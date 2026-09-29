@@ -19,6 +19,24 @@ contains thin discovery pointers; canonical content lives under
 The generated uc-apx skill payload is not part of this repository. See the
 [optional workflow](../workflows/uc-apx.md) for use and fallback behavior.
 
+## APEX and SQLcl workflows
+
+| Skill | Use when |
+|---|---|
+| [apex-background](apex-background/SKILL.md) | Writing or debugging APEX PL/SQL in automations, workflow activities, human task actions, or background execution chains (session state, binds, substitutions). |
+| [apex-session-context](apex-session-context/SKILL.md) | SQL/PL/SQL outside a normal page request (SQLcl, scheduler job, automation) reads task/workflow views or calls workflow APIs. |
+| [apex-workflow-lifecycle](apex-workflow-lifecycle/SKILL.md) | Importing or moving an app with live workflow/task instances, changing automations, diagnosing a missing schedule, or running bulk workflow/task operations. |
+| [apexlang-export-debugging](apexlang-export-debugging/SKILL.md) | APEXLANG (.apx) or READABLE_YAML exports fail with ORA-01403 in `WWV_META_META_DATA`. |
+| [optimizing-apex-task-inboxes](optimizing-apex-task-inboxes/SKILL.md) | Task inboxes are slow from repeated task API/view calls or task-count/action lookups. |
+| [safeguarding-apexlang-text-messages](safeguarding-apexlang-text-messages/SKILL.md) | Localizing, bulk converting, reviewing, or repairing APEXlang `textMessages`. |
+| [sqlcl-script-path-debugging](sqlcl-script-path-debugging/SKILL.md) | Nested SQLcl scripts load an unexpected file, or relative SPOOL/include paths misbehave. |
+
+## Browser inspection
+
+| Skill | Use when |
+|---|---|
+| [chrome-devtools-mcp](chrome-devtools-mcp/SKILL.md) | Inspecting or interacting with a web app through the persistent Chrome DevTools MCP daemon (`tools/chrome_mcp_daemon.py`; see [`docs/CHROME_DEVTOOLS_MCP.md`](../../docs/CHROME_DEVTOOLS_MCP.md)). |
+
 ## `sqlcl-mcp-r0/` — SQLcl MCP at restriction level 0
 
 One skill; see [`.agents/skills/sqlcl-mcp-r0/SKILL.md`](sqlcl-mcp-r0/SKILL.md).
@@ -49,3 +67,4 @@ General software-engineering process, not APEX/Oracle-specific. Start with
 | [verification-before-completion](superpowers/verification-before-completion/SKILL.md) | About to claim work is complete/fixed/passing, before committing or opening a PR. |
 | [finishing-a-development-branch](superpowers/finishing-a-development-branch/SKILL.md) | Implementation is done and tests pass — deciding how to integrate the work. |
 | [writing-skills](superpowers/writing-skills/SKILL.md) | Creating or editing a skill, or verifying one works before deployment. |
+| [diagnosing-superpowers](superpowers/diagnosing-superpowers/SKILL.md) | A superpowers session went wrong (repeated work, ignored plans, skill did not fire) and you need to know why, or want a maintainer bug report. |
