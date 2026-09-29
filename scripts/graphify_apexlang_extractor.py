@@ -37,9 +37,12 @@ DISPLAY_TYPES = {
     "build_option": "Build Option",
 }
 
+# Graphify's node type for anchors shared by many files. Nodes of this type are
+# exempt from cross-file id salting and merge by id.
+SHARED_ANCHOR_TYPE = "module"
 DECLARATION_RE = re.compile(
     r'^\s*([A-Za-z][A-Za-z0-9-]*)'
-    r'(?:\s+("(?:[^"\\]|\\.)*"|[A-Za-z0-9_.-]+))?\s*\(\s*$'
+    r'(?:\s+("(?:[^"\\]|\\.)*"|\'(?:[^\'\\]|\\.)*\'|[A-Za-z0-9_.-]+))?\s*\(\s*$'
 )
 NAME_RE = re.compile(r'^\s*name\s*:\s*(.*?)\s*$')
 CLOSE_COMPONENT_RE = re.compile(r'^\s*\)\s*$')
@@ -106,10 +109,18 @@ IGNORED_SQL_OBJECTS = {
 SQL_PROPERTY_NAMES = {
     "sqlquery",
     "plsqlcode",
+    "plsqlexpression",
     "plsqlfunctionbody",
     "functionbody",
     "whereclause",
 }
+# Declarative table source, e.g. a report region's `tableName: ORDERS`.
+TABLE_PROPERTY_NAMES = {"tablename"}
+# A bare `package.function` name rather than SQL, e.g. a custom authentication.
+FUNCTION_PROPERTY_NAMES = {"authfunctionname"}
+QUALIFIED_MEMBER_RE = re.compile(
+    r"(?<![\w$#.:])([A-Za-z_][\w$#]*)\s*\.\s*([A-Za-z_][\w$#]*)"
+)
 
 
 class ApexlangParseError(ValueError):
@@ -132,11 +143,97 @@ def make_id(*parts: object) -> str:
     return re.sub(r"_+", "_", normalized).strip("_").lower()
 
 
+class DatabaseMirror:
+    """Resolve references to objects mirrored under ``database/<SCHEMA>/``.
+
+    Graphify's SQL extractor names a table node ``<file id>_<schema>_<table>``
+    and cannot rewire a bare-name stub onto it: a schema-qualified label
+    contains a dot, which disqualifies it as a rewire target. A reference from
+    an application file therefore has to name that node id itself, or the
+    application and database halves of the graph never connect. Anything the
+    mirror does not hold (APEX dictionary views, DUAL, unexported objects)
+    stays a stub.
+    """
+
+    TABLE_FOLDERS = ("tables", "views")
+
+    def __init__(self, root: Path | None = None, schema: str | None = None) -> None:
+        self.root = root
+        self.schema = schema
+        self._tables: dict[str, str] | None = None
+        self._packages: dict[str, str] | None = None
+
+    @classmethod
+    def for_application_file(cls, source: Path) -> "DatabaseMirror":
+        """Locate the mirror from ``<root>/apps/<schema>/<app id>/...``."""
+        parts = source.parts
+        for index in range(len(parts) - 3, -1, -1):
+            if parts[index] == "apps" and parts[index + 2].isdigit():
+                return cls(Path(*parts[:index]) if index else Path(), parts[index + 1])
+        return cls()
+
+    @classmethod
+    def for_database_file(cls, source: Path) -> "DatabaseMirror":
+        """Locate the mirror from ``<root>/database/<schema>/<folder>/...``."""
+        parts = source.parts
+        for index in range(len(parts) - 4, -1, -1):
+            if parts[index] == "database":
+                return cls(Path(*parts[:index]) if index else Path(), parts[index + 1])
+        return cls()
+
+    def _scan(self) -> None:
+        self._tables, self._packages = {}, {}
+        if self.root is None or self.schema is None:
+            return
+        schema_dir = self.root / "database" / self.schema
+        for folder in self.TABLE_FOLDERS:
+            for file in self._sql_files(schema_dir / folder):
+                file_id = make_id(file.relative_to(self.root).with_suffix("").as_posix())
+                self._tables.setdefault(
+                    file.stem.upper(), make_id(file_id, self.schema, file.stem)
+                )
+        for file in self._sql_files(schema_dir / "packages"):
+            name = file.stem.upper()
+            for suffix in ("_SPEC", "_BODY"):
+                if name.endswith(suffix):
+                    name = name[: -len(suffix)]
+                    break
+            file_id = make_id(file.relative_to(self.root).with_suffix("").as_posix())
+            # The specification is the package's public face; prefer it.
+            if file.stem.upper().endswith("_SPEC") or name not in self._packages:
+                self._packages[name] = file_id
+
+    @staticmethod
+    def _sql_files(directory: Path) -> list[Path]:
+        try:
+            return sorted(directory.glob("*.sql"))
+        except OSError:
+            return []
+
+    def table(self, label: str) -> str | None:
+        if self._tables is None:
+            self._scan()
+        parts = label.split(".")
+        if len(parts) == 2 and parts[0].upper() != (self.schema or "").upper():
+            return None
+        if len(parts) > 2:
+            return None
+        return self._tables.get(parts[-1].upper())
+
+    def package(self, label: str) -> str | None:
+        if self._packages is None:
+            self._scan()
+        parts = label.split(".")
+        if len(parts) == 3 and parts[0].upper() == (self.schema or "").upper():
+            parts = parts[1:]
+        return self._packages.get(parts[0].upper()) if len(parts) == 2 else None
+
+
 def _clean_identifier(value: str | None, fallback: str) -> str:
     if not value:
         return fallback
     value = value.strip()
-    if len(value) >= 2 and value[0] == value[-1] == '"':
+    if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
         value = value[1:-1]
     return value
 
@@ -321,6 +418,20 @@ def _from_items(text: str):
             yield text[item_start:index]
 
 
+def _qualified_members(text: str) -> set[str]:
+    """Return every ``a.b`` name in *text*, outside comments and literals.
+
+    A package function used as an expression (``where id = pkg.current_id``)
+    has neither parentheses nor a statement position, so the call patterns miss
+    it. Whether ``a`` is a package is only knowable from the database mirror.
+    """
+    clean = _strip_sql_comments_and_literals(text)
+    return {
+        f"{match.group(1)}.{match.group(2)}".upper()
+        for match in QUALIFIED_MEMBER_RE.finditer(clean)
+    }
+
+
 def _sql_dependencies(text: str) -> tuple[set[str], set[str], set[str]]:
     clean = _strip_sql_comments_and_literals(text)
     # DELETE FROM names a write target, not a queried source.
@@ -428,6 +539,12 @@ def parse_apexlang(text: str, path: Path) -> dict[str, object]:
         return bool(node.get("metadata", {}).get("synthetic_reference"))
 
     def add_node(node: dict) -> None:
+        if is_synthetic(node):
+            # Graphify salts same-id nodes from different files apart by path,
+            # which would split a reference from the declaration it names.
+            # Its own cross-file anchors (`type: module`) are exempt from that
+            # pass and collapse onto one node, which is what a placeholder is.
+            node["type"] = SHARED_ANCHOR_TYPE
         existing = node_by_id.get(node["id"])
         if existing is None:
             node_by_id[node["id"]] = node
@@ -438,11 +555,20 @@ def parse_apexlang(text: str, path: Path) -> dict[str, object]:
             existing.clear()
             existing.update(node)
 
-    def add_reference_node(label: str) -> str:
+    mirror = DatabaseMirror.for_application_file(path)
+
+    def mirrored_members(text: str) -> set[str]:
+        return {name for name in _qualified_members(text) if mirror.package(name)}
+
+    def add_reference_node(label: str, relation: str) -> str:
+        mirrored = mirror.package(label) if relation == "calls" else mirror.table(label)
+        if mirrored:
+            return mirrored
         node_id = make_id(label)
         if node_id not in node_by_id:
             node = _node(node_id, label, "", None, origin_file=source_path)
             node["source_location"] = ""
+            node["type"] = SHARED_ANCHOR_TYPE
             node_by_id[node_id] = node
             nodes.append(node)
         return node_id
@@ -467,18 +593,19 @@ def parse_apexlang(text: str, path: Path) -> dict[str, object]:
             edges.append(candidate)
 
     for line_number, raw_line in enumerate(text.splitlines(), start=1):
-        fence_count = raw_line.count("```")
         if in_fence:
+            fence_count = raw_line.count("```")
             if fence_count % 2:
                 block = "\n".join(fence_lines)
                 if fence_owner and fence_is_database_code:
                     reads, writes, calls = _sql_dependencies(block)
+                    calls |= mirrored_members(block)
                     for target in sorted(reads, key=str.casefold):
-                        add_edge(fence_owner, add_reference_node(target), "reads_from", fence_start)
+                        add_edge(fence_owner, add_reference_node(target, "reads_from"), "reads_from", fence_start)
                     for target in sorted(writes, key=str.casefold):
-                        add_edge(fence_owner, add_reference_node(target), "writes_to", fence_start)
+                        add_edge(fence_owner, add_reference_node(target, "writes_to"), "writes_to", fence_start)
                     for target in sorted(calls, key=str.casefold):
-                        add_edge(fence_owner, add_reference_node(target), "calls", fence_start)
+                        add_edge(fence_owner, add_reference_node(target, "calls"), "calls", fence_start)
                 in_fence = False
                 fence_owner = None
                 fence_lines = []
@@ -488,12 +615,17 @@ def parse_apexlang(text: str, path: Path) -> dict[str, object]:
             else:
                 fence_lines.append(raw_line)
             continue
+        # APEXlang comments belong to the syntax outside a real multiline
+        # payload. Remove them before recognizing fence delimiters so a note
+        # such as "// examples use ```sql" cannot consume the rest of the file.
+        line, in_block_comment = _strip_comments(raw_line, in_block_comment)
+        fence_count = line.count("```")
         if fence_count % 2:
-            prefix = raw_line.split("```", 1)[0]
+            prefix = line.split("```", 1)[0]
             property_match = PROPERTY_RE.match(prefix)
             if property_match:
                 pending_property = property_match.group(1)
-            language = raw_line.split("```", 1)[1].strip().casefold()
+            language = line.split("```", 1)[1].strip().casefold()
             in_fence = True
             fence_owner = _nearest_owner(frames, app_node_id)
             fence_start = line_number + 1
@@ -504,7 +636,6 @@ def parse_apexlang(text: str, path: Path) -> dict[str, object]:
             )
             continue
 
-        line, in_block_comment = _strip_comments(raw_line, in_block_comment)
         if not line.strip():
             continue
 
@@ -644,14 +775,23 @@ def parse_apexlang(text: str, path: Path) -> dict[str, object]:
                     )
                 )
                 add_edge(owner, target, "secured_by", line_number)
+            if property_name in TABLE_PROPERTY_NAMES and property_value:
+                table = _reference_label(_clean_identifier(property_value, property_value))
+                if table and not _is_ignored_object(table):
+                    add_edge(owner, add_reference_node(table, "reads_from"), "reads_from", line_number)
+            if property_name in FUNCTION_PROPERTY_NAMES and property_value:
+                function = _reference_label(_clean_identifier(property_value, property_value))
+                if "." in function and not _is_ignored_object(function):
+                    add_edge(owner, add_reference_node(function, "calls"), "calls", line_number)
             if property_name in SQL_PROPERTY_NAMES and property_value:
                 reads, writes, calls = _sql_dependencies(property_value)
+                calls |= mirrored_members(property_value)
                 for target in sorted(reads, key=str.casefold):
-                    add_edge(owner, add_reference_node(target), "reads_from", line_number)
+                    add_edge(owner, add_reference_node(target, "reads_from"), "reads_from", line_number)
                 for target in sorted(writes, key=str.casefold):
-                    add_edge(owner, add_reference_node(target), "writes_to", line_number)
+                    add_edge(owner, add_reference_node(target, "writes_to"), "writes_to", line_number)
                 for target in sorted(calls, key=str.casefold):
-                    add_edge(owner, add_reference_node(target), "calls", line_number)
+                    add_edge(owner, add_reference_node(target, "calls"), "calls", line_number)
 
     if in_fence:
         raise ApexlangParseError(f"unclosed multiline fence in {source_path}")
@@ -663,6 +803,47 @@ def parse_apexlang(text: str, path: Path) -> dict[str, object]:
         )
 
     return {"nodes": nodes, "edges": edges}
+
+
+def extract_sql_linked(path: Path) -> dict:
+    """Graphify's SQL extraction, with foreign keys pointed at mirrored tables.
+
+    The SQL extractor leaves a foreign key's parent table as a sourceless stub
+    and Graphify cannot rewire it onto the parent's real node, because a
+    schema-qualified label such as "DEMO"."USERS" contains a dot. The stub is
+    replaced here by the parent's node id whenever the parent is mirrored under
+    ``database/<schema>/``; anything else is left exactly as extracted.
+    """
+    from graphify.extractors.sql import extract_sql
+
+    result = extract_sql(path)
+    if result.get("error"):
+        return result
+    mirror = DatabaseMirror.for_database_file(path)
+    if mirror.root is None:
+        return result
+    remap: dict[str, str] = {}
+    for node in result.get("nodes", []):
+        if node.get("source_file"):
+            continue
+        target = mirror.table(_reference_label(str(node.get("label", ""))))
+        if target and target != node.get("id"):
+            remap[str(node["id"])] = target
+    if not remap:
+        return result
+    for edge in result.get("edges", []):
+        for end in ("source", "target"):
+            if edge.get(end) in remap:
+                edge[end] = remap[edge[end]]
+    referenced = {
+        edge.get(end) for edge in result.get("edges", []) for end in ("source", "target")
+    }
+    result["nodes"] = [
+        node
+        for node in result.get("nodes", [])
+        if node.get("id") not in remap or node.get("id") in referenced
+    ]
+    return result
 
 
 def extract_apexlang(path: Path) -> dict[str, object]:

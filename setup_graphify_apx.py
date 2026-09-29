@@ -18,6 +18,7 @@ REPO_ROOT = Path(__file__).resolve().parent
 CANONICAL_EXTRACTOR = REPO_ROOT / "scripts" / "graphify_apexlang_extractor.py"
 # The exact text this installer writes; the only proof that .apx is ours.
 DETECT_MARKER = "'.sql', '.apx',"
+SQL_LINK_IMPORT = "from graphify.extractors.apexlang import extract_sql_linked  # noqa: F401"
 
 
 def graphify_console_interpreter() -> str | None:
@@ -144,6 +145,18 @@ def _patched_dispatch(text: str) -> str | None:
     # The project-owned APEXlang parser is standard-library-only. A legacy
     # setup mapped .apx to the optional SQL dependency; remove that false gate.
     text = text.replace('    ".apx": "sql",\n', "")
+
+    # Route .sql through the wrapper that links foreign keys to mirrored tables.
+    # The optional-dependency gate for .sql stays: the wrapper still calls the
+    # tree-sitter based SQL extractor.
+    if SQL_LINK_IMPORT not in text:
+        if import_line not in text:
+            return None
+        text = text.replace(import_line, f"{import_line}\n{SQL_LINK_IMPORT}", 1)
+    if '".sql": extract_sql,' in text:
+        text = text.replace('".sql": extract_sql,', '".sql": extract_sql_linked,', 1)
+    elif '".sql": extract_sql_linked,' not in text:
+        return None
     return text
 
 
@@ -174,6 +187,8 @@ def _smoke_test_extractor(extractor_path: Path) -> tuple[bool, str]:
         sys.modules[module_name] = module
         sys.dont_write_bytecode = True
         spec.loader.exec_module(module)
+        if not callable(getattr(module, "extract_sql_linked", None)):
+            return False, "extractor does not define extract_sql_linked"
         result = module.extract_apexlang(fixture)
         if result.get("error"):
             return False, f"smoke extraction failed: {result['error']}"
@@ -210,11 +225,19 @@ def verify_installation(base: Path) -> tuple[bool, str]:
         return False, ".apx is not routed to extract_apexlang"
     if '".apx": extract_sql,' in extract:
         return False, "legacy .apx SQL route is still present"
+    if SQL_LINK_IMPORT not in extract or '".sql": extract_sql_linked,' not in extract:
+        return False, ".sql is not routed through extract_sql_linked"
     return _smoke_test_extractor(installed)
 
 
 def invalidate_apx_cache(cache_root: Path) -> int:
-    """Remove only AST cache records produced from .apx source files."""
+    """Remove AST cache records produced from .apx and .sql source files.
+
+    The cache is keyed by file content alone. An .apx result names the database
+    objects it reads and a .sql result names its foreign-key parents, so results
+    cached before the extractor (or the database mirror) changed keep stale
+    stubs until their files happen to change.
+    """
     if not cache_root.is_dir():
         return 0
     removed = 0
@@ -228,7 +251,7 @@ def invalidate_apx_cache(cache_root: Path) -> int:
             for node in payload.get("nodes", [])
             if isinstance(node, dict)
         }
-        if any(source.casefold().endswith(".apx") for source in source_files):
+        if any(source.casefold().endswith((".apx", ".sql")) for source in source_files):
             try:
                 cache_file.unlink()
                 removed += 1

@@ -91,6 +91,9 @@ durable architectural knowledge rather than bare Markdown headings. Afterwards:
   API cost).
 - `graphify extract .` after changing `app_context`, to refresh semantic
   concepts.
+- `python3 setup_graphify_apx.py` then `graphify update .` after the first
+  database export or when tables or packages change, so pages link to the real
+  database nodes instead of cached stubs.
 - `graphify extract . --force` after changing `.graphifyignore`.
 - `python3 setup_graphify_apx.py` again after **every Graphify upgrade**, so the
   tracked extractor is reinstalled and verified rather than silently falling

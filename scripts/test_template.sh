@@ -852,5 +852,6 @@ printf '%s\n' '````markdown' '[example](not-a-real-file.md)' '````' > "$LINK_FIX
 "$PYTHON_COMMAND" "$REPO_ROOT/scripts/test_setup_graphify.py"
 "$PYTHON_COMMAND" "$REPO_ROOT/scripts/test_graphify_apexlang_extractor.py"
 "$PYTHON_COMMAND" "$REPO_ROOT/scripts/test_graphify_corpus.py"
+"$PYTHON_COMMAND" "$REPO_ROOT/scripts/test_graphify_pipeline.py"
 
 echo "PASS: template synchronization and documentation checks"

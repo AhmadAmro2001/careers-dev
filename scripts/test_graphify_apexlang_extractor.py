@@ -9,6 +9,7 @@ import io
 import shutil
 import sys
 import tempfile
+import types
 import unittest
 from unittest import mock
 from pathlib import Path
@@ -56,6 +57,285 @@ class ApexlangExtractorTests(unittest.TestCase):
             (edge["source"], edge["target"], edge["relation"])
             for edge in result["edges"]
         }
+
+    def test_comment_backticks_do_not_hide_following_multiline_sql(self) -> None:
+        result = self.extract(
+            "// SQL examples use ```sql in this note\n"
+            "app 100 (\n"
+            "    page 1 (\n"
+            "        sqlQuery: ```sql\n"
+            "            SELECT * FROM ORDERS\n"
+            "        ```\n"
+            "    )\n"
+            ")\n"
+        )
+        self.assertNotIn("error", result)
+        reads = [edge for edge in result["edges"] if edge["relation"] == "reads_from"]
+        self.assertEqual(1, len(reads))
+        target = next(node for node in result["nodes"] if node["id"] == reads[0]["target"])
+        self.assertEqual("ORDERS", target["label"])
+
+    def test_single_quoted_component_identifier_keeps_the_frame_balanced(self) -> None:
+        # APEX exports report columns named after their SQL alias, such as
+        # `column '#A01#' (`. Not recognizing the opener made its closing
+        # parenthesis pop the enclosing region and abort the whole page.
+        result = self.extract(
+            "app 100 (\n"
+            "    page 5 (\n"
+            "        region report (\n"
+            "            name: Report\n"
+            "            column '#A01#' (\n"
+            "                heading: A01\n"
+            "            )\n"
+            "        )\n"
+            "        region after (\n"
+            "            name: After\n"
+            "            source {\n"
+            "                sqlQuery: select id from orders\n"
+            "            }\n"
+            "        )\n"
+            "    )\n"
+            ")\n"
+        )
+        self.assertNotIn("error", result)
+        labels = {node["label"] for node in result["nodes"]}
+        self.assertIn("orders", {label.lower() for label in labels})
+        self.assertTrue(any("after" in label.lower() for label in labels))
+
+    def write_database_object(self, relative: str, text: str = "-- ddl\n") -> None:
+        path = self.root / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+
+    def test_database_references_link_to_the_mirrored_object_nodes(self) -> None:
+        # Graphify's SQL extractor names a table node
+        # <file id>_<schema>_<table> and cannot rewire a stub onto it (a
+        # schema-qualified label contains a dot), so the page has to point at
+        # that id itself or the app and database halves never connect.
+        self.write_database_object("database/DEMO/tables/ORDERS.sql")
+        self.write_database_object("database/DEMO/tables/AUDIT_LOG.sql")
+        self.write_database_object("database/DEMO/packages/HR_AUTH_PKG_SPEC.sql")
+        self.write_database_object("database/DEMO/packages/HR_AUTH_PKG_BODY.sql")
+        result = self.extract(
+            "app 102 (\n"
+            "    page 4 (\n"
+            "        region orders (\n"
+            "            source {\n"
+            "                sqlQuery: select o.id from orders o, dual\n"
+            "            }\n"
+            "        )\n"
+            "        process audit (\n"
+            "            source {\n"
+            "                plsql: ```plsql\n"
+            "                    insert into audit_log (id) values (1);\n"
+            "                    hr_auth_pkg.assert_super_admin;\n"
+            "                ```\n"
+            "            }\n"
+            "        )\n"
+            "    )\n"
+            ")\n"
+        )
+        edges = {(e["relation"], e["target"]) for e in result["edges"]}
+        self.assertIn(("reads_from", "database_demo_tables_orders_demo_orders"), edges)
+        self.assertIn(("writes_to", "database_demo_tables_audit_log_demo_audit_log"), edges)
+        self.assertIn(("calls", "database_demo_packages_hr_auth_pkg_spec"), edges)
+        node_ids = {node["id"] for node in result["nodes"]}
+        self.assertNotIn("orders", node_ids)
+        self.assertNotIn("audit_log", node_ids)
+
+    def relation_targets(self, result: dict) -> set[tuple[str, str]]:
+        return {(edge["relation"], edge["target"]) for edge in result["edges"]}
+
+    def test_table_name_property_reads_the_table(self) -> None:
+        self.write_database_object("database/DEMO/tables/ORDERS.sql")
+        result = self.extract(
+            "app 102 (\n"
+            "    page 4 (\n"
+            "        region r (\n"
+            "            source {\n"
+            "                location: localDatabase\n"
+            "                tableName: ORDERS\n"
+            "            }\n"
+            "        )\n"
+            "    )\n"
+            ")\n"
+        )
+        self.assertIn(
+            ("reads_from", "database_demo_tables_orders_demo_orders"),
+            self.relation_targets(result),
+        )
+
+    def test_table_name_property_without_a_mirror_reads_a_stub(self) -> None:
+        result = self.extract(
+            "app 102 (\n"
+            "    page 4 (\n"
+            "        region r (\n"
+            "            source {\n"
+            "                tableName: ORDERS\n"
+            "            }\n"
+            "        )\n"
+            "    )\n"
+            ")\n"
+        )
+        self.assertIn(("reads_from", "orders"), self.relation_targets(result))
+
+    def test_plsql_expression_and_auth_function_call_the_mirrored_package(self) -> None:
+        self.write_database_object("database/DEMO/packages/HR_AUTH_PKG_SPEC.sql")
+        result = self.extract(
+            "app 102 (\n"
+            "    page 4 (\n"
+            "        region r (\n"
+            "            serverSideCondition {\n"
+            "                type: expression\n"
+            "                plsqlExpression: hr_auth_pkg.is_employee(:APP_USER)\n"
+            "            }\n"
+            "        )\n"
+            "    )\n"
+            ")\n"
+        )
+        self.assertIn(
+            ("calls", "database_demo_packages_hr_auth_pkg_spec"),
+            self.relation_targets(result),
+        )
+        authentication = self.extract(
+            "authentication custom (\n"
+            "    settings {\n"
+            "        authFunctionName: hr_auth_pkg.authenticate\n"
+            "    }\n"
+            ")\n",
+            relative="apps/DEMO/102/shared-components/authentications.apx",
+        )
+        self.assertIn(
+            ("calls", "database_demo_packages_hr_auth_pkg_spec"),
+            self.relation_targets(authentication),
+        )
+
+    def test_package_function_used_in_sql_without_parentheses_is_a_call(self) -> None:
+        self.write_database_object("database/DEMO/packages/HR_USER_PKG_SPEC.sql")
+        source = (
+            "app 102 (\n"
+            "    page 4 (\n"
+            "        region r (\n"
+            "            source {\n"
+            "                sqlQuery: ```sql\n"
+            "                    select b.id from balances b\n"
+            "                     where b.user_id = hr_user_pkg.current_user_id\n"
+            "                ```\n"
+            "            }\n"
+            "        )\n"
+            "    )\n"
+            ")\n"
+        )
+        result = self.extract(source)
+        calls = {t for r, t in self.relation_targets(result) if r == "calls"}
+        # The table alias `b.` is not a package, and only a mirrored package counts.
+        self.assertEqual({"database_demo_packages_hr_user_pkg_spec"}, calls)
+
+    def test_package_function_in_sql_is_ignored_without_a_mirror(self) -> None:
+        result = self.extract(
+            "app 102 (\n"
+            "    page 4 (\n"
+            "        region r (\n"
+            "            source {\n"
+            "                sqlQuery: select id from t where user_id = hr_user_pkg.current_user_id\n"
+            "            }\n"
+            "        )\n"
+            "    )\n"
+            ")\n"
+        )
+        self.assertEqual(
+            set(), {t for r, t in self.relation_targets(result) if r == "calls"}
+        )
+
+    def linked_sql(self, relative: str, result: dict) -> dict:
+        path = self.root / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("-- ddl\n", encoding="utf-8")
+        fake_package = types.ModuleType("graphify")
+        fake_extractors = types.ModuleType("graphify.extractors")
+        fake_sql = types.ModuleType("graphify.extractors.sql")
+        fake_sql.extract_sql = lambda _path: result
+        modules = {
+            "graphify": fake_package,
+            "graphify.extractors": fake_extractors,
+            "graphify.extractors.sql": fake_sql,
+        }
+        with mock.patch.dict(sys.modules, modules):
+            return self.module.extract_sql_linked(path)
+
+    @staticmethod
+    def foreign_key_result() -> dict:
+        return {
+            "nodes": [
+                {"id": "child_file", "label": "USER_ROLES.sql", "source_file": "x"},
+                {"id": "child", "label": '"DEMO"."USER_ROLES"', "source_file": "x"},
+                {"id": "demo_users", "label": '"DEMO"."USERS"', "source_file": ""},
+                {"id": "demo_missing", "label": '"DEMO"."MISSING"', "source_file": ""},
+            ],
+            "edges": [
+                {"source": "child", "target": "demo_users", "relation": "references"},
+                {"source": "child", "target": "demo_missing", "relation": "references"},
+            ],
+        }
+
+    def test_sql_foreign_keys_point_at_the_mirrored_table_nodes(self) -> None:
+        # Graphify cannot rewire a foreign-key stub onto a schema-qualified
+        # table node, so a mirrored parent table would otherwise never show
+        # which tables reference it.
+        self.write_database_object("database/DEMO/tables/USERS.sql")
+        result = self.linked_sql("database/DEMO/tables/USER_ROLES.sql", self.foreign_key_result())
+        targets = {edge["target"] for edge in result["edges"]}
+        self.assertIn("database_demo_tables_users_demo_users", targets)
+        self.assertIn("demo_missing", targets)
+        node_ids = {node["id"] for node in result["nodes"]}
+        self.assertNotIn("demo_users", node_ids)
+        self.assertIn("demo_missing", node_ids)
+
+    def test_sql_outside_the_database_mirror_is_left_alone(self) -> None:
+        self.write_database_object("database/DEMO/tables/USERS.sql")
+        original = self.foreign_key_result()
+        result = self.linked_sql(
+            "apps/DEMO/102/supporting-objects/install-scripts/create-tables.sql", original
+        )
+        self.assertIn("demo_users", {edge["target"] for edge in result["edges"]})
+
+    def test_sql_extraction_errors_pass_through(self) -> None:
+        result = self.linked_sql(
+            "database/DEMO/tables/BROKEN.sql", {"nodes": [], "edges": [], "error": "boom"}
+        )
+        self.assertEqual("boom", result["error"])
+
+    def test_database_reference_without_a_mirrored_object_stays_a_stub(self) -> None:
+        self.write_database_object("database/DEMO/tables/ORDERS.sql")
+        result = self.extract(
+            "app 102 (\n"
+            "    page 4 (\n"
+            "        region r (\n"
+            "            source {\n"
+            "                sqlQuery: select * from apex_tasks, missing_table\n"
+            "            }\n"
+            "        )\n"
+            "    )\n"
+            ")\n"
+        )
+        nodes = {node["id"]: node for node in result["nodes"]}
+        for stub in ("apex_tasks", "missing_table"):
+            self.assertIn(stub, nodes)
+            self.assertEqual("", nodes[stub]["source_file"])
+
+    def test_database_references_stay_stubs_without_a_mirror(self) -> None:
+        result = self.extract(
+            "app 102 (\n"
+            "    page 4 (\n"
+            "        region r (\n"
+            "            source {\n"
+            "                sqlQuery: select * from orders\n"
+            "            }\n"
+            "        )\n"
+            "    )\n"
+            ")\n"
+        )
+        self.assertIn("orders", {node["id"] for node in result["nodes"]})
 
     def test_exposes_graphify_extractor_entry_point(self) -> None:
         self.assertTrue(

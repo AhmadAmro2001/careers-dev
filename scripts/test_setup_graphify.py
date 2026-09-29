@@ -82,6 +82,11 @@ class GraphifyPatchTests(unittest.TestCase):
         self.assertIn('".apx": extract_apexlang,', extract)
         self.assertNotIn('".apx": extract_sql,', extract)
         self.assertIn("'.apx'", detect)
+        # Foreign-key stubs only resolve when .sql goes through the wrapper.
+        self.assertIn("from graphify.extractors.apexlang import extract_sql_linked", extract)
+        self.assertIn('".sql": extract_sql_linked,', extract)
+        self.assertNotIn('".sql": extract_sql,', extract)
+        self.assertIn('".sql": "sql",', extract)
 
     def test_repeated_install_is_byte_for_byte_idempotent(self) -> None:
         self.write_package()
@@ -286,11 +291,15 @@ class GraphifyPatchTests(unittest.TestCase):
             "invalidate_apx_cache(cache_root) is missing",
         )
 
-    def test_invalidates_only_cached_apx_extractions(self) -> None:
+    def test_invalidates_cached_apx_and_sql_extractions_only(self) -> None:
+        # Both kinds depend on the database mirror: an .apx result names mirrored
+        # tables and a .sql result names its foreign-key parents, and the cache
+        # is keyed by file content alone.
         cache_root = self.root / "cache" / "ast" / "v0.9.35"
         cache_root.mkdir(parents=True)
         apx_cache = cache_root / "apx.json"
         sql_cache = cache_root / "sql.json"
+        other_cache = cache_root / "other.json"
         apx_cache.write_text(
             '{"nodes":[{"source_file":"apps/DEMO/102/pages/p00004-home.apx"}],"edges":[]}',
             encoding="utf-8",
@@ -299,12 +308,17 @@ class GraphifyPatchTests(unittest.TestCase):
             '{"nodes":[{"source_file":"database/DEMO/tables/ORDERS.sql"}],"edges":[]}',
             encoding="utf-8",
         )
+        other_cache.write_text(
+            '{"nodes":[{"source_file":"tools/helper.py"}],"edges":[]}',
+            encoding="utf-8",
+        )
 
         removed = MODULE.invalidate_apx_cache(self.root / "cache" / "ast")
 
-        self.assertEqual(removed, 1)
+        self.assertEqual(removed, 2)
         self.assertFalse(apx_cache.exists())
-        self.assertTrue(sql_cache.exists())
+        self.assertFalse(sql_cache.exists())
+        self.assertTrue(other_cache.exists())
 
     def test_invalidates_apx_cache_when_only_some_directories_patch(self) -> None:
         good = self.root / "good"

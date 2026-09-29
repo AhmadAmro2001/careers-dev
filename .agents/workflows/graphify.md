@@ -67,6 +67,22 @@ anchors and fails closed if an upgrade is incompatible. Never repair the
 installed copy by hand; update the tracked extractor/setup and their tests so
 the fix persists for every template user.
 
+## Database mirror dependency
+
+An `.apx` reference to a table or package is linked to the real node from
+`database/<SCHEMA>/tables|views|packages/` when that file exists, and stays a
+name-only stub when it does not (`APEX_*` dictionary views, `DUAL`). `.sql` files
+under `database/` get the same treatment for foreign keys. Graphify caches
+extraction by file content, so a result cached before the mirror existed keeps
+its stubs. After the first database export, or after tables or packages are
+added or removed, run `python3 setup_graphify_apx.py` (it clears cached `.apx`
+and `.sql` extractions) and then `graphify update .`.
+
+Two limits are inherent to Graphify rather than lost data: the graph is
+undirected, so a mutual foreign-key pair (`A -> B` and `B -> A`) shows as one
+edge, and several procedure calls into one package share one package node
+because package files carry no per-procedure nodes.
+
 ## Verification and queries
 
 Verify that every nonempty graph `source_file` begins with `apps/`,
