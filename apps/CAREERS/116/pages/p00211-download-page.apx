@@ -67,7 +67,7 @@ page 211 (
                 
                 EXCEPTION
                     WHEN NO_DATA_FOUND THEN
-                        raise_application_error(-20001, 'Attachment not found.');
+                        raise_application_error(-20001, APEX_LANG.GET_MESSAGE('ATTACHMENT_NOT_FOUND'));
                 END;
                 ```
         }

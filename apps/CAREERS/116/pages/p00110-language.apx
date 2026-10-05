@@ -484,7 +484,7 @@ page 110 (
                     and LANGUAGE_LEVEL_ID = :P110_LANGUAGE_LEVEL_ID and personal_id = :P110_PERSONAL_ID;
                 
                     if :P110_LANG_EXIST > 0 then
-                        raise_application_error(-20003, 'this language already added!');
+                        raise_application_error(-20003, APEX_LANG.GET_MESSAGE('LANGUAGE_ALREADY_ADDED'));
                     end if;
                 
                 end;

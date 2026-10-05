@@ -129,7 +129,7 @@ page 101 (
                         </div> -->
                 
                         <p>
-                           An OTP has been sent to your registered email. Please enter it below to verify your account.       
+                           ⚠️ &{OTP_ACCOUNT_VERIFICATION_GUIDANCE}.
                         </p>
                     </div>
                 </div>
@@ -152,7 +152,7 @@ page 101 (
 
     region otp (
         name: OTP
-        title: Enter The Correct OTP
+        title: "&{ENTER_CORRECT_OTP}."
         type: staticContent
         layout {
             sequence: 30
@@ -193,7 +193,7 @@ page 101 (
     pageItem P101_OTP (
         type: textField
         label {
-            label: Enter The OTP
+            label: "&{ENTER_OTP}."
             alignment: left
         }
         layout {
@@ -223,7 +223,7 @@ page 101 (
 
     button back (
         buttonName: Back
-        label: back
+        label: "&{BACK}."
         layout {
             sequence: 20
             region: @otp
@@ -288,7 +288,7 @@ page 101 (
                         update user_verification set is_used = 1 where id = v_id;
                         commit;
                     else
-                        raise_application_error(-20003, 'the code is not correct');
+                        raise_application_error(-20003, APEX_LANG.GET_MESSAGE('INVALID_OTP'));
                     end if;
                 
                 end;

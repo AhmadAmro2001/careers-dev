@@ -11,31 +11,31 @@ plugin appliocantNavbar (
                 <div class="nav-left">
                     <a href="f?p=&APP_ID.:131:&APP_SESSION." class="nav-link">
                         <span class="fa fa-home"></span>
-                        Home
+                        &{HOME}.
                     </a>
             
                     <a href="f?p=&APP_ID.:104:&APP_SESSION." class="nav-link">
                         <span class="fa fa-briefcase"></span>
-                        Vacancies
+                        &{VACANCIES}.
                     </a>
             
                     <a href="f?p=&APP_ID.:132:&APP_SESSION." class="nav-link">
                         <span class="fa fa-clipboard"></span>
-                        Applications
+                        &{APPLICATIONS}.
                     </a>
                     
                       {if PERSONAL_CHECK/}
             
             <a href="f?p=&APP_ID.:113:&APP_SESSION." class="nav-link">
                 <span class="fa fa-user"></span>
-                Profile
+                &{PROFILE}.
             </a>
             
             {else/}
             
             <a href="f?p=&APP_ID.:119:&APP_SESSION." class="nav-link">
                 <span class="fa fa-id-card"></span>
-                Personal Data
+                &{PERSONAL_INFO_DATA}.
             </a>
             
             {endif/}
@@ -53,7 +53,7 @@ plugin appliocantNavbar (
             
                     <a href="&LOGOUT_URL." class="logout-btn">
                     <span class="fa fa-sign-out"></span>
-                    Logout
+                    &{LOGOUT}.
                 </a>
                 </div>
             

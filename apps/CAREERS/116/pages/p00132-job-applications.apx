@@ -1,7 +1,7 @@
 page 132 (
     name: job applications
     alias: JOB-APPLICATIONS
-    title: job applications
+    title: "&{JOB_APPLICATIONS}."
     appearance {
         pageTemplate: @/blank
         templateOptions: #DEFAULT#
@@ -385,7 +385,7 @@ page 132 (
             derivedColumn: N
             type: link
             heading {
-                heading: Details
+                heading: "&{DETAILS}."
                 alignment: center
             }
             layout {
@@ -477,7 +477,7 @@ page 132 (
                         </div> -->
                 
                         <p>
-                            View, edit, or delete your submitted applications. Make sure your information is accurate and up to date.
+                            ⚠️ &{APPLICATIONS_GUIDANCE}.
                         </p>
                     </div>
                 </div>
@@ -493,7 +493,7 @@ page 132 (
                         </div> -->
                 
                         <p>
-                          To apply for another vacancy, please delete one of your existing applications first.        
+                          ⚠️ &{VACANCY_DELETE_GUIDANCE}.
                         </p>
                         
                         

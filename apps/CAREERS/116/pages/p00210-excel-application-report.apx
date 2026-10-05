@@ -458,7 +458,7 @@ page 210 (
         column EXPERIENCE_DETAILS (
             type: plainText
             heading {
-                heading: خبره عمل
+                heading: "&{WORK_EXPERIENCE}."
                 alignment: end
             }
             layout {
@@ -589,7 +589,7 @@ page 210 (
         column NAME (
             type: plainText
             heading {
-                heading: مؤهل دراسي
+                heading: "&{EDUCATIONAL_QUALIFICATION}."
                 alignment: end
             }
             layout {

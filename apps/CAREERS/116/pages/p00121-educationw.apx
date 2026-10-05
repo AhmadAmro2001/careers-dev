@@ -639,7 +639,7 @@ page 121 (
                         </div> -->
                 
                         <p>
-                            Please ensure all required information is accurate and complete, as incorrect details may affect your job application.       
+                            ⚠️ &{PERSONAL_INFO_ACCURACY_GUIDANCE}.
                         </p>
                     </div>
                 </div>
@@ -788,7 +788,7 @@ page 121 (
             reportColumnQueryId: 10
             derivedColumn: N
             heading {
-                heading: Education Field
+                heading: "&{EDUCATION_FIELD}."
                 alignment: center
             }
             layout {
@@ -801,7 +801,7 @@ page 121 (
             reportColumnQueryId: 11
             derivedColumn: N
             heading {
-                heading: Education Grade
+                heading: "&{EDUCATION_GRADE}."
                 alignment: center
             }
             layout {
@@ -814,7 +814,7 @@ page 121 (
             reportColumnQueryId: 9
             derivedColumn: N
             heading {
-                heading: Education Level
+                heading: "&{EDUCATION_LEVEL}."
                 alignment: center
             }
             layout {
@@ -827,7 +827,7 @@ page 121 (
             reportColumnQueryId: 2
             derivedColumn: N
             heading {
-                heading: Edud Id
+                heading: "&{ID_1}."
                 alignment: end
             }
             layout {
@@ -843,7 +843,7 @@ page 121 (
             reportColumnQueryId: 4
             derivedColumn: N
             heading {
-                heading: File Name
+                heading: "&{FILE_NAME}."
             }
             layout {
                 sequence: 70
@@ -858,7 +858,7 @@ page 121 (
             derivedColumn: N
             type: downloadBlob
             heading {
-                heading: Graduation Certificate File Id
+                heading: "&{GRADUATION_CERTIFICATE_FILE_NAME}."
                 alignment: center
             }
             layout {
@@ -903,7 +903,7 @@ page 121 (
             derivedColumn: N
             type: downloadBlob
             heading {
-                heading: Image
+                heading: "&{IMAGE}."
                 alignment: center
             }
             layout {
@@ -922,7 +922,7 @@ page 121 (
             reportColumnQueryId: 8
             derivedColumn: N
             heading {
-                heading: Other Education Field
+                heading: "&{OTHER_EDUCATION_FIELD}."
                 alignment: center
             }
             layout {
@@ -935,7 +935,7 @@ page 121 (
             reportColumnQueryId: 7
             derivedColumn: N
             heading {
-                heading: University
+                heading: "&{UNIVERSITY}."
                 alignment: center
             }
             layout {
@@ -1921,7 +1921,7 @@ page 121 (
             sequence: 30
         }
         successMessage {
-            successMessage: THE LANGUAGE ADDED
+            successMessage: "&{LANGUAGE_ADDED}."
         }
         advanced {
             executionMappingIdentifier: 352051948146205047

@@ -147,30 +147,26 @@ page 100 (
                 ```html
                 <div class="eprom-warning" style = "padding-top: 0px;">
                 
-                    <h3>   ⚠️ Caution </h3>
+                    <h3>   ⚠️ &{FRAUD_ALERT_HEADING}. </h3>
                 
                     <p>
-                        ⚠️ In our commitment to protecting citizens and maintaining our credibility,
-                        EPROM strongly warns and fully disclaims any responsibility against fake entities,
-                        individuals, online pages or phone numbers spreading misleading information falsely
-                        claiming to act as intermediaries offering job opportunities in the name of EPROM.
+                        ⚠️ &{FRAUD_ALERT_INTRO}.
                     </p>
                 
-                    <p><strong>The company affirms the following:</strong></p>
+                    <p><strong>&{FRAUD_ALERT_COMPANY_ASSURANCE}.</strong></p>
                 
                     <ul>
-                        <li>✅ There are no authorized intermediaries for offering job opportunities, whether inside or outside the country.</li>
-                        <li>✅ All services and job opportunities are announced exclusively through the company’s official channels.</li>
-                        <li>✅ All services are provided completely free of charge, with no fees or commissions whatsoever.</li>
+                        <li>✅ &{FRAUD_ALERT_NO_INTERMEDIARIES}.</li>
+                        <li>✅ &{FRAUD_ALERT_OFFICIAL_CHANNELS}.</li>
+                        <li>✅ &{FRAUD_ALERT_FREE_SERVICES}.</li>
                     </ul>
                 
                     <p>
-                        🚫 We urge everyone not to share any personal information with unknown parties
-                        impersonating the company.
+                        🚫 &{FRAUD_ALERT_PROTECT_PERSONAL_INFO}.
                     </p>
                 
                     <p>
-                        <strong>For your safety… Always verify through the EPROM official channels.</strong>
+                        <strong>&{FRAUD_ALERT_VERIFY_CHANNELS}.</strong>
                     </p>
                 
                 </div>
@@ -208,7 +204,7 @@ page 100 (
                         </div> -->
                 
                         <p>
-                            Please fill in all required fields with accurate information to create your account.        
+                            &{ACCOUNT_CREATION_GUIDANCE}.
                         </p>
                     </div>
                 </div>
@@ -466,7 +462,7 @@ page 100 (
 
     button create-acc (
         buttonName: Create_acc
-        label: Already have account?
+        label: "&{ALREADY_HAVE_ACCOUNT}."
         layout {
             sequence: 10
             region: @registration-page
@@ -609,7 +605,7 @@ page 100 (
             plsqlExpression: :P100_EMAIL_COUNT = 0
         }
         error {
-            errorMessage: This email already exists!
+            errorMessage: "&{EMAIL_ALREADY_EXISTS}."
         }
     )
 
@@ -629,14 +625,7 @@ page 100 (
                 ```
         }
         error {
-            errorMessage:
-                ```
-                Password must be at least 8 characters long and contain:
-                - One uppercase letter
-                - One lowercase letter
-                - One number
-                - One special character.
-                ```
+            errorMessage: "&{PASSWORD_COMPLEXITY_ERROR}."
         }
         serverSideCondition {
             whenButtonPressed: @create
@@ -755,7 +744,7 @@ page 100 (
                 
                 
                     IF :P100_EMAIL IS NULL THEN
-                    raise_application_error(-20002, 'Email is required');
+                    raise_application_error(-20002, APEX_LANG.GET_MESSAGE('EMAIL_IS_REQUIRED'));
                 END IF;
                 
                 

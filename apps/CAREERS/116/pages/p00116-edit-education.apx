@@ -253,7 +253,7 @@ page 116 (
     pageItem P116_FILE_BLOB (
         type: fileUpload
         label {
-            label: File Blob
+            label: "&{FILE_BLOB}."
             alignment: left
         }
         storage {

@@ -1,7 +1,7 @@
 page 214 (
     name: Login Reports
     alias: LOGIN-REPORTS
-    title: Login Reports
+    title: "&{LOGIN_REPORTS}."
     appearance {
         pageTemplate: @/standard
         templateOptions: #DEFAULT#
@@ -61,7 +61,7 @@ page 214 (
             reportColumnQueryId: 5
             derivedColumn: N
             heading {
-                heading: Created At
+                heading: "&{CREATED_AT}."
             }
             layout {
                 sequence: 50
@@ -76,7 +76,7 @@ page 214 (
             reportColumnQueryId: 1
             derivedColumn: N
             heading {
-                heading: Id
+                heading: "&{ID_1}."
             }
             layout {
                 sequence: 10
@@ -91,7 +91,7 @@ page 214 (
             reportColumnQueryId: 2
             derivedColumn: N
             heading {
-                heading: Account ID
+                heading: "&{ACCOUNT_ID_1}."
             }
             layout {
                 sequence: 20
@@ -106,7 +106,7 @@ page 214 (
             reportColumnQueryId: 3
             derivedColumn: N
             heading {
-                heading: User Email
+                heading: "&{USER_EMAIL}."
             }
             layout {
                 sequence: 30
@@ -121,7 +121,7 @@ page 214 (
             reportColumnQueryId: 4
             derivedColumn: N
             heading {
-                heading: User Problem
+                heading: "&{USER_PROBLEM}."
             }
             layout {
                 sequence: 40

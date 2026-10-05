@@ -1,7 +1,7 @@
 page 104 (
     name: HOME
     alias: HOME1
-    title: "&{Vacancies}."
+    title: "&{VACANCIES}."
     appearance {
         pageTemplate: @/blank
         templateOptions: #DEFAULT#
@@ -420,7 +420,7 @@ page 104 (
                         </div> -->
                 
                         <p>
-                            You can apply for up to 2 vacancies only. You cannot apply for the same vacancy twice.        
+                            ⚠️ &{VACANCY_APPLICATION_LIMIT_GUIDANCE}.
                         </p>
                         
                         
@@ -443,7 +443,7 @@ page 104 (
                         </div> -->
                 
                         <p>
-                          To apply for another vacancy, please delete one of your existing applications first.        
+                          ⚠️ &{VACANCY_DELETE_FIRST_GUIDANCE}.
                         </p>
                         
                         
@@ -562,8 +562,9 @@ page 104 (
                    v.title AS label, 
                    CASE -- Personal data not completed 
                    WHEN Job_application_pkg.check_complete_personal_info( :APP_USER_ACC_ID) = 0
-                   THEN 'javascript:apex.message.confirm(
-                ''Please complete your personal data first. Go to Personal Data page?'',
+                   THEN 'javascript:apex.message.confirm(''' ||
+                        APEX_LANG.GET_MESSAGE('COMPLETE_PERSONAL_DATA_FIRST_CONFIRM') ||
+                ''',
                 function(okPressed){
                     if(okPressed){
                         window.location.href = ''' ||
@@ -573,11 +574,12 @@ page 104 (
                 });'
                     -- Already applied 
                     WHEN Job_application_pkg.check_application_vacancy( :APP_USER_PERS_ID, v.id ) > 0 
-                    THEN 'javascript:apex.message.alert(''You already applied to this vacancy.'');' 
+                    THEN 'javascript:apex.message.alert(''' || APEX_LANG.GET_MESSAGE('ALREADY_APPLIED_TO_VACANCY') || ''');'
                     WHEN Job_application_pkg.check_application_vacancy_count_per_user( :APP_USER_PERS_ID) >= 2
                     THEN
-                    'javascript:apex.message.confirm(
-                ''You already applied to 2 vacancies. Delete at least one application to apply to new job!'',
+                    'javascript:apex.message.confirm(''' ||
+                        APEX_LANG.GET_MESSAGE('TWO_VACANCY_LIMIT_CONFIRM') ||
+                ''',
                 function(okPressed){
                     if(okPressed){
                         window.location.href = ''' ||

@@ -15,7 +15,7 @@ appProcess download-cv (
                 WHERE  j.id = :P203_DOWNLOAD_ID;
             
                 IF l_blob IS NULL THEN
-                    raise_application_error(-20001, 'No resume found for this application.');
+                    raise_application_error(-20001, APEX_LANG.GET_MESSAGE('NO_RESUME_FOR_APPLICATION'));
                 END IF;
             
                 sys.htp.init;

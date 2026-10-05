@@ -124,7 +124,7 @@ page 209 (
     pageItem P209_ID (
         type: displayOnly
         label {
-            label: New
+            label: "&{NEW}."
             alignment: left
         }
         layout {

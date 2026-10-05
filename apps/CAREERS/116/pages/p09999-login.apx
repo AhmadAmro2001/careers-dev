@@ -80,7 +80,7 @@ page 9999 (
 
     region careers (
         name: careers
-        title: EPROM Careers
+        title: "&{EPROM_CAREERS}."
         type: staticContent
         layout {
             sequence: 30
@@ -105,30 +105,26 @@ page 9999 (
                 ```html
                 <div class="eprom-warning" style = "padding-top: 0px;">
                 
-                    <h3>   ⚠️ Caution </h3>
+                    <h3>   ⚠️ &{FRAUD_ALERT_HEADING}. </h3>
                 
                     <p>
-                        ⚠️ In our commitment to protecting citizens and maintaining our credibility,
-                        EPROM strongly warns and fully disclaims any responsibility against fake entities,
-                        individuals, online pages or phone numbers spreading misleading information falsely
-                        claiming to act as intermediaries offering job opportunities in the name of EPROM.
+                        ⚠️ &{FRAUD_ALERT_INTRO}.
                     </p>
                 
-                    <p><strong>The company affirms the following:</strong></p>
+                    <p><strong>&{FRAUD_ALERT_COMPANY_ASSURANCE}.</strong></p>
                 
                     <ul>
-                        <li>✅ There are no authorized intermediaries for offering job opportunities, whether inside or outside the country.</li>
-                        <li>✅ All services and job opportunities are announced exclusively through the company’s official channels.</li>
-                        <li>✅ All services are provided completely free of charge, with no fees or commissions whatsoever.</li>
+                        <li>✅ &{FRAUD_ALERT_NO_INTERMEDIARIES}.</li>
+                        <li>✅ &{FRAUD_ALERT_OFFICIAL_CHANNELS}.</li>
+                        <li>✅ &{FRAUD_ALERT_FREE_SERVICES}.</li>
                     </ul>
                 
                     <p>
-                        🚫 We urge everyone not to share any personal information with unknown parties
-                        impersonating the company.
+                        🚫 &{FRAUD_ALERT_PROTECT_PERSONAL_INFO}.
                     </p>
                 
                     <p>
-                        <strong>For your safety… Always verify through the EPROM official channels.</strong>
+                        <strong>&{FRAUD_ALERT_VERIFY_CHANNELS}.</strong>
                     </p>
                 
                 </div>
@@ -168,7 +164,7 @@ page 9999 (
                         </div> -->
                 
                         <p>
-                            Please Enter the Registered Email & Password  (Capital letters & Special Characters counts!).
+                            &{LOGIN_GUIDANCE}.
                         </p>
                     </div>
                 </div>
@@ -310,7 +306,7 @@ page 9999 (
     pageItem P9999_REMEMBER (
         type: checkbox
         label {
-            label: Remember Email
+            label: "&{REMEMBER_EMAIL}."
             alignment: left
         }
         layout {
@@ -361,7 +357,7 @@ page 9999 (
             templateOptions: #DEFAULT#
             icon: fa-user
             width: 40
-            valuePlaceholder: "&{Email}."
+            valuePlaceholder: "&{EMAIL}."
         }
         validation {
             maxLength: 100
@@ -385,7 +381,7 @@ page 9999 (
 
     button create-acc (
         buttonName: Create_acc
-        label: Create New Account ?
+        label: "&{CREATE_NEW_ACCOUNT}."
         layout {
             sequence: 10
             region: @careers
@@ -414,7 +410,7 @@ page 9999 (
 
     button forget-password_1 (
         buttonName: Forget_Password
-        label: Forget Password ?
+        label: "&{FORGOT_PASSWORD}."
         layout {
             sequence: 20
             region: @careers
@@ -497,7 +493,7 @@ page 9999 (
 
     button problem-btn (
         buttonName: Problem_btn
-        label: Have Any Problem ?
+        label: "&{NEED_HELP}."
         layout {
             sequence: 20
             region: @careers
@@ -592,7 +588,7 @@ page 9999 (
                 ```
         }
         error {
-            errorMessage: reCAPTCHA validation failed.
+            errorMessage: "&{RECAPTCHA_VALIDATION_FAILED}."
         }
         serverSideCondition {
             type: request=Value
@@ -641,7 +637,7 @@ page 9999 (
             sequence: 30
         }
         error {
-            errorMessage: Invalid Credentials
+            errorMessage: "&{INVALID_CREDENTIALS}."
         }
         advanced {
             executionMappingIdentifier: 332077680882699692
@@ -934,7 +930,7 @@ page 9999 (
             sequence: 40
         }
         error {
-            errorMessage: Invalid Credentials
+            errorMessage: "&{INVALID_CREDENTIALS}."
         }
         advanced {
             executionMappingIdentifier: 17174137093907616
@@ -1020,7 +1016,7 @@ page 9999 (
                 
                 
                         IF :P9999_USERNAME IS NULL THEN
-                            raise_application_error(-20002, 'Email is required');
+                            raise_application_error(-20002, APEX_LANG.GET_MESSAGE('EMAIL_IS_REQUIRED'));
                         END IF;
                 
                 
@@ -1049,7 +1045,7 @@ page 9999 (
                 
                 
                         IF :P9999_USERNAME IS NULL THEN
-                            raise_application_error(-20002, 'Email is required');
+                            raise_application_error(-20002, APEX_LANG.GET_MESSAGE('EMAIL_IS_REQUIRED'));
                         END IF;
                 
                 
@@ -1119,6 +1115,92 @@ page 9999 (
         }
         serverSideCondition {
             whenButtonPressed: @forget-password_1
+        }
+    )
+
+    pageItem P9999_LANGUAGE (
+        type: hidden
+        layout {
+            sequence: 80
+            region: @careers
+            slot: regionBody
+        }
+        security {
+            sessionStateProtection: checksumRequiredSessionLevel
+        }
+    )
+    button switch-to-arabic (
+        buttonName: SWITCH_TO_ARABIC
+        label: العربية
+        layout {
+            sequence: 5
+            region: @careers
+            slot: edit
+        }
+        appearance {
+            buttonTemplate: @/text
+            cssClasses: language-switch
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 9999
+                clearCache: 9999
+                items: {
+                    P9999_LANGUAGE: ar
+                }
+            }
+            warnOnUnsavedChanges: doNotCheck
+        }
+        serverSideCondition {
+            type: expression
+            plsqlExpression: NVL(APEX_UTIL.GET_SESSION_LANG(), 'en') NOT LIKE 'ar%'
+        }
+    )
+    button switch-to-english (
+        buttonName: SWITCH_TO_ENGLISH
+        label: English
+        layout {
+            sequence: 6
+            region: @careers
+            slot: edit
+        }
+        appearance {
+            buttonTemplate: @/text
+            cssClasses: language-switch
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 9999
+                clearCache: 9999
+                items: {
+                    P9999_LANGUAGE: en
+                }
+            }
+            warnOnUnsavedChanges: doNotCheck
+        }
+        serverSideCondition {
+            type: expression
+            plsqlExpression: NVL(APEX_UTIL.GET_SESSION_LANG(), 'en') LIKE 'ar%'
+        }
+    )
+    process apply-login-language (
+        name: Apply login language
+        type: executeCode
+        execution {
+            sequence: 5
+            point: beforeHeader
+        }
+        source {
+            plsqlCode:
+                ```plsql
+                IF :P9999_LANGUAGE IN ('en', 'ar') THEN
+                    APEX_UTIL.SET_SESSION_LANG(LOWER(:P9999_LANGUAGE));
+                END IF;
+                ```
         }
     )
 

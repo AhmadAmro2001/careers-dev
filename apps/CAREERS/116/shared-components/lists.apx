@@ -207,7 +207,7 @@ list navigation-menu (
     )
 
     entry home-1 (
-        label: HOME_1
+        label: "&{HOME_1}."
         icon {
             imageIconCssClasses: fa-file-o
         }
@@ -251,7 +251,7 @@ list navigation-menu (
     )
 
     entry job-applications (
-        label: job applications
+        label: "&{JOB_APPLICATIONS}."
         icon {
             imageIconCssClasses: fa-file-o
         }
@@ -317,7 +317,7 @@ list navigation-menu (
     )
 
     entry login-reports (
-        label: Login Reports
+        label: "&{LOGIN_REPORTS}."
         icon {
             imageIconCssClasses: fa-bug
         }

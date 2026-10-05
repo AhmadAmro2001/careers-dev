@@ -255,7 +255,7 @@ page 125 (
 
     region apply-reg (
         name: apply_reg
-        title: Apply
+        title: "&{APPLY}."
         type: staticContent
         layout {
             sequence: 40
@@ -838,7 +838,7 @@ page 125 (
                 begin
                 
                     if :P125_VACANCY_ID is null then
-                        raise_application_error(-20101, 'choose the job');
+                        raise_application_error(-20101, APEX_LANG.GET_MESSAGE('CHOOSE_VACANCY'));
                     end if; 
                 end;
                  
@@ -1007,7 +1007,7 @@ page 125 (
                         :P125_PERSONAL_ID := :APP_USER_PERS_ID;
                         select email into :P125_EMAIL from account where id = :APP_USER_ACC_ID;
                     else
-                        raise_application_error(-20100, 'please complete your personal information');
+                        raise_application_error(-20100, APEX_LANG.GET_MESSAGE('COMPLETE_PERSONAL_INFORMATION'));
                     end if;
                 
                 end;
@@ -1074,10 +1074,7 @@ page 125 (
                 
                         -- Add custom error to APEX
                         APEX_ERROR.ADD_ERROR(
-                            p_message =>
-                                'Unable to submit your application. ' ||
-                                'Your attachment may be corrupted or invalid. ' ||
-                                'Please change your PDF attachment and try again.',
+                            p_message => APEX_LANG.GET_MESSAGE('APPLICATION_SUBMISSION_ATTACHMENT_ERROR'),
                 
                             p_display_location =>
                                 APEX_ERROR.C_INLINE_IN_NOTIFICATION

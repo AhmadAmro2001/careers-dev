@@ -313,7 +313,7 @@ page 202 (
         }
 
         series new (
-            name: recent app
+            name: "&{RECENT_APPLICATIONS}."
             execution {
                 sequence: 20
             }
@@ -340,7 +340,7 @@ page 202 (
         )
 
         series new-1 (
-            name: total app
+            name: "&{TOTAL_APPLICATIONS}."
             execution {
                 sequence: 10
             }
@@ -362,7 +362,7 @@ page 202 (
         )
 
         series new-2 (
-            name: archived app
+            name: "&{ARCHIVED_APPLICATIONS}."
             execution {
                 sequence: 30
             }
@@ -427,7 +427,7 @@ page 202 (
         }
 
         series archived-vacancies (
-            name: Archived Vacancies
+            name: "&{ARCHIVED_VACANCIES}."
             execution {
                 sequence: 30
             }
@@ -450,7 +450,7 @@ page 202 (
         )
 
         series open-vacancies (
-            name: Open Vacancies
+            name: "&{OPEN_VACANCIES}."
             execution {
                 sequence: 20
             }
@@ -475,7 +475,7 @@ page 202 (
         )
 
         series total-vacancies (
-            name: Total Vacancies
+            name: "&{TOTAL_VACANCIES}."
             execution {
                 sequence: 10
             }
@@ -515,7 +515,7 @@ page 202 (
     pageItem P202_NEW (
         type: selectList
         label {
-            label: New
+            label: "&{NEW}."
             alignment: left
         }
         lov {

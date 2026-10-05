@@ -111,7 +111,7 @@ page 212 (
                     END LOOP;
                 
                     IF l_file_count = 0 THEN
-                        raise_application_error(-20001, 'No resumes found for the current selection.');
+                        raise_application_error(-20001, APEX_LANG.GET_MESSAGE('NO_RESUMES_FOUND'));
                     END IF;
                 
                     apex_zip.finish(

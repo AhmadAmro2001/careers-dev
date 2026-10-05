@@ -411,7 +411,7 @@ page 204 (
             derivedColumn: N
             type: link
             heading {
-                heading: Show Applications
+                heading: "&{SHOW_APPLICATIONS}."
                 alignment: center
             }
             layout {
@@ -507,7 +507,7 @@ page 204 (
     pageItem P204_ROW (
         type: numberField
         label {
-            label: Row
+            label: "&{ROW}."
             alignment: left
         }
         layout {
@@ -552,7 +552,7 @@ page 204 (
 
     button submit (
         buttonName: Submit
-        label: Submit
+        label: "&{SUBMIT}."
         layout {
             sequence: 20
             region: @vacancies
@@ -729,7 +729,7 @@ page 204 (
                 
                         apex_json.open_object;
                         apex_json.write('success', true);
-                        apex_json.write('message', 'Vacancy archived successfully.');
+                        apex_json.write('message', APEX_LANG.GET_MESSAGE('VACANCY_ARCHIVED'));
                         apex_json.close_object;
                 
                     elsif l_action = 'UNARCHIVE' then
@@ -741,11 +741,11 @@ page 204 (
                 
                         apex_json.open_object;
                         apex_json.write('success', true);
-                        apex_json.write('message', 'Vacancy unarchived successfully.');
+                        apex_json.write('message', APEX_LANG.GET_MESSAGE('VACANCY_UNARCHIVED'));
                         apex_json.close_object;
                 
                     else
-                        raise_application_error(-20001, 'Invalid vacancy archive action.');
+                        raise_application_error(-20001, APEX_LANG.GET_MESSAGE('INVALID_VACANCY_ARCHIVE_ACTION'));
                     end if;
                 
                 exception

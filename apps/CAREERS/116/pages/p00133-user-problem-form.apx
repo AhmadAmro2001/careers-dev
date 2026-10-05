@@ -1,7 +1,7 @@
 page 133 (
     name: User Problem Form
     alias: USER-PROBLEM-FORM
-    title: User Problem Form
+    title: "&{USER_PROBLEM_FORM}."
     appearance {
         pageTemplate: @/blank
         templateOptions: #DEFAULT#
@@ -116,7 +116,7 @@ page 133 (
 
     region email (
         name: Email
-        title: Enter Your Email
+        title: "&{ENTER_YOUR_EMAIL}."
         type: staticContent
         layout {
             sequence: 40
@@ -143,7 +143,7 @@ page 133 (
 
     region otp (
         name: Problems
-        title: Enter Your Problem
+        title: "&{ENTER_YOUR_PROBLEM}."
         type: staticContent
         layout {
             sequence: 30
@@ -204,7 +204,7 @@ page 133 (
     pageItem P133_EMAIL (
         type: textField
         label {
-            label: Enter Your Email
+            label: "&{ENTER_YOUR_EMAIL}."
             alignment: left
         }
         layout {
@@ -223,7 +223,7 @@ page 133 (
     pageItem P133_EMAIL_1 (
         type: textField
         label {
-            label: Enter Your Email
+            label: "&{ENTER_YOUR_EMAIL}."
             alignment: left
         }
         layout {
@@ -251,7 +251,7 @@ page 133 (
     pageItem P133_PROBLEM (
         type: textarea
         label {
-            label: Enter Your Problem
+            label: "&{ENTER_YOUR_PROBLEM}."
             alignment: left
         }
         layout {
@@ -305,7 +305,7 @@ page 133 (
 
     button back (
         buttonName: Back
-        label: back
+        label: "&{BACK}."
         layout {
             sequence: 10
             region: @otp
@@ -330,7 +330,7 @@ page 133 (
 
     button back_1 (
         buttonName: Back_1
-        label: back
+        label: "&{BACK}."
         layout {
             sequence: 10
             region: @email
@@ -376,7 +376,7 @@ page 133 (
 
     button verfiy-otp (
         buttonName: Submit_problem
-        label: Submit
+        label: "&{SUBMIT}."
         layout {
             sequence: 80
             region: @otp
@@ -460,7 +460,7 @@ page 133 (
                 ```
         }
         error {
-            errorMessage: reCAPTCHA validation failed.
+            errorMessage: "&{RECAPTCHA_VALIDATION_FAILED}."
         }
         serverSideCondition {
             type: request=Value
@@ -537,7 +537,7 @@ page 133 (
                 
                 
                     IF :P133_EMAIL_1 IS NULL THEN
-                    raise_application_error(-20002, 'Email is required');
+                    raise_application_error(-20002, APEX_LANG.GET_MESSAGE('EMAIL_IS_REQUIRED'));
                 END IF;
                  -- Store email in application item
                     -- :G_VERIFICATION_EMAIL := :P133_EMAIL_1;

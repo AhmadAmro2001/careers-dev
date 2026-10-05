@@ -366,7 +366,7 @@ page 207 (
             reportColumnQueryId: 3
             derivedColumn: N
             heading {
-                heading: ID
+                heading: "&{ID_1}."
             }
             layout {
                 sequence: 30
@@ -399,7 +399,7 @@ page 207 (
             reportColumnQueryId: 29
             derivedColumn: N
             heading {
-                heading: Archive
+                heading: "&{ARCHIVE}."
             }
             layout {
                 sequence: 130
@@ -475,7 +475,7 @@ page 207 (
             reportColumnQueryId: 18
             derivedColumn: N
             heading {
-                heading: Creation Date
+                heading: "&{CREATION_DATE}."
             }
             layout {
                 sequence: 70
@@ -489,7 +489,7 @@ page 207 (
             reportColumnQueryId: 32
             derivedColumn: N
             heading {
-                heading: Documents
+                heading: "&{DOCUMENTS}."
             }
             layout {
                 sequence: 120
@@ -598,7 +598,7 @@ page 207 (
             reportColumnQueryId: 7
             derivedColumn: N
             heading {
-                heading: Update Date
+                heading: "&{UPDATE_DATE}."
             }
             layout {
                 sequence: 80
@@ -622,7 +622,7 @@ page 207 (
             derivedColumn: N
             type: link
             heading {
-                heading: Details
+                heading: "&{DETAILS}."
             }
             layout {
                 sequence: 100
@@ -658,7 +658,7 @@ page 207 (
             derivedColumn: N
             type: downloadBlob
             heading {
-                heading: Resume
+                heading: "&{RESUME}."
             }
             layout {
                 sequence: 110
@@ -730,7 +730,7 @@ page 207 (
             reportColumnQueryId: 19
             derivedColumn: N
             heading {
-                heading: Title
+                heading: "&{TITLE}."
             }
             layout {
                 sequence: 90
@@ -814,7 +814,7 @@ page 207 (
         facet P207_CITY (
             type: selectList
             label {
-                label: City
+                label: "&{CITY}."
             }
             lov {
                 type: sharedComponent
@@ -1017,7 +1017,7 @@ page 207 (
     pageItem P207_FIRST_NAME (
         type: textField
         label {
-            label: First Name
+            label: "&{FIRST_NAME}."
             alignment: left
         }
         layout {
@@ -1045,7 +1045,7 @@ page 207 (
     pageItem P207_LAST_NAME (
         type: textField
         label {
-            label: Last Name
+            label: "&{LAST_NAME}."
             alignment: left
         }
         layout {
@@ -1064,7 +1064,7 @@ page 207 (
     pageItem P207_ROWS (
         type: numberField
         label {
-            label: Rows
+            label: "&{ROWS}."
             alignment: left
         }
         layout {
@@ -1116,7 +1116,7 @@ page 207 (
 
     button apply (
         buttonName: Apply
-        label: Apply
+        label: "&{APPLY}."
         layout {
             sequence: 50
             region: @applications
@@ -1161,7 +1161,7 @@ page 207 (
 
     button submit (
         buttonName: Submit
-        label: Submit
+        label: "&{SUBMIT}."
         layout {
             sequence: 100
             region: @applications
@@ -1350,7 +1350,7 @@ page 207 (
                 
                         apex_json.open_object;
                         apex_json.write('success', true);
-                        apex_json.write('message', 'Application archived successfully.');
+                        apex_json.write('message', APEX_LANG.GET_MESSAGE('APPLICATION_ARCHIVED'));
                         apex_json.close_object;
                 
                     elsif l_action = 'UNARCHIVE' then
@@ -1362,11 +1362,11 @@ page 207 (
                 
                         apex_json.open_object;
                         apex_json.write('success', true);
-                        apex_json.write('message', 'Application unarchived successfully.');
+                        apex_json.write('message', APEX_LANG.GET_MESSAGE('APPLICATION_UNARCHIVED'));
                         apex_json.close_object;
                 
                     else
-                        raise_application_error(-20001, 'Invalid archive action.');
+                        raise_application_error(-20001, APEX_LANG.GET_MESSAGE('INVALID_APPLICATION_ARCHIVE_ACTION'));
                     end if;
                 
                 exception

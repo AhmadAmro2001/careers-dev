@@ -1,6 +1,6 @@
 textMessage ACCOUNTS (
     message {
-        text: Accounts
+        text: "الحسابات"
         language: ar
     }
 )
@@ -14,7 +14,7 @@ textMessage ACCOUNTS (
 
 textMessage ACCOUNT_ID (
     message {
-        text: Account Id
+        text: "رقم الحساب"
         language: ar
     }
 )
@@ -28,7 +28,7 @@ textMessage ACCOUNT_ID (
 
 textMessage ACCOUNT_ID_1 (
     message {
-        text: Account ID
+        text: "معرّف الحساب"
         language: ar
     }
 )
@@ -42,21 +42,21 @@ textMessage ACCOUNT_ID_1 (
 
 textMessage ACCREG (
     message {
-        text: Acc_reg
+        text: "تسجيل الحساب"
         language: ar
     }
 )
 
 textMessage ACCREG (
     message {
-        text: Acc_reg
+        text: "Account Registration"
         language: en
     }
 )
 
 textMessage ADD (
     message {
-        text: Add
+        text: "إضافة"
         language: ar
     }
 )
@@ -70,21 +70,21 @@ textMessage ADD (
 
 textMessage ADDOTHERCERTIFICATES (
     message {
-        text: add_other_certificates
+        text: "إضافة شهادات أخرى"
         language: ar
     }
 )
 
 textMessage ADDOTHERCERTIFICATES (
     message {
-        text: add_other_certificates
+        text: "Add Other Certificates"
         language: en
     }
 )
 
 textMessage ADDRESS (
     message {
-        text: Address
+        text: "العنوان"
         language: ar
     }
 )
@@ -98,7 +98,7 @@ textMessage ADDRESS (
 
 textMessage ADD_CERTIFICATE (
     message {
-        text: Add Certificate
+        text: "إضافة شهادة"
         language: ar
     }
 )
@@ -112,7 +112,7 @@ textMessage ADD_CERTIFICATE (
 
 textMessage ADD_EDUCATION (
     message {
-        text: Add Education
+        text: "إضافة مؤهل دراسي"
         language: ar
     }
 )
@@ -126,7 +126,7 @@ textMessage ADD_EDUCATION (
 
 textMessage ADD_OTHER_CERTIFICATES (
     message {
-        text: Add Other Certificates
+        text: "إضافة شهادات أخرى"
         language: ar
     }
 )
@@ -140,7 +140,7 @@ textMessage ADD_OTHER_CERTIFICATES (
 
 textMessage ALREADY_HAVE_ACCOUNT (
     message {
-        text: Already have account?
+        text: "هل لديك حساب بالفعل؟"
         language: ar
     }
 )
@@ -154,7 +154,7 @@ textMessage ALREADY_HAVE_ACCOUNT (
 
 textMessage APPLICATION (
     message {
-        text: Application
+        text: "طلب التوظيف"
         language: ar
     }
 )
@@ -168,7 +168,7 @@ textMessage APPLICATION (
 
 textMessage APPLICATIONS (
     message {
-        text: Applications
+        text: "طلبات التوظيف"
         language: ar
     }
 )
@@ -182,7 +182,7 @@ textMessage APPLICATIONS (
 
 textMessage APPLICATION_DETAILS (
     message {
-        text: Application Details
+        text: "تفاصيل طلب التوظيف"
         language: ar
     }
 )
@@ -196,7 +196,7 @@ textMessage APPLICATION_DETAILS (
 
 textMessage APPLICATION_ID (
     message {
-        text: Application Id
+        text: "معرّف طلب التوظيف"
         language: ar
     }
 )
@@ -210,7 +210,7 @@ textMessage APPLICATION_ID (
 
 textMessage APPLICATION_INFO (
     message {
-        text: Application Info
+        text: "معلومات طلب التوظيف"
         language: ar
     }
 )
@@ -224,7 +224,7 @@ textMessage APPLICATION_INFO (
 
 textMessage APPLY (
     message {
-        text: Apply
+        text: "التقديم"
         language: ar
     }
 )
@@ -238,7 +238,7 @@ textMessage APPLY (
 
 textMessage APPLY_CHANGES (
     message {
-        text: Apply Changes
+        text: "تطبيق التغييرات"
         language: ar
     }
 )
@@ -252,7 +252,7 @@ textMessage APPLY_CHANGES (
 
 textMessage APPLY_NOW (
     message {
-        text: Apply Now
+        text: "قدّم الآن"
         language: ar
     }
 )
@@ -266,7 +266,7 @@ textMessage APPLY_NOW (
 
 textMessage APPLY_TEST (
     message {
-        text: Apply test
+        text: "اختبار التقديم"
         language: ar
     }
 )
@@ -280,7 +280,7 @@ textMessage APPLY_TEST (
 
 textMessage APPLY_TO_JOB (
     message {
-        text: Apply To Job
+        text: "التقديم إلى وظيفة"
         language: ar
     }
 )
@@ -294,7 +294,7 @@ textMessage APPLY_TO_JOB (
 
 textMessage ARCHIVED (
     message {
-        text: Archived
+        text: "مؤرشف"
         language: ar
     }
 )
@@ -308,7 +308,7 @@ textMessage ARCHIVED (
 
 textMessage ARCHIVE_APP (
     message {
-        text: Archive App
+        text: "أرشفة طلب التوظيف"
         language: ar
     }
 )
@@ -322,7 +322,7 @@ textMessage ARCHIVE_APP (
 
 textMessage ARCHIVE_VACANCY (
     message {
-        text: Archive Vacancy
+        text: "أرشفة الوظيفة الشاغرة"
         language: ar
     }
 )
@@ -336,7 +336,7 @@ textMessage ARCHIVE_VACANCY (
 
 textMessage AREA (
     message {
-        text: Area
+        text: "المنطقة"
         language: ar
     }
 )
@@ -350,7 +350,7 @@ textMessage AREA (
 
 textMessage BREADCRUMB (
     message {
-        text: Breadcrumb
+        text: "مسار التنقل"
         language: ar
     }
 )
@@ -364,7 +364,7 @@ textMessage BREADCRUMB (
 
 textMessage BUTTONS (
     message {
-        text: Buttons
+        text: "الأزرار"
         language: ar
     }
 )
@@ -378,7 +378,7 @@ textMessage BUTTONS (
 
 textMessage CANCEL (
     message {
-        text: Cancel
+        text: "إلغاء"
         language: ar
     }
 )
@@ -392,7 +392,7 @@ textMessage CANCEL (
 
 textMessage CAREERS (
     message {
-        text: careers
+        text: "بوابة التوظيف"
         language: ar
     }
 )
@@ -406,7 +406,7 @@ textMessage CAREERS (
 
 textMessage CAREERS_1 (
     message {
-        text: Careers
+        text: "بوابة التوظيف"
         language: ar
     }
 )
@@ -420,7 +420,7 @@ textMessage CAREERS_1 (
 
 textMessage CAREERS_LOG_IN (
     message {
-        text: careers - Log In
+        text: "بوابة التوظيف - تسجيل الدخول"
         language: ar
     }
 )
@@ -434,7 +434,7 @@ textMessage CAREERS_LOG_IN (
 
 textMessage CATEGORY (
     message {
-        text: Category
+        text: "الفئة"
         language: ar
     }
 )
@@ -448,7 +448,7 @@ textMessage CATEGORY (
 
 textMessage CATEGORY_ID (
     message {
-        text: Category Id
+        text: "معرّف الفئة"
         language: ar
     }
 )
@@ -462,7 +462,7 @@ textMessage CATEGORY_ID (
 
 textMessage CATEGORY_NAME (
     message {
-        text: Category Name
+        text: "اسم الفئة"
         language: ar
     }
 )
@@ -476,7 +476,7 @@ textMessage CATEGORY_NAME (
 
 textMessage CERTIFICATE_DATE (
     message {
-        text: Certificate Date
+        text: "تاريخ الشهادة"
         language: ar
     }
 )
@@ -490,7 +490,7 @@ textMessage CERTIFICATE_DATE (
 
 textMessage CERTIFICATE_NAME (
     message {
-        text: Certificate Name
+        text: "اسم الشهادة"
         language: ar
     }
 )
@@ -504,7 +504,7 @@ textMessage CERTIFICATE_NAME (
 
 textMessage CERTIFICATE_NAME_IS_REQUIRED (
     message {
-        text: Certificate name is required!
+        text: "اسم الشهادة مطلوب."
         language: ar
     }
 )
@@ -518,7 +518,7 @@ textMessage CERTIFICATE_NAME_IS_REQUIRED (
 
 textMessage CITY (
     message {
-        text: City
+        text: "المدينة"
         language: ar
     }
 )
@@ -532,7 +532,7 @@ textMessage CITY (
 
 textMessage CLEAR (
     message {
-        text: Clear
+        text: "مسح"
         language: ar
     }
 )
@@ -546,7 +546,7 @@ textMessage CLEAR (
 
 textMessage CLEAR_CERTIFICATES (
     message {
-        text: Clear Certificates
+        text: "مسح الشهادات"
         language: ar
     }
 )
@@ -560,7 +560,7 @@ textMessage CLEAR_CERTIFICATES (
 
 textMessage CODE (
     message {
-        text: Code
+        text: "الرمز"
         language: ar
     }
 )
@@ -574,7 +574,7 @@ textMessage CODE (
 
 textMessage COLUMN_HEADING (
     message {
-        text: <input type="checkbox" id="check_all_docs" aria-label="Select all documents">
+        text: "<input type=\"checkbox\" id=\"check_all_docs\" aria-label=\"تحديد جميع المستندات\">"
         language: ar
     }
 )
@@ -599,12 +599,12 @@ textMessage COLUMN_HTML_EXPRESSION (
                         <div class="vacancy-sub-info">
                             <span>
                                 <i class="fa fa-calendar-o"></i>
-                                Posted: %POST_DATE
+                                نُشر في: %POST_DATE
                             </span>
             
                             <span>
                                 <i class="fa fa-user"></i>
-                                By: %NAME
+                                بواسطة: %NAME
                             </span>
                         </div>
                     </div>
@@ -617,32 +617,32 @@ textMessage COLUMN_HTML_EXPRESSION (
                 <div class="vacancy-info-grid">
             
                     <div class="vacancy-info-box">
-                        <span class="info-label">Category</span>
+                        <span class="info-label">الفئة</span>
                         <span class="info-value">%CATEGORY_NAME</span>
                     </div>
             
                     <div class="vacancy-info-box">
-                        <span class="info-label">Minimum Education Level</span>
+                        <span class="info-label">الحد الأدنى للمؤهل الدراسي</span>
                         <span class="info-value">%MINIMUM_EDUCATION_LEVEL_ID</span>
                     </div>
             
                     <div class="vacancy-info-box">
-                        <span class="info-label">Ministry Exclusive</span>
+                        <span class="info-label">خاص بالوزارة</span>
                         <span class="info-value">%MINISTRY_EXCLUSIVE</span>
                     </div>
             
                     <div class="vacancy-info-box">
-                        <span class="info-label">Created On</span>
+                        <span class="info-label">تاريخ الإنشاء</span>
                         <span class="info-value">%CREATION_DATE</span>
                     </div>
             
                     <div class="vacancy-info-box">
-                        <span class="info-label">Last Updated</span>
+                        <span class="info-label">آخر تحديث</span>
                         <span class="info-value">%LAST_UPDATE_DATE</span>
                     </div>
             
                     <div class="vacancy-info-box">
-                        <span class="info-label">Updated By</span>
+                        <span class="info-label">آخر تحديث بواسطة</span>
                         <span class="info-value">%LAST_UPDATED_BY</span>
                     </div>
             
@@ -651,7 +651,7 @@ textMessage COLUMN_HTML_EXPRESSION (
                 <div class="vacancy-section">
                     <h3>
                         <i class="fa fa-info-circle"></i>
-                        Job Summary
+                        ملخص الوظيفة
                     </h3>
             
                     <div class="vacancy-html-content">
@@ -662,7 +662,7 @@ textMessage COLUMN_HTML_EXPRESSION (
                 <div class="vacancy-section">
                     <h3>
                         <i class="fa fa-tasks"></i>
-                        Responsibilities
+                        المسؤوليات
                     </h3>
             
                     <div class="vacancy-html-content">
@@ -673,7 +673,7 @@ textMessage COLUMN_HTML_EXPRESSION (
                 <div class="vacancy-section">
                     <h3>
                         <i class="fa fa-check-square-o"></i>
-                        Required Qualifications
+                        المؤهلات المطلوبة
                     </h3>
             
                     <div class="vacancy-html-content">
@@ -790,7 +790,7 @@ textMessage COLUMN_HTML_EXPRESSION (
 
 textMessage COMPANY (
     message {
-        text: Company
+        text: "الشركة"
         language: ar
     }
 )
@@ -804,7 +804,7 @@ textMessage COMPANY (
 
 textMessage COMPLETE_YOUR_PERSONAL_INFO (
     message {
-        text: Complete Your Personal Info
+        text: "استكمال بياناتك الشخصية"
         language: ar
     }
 )
@@ -818,7 +818,7 @@ textMessage COMPLETE_YOUR_PERSONAL_INFO (
 
 textMessage COMPLETE_YOUR_PERSONAL_INFO_FIRST (
     message {
-        text: Complete Your Personal Info First
+        text: "يرجى استكمال بياناتك الشخصية أولًا."
         language: ar
     }
 )
@@ -832,7 +832,7 @@ textMessage COMPLETE_YOUR_PERSONAL_INFO_FIRST (
 
 textMessage CONFIRM_PASSWORD (
     message {
-        text: Confirm Password
+        text: "تأكيد كلمة المرور"
         language: ar
     }
 )
@@ -846,7 +846,7 @@ textMessage CONFIRM_PASSWORD (
 
 textMessage COUNTRY (
     message {
-        text: "Country "
+        text: "الدولة "
         language: ar
     }
 )
@@ -860,7 +860,7 @@ textMessage COUNTRY (
 
 textMessage COUNTRY_1 (
     message {
-        text: Country
+        text: "الدولة"
         language: ar
     }
 )
@@ -874,7 +874,7 @@ textMessage COUNTRY_1 (
 
 textMessage COUNTRY_ID (
     message {
-        text: Country Id
+        text: "معرّف الدولة"
         language: ar
     }
 )
@@ -888,7 +888,7 @@ textMessage COUNTRY_ID (
 
 textMessage COUNTRY_NAME (
     message {
-        text: Country Name
+        text: "اسم الدولة"
         language: ar
     }
 )
@@ -902,7 +902,7 @@ textMessage COUNTRY_NAME (
 
 textMessage COUNTRY_PHONE_CODE (
     message {
-        text: "Country Phone Code "
+        text: "رمز الاتصال الدولي "
         language: ar
     }
 )
@@ -916,7 +916,7 @@ textMessage COUNTRY_PHONE_CODE (
 
 textMessage COUNTRY_PHONE_CODE_1 (
     message {
-        text: Country Phone Code
+        text: "رمز الاتصال الدولي"
         language: ar
     }
 )
@@ -930,7 +930,7 @@ textMessage COUNTRY_PHONE_CODE_1 (
 
 textMessage CREATE (
     message {
-        text: Create
+        text: "إنشاء"
         language: ar
     }
 )
@@ -944,7 +944,7 @@ textMessage CREATE (
 
 textMessage CREATED_BY (
     message {
-        text: Created By
+        text: "أنشئ بواسطة"
         language: ar
     }
 )
@@ -958,7 +958,7 @@ textMessage CREATED_BY (
 
 textMessage CREATE_NEW_ACCOUNT (
     message {
-        text: Create new account?
+        text: "إنشاء حساب جديد؟"
         language: ar
     }
 )
@@ -972,7 +972,7 @@ textMessage CREATE_NEW_ACCOUNT (
 
 textMessage DASHBOARD (
     message {
-        text: Dashboard
+        text: "لوحة المعلومات"
         language: ar
     }
 )
@@ -986,7 +986,7 @@ textMessage DASHBOARD (
 
 textMessage DATE_IS_REQUIRED (
     message {
-        text: Date is required!
+        text: "التاريخ مطلوب."
         language: ar
     }
 )
@@ -1000,7 +1000,7 @@ textMessage DATE_IS_REQUIRED (
 
 textMessage DATE_OF_ACQUISITION (
     message {
-        text: Date Of Acquisition
+        text: "تاريخ الحصول"
         language: ar
     }
 )
@@ -1014,7 +1014,7 @@ textMessage DATE_OF_ACQUISITION (
 
 textMessage DATE_OF_BIRTH (
     message {
-        text: Date Of Birth
+        text: "تاريخ الميلاد"
         language: ar
     }
 )
@@ -1028,7 +1028,7 @@ textMessage DATE_OF_BIRTH (
 
 textMessage DATE_TIME (
     message {
-        text: Date Time
+        text: "التاريخ والوقت"
         language: ar
     }
 )
@@ -1042,7 +1042,7 @@ textMessage DATE_TIME (
 
 textMessage DELETE (
     message {
-        text: Delete
+        text: "حذف"
         language: ar
     }
 )
@@ -1056,7 +1056,7 @@ textMessage DELETE (
 
 textMessage DETAILS_CARD (
     message {
-        text: Details Card
+        text: "بطاقة التفاصيل"
         language: ar
     }
 )
@@ -1070,7 +1070,7 @@ textMessage DETAILS_CARD (
 
 textMessage DOWNLOAD (
     message {
-        text: Download
+        text: "تنزيل"
         language: ar
     }
 )
@@ -1084,7 +1084,7 @@ textMessage DOWNLOAD (
 
 textMessage DOWNLOAD_PAGE (
     message {
-        text: download page
+        text: "صفحة التنزيل"
         language: ar
     }
 )
@@ -1098,7 +1098,7 @@ textMessage DOWNLOAD_PAGE (
 
 textMessage DOWNLOAD_RESUMES (
     message {
-        text: Download Resumes
+        text: "تنزيل السير الذاتية"
         language: ar
     }
 )
@@ -1112,7 +1112,7 @@ textMessage DOWNLOAD_RESUMES (
 
 textMessage EDIT (
     message {
-        text: Edit
+        text: "تعديل"
         language: ar
     }
 )
@@ -1126,7 +1126,7 @@ textMessage EDIT (
 
 textMessage EDIT_ACCOUNT_DATA (
     message {
-        text: Edit Account Data
+        text: "تعديل بيانات الحساب"
         language: ar
     }
 )
@@ -1140,7 +1140,7 @@ textMessage EDIT_ACCOUNT_DATA (
 
 textMessage EDIT_APPLICATIONS (
     message {
-        text: Edit Applications
+        text: "تعديل طلبات التوظيف"
         language: ar
     }
 )
@@ -1154,7 +1154,7 @@ textMessage EDIT_APPLICATIONS (
 
 textMessage EDIT_EDUCATION (
     message {
-        text: Edit Education
+        text: "تعديل المؤهل الدراسي"
         language: ar
     }
 )
@@ -1168,7 +1168,7 @@ textMessage EDIT_EDUCATION (
 
 textMessage EDIT_EXPERIENCE (
     message {
-        text: Edit Experience
+        text: "تعديل الخبرة العملية"
         language: ar
     }
 )
@@ -1182,21 +1182,21 @@ textMessage EDIT_EXPERIENCE (
 
 textMessage EDIT_LANGUGE (
     message {
-        text: Edit Languge
+        text: "تعديل اللغة"
         language: ar
     }
 )
 
 textMessage EDIT_LANGUGE (
     message {
-        text: Edit Languge
+        text: "Edit Language"
         language: en
     }
 )
 
 textMessage EDIT_VACANCY (
     message {
-        text: Edit Vacancy
+        text: "تعديل الوظيفة الشاغرة"
         language: ar
     }
 )
@@ -1210,7 +1210,7 @@ textMessage EDIT_VACANCY (
 
 textMessage EDUCATION (
     message {
-        text: Education
+        text: "التعليم"
         language: ar
     }
 )
@@ -1224,7 +1224,7 @@ textMessage EDUCATION (
 
 textMessage EDUCATIONW (
     message {
-        text: EducationW
+        text: "التعليم"
         language: ar
     }
 )
@@ -1238,7 +1238,7 @@ textMessage EDUCATIONW (
 
 textMessage EDUCATION_DEGREE (
     message {
-        text: Education Degree
+        text: "الدرجة العلمية"
         language: ar
     }
 )
@@ -1252,7 +1252,7 @@ textMessage EDUCATION_DEGREE (
 
 textMessage EDUCATION_FIELD (
     message {
-        text: Education Field
+        text: "التخصص الدراسي"
         language: ar
     }
 )
@@ -1266,7 +1266,7 @@ textMessage EDUCATION_FIELD (
 
 textMessage EDUCATION_GRADE (
     message {
-        text: Education Grade
+        text: "التقدير الدراسي"
         language: ar
     }
 )
@@ -1280,7 +1280,7 @@ textMessage EDUCATION_GRADE (
 
 textMessage EDUCATION_LEVEL (
     message {
-        text: Education Level
+        text: "المستوى التعليمي"
         language: ar
     }
 )
@@ -1294,7 +1294,7 @@ textMessage EDUCATION_LEVEL (
 
 textMessage EMAIL (
     message {
-        text: Email
+        text: "البريد الإلكتروني"
         language: ar
     }
 )
@@ -1308,7 +1308,7 @@ textMessage EMAIL (
 
 textMessage ENTER_YOUR_EXPERIENCE_FIRST (
     message {
-        text: Enter Your Experience First!
+        text: "يرجى إضافة الخبرة العملية أولًا."
         language: ar
     }
 )
@@ -1322,7 +1322,7 @@ textMessage ENTER_YOUR_EXPERIENCE_FIRST (
 
 textMessage ERROR_MESSAGE (
     message {
-        text: Insufficient privileges, user is not an Administrator
+        text: "لا تملك صلاحيات كافية؛ فالمستخدم ليس مسؤولًا."
         language: ar
     }
 )
@@ -1336,7 +1336,7 @@ textMessage ERROR_MESSAGE (
 
 textMessage EXCEL_APPLICATION_REPORT (
     message {
-        text: Excel Application Report
+        text: "تقرير طلبات التوظيف في Excel"
         language: ar
     }
 )
@@ -1350,7 +1350,7 @@ textMessage EXCEL_APPLICATION_REPORT (
 
 textMessage EXCEL_DOWNLOAD (
     message {
-        text: Excel Download
+        text: "تنزيل ملف Excel"
         language: ar
     }
 )
@@ -1364,7 +1364,7 @@ textMessage EXCEL_DOWNLOAD (
 
 textMessage EXPERIENCE (
     message {
-        text: Experience
+        text: "الخبرة العملية"
         language: ar
     }
 )
@@ -1378,7 +1378,7 @@ textMessage EXPERIENCE (
 
 textMessage EXPERIENCEW (
     message {
-        text: ExperienceW
+        text: "الخبرات العملية"
         language: ar
     }
 )
@@ -1392,7 +1392,7 @@ textMessage EXPERIENCEW (
 
 textMessage EXPERIENCE_YEARS (
     message {
-        text: Experience Years
+        text: "سنوات الخبرة"
         language: ar
     }
 )
@@ -1406,7 +1406,7 @@ textMessage EXPERIENCE_YEARS (
 
 textMessage EXPORT (
     message {
-        text: Export
+        text: "تصدير"
         language: ar
     }
 )
@@ -1420,7 +1420,7 @@ textMessage EXPORT (
 
 textMessage FIELD_IS_REQUIRED (
     message {
-        text: field is required!
+        text: "هذا الحقل مطلوب."
         language: ar
     }
 )
@@ -1434,7 +1434,7 @@ textMessage FIELD_IS_REQUIRED (
 
 textMessage FIELD_NAME (
     message {
-        text: Field Name
+        text: "اسم الحقل"
         language: ar
     }
 )
@@ -1448,7 +1448,7 @@ textMessage FIELD_NAME (
 
 textMessage FILE_NAME (
     message {
-        text: File Name
+        text: "اسم الملف"
         language: ar
     }
 )
@@ -1462,7 +1462,7 @@ textMessage FILE_NAME (
 
 textMessage FILTER (
     message {
-        text: Filter
+        text: "تصفية"
         language: ar
     }
 )
@@ -1476,7 +1476,7 @@ textMessage FILTER (
 
 textMessage FINISH (
     message {
-        text: Finish
+        text: "إنهاء"
         language: ar
     }
 )
@@ -1490,7 +1490,7 @@ textMessage FINISH (
 
 textMessage FIRST_NAME (
     message {
-        text: First Name
+        text: "الاسم الأول"
         language: ar
     }
 )
@@ -1504,21 +1504,21 @@ textMessage FIRST_NAME (
 
 textMessage FROMDATE (
     message {
-        text: Fromdate
+        text: "تاريخ البدء"
         language: ar
     }
 )
 
 textMessage FROMDATE (
     message {
-        text: Fromdate
+        text: "From Date"
         language: en
     }
 )
 
 textMessage GENDER (
     message {
-        text: Gender
+        text: "الجنس"
         language: ar
     }
 )
@@ -1532,7 +1532,7 @@ textMessage GENDER (
 
 textMessage GET_VACANCIES (
     message {
-        text: Get Vacancies
+        text: "جلب الوظائف الشاغرة"
         language: ar
     }
 )
@@ -1546,7 +1546,7 @@ textMessage GET_VACANCIES (
 
 textMessage GLOBAL_PAGE (
     message {
-        text: Global Page
+        text: "الصفحة العامة"
         language: ar
     }
 )
@@ -1560,7 +1560,7 @@ textMessage GLOBAL_PAGE (
 
 textMessage GRADE_NAME (
     message {
-        text: Grade Name
+        text: "اسم التقدير"
         language: ar
     }
 )
@@ -1574,7 +1574,7 @@ textMessage GRADE_NAME (
 
 textMessage GRADUATION_CERTIFICATE (
     message {
-        text: Graduation Certificate
+        text: "شهادة التخرج"
         language: ar
     }
 )
@@ -1588,7 +1588,7 @@ textMessage GRADUATION_CERTIFICATE (
 
 textMessage GRADUATION_CERTIFICATE_FILE_NAME (
     message {
-        text: Graduation Certificate File Name
+        text: "اسم ملف شهادة التخرج"
         language: ar
     }
 )
@@ -1602,7 +1602,7 @@ textMessage GRADUATION_CERTIFICATE_FILE_NAME (
 
 textMessage GRADUATION_YEAR (
     message {
-        text: Graduation Year
+        text: "سنة التخرج"
         language: ar
     }
 )
@@ -1616,7 +1616,7 @@ textMessage GRADUATION_YEAR (
 
 textMessage HOME (
     message {
-        text: Home
+        text: "الرئيسية"
         language: ar
     }
 )
@@ -1630,7 +1630,7 @@ textMessage HOME (
 
 textMessage HOME_1 (
     message {
-        text: HOME
+        text: "الصفحة الرئيسية"
         language: ar
     }
 )
@@ -1644,7 +1644,7 @@ textMessage HOME_1 (
 
 textMessage HOME_TELEPHONE (
     message {
-        text: Home Telephone
+        text: "هاتف المنزل"
         language: ar
     }
 )
@@ -1658,7 +1658,7 @@ textMessage HOME_TELEPHONE (
 
 textMessage ID (
     message {
-        text: Id
+        text: "المعرّف"
         language: ar
     }
 )
@@ -1672,7 +1672,7 @@ textMessage ID (
 
 textMessage ID_1 (
     message {
-        text: ID
+        text: "المعرّف"
         language: ar
     }
 )
@@ -1686,7 +1686,7 @@ textMessage ID_1 (
 
 textMessage IMAGE (
     message {
-        text: Image
+        text: "الصورة"
         language: ar
     }
 )
@@ -1700,7 +1700,7 @@ textMessage IMAGE (
 
 textMessage IS_ARCHIVED (
     message {
-        text: Is Archived
+        text: "مؤرشف؟"
         language: ar
     }
 )
@@ -1714,7 +1714,7 @@ textMessage IS_ARCHIVED (
 
 textMessage JOB_APPLICATION_ID (
     message {
-        text: Job Application Id
+        text: "معرّف طلب التوظيف"
         language: ar
     }
 )
@@ -1728,7 +1728,7 @@ textMessage JOB_APPLICATION_ID (
 
 textMessage JOB_CATEGORIES (
     message {
-        text: Job categories
+        text: "فئات الوظائف"
         language: ar
     }
 )
@@ -1742,7 +1742,7 @@ textMessage JOB_CATEGORIES (
 
 textMessage JOB_DETAILS (
     message {
-        text: Job Details
+        text: "تفاصيل الوظيفة"
         language: ar
     }
 )
@@ -1756,7 +1756,7 @@ textMessage JOB_DETAILS (
 
 textMessage JOB_ID (
     message {
-        text: Job Id
+        text: "معرّف الوظيفة"
         language: ar
     }
 )
@@ -1770,7 +1770,7 @@ textMessage JOB_ID (
 
 textMessage JOB_SUMMARY (
     message {
-        text: job summary
+        text: "ملخص الوظيفة"
         language: ar
     }
 )
@@ -1784,7 +1784,7 @@ textMessage JOB_SUMMARY (
 
 textMessage JOB_SUMMARY_1 (
     message {
-        text: Job Summary
+        text: "ملخص الوظيفة"
         language: ar
     }
 )
@@ -1798,7 +1798,7 @@ textMessage JOB_SUMMARY_1 (
 
 textMessage JOB_SUMMARY_DETAILS (
     message {
-        text: Job Summary Details
+        text: "تفاصيل ملخص الوظيفة"
         language: ar
     }
 )
@@ -1812,7 +1812,7 @@ textMessage JOB_SUMMARY_DETAILS (
 
 textMessage JOB_TITLE (
     message {
-        text: Job Title
+        text: "المسمى الوظيفي"
         language: ar
     }
 )
@@ -1826,7 +1826,7 @@ textMessage JOB_TITLE (
 
 textMessage JOB_VACANCIES (
     message {
-        text: Job Vacancies
+        text: "الوظائف الشاغرة"
         language: ar
     }
 )
@@ -1840,7 +1840,7 @@ textMessage JOB_VACANCIES (
 
 textMessage JOIN_DATE (
     message {
-        text: Join Date
+        text: "تاريخ الانضمام"
         language: ar
     }
 )
@@ -1854,7 +1854,7 @@ textMessage JOIN_DATE (
 
 textMessage LANGUAGE (
     message {
-        text: Language
+        text: "اللغة"
         language: ar
     }
 )
@@ -1868,7 +1868,7 @@ textMessage LANGUAGE (
 
 textMessage LANGUAGE_ID (
     message {
-        text: Language Id
+        text: "معرّف اللغة"
         language: ar
     }
 )
@@ -1882,7 +1882,7 @@ textMessage LANGUAGE_ID (
 
 textMessage LANGUAGE_IS_REQUIRED (
     message {
-        text: language is required!
+        text: "اللغة مطلوبة."
         language: ar
     }
 )
@@ -1896,7 +1896,7 @@ textMessage LANGUAGE_IS_REQUIRED (
 
 textMessage LANGUAGE_LEVEL (
     message {
-        text: Language Level
+        text: "مستوى اللغة"
         language: ar
     }
 )
@@ -1910,7 +1910,7 @@ textMessage LANGUAGE_LEVEL (
 
 textMessage LANGUAGE_LEVEL_ID (
     message {
-        text: Language Level Id
+        text: "معرّف مستوى اللغة"
         language: ar
     }
 )
@@ -1924,7 +1924,7 @@ textMessage LANGUAGE_LEVEL_ID (
 
 textMessage LAST_NAME (
     message {
-        text: Last Name
+        text: "اسم العائلة"
         language: ar
     }
 )
@@ -1938,7 +1938,7 @@ textMessage LAST_NAME (
 
 textMessage LAST_UPDATE_DATE (
     message {
-        text: Last Update Date
+        text: "تاريخ آخر تحديث"
         language: ar
     }
 )
@@ -1952,7 +1952,7 @@ textMessage LAST_UPDATE_DATE (
 
 textMessage LEVEL_NAME (
     message {
-        text: Level Name
+        text: "اسم المستوى"
         language: ar
     }
 )
@@ -1966,7 +1966,7 @@ textMessage LEVEL_NAME (
 
 textMessage LOGIN (
     message {
-        text: Login
+        text: "تسجيل الدخول"
         language: ar
     }
 )
@@ -1980,7 +1980,7 @@ textMessage LOGIN (
 
 textMessage LOGOUT (
     message {
-        text: Logout
+        text: "تسجيل الخروج"
         language: ar
     }
 )
@@ -1994,7 +1994,7 @@ textMessage LOGOUT (
 
 textMessage MARITAL_STATUS (
     message {
-        text: Marital Status
+        text: "الحالة الاجتماعية"
         language: ar
     }
 )
@@ -2008,7 +2008,7 @@ textMessage MARITAL_STATUS (
 
 textMessage MAX_ROW_COUNT_MESSAGE (
     message {
-        text: The maximum row count for this report is %MAX_ROW_COUNT rows.  Please apply a filter to reduce the number of records in your query.
+        text: "يتجاوز عدد الصفوف الحد الأقصى لهذا التقرير وهو %MAX_ROW_COUNT صفًا. يرجى تطبيق عامل تصفية لتقليل عدد السجلات في الاستعلام."
         language: ar
     }
 )
@@ -2022,7 +2022,7 @@ textMessage MAX_ROW_COUNT_MESSAGE (
 
 textMessage MILITARY_STATUS (
     message {
-        text: Military Status
+        text: "الحالة العسكرية"
         language: ar
     }
 )
@@ -2036,7 +2036,7 @@ textMessage MILITARY_STATUS (
 
 textMessage MINIMUM_EDUCATION_LEVEL (
     message {
-        text: Minimum Education Level
+        text: "الحد الأدنى للمؤهل الدراسي"
         language: ar
     }
 )
@@ -2050,7 +2050,7 @@ textMessage MINIMUM_EDUCATION_LEVEL (
 
 textMessage MOBILE_TELEPHONE (
     message {
-        text: Mobile Telephone
+        text: "رقم الهاتف المحمول"
         language: ar
     }
 )
@@ -2064,7 +2064,7 @@ textMessage MOBILE_TELEPHONE (
 
 textMessage MORE_DETAILS (
     message {
-        text: More Details
+        text: "مزيد من التفاصيل"
         language: ar
     }
 )
@@ -2078,7 +2078,7 @@ textMessage MORE_DETAILS (
 
 textMessage MOTHER_FULL_NAME (
     message {
-        text: Mother Full Name
+        text: "الاسم الكامل للأم"
         language: ar
     }
 )
@@ -2092,7 +2092,7 @@ textMessage MOTHER_FULL_NAME (
 
 textMessage NATIDTEST (
     message {
-        text: natIDTEST
+        text: "اختبار الرقم القومي"
         language: ar
     }
 )
@@ -2106,7 +2106,7 @@ textMessage NATIDTEST (
 
 textMessage NATIONAL_ID (
     message {
-        text: National Id
+        text: "الرقم القومي"
         language: ar
     }
 )
@@ -2120,7 +2120,7 @@ textMessage NATIONAL_ID (
 
 textMessage NATIONAL_ID_1 (
     message {
-        text: National ID
+        text: "الرقم القومي"
         language: ar
     }
 )
@@ -2134,7 +2134,7 @@ textMessage NATIONAL_ID_1 (
 
 textMessage NATIONAL_ID_FILE_ID (
     message {
-        text: National Id File Id
+        text: "معرّف ملف الرقم القومي"
         language: ar
     }
 )
@@ -2148,7 +2148,7 @@ textMessage NATIONAL_ID_FILE_ID (
 
 textMessage NATIONAL_ID_IMAGE (
     message {
-        text: National Id Image
+        text: "صورة الرقم القومي"
         language: ar
     }
 )
@@ -2162,7 +2162,7 @@ textMessage NATIONAL_ID_IMAGE (
 
 textMessage NAT_ID_FILE_NAME (
     message {
-        text: Nat Id File Name
+        text: "اسم ملف الرقم القومي"
         language: ar
     }
 )
@@ -2176,7 +2176,7 @@ textMessage NAT_ID_FILE_NAME (
 
 textMessage NAVBAR (
     message {
-        text: navbar
+        text: "شريط التنقل"
         language: ar
     }
 )
@@ -2190,7 +2190,7 @@ textMessage NAVBAR (
 
 textMessage NAVBAR_1 (
     message {
-        text: navBar
+        text: "شريط التنقل"
         language: ar
     }
 )
@@ -2204,7 +2204,7 @@ textMessage NAVBAR_1 (
 
 textMessage NEW (
     message {
-        text: New
+        text: "جديد"
         language: ar
     }
 )
@@ -2218,7 +2218,7 @@ textMessage NEW (
 
 textMessage NEW_PASSWORD (
     message {
-        text: New Password
+        text: "كلمة المرور الجديدة"
         language: ar
     }
 )
@@ -2232,7 +2232,7 @@ textMessage NEW_PASSWORD (
 
 textMessage NEW_VACANCY (
     message {
-        text: New Vacancy
+        text: "وظيفة شاغرة جديدة"
         language: ar
     }
 )
@@ -2246,7 +2246,7 @@ textMessage NEW_VACANCY (
 
 textMessage NEXT (
     message {
-        text: Next
+        text: "التالي"
         language: ar
     }
 )
@@ -2260,7 +2260,7 @@ textMessage NEXT (
 
 textMessage NO_DATA_FOUND (
     message {
-        text: No data found.
+        text: "لا توجد بيانات."
         language: ar
     }
 )
@@ -2274,7 +2274,7 @@ textMessage NO_DATA_FOUND (
 
 textMessage NO_DATA_FOUND_1 (
     message {
-        text: no data found
+        text: "لا توجد بيانات."
         language: ar
     }
 )
@@ -2288,7 +2288,7 @@ textMessage NO_DATA_FOUND_1 (
 
 textMessage OTHER_CERTIFICATES (
     message {
-        text: Other Certificates
+        text: "الشهادات الأخرى"
         language: ar
     }
 )
@@ -2302,7 +2302,7 @@ textMessage OTHER_CERTIFICATES (
 
 textMessage OTHER_DETAILS (
     message {
-        text: Other Details
+        text: "تفاصيل أخرى"
         language: ar
     }
 )
@@ -2316,7 +2316,7 @@ textMessage OTHER_DETAILS (
 
 textMessage OTHER_EDUCATION_FIELD (
     message {
-        text: Other Education Field
+        text: "مجال دراسي آخر"
         language: ar
     }
 )
@@ -2330,7 +2330,7 @@ textMessage OTHER_EDUCATION_FIELD (
 
 textMessage OTP (
     message {
-        text: OTP
+        text: "رمز التحقق لمرة واحدة"
         language: ar
     }
 )
@@ -2344,7 +2344,7 @@ textMessage OTP (
 
 textMessage OTP_1 (
     message {
-        text: Otp
+        text: "رمز تحقق لمرة واحدة"
         language: ar
     }
 )
@@ -2358,7 +2358,7 @@ textMessage OTP_1 (
 
 textMessage OTP_VALIDATION (
     message {
-        text: OTP Validation
+        text: "التحقق من رمز التحقق"
         language: ar
     }
 )
@@ -2372,21 +2372,21 @@ textMessage OTP_VALIDATION (
 
 textMessage PASSORT_NUMBER (
     message {
-        text: Passort Number
+        text: "رقم جواز السفر"
         language: ar
     }
 )
 
 textMessage PASSORT_NUMBER (
     message {
-        text: Passort Number
+        text: "Passport Number"
         language: en
     }
 )
 
 textMessage PASSPORT_NUMBER (
     message {
-        text: Passport Number
+        text: "رقم جواز السفر"
         language: ar
     }
 )
@@ -2400,7 +2400,7 @@ textMessage PASSPORT_NUMBER (
 
 textMessage PASSWORD (
     message {
-        text: Password
+        text: "كلمة المرور"
         language: ar
     }
 )
@@ -2414,7 +2414,7 @@ textMessage PASSWORD (
 
 textMessage PERSONALEDUCATION (
     message {
-        text: Personal_education
+        text: "التعليم الشخصي"
         language: ar
     }
 )
@@ -2428,7 +2428,7 @@ textMessage PERSONALEDUCATION (
 
 textMessage PERSONALEPERIENCE (
     message {
-        text: Personal_Eperience
+        text: "الخبرة العملية الشخصية"
         language: ar
     }
 )
@@ -2442,7 +2442,7 @@ textMessage PERSONALEPERIENCE (
 
 textMessage PERSONALINFO (
     message {
-        text: Personal_info
+        text: "المعلومات الشخصية"
         language: ar
     }
 )
@@ -2456,7 +2456,7 @@ textMessage PERSONALINFO (
 
 textMessage PERSONALLANG (
     message {
-        text: personal_Lang
+        text: "اللغات الشخصية"
         language: ar
     }
 )
@@ -2470,7 +2470,7 @@ textMessage PERSONALLANG (
 
 textMessage PERSONAL_INFO (
     message {
-        text: Personal Info
+        text: "المعلومات الشخصية"
         language: ar
     }
 )
@@ -2484,7 +2484,7 @@ textMessage PERSONAL_INFO (
 
 textMessage PERSONAL_INFOW (
     message {
-        text: Personal InfoW
+        text: "المعلومات الشخصية"
         language: ar
     }
 )
@@ -2498,7 +2498,7 @@ textMessage PERSONAL_INFOW (
 
 textMessage PERSONAL_INFO_DATA (
     message {
-        text: Personal Info Data
+        text: "البيانات الشخصية"
         language: ar
     }
 )
@@ -2512,7 +2512,7 @@ textMessage PERSONAL_INFO_DATA (
 
 textMessage PERSONAL_INFO_DATA_2 (
     message {
-        text: Personal Info Data 2
+        text: "البيانات الشخصية"
         language: ar
     }
 )
@@ -2526,7 +2526,7 @@ textMessage PERSONAL_INFO_DATA_2 (
 
 textMessage PERSONAL_INFO_EDIT (
     message {
-        text: Personal Info Edit
+        text: "تعديل المعلومات الشخصية"
         language: ar
     }
 )
@@ -2540,7 +2540,7 @@ textMessage PERSONAL_INFO_EDIT (
 
 textMessage PERSONAL_INFO_TEST (
     message {
-        text: personal info test
+        text: "اختبار المعلومات الشخصية"
         language: ar
     }
 )
@@ -2554,7 +2554,7 @@ textMessage PERSONAL_INFO_TEST (
 
 textMessage PERSONAL_INFO_W (
     message {
-        text: Personal Info W
+        text: "المعلومات الشخصية"
         language: ar
     }
 )
@@ -2568,7 +2568,7 @@ textMessage PERSONAL_INFO_W (
 
 textMessage PHONE_NUMBER_MUST_BE_NUMBERS_ONLY (
     message {
-        text: phone number must be numbers only!
+        text: "يجب أن يتكون رقم الهاتف من أرقام فقط."
         language: ar
     }
 )
@@ -2582,7 +2582,7 @@ textMessage PHONE_NUMBER_MUST_BE_NUMBERS_ONLY (
 
 textMessage PI_ID (
     message {
-        text: Pi Id
+        text: "معرّف المعلومات الشخصية"
         language: ar
     }
 )
@@ -2596,7 +2596,7 @@ textMessage PI_ID (
 
 textMessage PLEASE_MATCH_BOTH_PASSWORDS (
     message {
-        text: please match both passwords
+        text: "يرجى التأكد من تطابق كلمتي المرور."
         language: ar
     }
 )
@@ -2701,24 +2701,24 @@ textMessage PLUG_SOURCE_1 (
                 <div class="nav-left">
                     <a href="f?p=%APP_ID:104:&SESSION." class="nav-link">
                         <span class="fa fa-home"></span>
-                        Home
+                        الرئيسية
                     </a>
             
                     <a href="f?p=%APP_ID:113:&SESSION." class="nav-link">
                         <span class="fa fa-user"></span>
-                        Profile
+                        الملف الشخصي
                     </a>
             
                     <a href="f?p=%APP_ID:119:&SESSION." class="nav-link">
                         <span class="fa fa-id-card"></span>
-                        Personal Data
+                        البيانات الشخصية
                     </a>
                 </div>
             
                 <div class="nav-right">
                     <a href="javascript:apex.submit('LOGOUT');" class="logout-btn">
                         <span class="fa fa-sign-out"></span>
-                        Logout
+                        تسجيل الخروج
                     </a>
                 </div>
             
@@ -2766,7 +2766,7 @@ textMessage PLUG_SOURCE_1 (
 
 textMessage POSITION_NAME (
     message {
-        text: Position Name
+        text: "المسمى الوظيفي"
         language: ar
     }
 )
@@ -2780,7 +2780,7 @@ textMessage POSITION_NAME (
 
 textMessage POST_DATE (
     message {
-        text: Post Date
+        text: "تاريخ النشر"
         language: ar
     }
 )
@@ -2794,7 +2794,7 @@ textMessage POST_DATE (
 
 textMessage PREVIOUS (
     message {
-        text: Previous
+        text: "السابق"
         language: ar
     }
 )
@@ -2808,7 +2808,7 @@ textMessage PREVIOUS (
 
 textMessage PROFILE (
     message {
-        text: Profile
+        text: "الملف الشخصي"
         language: ar
     }
 )
@@ -2822,7 +2822,7 @@ textMessage PROFILE (
 
 textMessage QUALIFICATIONS (
     message {
-        text: Qualifications
+        text: "المؤهلات المطلوبة"
         language: ar
     }
 )
@@ -2836,7 +2836,7 @@ textMessage QUALIFICATIONS (
 
 textMessage QUALIFICATIONS_1 (
     message {
-        text: QUALIFICATIONS
+        text: "المؤهلات"
         language: ar
     }
 )
@@ -2850,7 +2850,7 @@ textMessage QUALIFICATIONS_1 (
 
 textMessage REGISTER (
     message {
-        text: Register
+        text: "إنشاء حساب"
         language: ar
     }
 )
@@ -2864,7 +2864,7 @@ textMessage REGISTER (
 
 textMessage REGISTRATION_PAGE (
     message {
-        text: Registration page
+        text: "صفحة التسجيل"
         language: ar
     }
 )
@@ -2878,7 +2878,7 @@ textMessage REGISTRATION_PAGE (
 
 textMessage REMEMBER_USERNAME (
     message {
-        text: Remember username
+        text: "تذكر اسم المستخدم"
         language: ar
     }
 )
@@ -2892,7 +2892,7 @@ textMessage REMEMBER_USERNAME (
 
 textMessage RESET_ADMIN_PASSWORD (
     message {
-        text: Reset Admin Password
+        text: "إعادة تعيين كلمة مرور المسؤول"
         language: ar
     }
 )
@@ -2906,7 +2906,7 @@ textMessage RESET_ADMIN_PASSWORD (
 
 textMessage RESET_PASSWORD (
     message {
-        text: Reset Password
+        text: "إعادة تعيين كلمة المرور"
         language: ar
     }
 )
@@ -2920,7 +2920,7 @@ textMessage RESET_PASSWORD (
 
 textMessage RESET_PASSWORD_BTN (
     message {
-        text: Reset Password Btn
+        text: "زر إعادة تعيين كلمة المرور"
         language: ar
     }
 )
@@ -2934,7 +2934,7 @@ textMessage RESET_PASSWORD_BTN (
 
 textMessage RESET_PASSWORD_FLG (
     message {
-        text: Reset Password Flg
+        text: "حالة إعادة تعيين كلمة المرور"
         language: ar
     }
 )
@@ -2948,7 +2948,7 @@ textMessage RESET_PASSWORD_FLG (
 
 textMessage RESPONSIBILITIES (
     message {
-        text: Responsibilities
+        text: "المسؤوليات"
         language: ar
     }
 )
@@ -2962,7 +2962,7 @@ textMessage RESPONSIBILITIES (
 
 textMessage RESPONSIBILITIES_1 (
     message {
-        text: RESPONSIBILITIES
+        text: "المسؤوليات"
         language: ar
     }
 )
@@ -2976,7 +2976,7 @@ textMessage RESPONSIBILITIES_1 (
 
 textMessage RESUME (
     message {
-        text: Resume
+        text: "السيرة الذاتية"
         language: ar
     }
 )
@@ -2990,7 +2990,7 @@ textMessage RESUME (
 
 textMessage RESUME_DOWNLOAD (
     message {
-        text: Resume Download
+        text: "تنزيل السيرة الذاتية"
         language: ar
     }
 )
@@ -3004,7 +3004,7 @@ textMessage RESUME_DOWNLOAD (
 
 textMessage RESUME_IS_REQUIRED (
     message {
-        text: Resume is Required
+        text: "السيرة الذاتية مطلوبة."
         language: ar
     }
 )
@@ -3018,7 +3018,7 @@ textMessage RESUME_IS_REQUIRED (
 
 textMessage SALT (
     message {
-        text: Salt
+        text: "ملح التشفير"
         language: ar
     }
 )
@@ -3032,7 +3032,7 @@ textMessage SALT (
 
 textMessage SAVE (
     message {
-        text: Save
+        text: "حفظ"
         language: ar
     }
 )
@@ -3046,7 +3046,7 @@ textMessage SAVE (
 
 textMessage SECOND_NAME (
     message {
-        text: Second Name
+        text: "الاسم الثاني"
         language: ar
     }
 )
@@ -3060,7 +3060,7 @@ textMessage SECOND_NAME (
 
 textMessage SEQ_ID (
     message {
-        text: Seq Id
+        text: "معرّف التسلسل"
         language: ar
     }
 )
@@ -3074,7 +3074,7 @@ textMessage SEQ_ID (
 
 textMessage SHOW_APP (
     message {
-        text: Show App
+        text: "عرض الطلب"
         language: ar
     }
 )
@@ -3088,7 +3088,7 @@ textMessage SHOW_APP (
 
 textMessage SIGN_IN (
     message {
-        text: Sign In
+        text: "تسجيل الدخول"
         language: ar
     }
 )
@@ -3102,7 +3102,7 @@ textMessage SIGN_IN (
 
 textMessage SIGN_OUT (
     message {
-        text: Sign Out
+        text: "تسجيل الخروج"
         language: ar
     }
 )
@@ -3116,7 +3116,7 @@ textMessage SIGN_OUT (
 
 textMessage SKIP_FOR_NOW (
     message {
-        text: Skip For Now
+        text: "تخطَّ الآن"
         language: ar
     }
 )
@@ -3130,7 +3130,7 @@ textMessage SKIP_FOR_NOW (
 
 textMessage SUBMIT (
     message {
-        text: Submit
+        text: "إرسال"
         language: ar
     }
 )
@@ -3144,7 +3144,7 @@ textMessage SUBMIT (
 
 textMessage SUMMARY (
     message {
-        text: Summary
+        text: "الملخص"
         language: ar
     }
 )
@@ -3158,7 +3158,7 @@ textMessage SUMMARY (
 
 textMessage THE_EDUCATION_ADDED (
     message {
-        text: The Education Added!
+        text: "تمت إضافة المؤهل الدراسي."
         language: ar
     }
 )
@@ -3172,7 +3172,7 @@ textMessage THE_EDUCATION_ADDED (
 
 textMessage THE_FIELD_IS_REQUIRED (
     message {
-        text: the field is required!
+        text: "هذا الحقل مطلوب."
         language: ar
     }
 )
@@ -3186,7 +3186,7 @@ textMessage THE_FIELD_IS_REQUIRED (
 
 textMessage THE_PASSWORD_AND_CONFIRM_PASSWORD_MUST_BE_THE_SAME (
     message {
-        text: the password and confirm password must be the same!
+        text: "يجب أن تتطابق كلمة المرور مع تأكيد كلمة المرور."
         language: ar
     }
 )
@@ -3200,7 +3200,7 @@ textMessage THE_PASSWORD_AND_CONFIRM_PASSWORD_MUST_BE_THE_SAME (
 
 textMessage THE_PASSWORD_UPDATED_SUCCESSFULLY (
     message {
-        text: the password updated successfully!
+        text: "تم تحديث كلمة المرور بنجاح."
         language: ar
     }
 )
@@ -3214,7 +3214,7 @@ textMessage THE_PASSWORD_UPDATED_SUCCESSFULLY (
 
 textMessage THIS_IS_INVALID_YEAR (
     message {
-        text: this is invalid year!
+        text: "السنة غير صالحة."
         language: ar
     }
 )
@@ -3228,7 +3228,7 @@ textMessage THIS_IS_INVALID_YEAR (
 
 textMessage TITLE (
     message {
-        text: Title
+        text: "العنوان"
         language: ar
     }
 )
@@ -3242,7 +3242,7 @@ textMessage TITLE (
 
 textMessage TITLE_CODE (
     message {
-        text: Title Code
+        text: "رمز المسمى الوظيفي"
         language: ar
     }
 )
@@ -3256,21 +3256,21 @@ textMessage TITLE_CODE (
 
 textMessage TODATE (
     message {
-        text: Todate
+        text: "تاريخ الانتهاء"
         language: ar
     }
 )
 
 textMessage TODATE (
     message {
-        text: Todate
+        text: "To Date"
         language: en
     }
 )
 
 textMessage TOTAL_APPLICATIONS (
     message {
-        text: Total Applications
+        text: "إجمالي طلبات التوظيف"
         language: ar
     }
 )
@@ -3284,7 +3284,7 @@ textMessage TOTAL_APPLICATIONS (
 
 textMessage UNIVERSITY (
     message {
-        text: University
+        text: "الجامعة"
         language: ar
     }
 )
@@ -3298,7 +3298,7 @@ textMessage UNIVERSITY (
 
 textMessage UPDATE (
     message {
-        text: Update
+        text: "تحديث"
         language: ar
     }
 )
@@ -3312,7 +3312,7 @@ textMessage UPDATE (
 
 textMessage USERNAME (
     message {
-        text: Username
+        text: "اسم المستخدم"
         language: ar
     }
 )
@@ -3326,7 +3326,7 @@ textMessage USERNAME (
 
 textMessage VACANCIES (
     message {
-        text: Vacancies
+        text: "الوظائف الشاغرة"
         language: ar
     }
 )
@@ -3340,7 +3340,7 @@ textMessage VACANCIES (
 
 textMessage VACANCY (
     message {
-        text: "Vacancy "
+        text: "وظيفة شاغرة "
         language: ar
     }
 )
@@ -3354,7 +3354,7 @@ textMessage VACANCY (
 
 textMessage VACANCY_APPLICATIONS (
     message {
-        text: Vacancy Applications
+        text: "طلبات التقدم للوظيفة"
         language: ar
     }
 )
@@ -3368,7 +3368,7 @@ textMessage VACANCY_APPLICATIONS (
 
 textMessage VACANCY_DETAILS (
     message {
-        text: Vacancy Details
+        text: "تفاصيل الوظيفة الشاغرة"
         language: ar
     }
 )
@@ -3382,7 +3382,7 @@ textMessage VACANCY_DETAILS (
 
 textMessage VACANCY_EDIT (
     message {
-        text: Vacancy Edit
+        text: "تعديل الوظيفة الشاغرة"
         language: ar
     }
 )
@@ -3396,7 +3396,7 @@ textMessage VACANCY_EDIT (
 
 textMessage VACANCY_ID (
     message {
-        text: Vacancy Id
+        text: "معرّف الوظيفة الشاغرة"
         language: ar
     }
 )
@@ -3410,7 +3410,7 @@ textMessage VACANCY_ID (
 
 textMessage VACANCY_PER_CATEGORY_TEST (
     message {
-        text: vacancy per category test
+        text: "اختبار الوظائف حسب الفئة"
         language: ar
     }
 )
@@ -3424,7 +3424,7 @@ textMessage VACANCY_PER_CATEGORY_TEST (
 
 textMessage VACANCY_TYPE (
     message {
-        text: Vacancy Type
+        text: "نوع الوظيفة"
         language: ar
     }
 )
@@ -3438,35 +3438,35 @@ textMessage VACANCY_TYPE (
 
 textMessage VACANY_ID (
     message {
-        text: Vacany Id
+        text: "معرّف الوظيفة الشاغرة"
         language: ar
     }
 )
 
 textMessage VACANY_ID (
     message {
-        text: Vacany Id
+        text: "Vacancy ID"
         language: en
     }
 )
 
 textMessage VERFIY (
     message {
-        text: Verfiy
+        text: "تحقق"
         language: ar
     }
 )
 
 textMessage VERFIY (
     message {
-        text: Verfiy
+        text: "Verify"
         language: en
     }
 )
 
 textMessage WELCOME_BACK (
     message {
-        text: Welcome Back!
+        text: "مرحبًا بعودتك."
         language: ar
     }
 )
@@ -3480,7 +3480,7 @@ textMessage WELCOME_BACK (
 
 textMessage YOUR_CERTIFICATES (
     message {
-        text: Your Certificates
+        text: "شهاداتك"
         language: ar
     }
 )
@@ -3494,7 +3494,7 @@ textMessage YOUR_CERTIFICATES (
 
 textMessage YOUR_EDUCATION_IS_REQUIRED (
     message {
-        text: your education is required!
+        text: "المؤهل الدراسي مطلوب."
         language: ar
     }
 )
@@ -3508,7 +3508,7 @@ textMessage YOUR_EDUCATION_IS_REQUIRED (
 
 textMessage YOU_ARE_NOT_AUTHORIZED (
     message {
-        text: You Are not Authorized
+        text: "غير مصرح لك."
         language: ar
     }
 )
@@ -3522,7 +3522,7 @@ textMessage YOU_ARE_NOT_AUTHORIZED (
 
 textMessage YOU_HAVE_NOT_ENTERED_ANY_DATA (
     message {
-        text: you have not entered any data
+        text: "لم تُدخل أي بيانات."
         language: ar
     }
 )
@@ -3536,7 +3536,7 @@ textMessage YOU_HAVE_NOT_ENTERED_ANY_DATA (
 
 textMessage YOU_MUST_ADD_EDUCATION_FIRST (
     message {
-        text: You must add education first!
+        text: "يرجى إضافة المؤهل الدراسي أولًا."
         language: ar
     }
 )
@@ -3550,7 +3550,7 @@ textMessage YOU_MUST_ADD_EDUCATION_FIRST (
 
 textMessage YOU_MUST_ADD_LANGUAGE_FIRST (
     message {
-        text: You Must Add Language First!
+        text: "يرجى إضافة لغة أولًا."
         language: ar
     }
 )
@@ -3564,7 +3564,7 @@ textMessage YOU_MUST_ADD_LANGUAGE_FIRST (
 
 textMessage ZIP_CONTAINER (
     message {
-        text: Zip Container
+        text: "ملف ZIP مضغوط"
         language: ar
     }
 )
@@ -3578,196 +3578,1758 @@ textMessage ZIP_CONTAINER (
 
 textMessage اسم_المتقدم_للوظيفة (
     message {
-        text: اسم المتقدم للوظيفة
+        text: "اسم المتقدم للوظيفة"
         language: ar
     }
 )
 
 textMessage اسم_المتقدم_للوظيفة (
     message {
-        text: اسم المتقدم للوظيفة
+        text: "Applicant Name"
         language: en
     }
 )
 
 textMessage التخصص (
     message {
-        text: التخصص
+        text: "التخصص"
         language: ar
     }
 )
 
 textMessage التخصص (
     message {
-        text: التخصص
+        text: "Specialization"
         language: en
     }
 )
 
 textMessage الجامعةالكلية (
     message {
-        text: الجامعة/الكلية
+        text: "الجامعة/الكلية"
         language: ar
     }
 )
 
 textMessage الجامعةالكلية (
     message {
-        text: الجامعة/الكلية
+        text: "University/College"
         language: en
     }
 )
 
 textMessage الخبره_الوظيفية (
     message {
-        text: الخبره الوظيفية
+        text: "الخبرة الوظيفية"
         language: ar
     }
 )
 
 textMessage الخبره_الوظيفية (
     message {
-        text: الخبره الوظيفية
+        text: "Work Experience"
         language: en
     }
 )
 
 textMessage الرقم_القومى (
     message {
-        text: الرقم القومى
+        text: "الرقم القومي"
         language: ar
     }
 )
 
 textMessage الرقم_القومى (
     message {
-        text: الرقم القومى
+        text: "National ID"
         language: en
     }
 )
 
 textMessage المؤهل_الدراسى (
     message {
-        text: المؤهل الدراسى
+        text: "المؤهل الدراسي"
         language: ar
     }
 )
 
 textMessage المؤهل_الدراسى (
     message {
-        text: المؤهل الدراسى
+        text: "Educational Qualification"
         language: en
     }
 )
 
 textMessage المدينة (
     message {
-        text: المدينة
+        text: "المدينة"
         language: ar
     }
 )
 
 textMessage المدينة (
     message {
-        text: المدينة
+        text: "City"
         language: en
     }
 )
 
 textMessage بريد_إليكترونى (
     message {
-        text: بريد إليكترونى
+        text: "البريد الإلكتروني"
         language: ar
     }
 )
 
 textMessage بريد_إليكترونى (
     message {
-        text: بريد إليكترونى
+        text: "Email Address"
         language: en
     }
 )
 
 textMessage تاريخ_الميلاد (
     message {
-        text: تاريخ الميلاد
+        text: "تاريخ الميلاد"
         language: ar
     }
 )
 
 textMessage تاريخ_الميلاد (
     message {
-        text: تاريخ الميلاد
+        text: "Date of Birth"
         language: en
     }
 )
 
 textMessage دراسات_عليا (
     message {
-        text: دراسات عليا
+        text: "الدراسات العليا"
         language: ar
     }
 )
 
 textMessage دراسات_عليا (
     message {
-        text: دراسات عليا
+        text: "Postgraduate Studies"
         language: en
     }
 )
 
 textMessage رقم_التسجيل (
     message {
-        text: رقم التسجيل
+        text: "رقم التسجيل"
         language: ar
     }
 )
 
 textMessage رقم_التسجيل (
     message {
-        text: رقم التسجيل
+        text: "Registration Number"
         language: en
     }
 )
 
 textMessage رقم_التليفون_موبايل (
     message {
-        text: رقم التليفون/ موبايل
+        text: "رقم الهاتف المحمول"
         language: ar
     }
 )
 
 textMessage رقم_التليفون_موبايل (
     message {
-        text: رقم التليفون/ موبايل
+        text: "Mobile Phone Number"
         language: en
     }
 )
 
 textMessage سنة_التخرج (
     message {
-        text: سنة التخرج
+        text: "سنة التخرج"
         language: ar
     }
 )
 
 textMessage سنة_التخرج (
     message {
-        text: سنة التخرج
+        text: "Graduation Year"
         language: en
     }
 )
 
 textMessage سنة_الحصول_عليها (
     message {
-        text: سنة الحصول عليها
+        text: "سنة الحصول عليها"
         language: ar
     }
 )
 
 textMessage سنة_الحصول_عليها (
     message {
-        text: سنة الحصول عليها
+        text: "Year Obtained"
         language: en
+    }
+)
+
+textMessage ENTER_YOUR_EMAIL (
+    message {
+        text: "Enter Your Email"
+        language: en
+    }
+)
+
+textMessage ENTER_YOUR_EMAIL (
+    message {
+        text: "أدخل بريدك الإلكتروني"
+        language: ar
+    }
+)
+
+textMessage ENTER_CORRECT_OTP (
+    message {
+        text: "Enter The Correct OTP"
+        language: en
+    }
+)
+
+textMessage ENTER_CORRECT_OTP (
+    message {
+        text: "أدخل رمز التحقق الصحيح"
+        language: ar
+    }
+)
+
+textMessage ENTER_OTP (
+    message {
+        text: "Enter The OTP"
+        language: en
+    }
+)
+
+textMessage ENTER_OTP (
+    message {
+        text: "أدخل رمز التحقق"
+        language: ar
+    }
+)
+
+textMessage BACK (
+    message {
+        text: "Back"
+        language: en
+    }
+)
+
+textMessage BACK (
+    message {
+        text: "رجوع"
+        language: ar
+    }
+)
+
+textMessage ACCOUNT_CREATION_GUIDANCE (
+    message {
+        text: "Please fill in all required fields with accurate information to create your account."
+        language: en
+    }
+)
+
+textMessage ACCOUNT_CREATION_GUIDANCE (
+    message {
+        text: "يرجى استكمال جميع الحقول المطلوبة وإدخال معلومات دقيقة لإنشاء حسابك."
+        language: ar
+    }
+)
+
+textMessage OTP_ACCOUNT_VERIFICATION_GUIDANCE (
+    message {
+        text: "An OTP has been sent to your registered email. Please enter it below to verify your account."
+        language: en
+    }
+)
+
+textMessage OTP_ACCOUNT_VERIFICATION_GUIDANCE (
+    message {
+        text: "تم إرسال رمز تحقق لمرة واحدة إلى بريدك الإلكتروني المسجل. أدخله أدناه لتأكيد حسابك."
+        language: ar
+    }
+)
+
+textMessage OTP_LOGIN_GUIDANCE (
+    message {
+        text: "An OTP has been sent to your registered email. Please enter it to log in."
+        language: en
+    }
+)
+
+textMessage OTP_LOGIN_GUIDANCE (
+    message {
+        text: "تم إرسال رمز تحقق لمرة واحدة إلى بريدك الإلكتروني المسجل. أدخله لتسجيل الدخول."
+        language: ar
+    }
+)
+
+textMessage VACANCY_APPLICATION_LIMIT_GUIDANCE (
+    message {
+        text: "You can apply for up to 2 vacancies only. You cannot apply for the same vacancy twice."
+        language: en
+    }
+)
+
+textMessage VACANCY_APPLICATION_LIMIT_GUIDANCE (
+    message {
+        text: "يمكنك التقدم إلى وظيفتين شاغرتين كحد أقصى، ولا يمكنك التقدم إلى الوظيفة الشاغرة نفسها أكثر من مرة."
+        language: ar
+    }
+)
+
+textMessage VACANCY_DELETE_FIRST_GUIDANCE (
+    message {
+        text: "To apply for another vacancy, please delete one of your existing applications first."
+        language: en
+    }
+)
+
+textMessage VACANCY_DELETE_FIRST_GUIDANCE (
+    message {
+        text: "للتقدم إلى وظيفة شاغرة أخرى، يرجى أولًا حذف أحد طلباتك الحالية."
+        language: ar
+    }
+)
+
+textMessage PROFILE_EDIT_GUIDANCE (
+    message {
+        text: "View your personal information and click the Edit button to update any incorrect details."
+        language: en
+    }
+)
+
+textMessage PROFILE_EDIT_GUIDANCE (
+    message {
+        text: "اعرض معلوماتك الشخصية، ثم انقر على «تعديل» لتحديث أي بيانات غير صحيحة."
+        language: ar
+    }
+)
+
+textMessage PERSONAL_INFO_ACCURACY_GUIDANCE (
+    message {
+        text: "Please ensure all required information is accurate and complete, as incorrect details may affect your job application."
+        language: en
+    }
+)
+
+textMessage PERSONAL_INFO_ACCURACY_GUIDANCE (
+    message {
+        text: "يرجى التأكد من دقة جميع المعلومات المطلوبة واكتمالها، إذ قد تؤثر البيانات غير الصحيحة في طلب التوظيف."
+        language: ar
+    }
+)
+
+textMessage APPLICATIONS_GUIDANCE (
+    message {
+        text: "View, edit, or delete your submitted applications. Make sure your information is accurate and up to date."
+        language: en
+    }
+)
+
+textMessage APPLICATIONS_GUIDANCE (
+    message {
+        text: "يمكنك عرض طلباتك المقدمة أو تعديلها أو حذفها. تأكد من دقة معلوماتك وحداثتها."
+        language: ar
+    }
+)
+
+textMessage LOGIN_GUIDANCE (
+    message {
+        text: "Please enter the registered email and password (capital letters and special characters count!)."
+        language: en
+    }
+)
+
+textMessage LOGIN_GUIDANCE (
+    message {
+        text: "يرجى إدخال البريد الإلكتروني المسجل وكلمة المرور، مع مراعاة الأحرف الكبيرة والرموز الخاصة."
+        language: ar
+    }
+)
+
+textMessage VACANCY_DELETE_GUIDANCE (
+    message {
+        text: "To apply for another vacancy, please delete one of your existing applications first."
+        language: en
+    }
+)
+
+textMessage VACANCY_DELETE_GUIDANCE (
+    message {
+        text: "للتقدم إلى وظيفة شاغرة أخرى، يرجى أولًا حذف أحد طلباتك الحالية."
+        language: ar
+    }
+)
+
+textMessage EMAIL_ALREADY_EXISTS (
+    message {
+        text: "This email already exists!"
+        language: en
+    }
+)
+
+textMessage EMAIL_ALREADY_EXISTS (
+    message {
+        text: "هذا البريد الإلكتروني مسجل بالفعل."
+        language: ar
+    }
+)
+
+textMessage PASSWORD_COMPLEXITY_ERROR (
+    message {
+        text: "Password must be at least 8 characters long and contain: - One uppercase letter - One lowercase letter - One number - One special character."
+        language: en
+    }
+)
+
+textMessage PASSWORD_COMPLEXITY_ERROR (
+    message {
+        text: "يجب ألا يقل طول كلمة المرور عن 8 أحرف، وأن تتضمن حرفًا كبيرًا واحدًا وحرفًا صغيرًا واحدًا ورقمًا واحدًا ورمزًا خاصًا واحدًا على الأقل."
+        language: ar
+    }
+)
+
+textMessage PERSONAL_DATA_INFORMATION (
+    message {
+        text: "Personal Data Information"
+        language: en
+    }
+)
+
+textMessage PERSONAL_DATA_INFORMATION (
+    message {
+        text: "معلومات البيانات الشخصية"
+        language: ar
+    }
+)
+
+textMessage ADD_EXPERIENCE (
+    message {
+        text: "Add Experience"
+        language: en
+    }
+)
+
+textMessage ADD_EXPERIENCE (
+    message {
+        text: "إضافة خبرة عملية"
+        language: ar
+    }
+)
+
+textMessage ADD_LANGUAGE (
+    message {
+        text: "Add Language"
+        language: en
+    }
+)
+
+textMessage ADD_LANGUAGE (
+    message {
+        text: "إضافة لغة"
+        language: ar
+    }
+)
+
+textMessage FILE_BLOB (
+    message {
+        text: "File Blob"
+        language: en
+    }
+)
+
+textMessage FILE_BLOB (
+    message {
+        text: "محتوى الملف"
+        language: ar
+    }
+)
+
+textMessage NATIONAL_ID_LENGTH_ERROR (
+    message {
+        text: "National id must be 14 number only!"
+        language: en
+    }
+)
+
+textMessage NATIONAL_ID_LENGTH_ERROR (
+    message {
+        text: "يجب أن يتكون الرقم القومي من 14 رقمًا فقط."
+        language: ar
+    }
+)
+
+textMessage FRESH_GRADUATE (
+    message {
+        text: "I Am Fresh Graduate"
+        language: en
+    }
+)
+
+textMessage FRESH_GRADUATE (
+    message {
+        text: "أنا حديث التخرج"
+        language: ar
+    }
+)
+
+textMessage DETAILS (
+    message {
+        text: "Details"
+        language: en
+    }
+)
+
+textMessage DETAILS (
+    message {
+        text: "التفاصيل"
+        language: ar
+    }
+)
+
+textMessage ARCHIVE (
+    message {
+        text: "Archive"
+        language: en
+    }
+)
+
+textMessage ARCHIVE (
+    message {
+        text: "أرشفة"
+        language: ar
+    }
+)
+
+textMessage CREATION_DATE (
+    message {
+        text: "Creation Date"
+        language: en
+    }
+)
+
+textMessage CREATION_DATE (
+    message {
+        text: "تاريخ الإنشاء"
+        language: ar
+    }
+)
+
+textMessage DOCUMENTS (
+    message {
+        text: "Documents"
+        language: en
+    }
+)
+
+textMessage DOCUMENTS (
+    message {
+        text: "المستندات"
+        language: ar
+    }
+)
+
+textMessage UPDATE_DATE (
+    message {
+        text: "Update Date"
+        language: en
+    }
+)
+
+textMessage UPDATE_DATE (
+    message {
+        text: "تاريخ التحديث"
+        language: ar
+    }
+)
+
+textMessage SHOW_APPLICATIONS (
+    message {
+        text: "Show Applications"
+        language: en
+    }
+)
+
+textMessage SHOW_APPLICATIONS (
+    message {
+        text: "عرض الطلبات"
+        language: ar
+    }
+)
+
+textMessage ROW (
+    message {
+        text: "Row"
+        language: en
+    }
+)
+
+textMessage ROW (
+    message {
+        text: "الصف"
+        language: ar
+    }
+)
+
+textMessage ROWS (
+    message {
+        text: "Rows"
+        language: en
+    }
+)
+
+textMessage ROWS (
+    message {
+        text: "عدد الصفوف"
+        language: ar
+    }
+)
+
+textMessage CREATED_AT (
+    message {
+        text: "Created At"
+        language: en
+    }
+)
+
+textMessage CREATED_AT (
+    message {
+        text: "تاريخ الإنشاء"
+        language: ar
+    }
+)
+
+textMessage USER_EMAIL (
+    message {
+        text: "User Email"
+        language: en
+    }
+)
+
+textMessage USER_EMAIL (
+    message {
+        text: "البريد الإلكتروني للمستخدم"
+        language: ar
+    }
+)
+
+textMessage USER_PROBLEM (
+    message {
+        text: "User Problem"
+        language: en
+    }
+)
+
+textMessage USER_PROBLEM (
+    message {
+        text: "مشكلة المستخدم"
+        language: ar
+    }
+)
+
+textMessage WORK_EXPERIENCE (
+    message {
+        text: "Work Experience"
+        language: en
+    }
+)
+
+textMessage WORK_EXPERIENCE (
+    message {
+        text: "الخبرة العملية"
+        language: ar
+    }
+)
+
+textMessage EDUCATIONAL_QUALIFICATION (
+    message {
+        text: "Educational Qualification"
+        language: en
+    }
+)
+
+textMessage EDUCATIONAL_QUALIFICATION (
+    message {
+        text: "المؤهل الدراسي"
+        language: ar
+    }
+)
+
+textMessage EPROM_CAREERS (
+    message {
+        text: "EPROM Careers"
+        language: en
+    }
+)
+
+textMessage EPROM_CAREERS (
+    message {
+        text: "بوابة التوظيف في إبروم"
+        language: ar
+    }
+)
+
+textMessage FRAUD_ALERT_HEADING (
+    message {
+        text: "Caution"
+        language: en
+    }
+)
+
+textMessage FRAUD_ALERT_HEADING (
+    message {
+        text: "تنبيه"
+        language: ar
+    }
+)
+
+textMessage FRAUD_ALERT_INTRO (
+    message {
+        text: "In our commitment to protecting citizens and maintaining our credibility, EPROM strongly warns and fully disclaims any responsibility against fake entities, individuals, online pages or phone numbers spreading misleading information falsely claiming to act as intermediaries offering job opportunities in the name of EPROM."
+        language: en
+    }
+)
+
+textMessage FRAUD_ALERT_INTRO (
+    message {
+        text: "في إطار التزامنا بحماية المواطنين والحفاظ على مصداقيتنا، تحذر إبروم بشدة وتخلي مسؤوليتها تمامًا عن أي جهات أو أفراد أو صفحات إلكترونية أو أرقام هاتفية زائفة تنشر معلومات مضللة وتدّعي كذبًا أنها وسطاء لتوفير فرص عمل باسم إبروم."
+        language: ar
+    }
+)
+
+textMessage FRAUD_ALERT_COMPANY_ASSURANCE (
+    message {
+        text: "The company affirms the following:"
+        language: en
+    }
+)
+
+textMessage FRAUD_ALERT_COMPANY_ASSURANCE (
+    message {
+        text: "وتؤكد الشركة ما يلي:"
+        language: ar
+    }
+)
+
+textMessage FRAUD_ALERT_NO_INTERMEDIARIES (
+    message {
+        text: "There are no authorized intermediaries for offering job opportunities, whether inside or outside the country."
+        language: en
+    }
+)
+
+textMessage FRAUD_ALERT_NO_INTERMEDIARIES (
+    message {
+        text: "لا يوجد وسطاء معتمدون لتقديم فرص العمل، سواء داخل البلاد أو خارجها."
+        language: ar
+    }
+)
+
+textMessage FRAUD_ALERT_OFFICIAL_CHANNELS (
+    message {
+        text: "All services and job opportunities are announced exclusively through the company’s official channels."
+        language: en
+    }
+)
+
+textMessage FRAUD_ALERT_OFFICIAL_CHANNELS (
+    message {
+        text: "تُعلَن جميع الخدمات وفرص العمل حصريًا عبر القنوات الرسمية للشركة."
+        language: ar
+    }
+)
+
+textMessage FRAUD_ALERT_FREE_SERVICES (
+    message {
+        text: "All services are provided completely free of charge, with no fees or commissions whatsoever."
+        language: en
+    }
+)
+
+textMessage FRAUD_ALERT_FREE_SERVICES (
+    message {
+        text: "تُقدَّم جميع الخدمات مجانًا بالكامل، دون أي رسوم أو عمولات."
+        language: ar
+    }
+)
+
+textMessage FRAUD_ALERT_PROTECT_PERSONAL_INFO (
+    message {
+        text: "We urge everyone not to share any personal information with unknown parties impersonating the company."
+        language: en
+    }
+)
+
+textMessage FRAUD_ALERT_PROTECT_PERSONAL_INFO (
+    message {
+        text: "نحث الجميع على عدم مشاركة أي معلومات شخصية مع جهات مجهولة تنتحل صفة الشركة."
+        language: ar
+    }
+)
+
+textMessage FRAUD_ALERT_VERIFY_CHANNELS (
+    message {
+        text: "For your safety… Always verify through the EPROM official channels."
+        language: en
+    }
+)
+
+textMessage FRAUD_ALERT_VERIFY_CHANNELS (
+    message {
+        text: "حرصًا على سلامتكم، تحققوا دائمًا عبر القنوات الرسمية لشركة إبروم."
+        language: ar
+    }
+)
+
+textMessage FORGOT_PASSWORD (
+    message {
+        text: "Forget Password ?"
+        language: en
+    }
+)
+
+textMessage FORGOT_PASSWORD (
+    message {
+        text: "نسيت كلمة المرور؟"
+        language: ar
+    }
+)
+
+textMessage NEED_HELP (
+    message {
+        text: "Have Any Problem ?"
+        language: en
+    }
+)
+
+textMessage NEED_HELP (
+    message {
+        text: "هل تواجه مشكلة؟"
+        language: ar
+    }
+)
+
+textMessage RECAPTCHA_VALIDATION_FAILED (
+    message {
+        text: "reCAPTCHA validation failed."
+        language: en
+    }
+)
+
+textMessage RECAPTCHA_VALIDATION_FAILED (
+    message {
+        text: "تعذر التحقق من reCAPTCHA."
+        language: ar
+    }
+)
+
+textMessage INVALID_CREDENTIALS (
+    message {
+        text: "Invalid Credentials"
+        language: en
+    }
+)
+
+textMessage INVALID_CREDENTIALS (
+    message {
+        text: "بيانات تسجيل الدخول غير صحيحة."
+        language: ar
+    }
+)
+
+textMessage LANGUAGE_ADDED (
+    message {
+        text: "The language was added."
+        language: en
+    }
+)
+
+textMessage LANGUAGE_ADDED (
+    message {
+        text: "تمت إضافة اللغة."
+        language: ar
+    }
+)
+
+textMessage EMAIL_IS_REQUIRED (
+    message {
+        text: "Email is required"
+        language: en
+    }
+)
+
+textMessage EMAIL_IS_REQUIRED (
+    message {
+        text: "البريد الإلكتروني مطلوب."
+        language: ar
+    }
+)
+
+textMessage INVALID_OTP (
+    message {
+        text: "The code is not correct"
+        language: en
+    }
+)
+
+textMessage INVALID_OTP (
+    message {
+        text: "رمز التحقق غير صحيح."
+        language: ar
+    }
+)
+
+textMessage CHOOSE_VACANCY (
+    message {
+        text: "Choose the job"
+        language: en
+    }
+)
+
+textMessage CHOOSE_VACANCY (
+    message {
+        text: "يرجى اختيار الوظيفة الشاغرة."
+        language: ar
+    }
+)
+
+textMessage COMPLETE_PERSONAL_INFORMATION (
+    message {
+        text: "Please complete your personal information"
+        language: en
+    }
+)
+
+textMessage COMPLETE_PERSONAL_INFORMATION (
+    message {
+        text: "يرجى استكمال بياناتك الشخصية."
+        language: ar
+    }
+)
+
+textMessage LANGUAGE_ALREADY_ADDED (
+    message {
+        text: "This language is already added!"
+        language: en
+    }
+)
+
+textMessage LANGUAGE_ALREADY_ADDED (
+    message {
+        text: "تمت إضافة هذه اللغة مسبقًا."
+        language: ar
+    }
+)
+
+textMessage EXPERIENCE_ALREADY_ADDED (
+    message {
+        text: "You already added experience!"
+        language: en
+    }
+)
+
+textMessage EXPERIENCE_ALREADY_ADDED (
+    message {
+        text: "تمت إضافة الخبرة العملية مسبقًا."
+        language: ar
+    }
+)
+
+textMessage APPLICATION_NOT_FOUND (
+    message {
+        text: "This application does not exist"
+        language: en
+    }
+)
+
+textMessage APPLICATION_NOT_FOUND (
+    message {
+        text: "طلب التوظيف غير موجود."
+        language: ar
+    }
+)
+
+textMessage INVALID_APPLICATION_ARCHIVE_ACTION (
+    message {
+        text: "Invalid archive action."
+        language: en
+    }
+)
+
+textMessage INVALID_APPLICATION_ARCHIVE_ACTION (
+    message {
+        text: "إجراء أرشفة طلب التوظيف غير صالح."
+        language: ar
+    }
+)
+
+textMessage INVALID_VACANCY_ARCHIVE_ACTION (
+    message {
+        text: "Invalid vacancy archive action."
+        language: en
+    }
+)
+
+textMessage INVALID_VACANCY_ARCHIVE_ACTION (
+    message {
+        text: "إجراء أرشفة الوظيفة الشاغرة غير صالح."
+        language: ar
+    }
+)
+
+textMessage NO_RESUMES_FOUND (
+    message {
+        text: "No resumes found for the current selection."
+        language: en
+    }
+)
+
+textMessage NO_RESUMES_FOUND (
+    message {
+        text: "لم يتم العثور على سير ذاتية ضمن التحديد الحالي."
+        language: ar
+    }
+)
+
+textMessage ATTACHMENT_NOT_FOUND (
+    message {
+        text: "Attachment not found."
+        language: en
+    }
+)
+
+textMessage ATTACHMENT_NOT_FOUND (
+    message {
+        text: "لم يتم العثور على المرفق."
+        language: ar
+    }
+)
+
+textMessage NO_RESUME_FOR_APPLICATION (
+    message {
+        text: "No resume found for this application."
+        language: en
+    }
+)
+
+textMessage NO_RESUME_FOR_APPLICATION (
+    message {
+        text: "لم يتم العثور على سيرة ذاتية لهذا الطلب."
+        language: ar
+    }
+)
+
+textMessage APPLICATION_SUBMISSION_ATTACHMENT_ERROR (
+    message {
+        text: "Unable to submit your application. Your attachment may be corrupted or invalid. Please change your PDF attachment and try again."
+        language: en
+    }
+)
+
+textMessage APPLICATION_SUBMISSION_ATTACHMENT_ERROR (
+    message {
+        text: "تعذر إرسال طلبك. قد يكون المرفق تالفًا أو غير صالح. يرجى استبدال ملف PDF والمحاولة مرة أخرى."
+        language: ar
+    }
+)
+
+textMessage COMPLETE_PERSONAL_DATA_FIRST_CONFIRM (
+    message {
+        text: "Please complete your personal data first. Go to Personal Data page?"
+        language: en
+    }
+)
+
+textMessage COMPLETE_PERSONAL_DATA_FIRST_CONFIRM (
+    message {
+        text: "يرجى استكمال بياناتك الشخصية أولًا. هل تريد الانتقال إلى صفحة البيانات الشخصية؟"
+        language: ar
+    }
+)
+
+textMessage ALREADY_APPLIED_TO_VACANCY (
+    message {
+        text: "You already applied to this vacancy."
+        language: en
+    }
+)
+
+textMessage ALREADY_APPLIED_TO_VACANCY (
+    message {
+        text: "لقد تقدمت إلى هذه الوظيفة الشاغرة بالفعل."
+        language: ar
+    }
+)
+
+textMessage TWO_VACANCY_LIMIT_CONFIRM (
+    message {
+        text: "You already applied to 2 vacancies. Delete at least one application to apply to new job!"
+        language: en
+    }
+)
+
+textMessage TWO_VACANCY_LIMIT_CONFIRM (
+    message {
+        text: "لقد تقدمت إلى وظيفتين شاغرتين بالفعل. احذف طلبًا واحدًا على الأقل للتقدم إلى وظيفة جديدة."
+        language: ar
+    }
+)
+
+textMessage APPLICATION_ARCHIVED (
+    message {
+        text: "Application archived successfully."
+        language: en
+    }
+)
+
+textMessage APPLICATION_ARCHIVED (
+    message {
+        text: "تمت أرشفة طلب التوظيف بنجاح."
+        language: ar
+    }
+)
+
+textMessage APPLICATION_UNARCHIVED (
+    message {
+        text: "Application unarchived successfully."
+        language: en
+    }
+)
+
+textMessage APPLICATION_UNARCHIVED (
+    message {
+        text: "تم إلغاء أرشفة طلب التوظيف بنجاح."
+        language: ar
+    }
+)
+
+textMessage VACANCY_ARCHIVED (
+    message {
+        text: "Vacancy archived successfully."
+        language: en
+    }
+)
+
+textMessage VACANCY_ARCHIVED (
+    message {
+        text: "تمت أرشفة الوظيفة الشاغرة بنجاح."
+        language: ar
+    }
+)
+
+textMessage VACANCY_UNARCHIVED (
+    message {
+        text: "Vacancy unarchived successfully."
+        language: en
+    }
+)
+
+textMessage VACANCY_UNARCHIVED (
+    message {
+        text: "تم إلغاء أرشفة الوظيفة الشاغرة بنجاح."
+        language: ar
+    }
+)
+
+textMessage RECENT_APPLICATIONS (
+    message {
+        text: "Recent Applications"
+        language: en
+    }
+)
+
+textMessage RECENT_APPLICATIONS (
+    message {
+        text: "أحدث طلبات التوظيف"
+        language: ar
+    }
+)
+
+textMessage ARCHIVED_APPLICATIONS (
+    message {
+        text: "Archived Applications"
+        language: en
+    }
+)
+
+textMessage ARCHIVED_APPLICATIONS (
+    message {
+        text: "طلبات التوظيف المؤرشفة"
+        language: ar
+    }
+)
+
+textMessage ARCHIVED_VACANCIES (
+    message {
+        text: "Archived Vacancies"
+        language: en
+    }
+)
+
+textMessage ARCHIVED_VACANCIES (
+    message {
+        text: "الوظائف الشاغرة المؤرشفة"
+        language: ar
+    }
+)
+
+textMessage OPEN_VACANCIES (
+    message {
+        text: "Open Vacancies"
+        language: en
+    }
+)
+
+textMessage OPEN_VACANCIES (
+    message {
+        text: "الوظائف الشاغرة المفتوحة"
+        language: ar
+    }
+)
+
+textMessage TOTAL_VACANCIES (
+    message {
+        text: "Total Vacancies"
+        language: en
+    }
+)
+
+textMessage TOTAL_VACANCIES (
+    message {
+        text: "إجمالي الوظائف الشاغرة"
+        language: ar
+    }
+)
+
+
+
+textMessage REGISTRATION (
+    message {
+        text: "Registration"
+        language: en
+    }
+)
+
+textMessage REGISTRATION (
+    message {
+        text: "التسجيل"
+        language: ar
+    }
+)
+
+textMessage DATE (
+    message {
+        text: "Date"
+        language: en
+    }
+)
+
+textMessage DATE (
+    message {
+        text: "التاريخ"
+        language: ar
+    }
+)
+
+textMessage OTP_VALIDATION_FORGOT_PASSWORD (
+    message {
+        text: "OTP Validation - Forgot Password"
+        language: en
+    }
+)
+
+textMessage OTP_VALIDATION_FORGOT_PASSWORD (
+    message {
+        text: "التحقق من رمز استعادة كلمة المرور"
+        language: ar
+    }
+)
+
+textMessage OTP_LOGIN_VALIDATION (
+    message {
+        text: "OTP Login Validation"
+        language: en
+    }
+)
+
+textMessage OTP_LOGIN_VALIDATION (
+    message {
+        text: "التحقق من رمز تسجيل الدخول لمرة واحدة"
+        language: ar
+    }
+)
+
+textMessage JOB_APPLICATIONS (
+    message {
+        text: "Job Applications"
+        language: en
+    }
+)
+
+textMessage JOB_APPLICATIONS (
+    message {
+        text: "طلبات التوظيف"
+        language: ar
+    }
+)
+
+textMessage USER_PROBLEM_FORM (
+    message {
+        text: "User Problem Form"
+        language: en
+    }
+)
+
+textMessage USER_PROBLEM_FORM (
+    message {
+        text: "نموذج الإبلاغ عن مشكلة"
+        language: ar
+    }
+)
+
+textMessage ATTACHMENT_PREVIEW (
+    message {
+        text: "Attachment Preview"
+        language: en
+    }
+)
+
+textMessage ATTACHMENT_PREVIEW (
+    message {
+        text: "معاينة المرفق"
+        language: ar
+    }
+)
+
+textMessage LOGIN_REPORTS (
+    message {
+        text: "Login Reports"
+        language: en
+    }
+)
+
+textMessage LOGIN_REPORTS (
+    message {
+        text: "تقارير تسجيل الدخول"
+        language: ar
+    }
+)
+
+textMessage CURRENT_VACANCIES (
+    message {
+        text: "Current Vacancies"
+        language: en
+    }
+)
+
+textMessage CURRENT_VACANCIES (
+    message {
+        text: "الوظائف الشاغرة حاليًا"
+        language: ar
+    }
+)
+
+textMessage RECRUITMENT_PROCESS (
+    message {
+        text: "EPROM Recruitment Process"
+        language: en
+    }
+)
+
+textMessage RECRUITMENT_PROCESS (
+    message {
+        text: "عملية التوظيف في إبروم"
+        language: ar
+    }
+)
+
+textMessage STAGE_1_APPLICATION (
+    message {
+        text: "STAGE 1: APPLICATION"
+        language: en
+    }
+)
+
+textMessage STAGE_1_APPLICATION (
+    message {
+        text: "المرحلة الأولى: التقديم"
+        language: ar
+    }
+)
+
+textMessage STAGE_1_APPLY_INTRO (
+    message {
+        text: "Apply for a position of interest through the EPROM Careers Portal under"
+        language: en
+    }
+)
+
+textMessage STAGE_1_APPLY_INTRO (
+    message {
+        text: "قدّم طلبًا إلى الوظيفة التي تناسب اهتماماتك عبر بوابة التوظيف في إبروم ضمن قسم"
+        language: ar
+    }
+)
+
+textMessage STAGE_1_APPLY_OUTRO (
+    message {
+        text: ", ensuring that the role aligns with your educational background, skills, and professional experience."
+        language: en
+    }
+)
+
+textMessage STAGE_1_APPLY_OUTRO (
+    message {
+        text: "، مع التأكد من توافق الوظيفة مع مؤهلاتك التعليمية ومهاراتك وخبراتك العملية."
+        language: ar
+    }
+)
+
+
+
+textMessage STAGE_2_ASSESSMENT (
+    message {
+        text: "STAGE 2: ASSESSMENT"
+        language: en
+    }
+)
+
+textMessage STAGE_2_ASSESSMENT (
+    message {
+        text: "المرحلة الثانية: التقييم"
+        language: ar
+    }
+)
+
+textMessage STAGE_2_REVIEW (
+    message {
+        text: "Once your application is submitted into our system, it will be reviewed against the requirements of the position."
+        language: en
+    }
+)
+
+textMessage STAGE_2_REVIEW (
+    message {
+        text: "بعد تسجيل طلبك في النظام، ستتم مراجعته ومقارنته بمتطلبات الوظيفة."
+        language: ar
+    }
+)
+
+
+
+textMessage STAGE_3_INTERVIEW (
+    message {
+        text: "STAGE 3: INTERVIEW"
+        language: en
+    }
+)
+
+textMessage STAGE_3_INTERVIEW (
+    message {
+        text: "المرحلة الثالثة: المقابلة"
+        language: ar
+    }
+)
+
+textMessage STAGE_3_FORMAT (
+    message {
+        text: "The interview process may include a telephonic interview with an EPROM Recruiter and/or Line Manager, followed by a face-to-face or onsite interview."
+        language: en
+    }
+)
+
+textMessage STAGE_3_FORMAT (
+    message {
+        text: "قد تشمل المقابلات مقابلة هاتفية مع مسؤول توظيف في إبروم و/أو مدير مباشر، تليها مقابلة شخصية حضورية أو في موقع العمل."
+        language: ar
+    }
+)
+
+textMessage STAGE_3_PURPOSE (
+    message {
+        text: "The primary purpose of the interview process is to assess the candidate’s technical skills, professional experience, and cultural fit with the needs and values of EPROM."
+        language: en
+    }
+)
+
+textMessage STAGE_3_PURPOSE (
+    message {
+        text: "تهدف المقابلة أساسًا إلى تقييم المهارات الفنية للمرشح وخبرته العملية ومدى توافقه مع احتياجات إبروم وقيمها."
+        language: ar
+    }
+)
+
+textMessage STAGE_3_OPPORTUNITY (
+    message {
+        text: "The interview also provides an opportunity for candidates to gain a better understanding of the role, responsibilities, and career opportunities available within the organization."
+        language: en
+    }
+)
+
+textMessage STAGE_3_OPPORTUNITY (
+    message {
+        text: "كما تتيح المقابلة للمرشحين فرصة لفهم الدور والمسؤوليات والفرص المهنية المتاحة في الشركة بصورة أفضل."
+        language: ar
+    }
+)
+
+textMessage STAGE_4_SELECTION (
+    message {
+        text: "STAGE 4: SELECTION"
+        language: en
+    }
+)
+
+textMessage STAGE_4_SELECTION (
+    message {
+        text: "المرحلة الرابعة: الاختيار"
+        language: ar
+    }
+)
+
+textMessage STAGE_4_OFFER (
+    message {
+        text: "EPROM extends an employment offer to the selected candidate based on the outcome of the recruitment and interview process."
+        language: en
+    }
+)
+
+textMessage STAGE_4_OFFER (
+    message {
+        text: "تقدم إبروم عرض عمل للمرشح المختار بناءً على نتائج التوظيف والمقابلات."
+        language: ar
+    }
+)
+
+textMessage STAGE_4_ONBOARDING (
+    message {
+        text: "Upon acceptance of the offer, the candidate will be required to complete medical examinations and fulfill any additional pre-employment requirements as part of the onboarding process."
+        language: en
+    }
+)
+
+textMessage STAGE_4_ONBOARDING (
+    message {
+        text: "بعد قبول العرض، يتعين على المرشح استكمال الفحوصات الطبية وأي متطلبات إضافية قبل التوظيف ضمن إجراءات الانضمام."
+        language: ar
+    }
+)
+
+textMessage STAGE_4_JOINING (
+    message {
+        text: "Once all requirements have been successfully completed, the candidate will proceed with the joining process and become part of the EPROM team."
+        language: en
+    }
+)
+
+textMessage STAGE_4_JOINING (
+    message {
+        text: "بعد استيفاء جميع المتطلبات بنجاح، يستكمل المرشح إجراءات التعيين وينضم إلى فريق إبروم."
+        language: ar
+    }
+)
+
+textMessage RECRUITMENT_OVERVIEW (
+    message {
+        text: "EPROM RECRUITMENT PROCESS"
+        language: en
+    }
+)
+
+textMessage RECRUITMENT_OVERVIEW (
+    message {
+        text: "عملية التوظيف في إبروم"
+        language: ar
+    }
+)
+
+
+
+textMessage WRITTEN_TESTS (
+    message {
+        text: "Written Tests"
+        language: en
+    }
+)
+
+textMessage WRITTEN_TESTS (
+    message {
+        text: "اختبارات تحريرية"
+        language: ar
+    }
+)
+
+textMessage PERSONAL_INTERVIEWS (
+    message {
+        text: "Personal Interviews"
+        language: en
+    }
+)
+
+textMessage PERSONAL_INTERVIEWS (
+    message {
+        text: "مقابلات شخصية"
+        language: ar
+    }
+)
+
+textMessage ASSESSMENTS_PURPOSE (
+    message {
+        text: "These assessments help identify candidates’ skills, qualifications, and suitability for the position."
+        language: en
+    }
+)
+
+textMessage ASSESSMENTS_PURPOSE (
+    message {
+        text: "تساعد هذه التقييمات على تحديد مهارات المرشحين ومؤهلاتهم ومدى ملاءمتهم للوظيفة."
+        language: ar
+    }
+)
+
+textMessage STAGE_1_EMAIL_ACKNOWLEDGEMENT (
+    message {
+        text: "After your application is submitted successfully, you will receive an automated email confirming receipt."
+        language: en
+    }
+)
+
+textMessage STAGE_1_EMAIL_ACKNOWLEDGEMENT (
+    message {
+        text: "بعد إرسال طلبك بنجاح، ستتلقى رسالة بريد إلكتروني آلية تؤكد استلامه."
+        language: ar
+    }
+)
+
+textMessage STAGE_1_APPLICATION_NUMBER (
+    message {
+        text: "The email will also include a unique application number generated by the system for future reference throughout the recruitment process."
+        language: en
+    }
+)
+
+textMessage STAGE_1_APPLICATION_NUMBER (
+    message {
+        text: "كما ستتضمن الرسالة رقمًا فريدًا للطلب ينشئه النظام، ويمكنك استخدامه للرجوع إلى الطلب خلال مراحل التوظيف."
+        language: ar
+    }
+)
+
+textMessage STAGE_2_SELECTION_PRIMARY (
+    message {
+        text: "Due to the large number of resumes we receive, we will contact only the candidates whose profiles most closely match the position requirements."
+        language: en
+    }
+)
+
+textMessage STAGE_2_SELECTION_PRIMARY (
+    message {
+        text: "نظرًا للعدد الكبير من السير الذاتية التي نتلقاها، سنتواصل فقط مع المرشحين الأكثر توافقًا مع متطلبات الوظيفة."
+        language: ar
+    }
+)
+
+textMessage STAGE_2_SELECTION_FOLLOWUP (
+    message {
+        text: "If we do not contact you within three months of your application, your application may be considered unsuccessful for the vacancy."
+        language: en
+    }
+)
+
+textMessage STAGE_2_SELECTION_FOLLOWUP (
+    message {
+        text: "إذا لم نتواصل معك خلال ثلاثة أشهر من تقديم طلبك، فقد يُعد طلبك غير ناجح للوظيفة الشاغرة."
+        language: ar
+    }
+)
+
+textMessage RECRUITMENT_SUMMARY_INTRO (
+    message {
+        text: "The Human Resources Recruitment Section manages hiring from identifying needs and defining roles to selecting and interviewing qualified candidates."
+        language: en
+    }
+)
+
+textMessage RECRUITMENT_SUMMARY_INTRO (
+    message {
+        text: "يتولى قسم التوظيف بإدارة الموارد البشرية إدارة التوظيف بدءًا من تحديد الاحتياجات ووضع مواصفات الوظائف، وصولًا إلى اختيار المرشحين المؤهلين وإجراء المقابلات معهم."
+        language: ar
+    }
+)
+
+textMessage RECRUITMENT_SUMMARY_SUPPORT (
+    message {
+        text: "Human Resources supports line managers and department managers throughout recruitment. Candidates are selected solely on merit, experience, and ability."
+        language: en
+    }
+)
+
+textMessage RECRUITMENT_SUMMARY_SUPPORT (
+    message {
+        text: "تدعم الموارد البشرية المديرين المباشرين ومديري الإدارات طوال عملية التوظيف. ويُختار المرشحون بناءً على الجدارة والخبرة والقدرة فقط."
+        language: ar
+    }
+)
+
+textMessage RECRUITMENT_SUMMARY_ASSESSMENT (
+    message {
+        text: "Depending on the role and the required skills and competencies, shortlisted candidates may complete assessments such as:"
+        language: en
+    }
+)
+
+textMessage RECRUITMENT_SUMMARY_ASSESSMENT (
+    message {
+        text: "وبحسب طبيعة الوظيفة والمهارات والكفاءات المطلوبة، قد يخضع المرشحون المدرجون في القائمة المختصرة لتقييمات مثل:"
+        language: ar
+    }
+)
+
+textMessage ENTER_YOUR_PROBLEM (
+    message {
+        text: "Describe your problem"
+        language: en
+    }
+)
+
+textMessage ENTER_YOUR_PROBLEM (
+    message {
+        text: "يرجى وصف المشكلة"
+        language: ar
+    }
+)
+
+textMessage DATE_RANGE_ERROR (
+    message {
+        text: "The end date must be after the start date."
+        language: en
+    }
+)
+
+textMessage DATE_RANGE_ERROR (
+    message {
+        text: "يجب أن يكون تاريخ الانتهاء بعد تاريخ البدء."
+        language: ar
+    }
+)
+
+textMessage REMEMBER_EMAIL (
+    message {
+        text: "Remember Email"
+        language: en
+    }
+)
+
+textMessage REMEMBER_EMAIL (
+    message {
+        text: "تذكّر البريد الإلكتروني"
+        language: ar
     }
 )

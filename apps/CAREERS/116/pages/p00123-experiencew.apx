@@ -610,7 +610,7 @@ page 123 (
             reportColumnQueryId: 6
             derivedColumn: N
             heading {
-                heading: From Date
+                heading: "&{FROMDATE}."
                 alignment: center
             }
             layout {
@@ -658,7 +658,7 @@ page 123 (
             reportColumnQueryId: 7
             derivedColumn: N
             heading {
-                heading: To Date
+                heading: "&{TODATE}."
                 alignment: center
             }
             layout {
@@ -733,7 +733,7 @@ page 123 (
     pageItem P123_FROMDATE (
         type: datePicker
         label {
-            label: From Date
+            label: "&{FROMDATE}."
             alignment: left
         }
         layout {
@@ -850,7 +850,7 @@ page 123 (
     pageItem P123_TODATE (
         type: datePicker
         label {
-            label: To Date
+            label: "&{TODATE}."
             alignment: left
         }
         layout {
@@ -938,7 +938,7 @@ page 123 (
 
     button fresh-grad (
         buttonName: Fresh_grad
-        label: I Am Fresh Graduate
+        label: "&{FRESH_GRADUATE}."
         layout {
             sequence: 20
             region: @experience
@@ -1043,7 +1043,7 @@ page 123 (
             plsqlExpression: :P123_TODATE > :P123_FROMDATE
         }
         error {
-            errorMessage: to date must be after from date!
+            errorMessage: "&{DATE_RANGE_ERROR}."
         }
     )
 
@@ -1220,7 +1220,7 @@ page 123 (
                 END IF;
                 
                 if v_exp_check > 0 then
-                    raise_application_error(-20200, 'you already added experience!');
+                    raise_application_error(-20200, APEX_LANG.GET_MESSAGE('EXPERIENCE_ALREADY_ADDED'));
                 end if;
                 
                 insert into JOB_APPLICATION_EXPERIENCE(POSITION_NAME, COMPANY, FROMDATE, OTHER_DETAILS, COUNTRY_ID, PERSONAL_ID, TODATE)Values('fresh grad', 'N/A', sysdate, null, v_country_id, :APP_USER_PERS_ID, sysdate);

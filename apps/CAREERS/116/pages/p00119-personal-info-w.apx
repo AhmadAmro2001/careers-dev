@@ -276,7 +276,7 @@ page 119 (
                         </div> -->
                 
                         <p>
-                            Please ensure all required information is accurate and complete, as incorrect details may affect your job application.       
+                            ⚠️ &{PERSONAL_INFO_ACCURACY_GUIDANCE}.
                         </p>
                     </div>
                 </div>
@@ -507,7 +507,7 @@ page 119 (
     pageItem P119_CITY_ID (
         type: selectList
         label {
-            label: City
+            label: "&{CITY}."
             alignment: left
         }
         lov {
@@ -1053,7 +1053,7 @@ page 119 (
     pageItem P119_NATIONAL_ID_FILE_ID (
         type: fileUpload
         label {
-            label: National ID
+            label: "&{NATIONAL_ID}."
             alignment: left
         }
         storage {
@@ -1510,7 +1510,7 @@ page 119 (
             plsqlExpression: "REGEXP_LIKE(:P1_NAT_ID, '^[0-9]{14}$')"
         }
         error {
-            errorMessage: National id must be 14 number only!
+            errorMessage: "&{NATIONAL_ID_LENGTH_ERROR}."
             associatedItem: @P119_HOME_TELEPHONE
         }
     )

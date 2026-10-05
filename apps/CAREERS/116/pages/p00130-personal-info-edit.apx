@@ -322,7 +322,7 @@ page 130 (
     pageItem P130_CITY_ID (
         type: selectList
         label {
-            label: "City "
+            label: "&{CITY}."
             alignment: left
         }
         lov {

@@ -1234,7 +1234,7 @@ page 113 (
             derivedColumn: N
             type: downloadBlob
             heading {
-                heading: "&{Graduation_Certificate}."
+                heading: "&{GRADUATION_CERTIFICATE}."
                 alignment: center
             }
             layout {
@@ -1545,7 +1545,7 @@ page 113 (
             reportColumnQueryId: 6
             derivedColumn: N
             heading {
-                heading: From Date
+                heading: "&{FROMDATE}."
                 alignment: center
             }
             layout {
@@ -1593,7 +1593,7 @@ page 113 (
             reportColumnQueryId: 7
             derivedColumn: N
             heading {
-                heading: To Date
+                heading: "&{TODATE}."
                 alignment: center
             }
             layout {
@@ -1622,7 +1622,7 @@ page 113 (
                         </div> -->
                 
                         <p>
-                           View your personal information and click the Edit button to update any incorrect details.      
+                           ⚠️ &{PROFILE_EDIT_GUIDANCE}.
                         </p>
                     </div>
                 </div>
@@ -1909,7 +1909,7 @@ page 113 (
 
     region personal-info-data (
         name: Personal Info Data
-        title: Personal Data Information
+        title: "&{PERSONAL_DATA_INFORMATION}."
         type: classicReport
         source {
             location: localDatabase
@@ -2136,7 +2136,7 @@ page 113 (
             reportColumnQueryId: 10
             derivedColumn: N
             heading {
-                heading: City
+                heading: "&{CITY}."
             }
             layout {
                 sequence: 120
@@ -2158,7 +2158,7 @@ page 113 (
             reportColumnQueryId: 14
             derivedColumn: N
             heading {
-                heading: Passport Number
+                heading: "&{PASSPORT_NUMBER}."
             }
             layout {
                 sequence: 200
@@ -2377,7 +2377,7 @@ page 113 (
 
     button add-experience (
         buttonName: Add_Experience
-        label: Add Experience
+        label: "&{ADD_EXPERIENCE}."
         layout {
             sequence: 10
             region: @experience2
@@ -2398,7 +2398,7 @@ page 113 (
 
     button add-language (
         buttonName: Add_language
-        label: Add Language
+        label: "&{ADD_LANGUAGE}."
         layout {
             sequence: 10
             region: @language_1
