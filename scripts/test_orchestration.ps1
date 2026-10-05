@@ -49,7 +49,11 @@ function Invoke-Sqlcl {
       [System.IO.File]::WriteAllText((Join-Path $databaseRoot 'manifest-tables.txt'), "TABLE=2`r`n")
     } else {
       [System.IO.File]::WriteAllText((Join-Path $databaseRoot 'views/CODE_ONE.sql'), "view one`n")
-      [System.IO.File]::WriteAllText((Join-Path $databaseRoot 'manifest-code.txt'), "VIEW=1`r`nPACKAGE=0`r`nPACKAGE BODY=0`r`nPROCEDURE=0`r`nFUNCTION=0`r`nTRIGGER=0`r`n")
+      $codeManifestRows = @('VIEW=1', 'PACKAGE=0', 'PACKAGE BODY=0', 'PROCEDURE=0', 'FUNCTION=0', 'TRIGGER=0')
+      if (-not [string]::IsNullOrEmpty($env:FAKE_MANIFEST_OMIT_TYPE)) {
+        $codeManifestRows = @($codeManifestRows | Where-Object { $_.Substring(0, $_.LastIndexOf('=')) -ne $env:FAKE_MANIFEST_OMIT_TYPE })
+      }
+      [System.IO.File]::WriteAllText((Join-Path $databaseRoot 'manifest-code.txt'), (($codeManifestRows -join "`r`n") + "`r`n"))
     }
     return 0
   }
@@ -108,6 +112,23 @@ UC_APX_SKILLS_AGENT=universal
 
   & git -C $testRepo add database
   & git -C $testRepo -c user.name=TemplateTest -c user.email=test@example.invalid commit -qm backup
+  [System.IO.File]::WriteAllText((Join-Path $testRepo "database/DEMO/old.txt"), "old mirror`n")
+  & git -C $testRepo add database/DEMO/old.txt
+  & git -C $testRepo -c user.name=TemplateTest -c user.email=test@example.invalid commit -qm missing-row-baseline
+  [System.IO.File]::WriteAllText($sqlclLog, "")
+  $env:FAKE_MANIFEST_OMIT_TYPE = "FUNCTION"
+  $missingManifestError = $null
+  try {
+    & (Join-Path $testScripts "backup_db.ps1")
+  } catch {
+    $missingManifestError = $_.Exception.Message
+  }
+  Assert-Orchestration (-not [string]::IsNullOrWhiteSpace($missingManifestError)) "PowerShell backup accepted a manifest missing the FUNCTION row"
+  Assert-Orchestration ($missingManifestError -match 'missing the FUNCTION row') "PowerShell backup failed for the wrong missing-row reason: $missingManifestError"
+  Assert-Orchestration (Test-Path -LiteralPath (Join-Path $testRepo "database/DEMO/old.txt")) "a missing manifest row damaged the previous PowerShell mirror"
+  Assert-Orchestration (@(git -C $testRepo status --porcelain -- database).Count -eq 0) "a missing manifest row left the PowerShell mirror dirty"
+  Remove-Item Env:FAKE_MANIFEST_OMIT_TYPE
+
   foreach ($appId in @("100", "101")) {
     $appPath = Join-Path $testRepo "apps/DEMO/$appId"
     New-Item -ItemType Directory -Force -Path $appPath | Out-Null
@@ -143,7 +164,7 @@ UC_APX_SKILLS_AGENT=universal
   Write-Host "PASS: native PowerShell orchestration checks"
 } finally {
   Remove-Item Env:PROJECT_ENV_FILE, Env:FAKE_REPO_ROOT, Env:FAKE_SQLCL_LOG,
-    Env:FAKE_FAIL_APP_ID -ErrorAction SilentlyContinue
+    Env:FAKE_FAIL_APP_ID, Env:FAKE_MANIFEST_OMIT_TYPE -ErrorAction SilentlyContinue
   if (Test-Path -LiteralPath $testRoot) {
     Remove-Item -LiteralPath $testRoot -Recurse -Force
   }

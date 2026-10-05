@@ -42,6 +42,14 @@ mkdir -p "database/$schema/tables" "database/$schema/views"
 # SQLcl spools with the platform's line terminator, so the same manifest is
 # LF-terminated on Linux and CRLF-terminated on Windows. Both must parse.
 write_manifest() {
+  if [ -n "${FAKE_MANIFEST_OMIT_TYPE:-}" ]; then
+    local rows=()
+    local row
+    for row in "$@"; do
+      [ "${row%%=*}" = "$FAKE_MANIFEST_OMIT_TYPE" ] || rows+=("$row")
+    done
+    set -- "${rows[@]}"
+  fi
   if [ "${FAKE_MANIFEST_CRLF:-false}" = true ]; then
     printf '%s\r\n' "$@" > "database/$schema/manifest-$scope.txt"
   else
@@ -152,6 +160,28 @@ test -z "$EMPTY_DIR" || fail "backup installed an empty scope directory: $EMPTY_
 git -C "$TEST_REPO" add database
 git -C "$TEST_REPO" -c user.name=TemplateTest -c user.email=test@example.invalid \
   commit -qm "record split-schema refresh"
+
+# A manifest that omits an expected zero-count type must be rejected before
+# replacing the previously committed mirror.
+printf 'old missing-row baseline\n' > "$TEST_REPO/database/DATA/old.txt"
+printf 'old missing-row baseline\n' > "$TEST_REPO/database/CODE/old.txt"
+git -C "$TEST_REPO" add database/DATA/old.txt database/CODE/old.txt
+git -C "$TEST_REPO" -c user.name=TemplateTest -c user.email=test@example.invalid \
+  commit -qm "re-seed mirrors for the missing-manifest-row case"
+missing_row_env="$TEST_ROOT/missing-row.env"
+write_env "$missing_row_env" DATA CODE
+if PATH="$TEST_ROOT/bin:$PATH" PROJECT_ENV_FILE="$missing_row_env" \
+  FAKE_REPO_ROOT="$TEST_REPO" FAKE_REQUIRED_DESTINATIONS="DATA,CODE" \
+  FAKE_SQL_LOG="$TEST_ROOT/missing-row.log" FAKE_MANIFEST_OMIT_TYPE=FUNCTION \
+  "$TEST_REPO/scripts/backup_db.sh" 2>"$TEST_ROOT/missing-row.err"; then
+  fail "backup accepted a manifest missing the FUNCTION row"
+fi
+grep -q 'missing the FUNCTION row' "$TEST_ROOT/missing-row.err" \
+  || fail "the missing-row backup failed for the wrong reason: $(cat "$TEST_ROOT/missing-row.err")"
+test -f "$TEST_REPO/database/DATA/old.txt" \
+  || fail "a missing manifest row damaged the previous mirror"
+test -z "$(git -C "$TEST_REPO" status --porcelain -- database)" \
+  || fail "a missing manifest row left the mirror dirty"
 
 for schema in DATA CODE; do
   printf 'old mirror\n' > "$TEST_REPO/database/$schema/old.txt"

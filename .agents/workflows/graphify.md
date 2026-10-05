@@ -70,9 +70,15 @@ the fix persists for every template user.
 ## Database mirror dependency
 
 An `.apx` reference to a table or package is linked to the real node from
-`database/<SCHEMA>/tables|views|packages/` when that file exists, and stays a
-name-only stub when it does not (`APEX_*` dictionary views, `DUAL`). `.sql` files
-under `database/` get the same treatment for foreign keys. Graphify caches
+`database/<SCHEMA>/tables|views|packages/` when that file exists. Unqualified
+names resolve in the app's own schema first; qualified names resolve in the
+named schema (every `database/*` schema is indexed). A private synonym under
+`database/<SCHEMA>/synonyms/` resolves one hop through its
+`FOR "SCHEMA"."OBJECT"` clause; this template's backup does not export
+synonyms, so they count only when present. Anything not in the mirror, including
+a target over a database link, stays a name-only stub: `APEX_*` dictionary views
+are such stubs, while `DUAL` is ignored and produces no node or edge. `.sql`
+files under `database/` get the same treatment for foreign keys. Graphify caches
 extraction by file content, so a result cached before the mirror existed keeps
 its stubs. After the first database export, or after tables or packages are
 added or removed, run `python3 setup_graphify_apx.py` (it clears cached `.apx`

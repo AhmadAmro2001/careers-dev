@@ -22,7 +22,7 @@ Rules:
 - Read graphify-out/GRAPH_REPORT.md only for broad architecture review or when query/path/explain do not surface enough context
 - `.graphifyignore` is a domain allowlist. Graph sources must come only from `apps/`, `database/`, or `app_context/`; agent skills, project automation, `ai_generate/`, workspace metadata, and static payloads stay excluded.
 - After modifying APEXlang or database source, run `graphify update .` to refresh deterministic AST relationships without semantic API cost.
-- Application-to-database links depend on the `database/` mirror. After the first database export or when tables or packages change, run `python3 setup_graphify_apx.py` (clears stale cached extractions) before `graphify update .`.
+- Application-to-database links depend on the `database/` mirror; qualified names resolve in the schema they name, and a mirrored synonym resolves one hop. After the first database export or when tables or packages change, run `python3 setup_graphify_apx.py` (clears stale cached extractions) before `graphify update .`.
 - After modifying `app_context/*.md`, run `graphify extract .` so the semantic hash and context concepts refresh.
 - After changing `.graphifyignore` or deliberately deleting substantial source, run `graphify extract . --force`, then verify excluded paths are absent and all three retained domain roots remain queryable.
 - Before `graphify update` or `graphify extract`, run `python3 setup_graphify_apx.py --verify`. It changes nothing and exits non-zero if a Graphify upgrade has silently reverted the APEXlang integration; reinstall with `python3 setup_graphify_apx.py` when it does.
