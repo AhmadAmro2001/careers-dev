@@ -1,0 +1,530 @@
+list navigation-bar (
+    name: Navigation Bar
+
+    entry app-user (
+        label: &APP_USER.
+        icon {
+            imageIconCssClasses: fa-user
+        }
+        layout {
+            sequence: 10
+        }
+        link {
+            target: {
+                type: url
+                url: #
+            }
+        }
+        userDefinedAttributes {
+            2: has-username
+        }
+    )
+
+    entry list_item (
+        label: ---
+        layout {
+            sequence: 20
+            parentEntry: @app-user
+        }
+        link {
+            target: {
+                type: url
+                url: separator
+            }
+        }
+        serverSideCondition {
+            type: userIsAuthenticated
+        }
+    )
+
+    entry sign-out (
+        label: "&{SIGN_OUT}."
+        icon {
+            imageIconCssClasses: fa-sign-out
+        }
+        layout {
+            sequence: 30
+            parentEntry: @app-user
+        }
+        link {
+            target: {
+                type: url
+                url: &LOGOUT_URL.
+            }
+        }
+        serverSideCondition {
+            type: userIsAuthenticated
+        }
+    )
+
+)
+
+list navigation-menu (
+    name: Navigation Menu
+
+    entry applications (
+        label: "&{APPLICATIONS}."
+        icon {
+            imageIconCssClasses: fa-file-o
+        }
+        layout {
+            sequence: 110
+        }
+        isCurrent {
+            type: pages
+            pages: 203
+        }
+        link {
+            target: {
+                page: 203
+            }
+        }
+        security {
+            authorizationScheme: @admin-schema
+        }
+    )
+
+    entry apply (
+        label: "&{APPLY}."
+        layout {
+            sequence: 230
+        }
+        isCurrent {
+            type: pages
+            pages: 125
+        }
+        link {
+            target: {
+                page: 125
+            }
+        }
+        security {
+            authorizationScheme: @user-schema
+        }
+    )
+
+    entry apply-to-job (
+        label: "&{APPLY_TO_JOB}."
+        layout {
+            sequence: 200
+        }
+        isCurrent {
+            type: pages
+            pages: 112
+        }
+        link {
+            target: {
+                page: 112
+            }
+        }
+        security {
+            authorizationScheme: @user-schema
+        }
+    )
+
+    entry dashboard (
+        label: "&{DASHBOARD}."
+        icon {
+            imageIconCssClasses: fa-file-o
+        }
+        layout {
+            sequence: 80
+        }
+        isCurrent {
+            type: pages
+            pages: 202
+        }
+        link {
+            target: {
+                page: 202
+            }
+        }
+        security {
+            authorizationScheme: @admin-schema
+        }
+    )
+
+    entry education (
+        label: "&{EDUCATION}."
+        icon {
+            imageIconCssClasses: fa-forms
+        }
+        layout {
+            sequence: 150
+        }
+        isCurrent {
+            type: pages
+            pages: 109
+        }
+        link {
+            target: {
+                page: 109
+            }
+        }
+        security {
+            authorizationScheme: @user-schema
+        }
+    )
+
+    entry experience (
+        label: "&{EXPERIENCE}."
+        icon {
+            imageIconCssClasses: fa-forms
+        }
+        layout {
+            sequence: 170
+        }
+        isCurrent {
+            type: pages
+            pages: 111
+        }
+        link {
+            target: {
+                page: 111
+            }
+        }
+        security {
+            authorizationScheme: @user-schema
+        }
+    )
+
+    entry home (
+        label: "&{HOME}."
+        icon {
+            imageIconCssClasses: fa-home
+        }
+        layout {
+            sequence: 10
+        }
+        link {
+            target: {
+                page: 1
+            }
+        }
+        security {
+            authorizationScheme: @user-schema
+        }
+    )
+
+    entry home-1 (
+        label: HOME_1
+        icon {
+            imageIconCssClasses: fa-file-o
+        }
+        layout {
+            sequence: 250
+        }
+        isCurrent {
+            type: pages
+            pages: 131
+        }
+        link {
+            target: {
+                page: 131
+            }
+        }
+        security {
+            authorizationScheme: @user-schema
+        }
+    )
+
+    entry home-2 (
+        label: "&{HOME_1}."
+        icon {
+            imageIconCssClasses: fa-file-o
+        }
+        layout {
+            sequence: 50
+        }
+        isCurrent {
+            type: pages
+            pages: 104
+        }
+        link {
+            target: {
+                page: 104
+            }
+        }
+        security {
+            authorizationScheme: @user-schema
+        }
+    )
+
+    entry job-applications (
+        label: job applications
+        icon {
+            imageIconCssClasses: fa-file-o
+        }
+        layout {
+            sequence: 260
+        }
+        isCurrent {
+            type: pages
+            pages: 132
+        }
+        link {
+            target: {
+                page: 132
+            }
+        }
+        security {
+            authorizationScheme: @user-schema
+        }
+    )
+
+    entry language (
+        label: "&{LANGUAGE}."
+        icon {
+            imageIconCssClasses: fa-forms
+        }
+        layout {
+            sequence: 160
+        }
+        isCurrent {
+            type: pages
+            pages: 110
+        }
+        link {
+            target: {
+                page: 110
+            }
+        }
+        security {
+            authorizationScheme: @user-schema
+        }
+    )
+
+    entry login (
+        label: "&{LOGIN}."
+        icon {
+            imageIconCssClasses: fa-forms
+        }
+        layout {
+            sequence: 40
+        }
+        isCurrent {
+            type: pages
+            pages: 103
+        }
+        link {
+            target: {
+                page: 103
+            }
+        }
+        security {
+            authorizationScheme: @user-schema
+        }
+    )
+
+    entry login-reports (
+        label: Login Reports
+        icon {
+            imageIconCssClasses: fa-bug
+        }
+        layout {
+            sequence: 270
+        }
+        isCurrent {
+            type: pages
+            pages: 214
+        }
+        link {
+            target: {
+                page: 214
+            }
+        }
+        security {
+            authorizationScheme: @it-admin-schema
+        }
+    )
+
+    entry otp-validation (
+        label: "&{OTP_VALIDATION}."
+        icon {
+            imageIconCssClasses: fa-file-o
+        }
+        layout {
+            sequence: 30
+        }
+        isCurrent {
+            type: pages
+            pages: 101
+        }
+        link {
+            target: {
+                page: 101
+            }
+        }
+        security {
+            authorizationScheme: @user-schema
+        }
+    )
+
+    entry personal-info (
+        label: "&{PERSONAL_INFO}."
+        layout {
+            sequence: 70
+        }
+        isCurrent {
+            type: pages
+            pages: 107
+        }
+        link {
+            target: {
+                page: 107
+            }
+        }
+        security {
+            authorizationScheme: @user-schema
+        }
+    )
+
+    entry personal-info-data (
+        label: "&{PERSONAL_INFO_DATA}."
+        layout {
+            sequence: 100
+        }
+        isCurrent {
+            type: pages
+            pages: 108
+        }
+        link {
+            target: {
+                page: 108
+            }
+        }
+        security {
+            authorizationScheme: @user-schema
+        }
+    )
+
+    entry personal-infow (
+        label: "&{PERSONAL_INFOW}."
+        icon {
+            imageIconCssClasses: fa-magic
+        }
+        layout {
+            sequence: 220
+        }
+        isCurrent {
+            type: pages
+            pages: 119
+        }
+        link {
+            target: {
+                page: 119
+            }
+        }
+        security {
+            authorizationScheme: @user-schema
+        }
+    )
+
+    entry profile (
+        label: "&{PROFILE}."
+        icon {
+            imageIconCssClasses: fa-file-o
+        }
+        layout {
+            sequence: 210
+        }
+        isCurrent {
+            type: pages
+            pages: 113
+        }
+        link {
+            target: {
+                page: 113
+            }
+        }
+        security {
+            authorizationScheme: @user-schema
+        }
+    )
+
+    entry registration-page (
+        label: "&{REGISTRATION_PAGE}."
+        icon {
+            imageIconCssClasses: fa-forms
+        }
+        layout {
+            sequence: 20
+        }
+        isCurrent {
+            type: pages
+            pages: 100
+        }
+        link {
+            target: {
+                page: 100
+            }
+        }
+        security {
+            authorizationScheme: @user-schema
+        }
+    )
+
+    entry vacancies (
+        label: "&{VACANCIES}."
+        icon {
+            imageIconCssClasses: fa-file-o
+        }
+        layout {
+            sequence: 120
+        }
+        isCurrent {
+            type: pages
+            pages: 204
+        }
+        link {
+            target: {
+                page: 204
+            }
+        }
+        security {
+            authorizationScheme: @admin-schema
+        }
+    )
+
+)
+
+list personal-infow (
+    name: Personal InfoW
+
+    entry educationw (
+        label: "&{EDUCATION}."
+        layout {
+            sequence: 30
+        }
+        link {
+            target: {
+                page: 121
+            }
+        }
+    )
+
+    entry experiencew (
+        label: "&{EXPERIENCE}."
+        layout {
+            sequence: 50
+        }
+        link {
+            target: {
+                page: 123
+            }
+        }
+    )
+
+    entry personal-info-w (
+        label: "&{PERSONAL_INFO}."
+        layout {
+            sequence: 10
+        }
+        link {
+            target: {
+                page: 119
+            }
+        }
+    )
+
+)

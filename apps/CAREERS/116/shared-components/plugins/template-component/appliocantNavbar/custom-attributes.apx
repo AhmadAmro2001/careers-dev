@@ -1,0 +1,8 @@
+customAttribute PERSONAL_CHECK (
+    apexlangName: personalCheck
+    attribute: 1
+    name: Personal Check
+    appearance {
+        sequence: 10
+    }
+)

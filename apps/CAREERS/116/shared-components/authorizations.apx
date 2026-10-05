@@ -1,0 +1,87 @@
+authorization admin-schema (
+    name: Admin Schema
+    type: existsSqlQuery
+    settings {
+        sqlQuery:
+            ```sql
+            Select *
+            from Admin
+            where upper(email) = upper(:APP_USER) and  ( IS_CAREER_ADMIN = 1 or IS_SUPER_ADMIN = 1) 
+            ```
+    }
+    error {
+        errorMessage: "&{YOU_ARE_NOT_AUTHORIZED}."
+    }
+    advanced {
+        evaluationType: perSession
+    }
+)
+
+authorization administration-rights (
+    name: Administration Rights
+    type: plSqlFunctionBody
+    settings {
+        plsqlFunctionBody: return true;
+    }
+    error {
+        errorMessage: "&{ERROR_MESSAGE}."
+    }
+)
+
+authorization it-admin-schema (
+    name: IT Admin Schema
+    type: existsSqlQuery
+    settings {
+        sqlQuery:
+            ```sql
+            select * 
+            from admin
+            where
+            lower(:APP_USER) = 'aamr@eprom.com.eg' or
+            lower(:APP_USER) = 'anaggar@eprom.com.eg' or
+            lower(:APP_USER) = 'asherif@eprom.com.eg' or
+            lower(:APP_USER) = 'amoner@eprom.com.eg' ;
+            ```
+    }
+    advanced {
+        evaluationType: perSession
+    }
+)
+
+authorization show-personal-info (
+    name: SHOW_PERSONAL_INFO
+    type: plSqlFunctionBody
+    settings {
+        plsqlFunctionBody: RETURN :PERSONAL_CHECK = 0;
+    }
+    advanced {
+        evaluationType: perSession
+    }
+)
+
+authorization show-profile (
+    name: SHOW_PROFILE
+    type: plSqlFunctionBody
+    settings {
+        plsqlFunctionBody: RETURN :PERSONAL_CHECK = 1;
+    }
+    advanced {
+        evaluationType: perSession
+    }
+)
+
+authorization user-schema (
+    name: User Schema
+    type: existsSqlQuery
+    settings {
+        sqlQuery:
+            ```sql
+            select *
+            from Account
+            where upper(email) = upper(:APP_USER)
+            ```
+    }
+    advanced {
+        evaluationType: perSession
+    }
+)

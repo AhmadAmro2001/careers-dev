@@ -1,0 +1,82 @@
+page 124 (
+    name: Job Details
+    alias: JOB-DETAILS
+    title: "&{JOB_DETAILS}."
+    appearance {
+        pageMode: modalDialog
+        dialogTemplate: @/modal-dialog
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    security {
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region job-summary (
+        name: job_summary
+        title: "&{JOB_SUMMARY}."
+        type: staticContent
+        layout {
+            sequence: 10
+            slot: contentBody
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+    )
+
+    pageItem P124_JOB_SUMMARY (
+        type: textField
+        label {
+            label: "&{JOB_SUMMARY_1}."
+            alignment: left
+        }
+        layout {
+            sequence: 10
+            region: @job-summary
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+    )
+
+    pageItem P124_JOB_SUMMARY_DETAILS (
+        type: textarea
+        label {
+            label: "&{JOB_SUMMARY_DETAILS}."
+            alignment: left
+        }
+        layout {
+            sequence: 20
+            region: @job-summary
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+            height: 5
+        }
+    )
+
+    pageItem P124_VACANCY_ID (
+        type: hidden
+        layout {
+            sequence: 20
+            slot: contentBody
+        }
+    )
+
+)

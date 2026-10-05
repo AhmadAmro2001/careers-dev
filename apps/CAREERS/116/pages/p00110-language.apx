@@ -1,0 +1,619 @@
+page 110 (
+    name: Language
+    alias: LANGUAGE
+    title: "&{LANGUAGE}."
+    appearance {
+        pageTemplate: @/blank
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    security {
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region language (
+        name: Language
+        title: "&{LANGUAGE}."
+        type: form
+        source {
+            location: localDatabase
+            tableName: JOB_APPLICATION_LANGUAGE
+        }
+        layout {
+            sequence: 20
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        edit {
+            enabled: true
+            allowedOperations: [
+                add
+                update
+                delete
+            ]
+        }
+    )
+
+    region personal-lang (
+        name: personal_Lang
+        title: "&{PERSONALLANG}."
+        type: classicReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select app_lang.ID,
+                       lang.name as language,
+                       lang_lev.name as language_Level
+                  from JOB_APPLICATION_LANGUAGE app_lang
+                  join LANGUAGE lang on lang.id = app_lang.LANGUAGE_ID
+                  join LANGUAGE_LEVEL lang_lev on lang_lev.id = app_lang.LANGUAGE_LEVEL_ID
+                  Where Personal_id = :APP_USER_PERS_ID;
+                ```
+        }
+        layout {
+            sequence: 30
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        componentAppearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Report--altRowsDefault
+                t-Report--rowHighlight
+            ]
+        }
+        pagination {
+            type: nextAndPreviousLinks
+        }
+
+        column ID (
+            reportColumnQueryId: 1
+            derivedColumn: N
+            heading {
+                heading: "&{ID}."
+                alignment: end
+            }
+            layout {
+                sequence: 10
+                columnAlignment: end
+            }
+        )
+
+        column LANGUAGE (
+            reportColumnQueryId: 2
+            derivedColumn: N
+            heading {
+                heading: "&{LANGUAGE}."
+            }
+            layout {
+                sequence: 20
+            }
+        )
+
+        column LANGUAGE_LEVEL (
+            reportColumnQueryId: 3
+            derivedColumn: N
+            heading {
+                heading: "&{LANGUAGE_LEVEL}."
+            }
+            layout {
+                sequence: 30
+            }
+        )
+
+    )
+
+    pageItem P110_ID (
+        type: hidden
+        layout {
+            sequence: 10
+            region: @language
+            slot: regionBody
+        }
+        source {
+            formRegion: @language
+            column: ID
+            dataType: number
+            queryOnly: true
+            primaryKey: true
+        }
+        security {
+            sessionStateProtection: checksumRequiredSessionLevel
+        }
+    )
+
+    pageItem P110_LANGUAGE_ID (
+        type: selectList
+        label {
+            label: "&{LANGUAGE}."
+            alignment: left
+        }
+        lov {
+            type: sharedComponent
+            lov: @language-name
+        }
+        layout {
+            sequence: 30
+            region: @language
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        source {
+            formRegion: @language
+            column: LANGUAGE_ID
+            dataType: number
+        }
+    )
+
+    pageItem P110_LANGUAGE_LEVEL_ID (
+        type: selectList
+        label {
+            label: "&{LANGUAGE_LEVEL}."
+            alignment: left
+        }
+        lov {
+            type: sharedComponent
+            lov: @language-level-name
+        }
+        layout {
+            sequence: 40
+            region: @language
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        source {
+            formRegion: @language
+            column: LANGUAGE_LEVEL_ID
+            dataType: number
+        }
+    )
+
+    pageItem P110_LANG_CHECK (
+        type: hidden
+        layout {
+            sequence: 10
+            slot: body
+        }
+    )
+
+    pageItem P110_LANG_EXIST (
+        type: hidden
+        layout {
+            sequence: 50
+            slot: body
+        }
+    )
+
+    pageItem P110_PERSONAL_ID (
+        type: hidden
+        layout {
+            sequence: 50
+            region: @language
+            slot: regionBody
+        }
+        source {
+            formRegion: @language
+            column: PERSONAL_ID
+            dataType: number
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P110_PERSONAL_ID
+        }
+    )
+
+    button cancel (
+        buttonName: CANCEL
+        label: "&{CANCEL}."
+        layout {
+            sequence: 10
+            region: @language
+            slot: close
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 1
+            }
+            warnOnUnsavedChanges: doNotCheck
+        }
+    )
+
+    button create (
+        buttonName: CREATE
+        label: "&{SAVE}."
+        layout {
+            sequence: 30
+            region: @language
+            slot: create
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: insert
+        }
+        serverSideCondition {
+            type: itemIsNull
+            item: P110_ID
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    button delete (
+        buttonName: DELETE
+        label: "&{DELETE}."
+        layout {
+            sequence: 20
+            region: @language
+            slot: delete
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            executeValidations: false
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: delete
+            requiresConfirmation: true
+        }
+        confirmation {
+            message: &APP_TEXT$DELETE_MSG!RAW.
+            style: danger
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P110_ID
+        }
+    )
+
+    button next (
+        buttonName: Next
+        label: "&{NEXT}."
+        layout {
+            sequence: 20
+            region: @language
+            slot: create
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+        }
+    )
+
+    button save (
+        buttonName: SAVE
+        label: "&{APPLY_CHANGES}."
+        layout {
+            sequence: 30
+            region: @language
+            slot: change
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: update
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P110_ID
+        }
+    )
+
+    button save-and-add-one (
+        buttonName: Save_and_add_one
+        label: "&{SAVE}."
+        layout {
+            sequence: 10
+            region: @language
+            slot: create
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: insert
+        }
+    )
+
+    dynamicAction new (
+        name: New
+        execution {
+            sequence: 10
+        }
+        when {
+            event: click
+            selectionType: button
+            button: @save-and-add-one
+        }
+
+        action native-refresh (
+            action: refresh
+            affectedElements {
+                selectionType: region
+                region: @personal-lang
+            }
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    validation lang-chec-val (
+        name: Lang_chec_val
+        execution {
+            sequence: 10
+        }
+        validation {
+            plsqlExpression: :P110_LANG_CHECK > 0
+        }
+        error {
+            errorMessage: "&{YOU_MUST_ADD_LANGUAGE_FIRST}."
+        }
+        serverSideCondition {
+            whenButtonPressed: @next
+        }
+    )
+
+    validation lang-level-val (
+        name: lang_level_val
+        execution {
+            sequence: 30
+        }
+        validation {
+            type: itemIsNotNull
+            item: P110_LANGUAGE_LEVEL_ID
+        }
+        error {
+            errorMessage: "&{LANGUAGE_IS_REQUIRED}."
+        }
+        serverSideCondition {
+            whenButtonPressed: @save-and-add-one
+        }
+    )
+
+    validation lang-val (
+        name: lang_val
+        execution {
+            sequence: 20
+        }
+        validation {
+            type: itemIsNotNull
+            item: P110_LANGUAGE_ID
+        }
+        error {
+            errorMessage: "&{LANGUAGE_IS_REQUIRED}."
+        }
+        serverSideCondition {
+            whenButtonPressed: @save-and-add-one
+        }
+    )
+
+    process check-lang (
+        name: Check_lang
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                BEGIN
+                
+                    SELECT count(*)
+                    INTO :P110_LANG_CHECK
+                    FROM JOB_APPLICATION_LANGUAGE
+                    WHERE personal_id = :APP_USER_PERS_ID;
+                
+                EXCEPTION
+                    WHEN NO_DATA_FOUND THEN
+                        :P110_LANG_CHECK := NULL;
+                END;
+                ```
+        }
+        execution {
+            sequence: 30
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 344532498179844825
+        }
+    )
+
+    process check-lang-val (
+        name: Check_lang_val
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                
+                    select count(*) into :P110_LANG_EXIST from Job_application_language where LANGUAGE_ID = :P110_LANGUAGE_ID
+                    and LANGUAGE_LEVEL_ID = :P110_LANGUAGE_LEVEL_ID and personal_id = :P110_PERSONAL_ID;
+                
+                    if :P110_LANG_EXIST > 0 then
+                        raise_application_error(-20003, 'this language already added!');
+                    end if;
+                
+                end;
+                ```
+        }
+        execution {
+            sequence: 10
+        }
+        advanced {
+            executionMappingIdentifier: 344534710107844848
+        }
+        serverSideCondition {
+            whenButtonPressed: @save-and-add-one
+        }
+    )
+
+    process initialize-form-language (
+        name: Initialize form Language
+        type: formInitialization
+        formRegion: @language
+        execution {
+            sequence: 20
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 342486638620114566
+        }
+    )
+
+    process process-form-language (
+        name: Process form Language_1
+        type: formAutoRowProcessing
+        formRegion: @language
+        execution {
+            sequence: 30
+        }
+        advanced {
+            executionMappingIdentifier: 338536597522033917
+        }
+        serverSideCondition {
+            whenButtonPressed: @save-and-add-one
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    process process-form-language-2 (
+        name: Process form Language
+        type: formAutoRowProcessing
+        formRegion: @language
+        execution {
+            sequence: 20
+        }
+        advanced {
+            executionMappingIdentifier: 342487023329114566
+        }
+        serverSideCondition {
+            whenButtonPressed: @save-and-add-one
+        }
+    )
+
+    process set-p-id (
+        name: set_p_id
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                
+                    :P110_PERSONAL_ID := :APP_USER_PERS_ID;
+                End;
+                ```
+        }
+        execution {
+            sequence: 10
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 338536704248033919
+        }
+    )
+
+    branch (
+        name: redirect to iself
+        execution {
+            sequence: 11
+        }
+        behavior {
+            target: {
+                page: 110
+            }
+        }
+        serverSideCondition {
+            whenButtonPressed: @save-and-add-one
+        }
+    )
+
+    branch (
+        name: Go To Page 1
+        execution {
+            sequence: 1
+        }
+        behavior {
+            target: {
+                page: 111
+            }
+        }
+        serverSideCondition {
+            whenButtonPressed: @create
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    branch (
+        name: next_redirect
+        execution {
+            sequence: 21
+        }
+        behavior {
+            target: {
+                page: 111
+            }
+        }
+        serverSideCondition {
+            whenButtonPressed: @next
+        }
+    )
+
+)

@@ -1,0 +1,798 @@
+page 109 (
+    name: Education
+    alias: EDUCATION
+    title: "&{EDUCATION}."
+    appearance {
+        pageMode: modalDialog
+        dialogTemplate: @/modal-dialog
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    security {
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region education (
+        name: Education
+        title: "&{EDUCATION}."
+        type: form
+        source {
+            location: localDatabase
+            tableName: EDUCATION_DEGREE
+        }
+        layout {
+            sequence: 10
+            slot: contentBody
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        edit {
+            enabled: true
+            allowedOperations: [
+                add
+                update
+                delete
+            ]
+        }
+    )
+
+    region personal-education (
+        name: Personal_education
+        title: "&{PERSONALEDUCATION}."
+        type: classicReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                SELECT ED.ID,
+                       EduL.name as LEVEL_NAME,
+                       EduF.name as FIELD_NAME,
+                       GRADUATION_YEAR,
+                       EduG.name as GRADE_NAME,
+                       sys.dbms_lob.getlength(ED.GRADUATION_CERTIFICATE) as GRADUATION_CERTIFICATE
+                FROM EDUCATION_DEGREE ED
+                join EDUCATION_LEVEL EduL on EduL.id = ED.EDUCATION_LEVEL
+                join EDUCATION_FIELD EduF on EduF.id = ED.EDUCATION_FIELD
+                join EDUCATION_GRADE EduG on EduG.id = ED.EDUCATION_GRADE
+                WHERE personal_id = :APP_USER_PERS_ID;
+                
+                
+                
+                ```
+        }
+        layout {
+            sequence: 20
+            slot: contentBody
+            column: 3
+            columnSpan: 8
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        config {
+            buildOption: @commented-out
+        }
+        componentAppearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Report--altRowsDefault
+                t-Report--rowHighlight
+            ]
+        }
+        pagination {
+            type: nextAndPreviousLinks
+        }
+
+        column FIELD_NAME (
+            reportColumnQueryId: 3
+            derivedColumn: N
+            heading {
+                heading: "&{FIELD_NAME}."
+            }
+            layout {
+                sequence: 80
+            }
+        )
+
+        column GRADE_NAME (
+            reportColumnQueryId: 5
+            derivedColumn: N
+            heading {
+                heading: "&{GRADE_NAME}."
+            }
+            layout {
+                sequence: 90
+            }
+        )
+
+        column GRADUATION_CERTIFICATE (
+            reportColumnQueryId: 6
+            derivedColumn: N
+            type: downloadBlob
+            heading {
+                heading: "&{GRADUATION_CERTIFICATE}."
+                alignment: center
+            }
+            layout {
+                sequence: 60
+                columnAlignment: center
+            }
+            blobAttributes {
+                tableName: EDUCATION_DEGREE
+                blobColumn: GRADUATION_CERTIFICATE
+                primaryKeyColumn1: ID
+                filenameColumn: GRADUATION_CERTIFICATE_FILE_NAME
+            }
+        )
+
+        column GRADUATION_YEAR (
+            reportColumnQueryId: 4
+            derivedColumn: N
+            heading {
+                heading: "&{GRADUATION_YEAR}."
+                alignment: end
+            }
+            layout {
+                sequence: 40
+                columnAlignment: end
+            }
+        )
+
+        column ID (
+            reportColumnQueryId: 1
+            derivedColumn: N
+            heading {
+                heading: "&{ID}."
+                alignment: end
+            }
+            layout {
+                sequence: 10
+                columnAlignment: end
+            }
+        )
+
+        column LEVEL_NAME (
+            reportColumnQueryId: 2
+            derivedColumn: N
+            heading {
+                heading: "&{LEVEL_NAME}."
+            }
+            layout {
+                sequence: 70
+            }
+        )
+
+    )
+
+    pageItem P109_EDUCATION_CHECK (
+        type: hidden
+        layout {
+            sequence: 30
+            slot: contentBody
+        }
+    )
+
+    pageItem P109_EDUCATION_FIELD (
+        type: selectList
+        label {
+            label: "&{EDUCATION_FIELD}."
+            alignment: left
+        }
+        lov {
+            type: sharedComponent
+            lov: @education-field-name
+        }
+        layout {
+            sequence: 30
+            region: @education
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @education
+            column: EDUCATION_FIELD
+            dataType: number
+        }
+    )
+
+    pageItem P109_EDUCATION_GRADE (
+        type: selectList
+        label {
+            label: "&{EDUCATION_GRADE}."
+            alignment: left
+        }
+        lov {
+            type: sharedComponent
+            lov: @education-grade-name
+        }
+        layout {
+            sequence: 50
+            region: @education
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @education
+            column: EDUCATION_GRADE
+            dataType: number
+        }
+    )
+
+    pageItem P109_EDUCATION_LEVEL (
+        type: selectList
+        label {
+            label: "&{EDUCATION_LEVEL}."
+            alignment: left
+        }
+        lov {
+            type: sharedComponent
+            lov: @education-level-name
+        }
+        layout {
+            sequence: 20
+            region: @education
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @education
+            column: EDUCATION_LEVEL
+            dataType: number
+        }
+    )
+
+    pageItem P109_GRADUATION_CERTIFICATE (
+        type: fileUpload
+        label {
+            label: "&{GRADUATION_CERTIFICATE}."
+            alignment: left
+        }
+        storage {
+            type: appTempFiles
+        }
+        layout {
+            sequence: 90
+            region: @education
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 60
+        }
+        validation {
+            maxLength: 255
+        }
+        source {
+            formRegion: @education
+            column: GRADUATION_CERTIFICATE
+            dataType: blob
+        }
+    )
+
+    pageItem P109_GRADUATION_YEAR (
+        type: numberField
+        label {
+            label: "&{GRADUATION_YEAR}."
+            alignment: left
+        }
+        layout {
+            sequence: 40
+            region: @education
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            valueRequired: true
+            maxLength: 255
+        }
+        source {
+            formRegion: @education
+            column: GRADUATION_YEAR
+            dataType: number
+        }
+    )
+
+    pageItem P109_ID (
+        type: hidden
+        layout {
+            sequence: 10
+            region: @education
+            slot: regionBody
+        }
+        source {
+            formRegion: @education
+            column: ID
+            dataType: number
+            queryOnly: true
+            primaryKey: true
+        }
+        security {
+            sessionStateProtection: checksumRequiredSessionLevel
+        }
+    )
+
+    pageItem P109_OTHER_EDUCATION_FIELD (
+        type: textField
+        label {
+            label: "&{OTHER_EDUCATION_FIELD}."
+            alignment: left
+        }
+        layout {
+            sequence: 80
+            region: @education
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 255
+        }
+        source {
+            formRegion: @education
+            column: OTHER_EDUCATION_FIELD
+            dataType: varchar2
+        }
+    )
+
+    pageItem P109_UNIVERSITY (
+        type: textField
+        label {
+            label: "&{UNIVERSITY}."
+            alignment: left
+        }
+        layout {
+            sequence: 70
+            region: @education
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 60
+        }
+        validation {
+            valueRequired: true
+            maxLength: 500
+        }
+        source {
+            formRegion: @education
+            column: UNIVERSITY
+            dataType: varchar2
+        }
+    )
+
+    button cancel (
+        buttonName: CANCEL
+        label: "&{CANCEL}."
+        layout {
+            sequence: 10
+            region: @education
+            slot: close
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 1
+            }
+            warnOnUnsavedChanges: doNotCheck
+        }
+    )
+
+    button create (
+        buttonName: CREATE
+        label: "&{SAVE}."
+        layout {
+            sequence: 40
+            region: @education
+            slot: create
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            action: definedByDynamicAction
+            executeValidations: false
+            databaseAction: insert
+        }
+        serverSideCondition {
+            type: itemIsNull
+            item: P109_ID
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    button delete (
+        buttonName: DELETE
+        label: "&{DELETE}."
+        layout {
+            sequence: 20
+            region: @education
+            slot: delete
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            executeValidations: false
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: delete
+            requiresConfirmation: true
+        }
+        confirmation {
+            message: &APP_TEXT$DELETE_MSG!RAW.
+            style: danger
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P109_ID
+        }
+    )
+
+    button next (
+        buttonName: Next
+        label: "&{NEXT}."
+        layout {
+            sequence: 60
+            region: @education
+            slot: create
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 110
+            }
+            warnOnUnsavedChanges: doNotCheck
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    button save (
+        buttonName: SAVE
+        label: "&{APPLY_CHANGES}."
+        layout {
+            sequence: 30
+            region: @education
+            slot: change
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            executeValidations: false
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: update
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P109_ID
+        }
+    )
+
+    button save-and-add-one (
+        buttonName: save_and_add_one
+        label: "&{SAVE}."
+        layout {
+            sequence: 50
+            region: @education
+            slot: create
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            executeValidations: false
+            warnOnUnsavedChanges: doNotCheck
+        }
+    )
+
+    dynamicAction new (
+        name: New
+        execution {
+            sequence: 20
+        }
+        when {
+            event: click
+            selectionType: button
+            button: @create
+        }
+
+        action native-refresh (
+            action: refresh
+            affectedElements {
+                selectionType: region
+                region: @personal-education
+            }
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    dynamicAction other-field (
+        name: other_field
+        execution {
+            sequence: 10
+        }
+        when {
+            selectionType: items
+            items: P109_EDUCATION_FIELD
+        }
+        clientSideCondition {
+            type: item=value
+            item: P109_EDUCATION_FIELD
+            value: 59
+        }
+
+        action native-hide (
+            action: hide
+            affectedElements {
+                selectionType: items
+                items: P109_OTHER_EDUCATION_FIELD
+            }
+            execution {
+                sequence: 10
+                fireWhenEventResultIs: false
+            }
+        )
+
+        action native-show (
+            action: show
+            affectedElements {
+                selectionType: items
+                items: P109_OTHER_EDUCATION_FIELD
+            }
+            execution {
+                sequence: 10
+            }
+        )
+
+    )
+
+    validation next-validation (
+        name: Next Validation
+        execution {
+            sequence: 10
+        }
+        validation {
+            type: itemIsNotZero
+            item: P109_EDUCATION_CHECK
+            alwaysExecute: true
+        }
+        error {
+            errorMessage: "&{YOU_MUST_ADD_EDUCATION_FIRST}."
+        }
+        serverSideCondition {
+            whenButtonPressed: @next
+        }
+    )
+
+    process check-edu-person (
+        name: Check_EDU_Person
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                BEGIN
+                
+                    SELECT 1
+                    INTO :P109_EDUCATION_CHECK
+                    FROM education_degree
+                    WHERE personal_id = :APP_USER_PERS_ID
+                    FETCH FIRST 1 ROW ONLY;
+                
+                EXCEPTION
+                    WHEN NO_DATA_FOUND THEN
+                        :P109_EDUCATION_CHECK := 0;
+                END;
+                ```
+        }
+        execution {
+            sequence: 20
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 344530870984844809
+        }
+    )
+
+    process create-and-redirect (
+        name: Create and redirect
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                -- Procedure save_education_degree(v_education_level education_degree.education_level%type, 
+                --     v_education_field education_degree.education_field%type, v_grad_year education_degree.GRADUATION_YEAR%type,
+                --     v_grade education_degree.EDUCATION_GRADE%type, v_university education_degree.UNIVERSITY%type, 
+                --     v_other_field education_degree.OTHER_EDUCATION_FIELD%type, 
+                --     v_personal_id education_degree.PERSONAL_ID%type, v_Grad_image Varchar2)
+                
+                
+                begin
+                    user_personal_info_pkg.save_education_degree(:P109_EDUCATION_LEVEL, :P109_EDUCATION_FIELD,
+                    :P109_GRADUATION_YEAR, :P109_EDUCATION_GRADE, :P109_UNIVERSITY, :P109_OTHER_EDUCATION_FIELD,
+                    :APP_USER_PERS_ID, :P109_GRADUATION_CERTIFICATE);
+                
+                END;
+                ```
+        }
+        execution {
+            sequence: 20
+        }
+        successMessage {
+            successMessage: "&{THE_EDUCATION_ADDED}."
+        }
+        advanced {
+            executionMappingIdentifier: 341789315471908908
+        }
+        serverSideCondition {
+            whenButtonPressed: @create
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    process initialize-form-education (
+        name: Initialize form Education
+        type: formInitialization
+        formRegion: @education
+        execution {
+            sequence: 10
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 341862309649256564
+        }
+    )
+
+    process process-form-education (
+        name: Process form Education
+        type: formAutoRowProcessing
+        formRegion: @education
+        execution {
+            sequence: 10
+        }
+        advanced {
+            executionMappingIdentifier: 341862780805256564
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    process save-and-add (
+        name: save and add
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                    user_personal_info_pkg.save_education_degree(:P109_EDUCATION_LEVEL, :P109_EDUCATION_FIELD,
+                    :P109_GRADUATION_YEAR, :P109_EDUCATION_GRADE, :P109_UNIVERSITY, :P109_OTHER_EDUCATION_FIELD,
+                    :APP_USER_PERS_ID, :P109_GRADUATION_CERTIFICATE);
+                
+                END;
+                ```
+        }
+        execution {
+            sequence: 30
+        }
+        successMessage {
+            successMessage: "&{THE_EDUCATION_ADDED}."
+        }
+        advanced {
+            executionMappingIdentifier: 341789408989908909
+        }
+        serverSideCondition {
+            whenButtonPressed: @save-and-add-one
+        }
+    )
+
+    branch (
+        name: Go To Page 1
+        execution {
+            sequence: 11
+        }
+        behavior {
+            target: {
+                page: 109
+                action: resetRegions
+            }
+        }
+        serverSideCondition {
+            whenButtonPressed: @save-and-add-one
+        }
+    )
+
+    branch (
+        name: Go To Page 1
+        execution {
+            sequence: 1
+        }
+        behavior {
+            target: {
+                page: 109
+            }
+        }
+        serverSideCondition {
+            whenButtonPressed: @create
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+)

@@ -1,0 +1,1998 @@
+page 121 (
+    name: Education
+    alias: EDUCATIONW
+    title: "&{EDUCATION}."
+    appearance {
+        pageTemplate: @/blank
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    css {
+        inline:
+            ```css
+            /* Region Container */
+            #modern_report {
+                background: #f8fafc;
+                border-radius: 18px;
+                padding: 18px;
+                box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+                border: none;
+            }
+            
+            /* Report Table */
+            #modern_report .t-Report-report {
+                border-collapse: separate;
+                border-spacing: 0 10px;
+                width: 100%;
+            }
+            
+            /* Header */
+            #modern_report .t-Report-colHead {
+                background: #001b47;
+                color: white;
+                font-size: 14px;
+                font-weight: 600;
+                padding: 14px;
+                border: none;
+            }
+            
+            /* Header First/Last Radius */
+            #modern_report .t-Report-colHead:first-child {
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
+            }
+            
+            #modern_report .t-Report-colHead:last-child {
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+            }
+            
+            /* Rows */
+            #modern_report .t-Report-report tbody tr {
+                background: white;
+                transition: 0.3s;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            }
+            
+            /* Rows Links */
+            #modern_report .t-Report-report tbody tr a{
+                color: rgb(0, 48, 65);
+                text-decoration: none;
+                font-weight: 600;
+            }
+            
+            #modern_report .t-Report-report tbody tr a:hover{
+                color: rgb(0, 119, 255);
+            }
+            
+            /* Hover Effect */
+            #modern_report .t-Report-report tbody tr:hover {
+                transform: scale(1.01);
+                background: #f1f5f9;
+            }
+            
+            /* Cells */
+            #modern_report .t-Report-cell {
+                padding: 16px;
+                border: none;
+                font-size: 14px;
+                color: #334155;
+            }
+            
+            /* First Cell Radius */
+            #modern_report .t-Report-cell:first-child {
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
+            }
+            
+            /* Last Cell Radius */
+            #modern_report .t-Report-cell:last-child {
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+            }
+            
+            /* Pagination */
+            #modern_report .t-Report-pagination {
+                margin-top: 15px;
+                text-align: center;
+            }
+            
+            /* Links */
+            #modern_report a {
+                color: rgb(169, 234, 255);
+                text-decoration: none;
+                font-weight: 600;
+            }
+            
+            #modern_report a:hover {
+                color: #9db7ff;
+            }
+            
+            #modern_report,
+            #modern_report .t-Region-body,
+            #modern_report .t-Report,
+            #modern_report .t-Report-wrap,
+            #modern_report .t-Report-tableWrap {
+                border: none !important;
+                box-shadow: none !important;
+                background: transparent !important;
+            }
+            
+            /* Remove table borders */
+            #modern_report table,
+            #modern_report th,
+            #modern_report td {
+                border: none !important;
+            }
+            
+            /* Remove outer gray line */
+            #modern_report .t-Report-report {
+                border: none !important;
+                outline: none !important;
+            }
+            
+            
+            
+            /* ========================================================== */
+            /* 1. STANDARD FORM FIELDS (TEXT, TEL, EMAIL, SELECT, ETC.)    */
+            /* ========================================================== */
+            
+            
+            
+            .t-Form-fieldContainer input[type="text"],
+            .t-Form-fieldContainer input[type="tel"],
+            .t-Form-fieldContainer input[type="email"],
+            .t-Form-fieldContainer input[type="date"],
+            .t-Form-fieldContainer textarea,
+            .apex-item-text,
+            .apex-item-textarea {
+                background-color: rgb(232, 244, 255)  !important; 
+                border-radius: 10px !important; /* Consistent 10px roundness */
+                border: 1px solid rgba(232, 244, 255, 0.705) !important;
+                transition: all 0.3s ease !important;
+            }
+            
+            .t-Form-fieldContainer select,
+            .apex-item-select {
+                background-color: rgb(232, 244, 255)  !important; 
+                border-radius: 10px !important;
+            }
+            
+            .t-Form-label::before{
+                background-color: rgb(232, 244, 255)  !important; 
+                border: none;
+                background: transparent;
+            }
+            
+            .t-Form-label:hover::before {
+                background-color: rgb(232, 244, 255)  !important; 
+            }
+            
+            .apex-item-file {
+                border-radius: 10px !important;
+                transition: all 0.3s ease !important;
+            }
+            .apex-item-file:hover {
+                border-color: #0563bb !important;
+                background-color: #f8fafc !important;
+            }
+            
+            .apex-item-group--datepicker,
+            .apex-item-group.apex-item-group--file {
+                display: inline-flex !important;
+                width: 100% !important;
+                align-items: stretch !important;
+                gap: 0 !important;
+            }
+            
+            /* Left side of the date component (Text Field) */
+            .apex-item-group--datepicker input.apex-item-text,
+            input.apex-item-datepicker {
+                background-color: rgb(232, 244, 255)  !important; 
+                border-top-left-radius: 10px !important;
+                border-bottom-left-radius: 10px !important;
+                border-top-right-radius: 0px !important;
+                border-bottom-right-radius: 0px !important;
+                border-right: none !important; 
+            }
+            
+            /* Right side of the date component (Calendar Button) */
+            .apex-item-group--datepicker .a-Button--calendar,
+            .apex-item-group--datepicker .apex-item-datepicker-btn,
+            .a-Button--calendar {
+                border-top-left-radius: 0px !important;
+                border-bottom-left-radius: 0px !important;
+                border-top-right-radius: 10px !important; /* Perfectly matches the 10px layout roundness */
+                border-bottom-right-radius: 10px !important;
+                border: 1px solid #cbd5e1 !important;
+                border-left: 1px solid #cbd5e1 !important; 
+                background-color: rgb(232, 244, 255)  !important; 
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                box-shadow: none !important;
+            }
+            /* ========================================================== */
+            /* CUSTOM NAVBAR                                               */
+            /* ========================================================== */
+            
+            .custom-navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            
+                background: rgb(233, 233, 233);
+            
+                padding: 14px 24px;
+            
+                border-radius: 18px;
+            
+                box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            
+                margin-bottom: 20px;
+            }
+            
+            /* Left Links */
+            .nav-left {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            
+            /* Nav Links */
+            .nav-link {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            
+                text-decoration: none;
+            
+                color: #334155;
+            
+                padding: 10px 18px;
+            
+                border-radius: 12px;
+            
+                font-weight: 600;
+            
+                transition: all 0.3s ease;
+            }
+            
+            /* Hover */
+            .nav-link:hover {
+                background: rgb(232, 244, 255);
+                color: #0563bb;
+            }
+            
+            /* Logout Button */
+            .logout-btn {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            
+                background: #ef4444;
+            
+                color: white !important;
+            
+                text-decoration: none;
+            
+                padding: 10px 18px;
+            
+                border-radius: 12px;
+            
+                font-weight: 600;
+            
+                transition: all 0.3s ease;
+            }
+            
+            /* Logout Hover */
+            .logout-btn:hover {
+                background: #dc2626;
+                transform: translateY(-1px);
+            }
+            
+            /* Icons */
+            .custom-navbar .fa {
+                font-size: 14px;
+            }
+            
+            
+            /* [data-header="National Id Image"] img,
+            [data-header="NATIONAL_ID_IMAGE"] img {
+                width: 300px !important;
+                height: auto !important;
+            } */
+            
+            
+            /* img {
+                width: 250px !important;
+                height: 130px !important;
+                object-fit: cover;
+                border-radius: 10px;
+            } */
+            
+            .nav-right {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .user-name {
+                color: #333;
+                font-weight: 600;
+            }
+            
+            /* Make navbar wrap on small screens */
+            .custom-navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap; /* مهم جداً */
+            }
+            
+            /* Mobile & small tablets */
+            @media (max-width: 768px) {
+                .custom-navbar {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 12px;
+                }
+            
+                .nav-left,
+                .nav-right {
+                    width: 100%;
+                    justify-content: flex-start;
+                    flex-wrap: wrap;
+                }
+            
+                .nav-link,
+                .logout-btn {
+                    width: 100%;
+                    justify-content: center;
+                }
+            
+                .user-name {
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+            
+            /* Very small screens (phones) */
+            @media (max-width: 480px) {
+                .nav-link,
+                .logout-btn {
+                    padding: 12px;
+                    font-size: 14px;
+                }
+            
+                .custom-navbar {
+                    padding: 12px;
+                }
+            }
+            
+            /* ==========================================================
+               EDUCATION REPORT - MOBILE CARD VIEW
+               ========================================================== */
+            
+            @media (max-width: 768px) {
+            
+                /* Report container */
+                #modern_report {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    box-sizing: border-box !important;
+                    padding: 10px !important;
+                    overflow: visible !important;
+                }
+            
+                /* Remove normal table spacing */
+                #modern_report .t-Report-report {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    border-spacing: 0 !important;
+                    display: block !important;
+                }
+            
+                /* Hide table header */
+                #modern_report .t-Report-report thead {
+                    display: none !important;
+                }
+            
+                /* Table body */
+                #modern_report .t-Report-report tbody {
+                    display: block !important;
+                    width: 100% !important;
+                }
+            
+                /* ======================================================
+                   EACH DATABASE RECORD = ONE CARD
+                   ====================================================== */
+            
+                #modern_report .t-Report-report tbody tr {
+                    display: block !important;
+            
+                    width: 100% !important;
+                    max-width: 100% !important;
+            
+                    margin: 0 0 15px 0 !important;
+                    padding: 8px !important;
+            
+                    box-sizing: border-box !important;
+            
+                    background: #ffffff !important;
+            
+                    border-radius: 12px !important;
+            
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
+            
+                    transform: none !important;
+                }
+            
+                /* ======================================================
+                   EACH COLUMN = KEY / VALUE ROW
+                   ====================================================== */
+            
+                #modern_report .t-Report-report tbody td {
+            
+                    display: grid !important;
+            
+                    grid-template-columns: 45% 55% !important;
+            
+                    width: 100% !important;
+            
+                    min-width: 0 !important;
+            
+                    box-sizing: border-box !important;
+            
+                    padding: 10px 6px !important;
+            
+                    border-bottom: 1px solid #e5e7eb !important;
+            
+                    font-size: 13px !important;
+            
+                    line-height: 1.4 !important;
+            
+                    color: #334155 !important;
+            
+                    overflow-wrap: anywhere !important;
+            
+                    word-break: break-word !important;
+            
+                    text-align: left !important;
+            
+                    align-items: center !important;
+                }
+            
+                /* Last row doesn't need separator */
+                #modern_report .t-Report-report tbody td:last-child {
+                    border-bottom: none !important;
+                }
+            
+            
+                /* ======================================================
+                   COLUMN LABELS
+                   ====================================================== */
+            
+                /* Graduation Year */
+                #modern_report .t-Report-report tbody td:nth-child(1)::before {
+                    content: "Graduation Year";
+                    font-weight: 600 !important;
+                    color: #001b47 !important;
+                    padding-right: 8px !important;
+                }
+            
+                /* University */
+                #modern_report .t-Report-report tbody td:nth-child(2)::before {
+                    content: "University";
+                    font-weight: 600 !important;
+                    color: #001b47 !important;
+                    padding-right: 8px !important;
+                }
+            
+                /* Degree */
+                #modern_report .t-Report-report tbody td:nth-child(3)::before {
+                    content: "Degree";
+                    font-weight: 600 !important;
+                    color: #001b47 !important;
+                    padding-right: 8px !important;
+                }
+            
+                /* Major */
+                #modern_report .t-Report-report tbody td:nth-child(4)::before {
+                    content: "Major";
+                    font-weight: 600 !important;
+                    color: #001b47 !important;
+                    padding-right: 8px !important;
+                }
+            
+                /* Grade */
+                #modern_report .t-Report-report tbody td:nth-child(5)::before {
+                    content: "Grade";
+                    font-weight: 600 !important;
+                    color: #001b47 !important;
+                    padding-right: 8px !important;
+                }
+            
+                /* Download */
+                #modern_report .t-Report-report tbody td:nth-child(6)::before {
+                    content: "Download";
+                    font-weight: 600 !important;
+                    color: #001b47 !important;
+                    padding-right: 8px !important;
+                }
+            
+            
+                /* ======================================================
+                   LINKS
+                   ====================================================== */
+            
+                #modern_report .t-Report-report tbody td a {
+                    color: #003041 !important;
+                    font-weight: 600 !important;
+                    text-decoration: none !important;
+                }
+            
+            
+                /* ======================================================
+                   IMAGES
+                   ====================================================== */
+            
+                #modern_report .t-Report-report tbody td img {
+                    max-width: 100% !important;
+                    width: 100px !important;
+                    height: auto !important;
+                    object-fit: contain !important;
+                    border-radius: 8px !important;
+                }
+            
+            
+                /* ======================================================
+                   REMOVE DESKTOP HOVER EFFECT ON MOBILE
+                   ====================================================== */
+            
+                #modern_report .t-Report-report tbody tr:hover {
+                    transform: none !important;
+                }
+            }
+            ```
+    }
+    security {
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region education (
+        name: Education
+        title: "&{EDUCATION}."
+        type: form
+        source {
+            location: localDatabase
+            tableName: EDUCATION_DEGREE
+        }
+        layout {
+            sequence: 40
+            parentRegion: @educationw
+            slot: wizardSubRegions
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--noBorder
+                t-Region--scrollBody
+            ]
+        }
+        edit {
+            enabled: true
+            allowedOperations: [
+                add
+                update
+                delete
+            ]
+        }
+    )
+
+    region educationw (
+        name: Education
+        title: "&{EDUCATION}."
+        type: list
+        source {
+            list: @personal-infow
+        }
+        layout {
+            sequence: 20
+            slot: body
+        }
+        appearance {
+            template: @/wizard-container
+            templateOptions: [
+                #DEFAULT#
+                t-Wizard--hideStepsXSmall
+            ]
+        }
+        componentAppearance {
+            listTemplate: @/wizard-progress
+            templateOptions: [
+                #DEFAULT#
+                t-WizardSteps--displayLabels
+            ]
+        }
+    )
+
+    region guide-message (
+        name: guide message
+        type: staticContent
+        source {
+            htmlCode:
+                ```html
+                <div class="grid-box-bg-blue">
+                 
+                    <div class="">
+                        ⚠️
+                    </div> 
+                
+                    <div class="guide-content">
+                        <!-- <div class="guide-title">
+                            User Guide
+                        </div> -->
+                
+                        <p>
+                            Please ensure all required information is accurate and complete, as incorrect details may affect your job application.       
+                        </p>
+                    </div>
+                </div>
+                ```
+        }
+        layout {
+            sequence: 10
+            parentRegion: @educationw
+            slot: wizardSubRegions
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--noPadding
+                t-Region--removeHeader js-removeLandmark
+                t-Region--scrollBody
+            ]
+        }
+    )
+
+    region language (
+        name: Language
+        title: "&{LANGUAGE}."
+        type: form
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select ID as Lang_id,
+                       LANGUAGE_ID,
+                       LANGUAGE_LEVEL_ID,
+                       PERSONAL_ID
+                  from JOB_APPLICATION_LANGUAGE
+                ```
+        }
+        layout {
+            sequence: 60
+            parentRegion: @educationw
+            slot: wizardSubRegions
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--noBorder
+                t-Region--scrollBody
+            ]
+        }
+        edit {
+            enabled: true
+            allowedOperations: [
+                add
+                update
+                delete
+            ]
+        }
+    )
+
+    region navbar (
+        name: navbar
+        title: "&{NAVBAR}."
+        type: appTemplateComponent/appliocantNavbar
+        layout {
+            sequence: 10
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        componentAppearance {
+            display: regionOnly
+        }
+    )
+
+    region personal-education (
+        name: Personal_education
+        title: "&{PERSONALEDUCATION}."
+        type: classicReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                -- SELECT ED.ID,
+                --        EduL.name as LEVEL_NAME,
+                --        EduF.name as FIELD_NAME,
+                --        GRADUATION_YEAR,
+                --        EduG.name as GRADE_NAME,
+                --        sys.dbms_lob.getlength(ED.GRADUATION_CERTIFICATE) as GRADUATION_CERTIFICATE
+                -- FROM EDUCATION_DEGREE ED
+                -- join EDUCATION_LEVEL EduL on EduL.id = ED.EDUCATION_LEVEL
+                -- join EDUCATION_FIELD EduF on EduF.id = ED.EDUCATION_FIELD
+                -- join EDUCATION_GRADE EduG on EduG.id = ED.EDUCATION_GRADE
+                -- WHERE personal_id = :APP_USER_PERS_ID;
+                
+                
+                select eduD.GRADUATION_CERTIFICATE_FILE_ID,
+                       eduD.id as eduD_id,
+                       j.id,
+                       j.file_name,
+                       dbms_lob.getlength(j.file_blob) as image,
+                       eduD.GRADUATION_YEAR,
+                       eduD.UNIVERSITY,
+                       eduD.OTHER_EDUCATION_FIELD,
+                       eduL.name as EDUCATION_LEVEL,
+                       eduF.name as EDUCATION_FIELD,
+                       eduG.name as EDUCATION_GRADE
+                  from EDUCATION_DEGREE eduD
+                  join education_level eduL on eduL.id = eduD.EDUCATION_LEVEL
+                  join EDUCATION_FIELD eduF on eduF.id = eduD.EDUCATION_FIELD
+                  join EDUCATION_GRADE eduG on eduG.id = eduD.EDUCATION_GRADE
+                  left join job_application_attachments j
+                           on j.id = eduD.GRADUATION_CERTIFICATE_FILE_ID
+                  where personal_id = :APP_USER_PERS_ID;
+                ```
+        }
+        layout {
+            sequence: 30
+            parentRegion: @educationw
+            slot: wizardSubRegions
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--removeHeader js-removeLandmark
+                t-Region--noBorder
+                t-Region--scrollBody
+                t-Form--stretchInputs
+            ]
+        }
+        advanced {
+            htmlDomId: modern_report
+        }
+        componentAppearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Report--altRowsDefault
+                t-Report--rowHighlight
+            ]
+        }
+
+        column EDUCATION_FIELD (
+            reportColumnQueryId: 10
+            derivedColumn: N
+            heading {
+                heading: Education Field
+                alignment: center
+            }
+            layout {
+                sequence: 170
+                columnAlignment: center
+            }
+        )
+
+        column EDUCATION_GRADE (
+            reportColumnQueryId: 11
+            derivedColumn: N
+            heading {
+                heading: Education Grade
+                alignment: center
+            }
+            layout {
+                sequence: 180
+                columnAlignment: center
+            }
+        )
+
+        column EDUCATION_LEVEL (
+            reportColumnQueryId: 9
+            derivedColumn: N
+            heading {
+                heading: Education Level
+                alignment: center
+            }
+            layout {
+                sequence: 160
+                columnAlignment: center
+            }
+        )
+
+        column EDUD_ID (
+            reportColumnQueryId: 2
+            derivedColumn: N
+            heading {
+                heading: Edud Id
+                alignment: end
+            }
+            layout {
+                sequence: 60
+                columnAlignment: end
+            }
+            config {
+                buildOption: @commented-out
+            }
+        )
+
+        column FILE_NAME (
+            reportColumnQueryId: 4
+            derivedColumn: N
+            heading {
+                heading: File Name
+            }
+            layout {
+                sequence: 70
+            }
+            config {
+                buildOption: @commented-out
+            }
+        )
+
+        column GRADUATION_CERTIFICATE_FILE_ID (
+            reportColumnQueryId: 1
+            derivedColumn: N
+            type: downloadBlob
+            heading {
+                heading: Graduation Certificate File Id
+                alignment: center
+            }
+            layout {
+                sequence: 50
+                columnAlignment: center
+            }
+            blobAttributes {
+                tableName: JOB_APPLICATION_ATTACHMENTS
+                blobColumn: FILE_BLOB
+                primaryKeyColumn1: ID
+                filenameColumn: FILE_NAME
+            }
+            config {
+                buildOption: @commented-out
+            }
+        )
+
+        column GRADUATION_YEAR (
+            reportColumnQueryId: 6
+            derivedColumn: N
+            heading {
+                heading: "&{GRADUATION_YEAR}."
+                alignment: center
+            }
+            layout {
+                sequence: 40
+                columnAlignment: center
+            }
+        )
+
+        column ID (
+            reportColumnQueryId: 3
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 10
+            }
+        )
+
+        column IMAGE (
+            reportColumnQueryId: 5
+            derivedColumn: N
+            type: downloadBlob
+            heading {
+                heading: Image
+                alignment: center
+            }
+            layout {
+                sequence: 190
+                columnAlignment: center
+            }
+            blobAttributes {
+                tableName: JOB_APPLICATION_ATTACHMENTS
+                blobColumn: FILE_BLOB
+                primaryKeyColumn1: ID
+                filenameColumn: FILE_NAME
+            }
+        )
+
+        column OTHER_EDUCATION_FIELD (
+            reportColumnQueryId: 8
+            derivedColumn: N
+            heading {
+                heading: Other Education Field
+                alignment: center
+            }
+            layout {
+                sequence: 200
+                columnAlignment: center
+            }
+        )
+
+        column UNIVERSITY (
+            reportColumnQueryId: 7
+            derivedColumn: N
+            heading {
+                heading: University
+                alignment: center
+            }
+            layout {
+                sequence: 120
+                columnAlignment: center
+            }
+        )
+
+    )
+
+    region personal-lang (
+        name: personal_Lang
+        title: "&{PERSONALLANG}."
+        type: classicReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select app_lang.ID,
+                       lang.name as language,
+                       lang_lev.name as language_Level
+                  from JOB_APPLICATION_LANGUAGE app_lang
+                  join LANGUAGE lang on lang.id = app_lang.LANGUAGE_ID
+                  join LANGUAGE_LEVEL lang_lev on lang_lev.id = app_lang.LANGUAGE_LEVEL_ID
+                  Where Personal_id = :APP_USER_PERS_ID;
+                ```
+        }
+        layout {
+            sequence: 50
+            parentRegion: @educationw
+            slot: wizardSubRegions
+            startNewRow: false
+            newColumn: false
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--removeHeader js-removeLandmark
+                t-Region--noBorder
+                t-Region--scrollBody
+                t-Form--stretchInputs
+            ]
+        }
+        advanced {
+            htmlDomId: modern_report
+        }
+        componentAppearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Report--altRowsDefault
+                t-Report--rowHighlight
+            ]
+        }
+
+        column ID (
+            reportColumnQueryId: 1
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 10
+            }
+        )
+
+        column LANGUAGE (
+            reportColumnQueryId: 2
+            derivedColumn: N
+            heading {
+                heading: "&{LANGUAGE}."
+                alignment: center
+            }
+            layout {
+                sequence: 20
+                columnAlignment: center
+            }
+        )
+
+        column LANGUAGE_LEVEL (
+            reportColumnQueryId: 3
+            derivedColumn: N
+            heading {
+                heading: "&{LANGUAGE_LEVEL}."
+                alignment: center
+            }
+            layout {
+                sequence: 30
+                columnAlignment: center
+            }
+        )
+
+    )
+
+    pageItem P121_EDUCARION_CHECK (
+        type: hidden
+        layout {
+            sequence: 40
+            slot: body
+        }
+    )
+
+    pageItem P121_EDUCATION_FIELD (
+        type: selectList
+        label {
+            label: "&{EDUCATION_FIELD}."
+            alignment: left
+        }
+        lov {
+            type: sharedComponent
+            lov: @education-field-name
+        }
+        layout {
+            sequence: 30
+            region: @education
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        source {
+            formRegion: @education
+            column: EDUCATION_FIELD
+            dataType: number
+        }
+    )
+
+    pageItem P121_EDUCATION_GRADE (
+        type: selectList
+        label {
+            label: "&{EDUCATION_GRADE}."
+            alignment: left
+        }
+        lov {
+            type: sharedComponent
+            lov: @education-grade-name
+        }
+        layout {
+            sequence: 40
+            region: @education
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        source {
+            formRegion: @education
+            column: EDUCATION_GRADE
+            dataType: number
+        }
+    )
+
+    pageItem P121_EDUCATION_LEVEL (
+        type: selectList
+        label {
+            label: "&{EDUCATION_LEVEL}."
+            alignment: left
+        }
+        lov {
+            type: sharedComponent
+            lov: @education-level-name
+        }
+        layout {
+            sequence: 20
+            region: @education
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        source {
+            formRegion: @education
+            column: EDUCATION_LEVEL
+            dataType: number
+        }
+    )
+
+    pageItem P121_GRADUATION_CERTIFICATE (
+        type: fileUpload
+        label {
+            label: "&{GRADUATION_CERTIFICATE}."
+            alignment: left
+        }
+        storage {
+            type: appTempFiles
+        }
+        layout {
+            sequence: 90
+            region: @education
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            width: 60
+        }
+        validation {
+            maxLength: 255
+        }
+        source {
+            formRegion: @education
+            column: GRADUATION_CERTIFICATE
+            dataType: blob
+        }
+    )
+
+    pageItem P121_GRADUATION_YEAR (
+        type: numberField
+        label {
+            label: "&{GRADUATION_YEAR}."
+            alignment: left
+        }
+        layout {
+            sequence: 50
+            region: @education
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 255
+        }
+        source {
+            formRegion: @education
+            column: GRADUATION_YEAR
+            dataType: number
+        }
+    )
+
+    pageItem P121_ID (
+        type: hidden
+        layout {
+            sequence: 10
+            region: @education
+            slot: regionBody
+        }
+        source {
+            formRegion: @education
+            column: ID
+            dataType: number
+            queryOnly: true
+            primaryKey: true
+        }
+        security {
+            sessionStateProtection: checksumRequiredSessionLevel
+        }
+    )
+
+    pageItem P121_LANGUAGE_ID (
+        type: selectList
+        label {
+            label: "&{LANGUAGE}."
+            alignment: left
+        }
+        lov {
+            type: sharedComponent
+            lov: @language-name
+        }
+        layout {
+            sequence: 20
+            region: @language
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        source {
+            formRegion: @language
+            column: LANGUAGE_ID
+            dataType: number
+        }
+    )
+
+    pageItem P121_LANGUAGE_LEVEL_ID (
+        type: selectList
+        label {
+            label: "&{LANGUAGE_LEVEL}."
+            alignment: left
+        }
+        lov {
+            type: sharedComponent
+            lov: @language-level-name
+        }
+        layout {
+            sequence: 30
+            region: @language
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        source {
+            formRegion: @language
+            column: LANGUAGE_LEVEL_ID
+            dataType: number
+        }
+    )
+
+    pageItem P121_LANG_CHECK (
+        type: hidden
+        layout {
+            sequence: 50
+            slot: body
+        }
+    )
+
+    pageItem P121_LANG_ID (
+        type: hidden
+        layout {
+            sequence: 10
+            region: @language
+            slot: regionBody
+        }
+        source {
+            formRegion: @language
+            column: LANG_ID
+            dataType: number
+            primaryKey: true
+        }
+        security {
+            sessionStateProtection: checksumRequiredSessionLevel
+        }
+    )
+
+    pageItem P121_OTHER_EDUCATION_FIELD (
+        type: textField
+        label {
+            label: "&{OTHER_EDUCATION_FIELD}."
+            alignment: left
+        }
+        layout {
+            sequence: 100
+            region: @education
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 255
+        }
+        source {
+            formRegion: @education
+            column: OTHER_EDUCATION_FIELD
+            dataType: varchar2
+        }
+    )
+
+    pageItem P121_PERSONAL_ID (
+        type: hidden
+        layout {
+            sequence: 60
+            region: @language
+            slot: regionBody
+        }
+        source {
+            formRegion: @language
+            column: PERSONAL_ID
+            dataType: number
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P121_PERSONAL_ID
+        }
+    )
+
+    pageItem P121_UNIVERSITY (
+        type: textField
+        label {
+            label: "&{UNIVERSITY}."
+            alignment: left
+        }
+        layout {
+            sequence: 70
+            region: @education
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: [
+                #DEFAULT#
+                t-Form-fieldContainer--stretchInputs
+            ]
+            width: 60
+        }
+        validation {
+            maxLength: 500
+        }
+        source {
+            formRegion: @education
+            column: UNIVERSITY
+            dataType: varchar2
+        }
+    )
+
+    button add (
+        buttonName: Add
+        label: "&{ADD_EDUCATION}."
+        layout {
+            sequence: 10
+            region: @personal-education
+            slot: create
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+            icon: fa-chevron-right
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 109
+            }
+            warnOnUnsavedChanges: doNotCheck
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    button cancel (
+        buttonName: CANCEL
+        label: "&{CANCEL}."
+        layout {
+            sequence: 10
+            region: @education
+            slot: close
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 1
+            }
+            warnOnUnsavedChanges: doNotCheck
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    button langsave (
+        buttonName: LangSave
+        label: "&{ADD}."
+        layout {
+            sequence: 10
+            region: @language
+            slot: create
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: [
+                #DEFAULT#
+                t-Button--stretch
+            ]
+            icon: fa-chevron-right
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: insert
+        }
+    )
+
+    button next (
+        buttonName: NEXT_2
+        label: "&{NEXT}."
+        layout {
+            sequence: 10
+            region: @educationw
+            slot: next
+        }
+        appearance {
+            buttonTemplate: @/text-with-icon
+            hot: true
+            templateOptions: t-Button--iconRight
+            icon: fa-chevron-right
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P121_EDUCARION_CHECK
+        }
+    )
+
+    button next-2 (
+        buttonName: NEXT
+        label: "&{ADD}."
+        layout {
+            sequence: 10
+            region: @education
+            slot: create
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+            icon: fa-chevron-right
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+        }
+    )
+
+    button previous (
+        buttonName: PREVIOUS
+        label: "&{PREVIOUS}."
+        layout {
+            sequence: 20
+            region: @educationw
+            slot: previous
+        }
+        appearance {
+            buttonTemplate: @/icon
+            templateOptions: #DEFAULT#
+            icon: fa-chevron-left
+        }
+        behavior {
+            executeValidations: false
+            warnOnUnsavedChanges: doNotCheck
+        }
+    )
+
+    button skip-for-now (
+        buttonName: Skip_For_Now
+        label: "&{SKIP_FOR_NOW}."
+        layout {
+            sequence: 10
+            region: @education
+            slot: edit
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: [
+                #DEFAULT#
+                t-Button--warning
+            ]
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 104
+                action: clearRegions
+            }
+            warnOnUnsavedChanges: doNotCheck
+        }
+    )
+
+    dynamicAction other-field (
+        name: other_field
+        execution {
+            sequence: 10
+        }
+        when {
+            selectionType: items
+            items: P121_EDUCATION_FIELD
+        }
+        clientSideCondition {
+            type: item=value
+            item: P121_EDUCATION_FIELD
+            value: 59
+        }
+
+        action native-hide (
+            action: hide
+            affectedElements {
+                selectionType: items
+                items: P121_OTHER_EDUCATION_FIELD
+            }
+            execution {
+                sequence: 10
+                fireWhenEventResultIs: false
+            }
+        )
+
+        action native-show (
+            action: show
+            affectedElements {
+                selectionType: items
+                items: P121_OTHER_EDUCATION_FIELD
+            }
+            execution {
+                sequence: 10
+            }
+        )
+
+    )
+
+    dynamicAction other-field_1 (
+        name: other_field2
+        execution {
+            sequence: 20
+        }
+        when {
+            selectionType: items
+            items: P121_EDUCATION_FIELD
+        }
+        clientSideCondition {
+            type: item=value
+            item: P121_EDUCATION_FIELD
+            value: 31
+        }
+
+        action native-hide (
+            action: hide
+            affectedElements {
+                selectionType: items
+                items: P121_OTHER_EDUCATION_FIELD
+            }
+            execution {
+                sequence: 10
+                fireWhenEventResultIs: false
+            }
+        )
+
+        action native-show (
+            action: show
+            affectedElements {
+                selectionType: items
+                items: P121_OTHER_EDUCATION_FIELD
+            }
+            execution {
+                sequence: 10
+            }
+        )
+
+    )
+
+    validation edu-filed-val (
+        name: edu_filed_val
+        execution {
+            sequence: 40
+        }
+        validation {
+            type: itemIsNotNull
+            item: P121_EDUCATION_FIELD
+        }
+        error {
+            errorMessage: "&{YOUR_EDUCATION_IS_REQUIRED}."
+        }
+        serverSideCondition {
+            whenButtonPressed: @next-2
+        }
+    )
+
+    validation edu-level-val (
+        name: edu_level_val
+        execution {
+            sequence: 30
+        }
+        validation {
+            type: itemIsNotNull
+            item: P121_EDUCATION_LEVEL
+        }
+        error {
+            errorMessage: "&{YOUR_EDUCATION_IS_REQUIRED}."
+        }
+        serverSideCondition {
+            whenButtonPressed: @next-2
+        }
+    )
+
+    validation grad-grade (
+        name: grad_grade
+        execution {
+            sequence: 60
+        }
+        validation {
+            type: itemIsNotNull
+            item: P121_EDUCATION_GRADE
+        }
+        error {
+            errorMessage: "&{FIELD_IS_REQUIRED}."
+        }
+        serverSideCondition {
+            whenButtonPressed: @next-2
+        }
+    )
+
+    validation grad-year-val (
+        name: grad_year_val
+        execution {
+            sequence: 50
+        }
+        validation {
+            type: itemIsNotNull
+            item: P121_GRADUATION_YEAR
+        }
+        error {
+            errorMessage: "&{FIELD_IS_REQUIRED}."
+        }
+        serverSideCondition {
+            whenButtonPressed: @next-2
+        }
+    )
+
+    validation lang-chec-val (
+        name: Lang_chec_val
+        execution {
+            sequence: 90
+        }
+        validation {
+            plsqlExpression: :P121_LANG_CHECK > 0
+        }
+        error {
+            errorMessage: "&{YOU_MUST_ADD_LANGUAGE_FIRST}."
+        }
+        serverSideCondition {
+            whenButtonPressed: @next
+        }
+    )
+
+    validation lang-level-val (
+        name: lang_level_val
+        execution {
+            sequence: 110
+        }
+        validation {
+            type: itemIsNotNull
+            item: P121_LANGUAGE_LEVEL_ID
+        }
+        error {
+            errorMessage: "&{LANGUAGE_IS_REQUIRED}."
+        }
+        serverSideCondition {
+            whenButtonPressed: @langsave
+        }
+    )
+
+    validation lang-val (
+        name: lang_val
+        execution {
+            sequence: 100
+        }
+        validation {
+            type: itemIsNotNull
+            item: P121_LANGUAGE_ID
+        }
+        error {
+            errorMessage: "&{LANGUAGE_IS_REQUIRED}."
+        }
+        serverSideCondition {
+            whenButtonPressed: @langsave
+        }
+    )
+
+    validation next-validation (
+        name: Next Validation
+        execution {
+            sequence: 20
+        }
+        validation {
+            type: itemIsNotZero
+            item: P121_EDUCATION_CHECK
+        }
+        error {
+            errorMessage: "&{YOU_MUST_ADD_EDUCATION_FIRST}."
+        }
+        serverSideCondition {
+            whenButtonPressed: @next-2
+        }
+    )
+
+    validation not-greater-than-today (
+        name: not greater than today
+        execution {
+            sequence: 80
+        }
+        validation {
+            type: functionBodyReturningBoolean
+            plsqlFunctionBody:
+                ```plsql
+                DECLARE
+                    v_year NUMBER := EXTRACT(YEAR FROM SYSDATE);
+                BEGIN
+                    RETURN :P121_GRADUATION_YEAR <= v_year;
+                END;
+                ```
+        }
+        error {
+            errorMessage: "&{THIS_IS_INVALID_YEAR}."
+            associatedItem: @P121_GRADUATION_YEAR
+        }
+    )
+
+    validation universty (
+        name: universty
+        execution {
+            sequence: 70
+        }
+        validation {
+            type: itemIsNotNull
+            item: P121_UNIVERSITY
+        }
+        error {
+            errorMessage: "&{FIELD_IS_REQUIRED}."
+        }
+        serverSideCondition {
+            whenButtonPressed: @next-2
+        }
+    )
+
+    process check-edu-person (
+        name: Check_EDU_Person
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                BEGIN
+                
+                    SELECT 1
+                    INTO :P121_EDUCARION_CHECK
+                    FROM education_degree
+                    WHERE personal_id = :APP_USER_PERS_ID
+                    FETCH FIRST 1 ROW ONLY;
+                
+                EXCEPTION
+                    WHEN NO_DATA_FOUND THEN
+                        :P121_EDUCARION_CHECK := 0;
+                END;
+                ```
+        }
+        execution {
+            sequence: 10
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 350836844598505948
+        }
+    )
+
+    process check-lang (
+        name: Check_lang
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                BEGIN
+                
+                    SELECT count(*)
+                    INTO :P121_LANG_CHECK
+                    FROM JOB_APPLICATION_LANGUAGE
+                    WHERE personal_id = :APP_USER_PERS_ID;
+                
+                EXCEPTION
+                    WHEN NO_DATA_FOUND THEN
+                        :P121_LANG_CHECK := NULL;
+                END;
+                ```
+        }
+        execution {
+            sequence: 30
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 352456316023679499
+        }
+    )
+
+    process logout-process (
+        name: logout Process
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                    APEX_UTIL.SET_SESSION_STATE('APP_USER_ACC_ID', NULL);
+                    APEX_UTIL.SET_SESSION_STATE('APP_USER_PERS_ID', NULL);
+                    -- apex_authentication.logout;
+                end;
+                ```
+        }
+        execution {
+            sequence: 50
+        }
+        advanced {
+            executionMappingIdentifier: 22279767641130180
+        }
+        serverSideCondition {
+            type: request=Value
+            value: LOGOUT
+        }
+    )
+
+    process process-form-language (
+        name: Process form Language
+        type: formAutoRowProcessing
+        formRegion: @language
+        execution {
+            sequence: 40
+        }
+        advanced {
+            executionMappingIdentifier: 352466252699701426
+        }
+        serverSideCondition {
+            whenButtonPressed: @langsave
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    process save-and-add (
+        name: save and add
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                    user_personal_info_pkg.save_education_degree(:P121_EDUCATION_LEVEL, :P121_EDUCATION_FIELD,
+                    :P121_GRADUATION_YEAR, :P121_EDUCATION_GRADE, :P121_UNIVERSITY, :P121_OTHER_EDUCATION_FIELD,
+                    :APP_USER_PERS_ID, :P121_GRADUATION_CERTIFICATE);
+                
+                END;
+                ```
+        }
+        execution {
+            sequence: 20
+        }
+        successMessage {
+            successMessage: "&{THE_EDUCATION_ADDED}."
+        }
+        advanced {
+            executionMappingIdentifier: 350839902378514775
+        }
+        serverSideCondition {
+            whenButtonPressed: @next-2
+        }
+    )
+
+    process save-and-add-2 (
+        name: save and add_1
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                
+                
+                    insert into JOB_APPLICATION_LANGUAGE(LANGUAGE_ID, LANGUAGE_LEVEL_ID, PERSONAL_ID)
+                    values(:P121_LANGUAGE_ID, :P121_LANGUAGE_LEVEL_ID, :APP_USER_PERS_ID);
+                
+                
+                END;
+                ```
+        }
+        execution {
+            sequence: 30
+        }
+        successMessage {
+            successMessage: THE LANGUAGE ADDED
+        }
+        advanced {
+            executionMappingIdentifier: 352051948146205047
+        }
+        serverSideCondition {
+            whenButtonPressed: @langsave
+        }
+    )
+
+    branch (
+        name: logout process
+        execution {
+            sequence: 40
+        }
+        behavior {
+            target: {
+                page: 9999
+            }
+        }
+        serverSideCondition {
+            type: request=Value
+            value: LOGOUT
+        }
+    )
+
+    branch (
+        name: Go To Page 122
+        execution {
+            sequence: 30
+        }
+        behavior {
+            target: {
+                page: 123
+            }
+        }
+        serverSideCondition {
+            whenButtonPressed: @next
+            type: itemIsNotZero
+            item: P121_EDUCARION_CHECK
+        }
+    )
+
+    branch (
+        name: Go To Page 119
+        execution {
+            sequence: 10
+            point: validating
+        }
+        behavior {
+            target: {
+                page: 119
+            }
+        }
+        serverSideCondition {
+            whenButtonPressed: @previous
+        }
+    )
+
+    branch (
+        name: Go To Page 122
+        execution {
+            sequence: 20
+        }
+        behavior {
+            target: {
+                page: 122
+            }
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+)

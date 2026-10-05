@@ -1,0 +1,540 @@
+page 202 (
+    name: Dashboard
+    alias: DASHBOARD
+    title: "&{DASHBOARD}."
+    appearance {
+        pageTemplate: @/standard
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    javaScript {
+        executeWhenPageLoads:
+            ```javascript-browser
+            // setTimeout(function () {
+            //   window.dispatchEvent(new Event('resize'));
+            // }, 500);
+            ```
+    }
+    css {
+        inline:
+            ```css
+            /* From Uiverse.io by alexruix */ 
+            .dashboard-body{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 400px;
+            }
+            .card {
+             width: 30%;
+             height: 260px;
+             border-radius: 20px;
+             background: #f5f5f5;
+             position: relative;
+             padding: 1.8rem;
+             border: 2px solid #c3c6ce;
+             transition: 0.5s ease-out;
+             overflow: hidden;
+             margin: 0 80px;
+             /* margin-bottom: 20px; */
+            }
+            
+            .card-details {
+             color: black;
+             height: 100%;
+             gap: .5em;
+             display: grid;
+             place-content:start;
+            }
+            
+            .card-button {
+             transform: translate(-50%, 125%);
+             text-align: center;
+             width: 60%;
+             border-radius: 1rem;
+             border: none;
+             /* background-color: #008bf8; */
+             background-color : var(--careers-primary-color);
+             color: #fff;
+             font-size: 1rem;
+             padding: .5rem 1rem;
+             position: absolute;
+             left: 50%;
+             bottom: 0;
+             opacity: 0;
+             transition: 0.3s ease-out;
+            }
+            
+            .text-body {
+             color: rgb(122, 120, 120);
+             font-size: 18px;
+            }
+            .text-body span {
+                /* color: #008bf8; */
+                color: var(--careers-primary-color) ;
+            }
+            
+            /*Text*/
+            .text-title {
+             font-size: 1.5em;
+             font-weight: bold;
+            }
+            
+            /*Hover*/
+            .card:hover {
+             border-color: var(--careers-primary-color);
+             box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+            }
+            
+            .card:hover .card-button {
+             transform: translate(-50%, -30%);
+             opacity: 1;
+            }
+            
+            
+            
+            /* Make the row that contains both charts full width */
+            .t-Body-contentInner .row:has(#applications_chart),
+            .t-Body-contentInner .row:has(#vacancies_chart) {
+              width: 100% !important;
+              max-width: 100% !important;
+              display: flex !important;
+              flex-wrap: wrap !important;
+            }
+            
+            /* Make each chart column exactly half of the full row */
+            .t-Body-contentInner .col:has(#applications_chart),
+            .t-Body-contentInner .col:has(#vacancies_chart) {
+              flex: 0 0 50% !important;
+              width: 50% !important;
+              max-width: 50% !important;
+            }
+            
+            /* Make the regions fill their columns */
+            #applications_chart,
+            #vacancies_chart {
+              width: 100% !important;
+              height: 520px !important;
+            }
+            
+            /* Same body height */
+            #applications_chart .t-Region-body,
+            #vacancies_chart .t-Region-body {
+              height: 500px !important;
+            }
+            
+            /* Same chart height and full chart width */
+            #applications_chart .oj-chart,
+            #vacancies_chart .oj-chart {
+              width: 100% !important;
+              height: 420px !important;
+            }
+            ```
+    }
+    security {
+        authorizationScheme: @admin-schema
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region breadcrumb (
+        name: Breadcrumb
+        title: "&{BREADCRUMB}."
+        type: breadcrumb
+        source {
+            breadcrumb: @breadcrumb
+        }
+        layout {
+            sequence: 10
+            slot: breadcrumbBar
+        }
+        appearance {
+            template: @/title-bar
+            templateOptions: [
+                #DEFAULT#
+                t-BreadcrumbRegion--useBreadcrumbTitle
+            ]
+        }
+        componentAppearance {
+            breadcrumbTemplate: @/breadcrumb
+            templateOptions: #DEFAULT#
+        }
+    )
+
+    region careers (
+        name: Careers
+        title: "&{CAREERS_1}."
+        type: dynamicContent
+        source {
+            plsqlFunctionBody:
+                ```plsql
+                DECLARE
+                
+                    total_app number;
+                    recent_app number;
+                    archived_app number;
+                    total_vacancies number;
+                    open_vacancy number;
+                    archived_vacancy number;
+                    v_result CLOB;
+                BEGIN
+                    -- SELECT COUNT(*)
+                    -- INTO total_app
+                    -- FROM Job_Application;
+                
+                    -- SELECT COUNT(*)
+                    -- INTO recent_app
+                    -- FROM Job_Application
+                    -- WHERE CREATION_DATE > (SYSDATE - 60);
+                    
+                    -- SELECT COUNT(*)
+                    -- INTO archived_app
+                    -- FROM Job_Application
+                    -- WHERE IS_ARCHIVED = 1;
+                
+                    SELECT 
+                    COUNT(*) AS total_app,
+                    SUM(CASE 
+                            WHEN date_time > (SYSDATE - 60) 
+                            THEN 1 
+                            ELSE 0 
+                        END) AS recent_app,
+                    SUM(CASE 
+                            WHEN IS_ARCHIVED = 1 
+                            THEN 1 
+                            ELSE 0 
+                        END) AS archived_app
+                INTO 
+                    total_app,
+                    recent_app,
+                    archived_app
+                FROM Job_vacancy_Application;
+                    
+                    -- SELECT COUNT(*)
+                    -- INTO total_vacancies
+                    -- FROM Job_Vacancy;
+                    
+                    -- SELECT COUNT(*)
+                    -- INTO open_vacancy
+                    -- FROM Job_Vacancy
+                    -- WHERE IS_ARCHIVED = 0;
+                    
+                    -- SELECT COUNT(*)
+                    -- INTO archived_vacancy
+                    -- FROM Job_Vacancy
+                    -- WHERE IS_ARCHIVED = 1;
+                
+                    SELECT COUNT(*) AS total_vacancies,
+                            SUM(
+                                CASE
+                                WHEN IS_ARCHIVED = 0 
+                                 THEN 1
+                                 ELSE 0
+                                END 
+                            ) AS open_vacancy,
+                            SUM(
+                                CASE
+                                WHEN IS_ARCHIVED = 1
+                                 THEN 1
+                                 ELSE 0
+                                END 
+                            ) AS archived_vacancy
+                            INTO total_vacancies,open_vacancy,archived_vacancy
+                            FROM Job_Vacancy;
+                
+                
+                    v_result := '<div class="dashboard-body">
+                                    <div class="card">
+                                    <div class="card-details">
+                                        <p class="text-title">Applications:</p>
+                                        <p class="text-body">Total Applications: <span> '|| TO_CHAR(total_app)||'</span></p>
+                                        <p class="text-body">New Applications: <span> '|| TO_CHAR(recent_app)||'</span></p>
+                                        <p class="text-body">Archived Applications: <span> '|| TO_CHAR(archived_app)||'</span></p>
+                                        </div>
+                                    <a class="card-button"
+                                    href="f?p='||:APP_ID||':203:'||:SESSION||'">All Applications</a>
+                                    </div>' || '
+                                    <div class="card">
+                                    <div class="card-details">
+                                        <p class="text-title">Available Vacancies:</p>
+                                        <p class="text-body">Total Vacancies:<span> '|| TO_CHAR(total_vacancies)||'</span></p>
+                                        <p class="text-body">Open Vacancies: <span> '|| TO_CHAR(open_vacancy)||'</span></p>
+                                        <p class="text-body">Archived Vacancies: <span> '|| TO_CHAR(archived_vacancy)||'</span></p>
+                                        </div>
+                                    
+                                        <a class="card-button" href="f?p='||:APP_ID||':204:'||:SESSION||'">All Vacancies</a>
+                                                          
+                                    
+                                </div>';
+                    return v_result;
+                
+                
+                
+                END;
+                ```
+        }
+        layout {
+            sequence: 40
+            slot: body
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--removeHeader js-removeLandmark
+                t-Region--scrollBody
+            ]
+        }
+    )
+
+    region new (
+        name: Applications
+        type: chart
+        layout {
+            sequence: 50
+            slot: body
+            columnSpan: 6
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        advanced {
+            htmlDomId: applications_chart
+        }
+        chartLayout {
+            height: 400
+        }
+
+        series new (
+            name: recent app
+            execution {
+                sequence: 20
+            }
+            source {
+                type: sqlQuery
+                sqlQuery:
+                    ```sql
+                    SELECT 
+                        
+                        SUM(CASE 
+                                WHEN CREATION_DATE > (SYSDATE - 60) 
+                                THEN 1 
+                                ELSE 0 
+                            END) AS recent_app
+                        
+                    FROM Job_Application;
+                    ```
+            }
+            columnMapping {
+                seriesName: RECENT_APP
+                label: RECENT_APP
+                value: RECENT_APP
+            }
+        )
+
+        series new-1 (
+            name: total app
+            execution {
+                sequence: 10
+            }
+            source {
+                type: sqlQuery
+                sqlQuery:
+                    ```sql
+                    SELECT 
+                        COUNT(*) AS total_app
+                        
+                    FROM Job_Vacancy_Application;
+                    ```
+            }
+            columnMapping {
+                seriesName: TOTAL_APP
+                label: TOTAL_APP
+                value: TOTAL_APP
+            }
+        )
+
+        series new-2 (
+            name: archived app
+            execution {
+                sequence: 30
+            }
+            source {
+                type: sqlQuery
+                sqlQuery:
+                    ```sql
+                    SELECT 
+                        
+                        SUM(CASE 
+                                WHEN IS_ARCHIVED = 1 
+                                THEN 1 
+                                ELSE 0 
+                            END) AS archived_app
+                    
+                    FROM Job_Application;
+                    ```
+            }
+            columnMapping {
+                seriesName: ARCHIVED_APP
+                label: ARCHIVED_APP
+                value: ARCHIVED_APP
+            }
+        )
+
+        axis x (
+            name: x
+        )
+
+        axis y (
+            name: y
+            value {
+                format: decimal
+                decimalPlaces: 0
+                formatScaling: none
+            }
+        )
+
+    )
+
+    region vacancies (
+        name: Vacancies
+        type: chart
+        layout {
+            sequence: 60
+            slot: body
+            startNewRow: false
+            columnSpan: 6
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        advanced {
+            htmlDomId: vacancies_chart
+        }
+        chartLayout {
+            height: 400
+        }
+
+        series archived-vacancies (
+            name: Archived Vacancies
+            execution {
+                sequence: 30
+            }
+            source {
+                type: sqlQuery
+                sqlQuery:
+                    ```sql
+                    
+                        SELECT COUNT(*)
+                        
+                        FROM Job_Vacancy
+                        WHERE IS_ARCHIVED = 1;
+                    ```
+            }
+            columnMapping {
+                seriesName: COUNT(*)
+                label: COUNT(*)
+                value: COUNT(*)
+            }
+        )
+
+        series open-vacancies (
+            name: Open Vacancies
+            execution {
+                sequence: 20
+            }
+            source {
+                type: sqlQuery
+                sqlQuery:
+                    ```sql
+                    
+                        SELECT COUNT(*)
+                     
+                        FROM Job_Vacancy
+                        WHERE IS_ARCHIVED = 0;
+                        
+                        
+                    ```
+            }
+            columnMapping {
+                seriesName: COUNT(*)
+                label: COUNT(*)
+                value: COUNT(*)
+            }
+        )
+
+        series total-vacancies (
+            name: Total Vacancies
+            execution {
+                sequence: 10
+            }
+            source {
+                type: sqlQuery
+                sqlQuery:
+                    ```sql
+                    SELECT COUNT(*)
+                        
+                        FROM Job_Vacancy;
+                        
+                        
+                    ```
+            }
+            columnMapping {
+                seriesName: COUNT(*)
+                label: COUNT(*)
+                value: COUNT(*)
+            }
+        )
+
+        axis x (
+            name: x
+        )
+
+        axis y (
+            name: y
+            value {
+                format: decimal
+                decimalPlaces: 0
+                formatScaling: none
+            }
+        )
+
+    )
+
+    pageItem P202_NEW (
+        type: selectList
+        label {
+            label: New
+            alignment: left
+        }
+        lov {
+            type: staticValues
+            staticValues: STATIC:1;Return1,2;Return2,3,4,5,6,7,8,9,10
+        }
+        layout {
+            sequence: 20
+            slot: body
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+)

@@ -23,10 +23,11 @@ function Invoke-Sqlcl {
   }
 
   # Start-Process joins -ArgumentList with spaces and does not quote, so any
-  # argument holding a space (a repository path, most often) must be quoted
-  # here or SQLcl receives it as several arguments.
+  # argument holding a space (a repository path, most often) or wildcard
+  # characters (*, ?) must be quoted here so the Windows CRT does not expand
+  # wildcards against the working directory.
   $quoted = @($Arguments | ForEach-Object {
-    if ($_ -match '\s') { '"' + $_ + '"' } else { $_ }
+    if ($_ -match '[\s*?]') { '"' + $_ + '"' } else { $_ }
   })
 
   $process = Start-Process -FilePath "sql" -ArgumentList $quoted `

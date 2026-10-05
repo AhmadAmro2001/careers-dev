@@ -172,3 +172,16 @@ Add lessons below only when the evidence supports them.
 - Verification: `scripts/test_template.sh` asserts nine `NOT LIKE 'BIN$%'`
   predicates, the `dropped = 'NO'` column filter, and that the guard names the
   objects it refuses.
+
+### Quote wildcard characters in native Windows argument lists to prevent CRT glob expansion
+
+- Trigger: running `scripts/backup_db.ps1` with `TABLES_PREFIXES=*` on Windows.
+- Evidence: `Invoke-Sqlcl` used `Start-Process` which only quoted arguments
+  containing whitespace. Passing an unquoted `*` caused the Windows C runtime
+  (CRT) in the child process to expand `*` into matching file/directory names in
+  the current working directory (e.g. `database`), passing `arg5=database` instead
+  of `arg5=*` to SQLcl and resulting in 0 tables/code objects being exported.
+- Preferred behavior: quote arguments matching `[\s*?]` in `Invoke-Sqlcl` so
+  wildcards are preserved literally across the process boundary.
+- Verification: executing `scripts/backup_db.ps1` with `PREFIXES=*` correctly
+  passes `*` and exports all schema objects into `database/<SCHEMA>/`.

@@ -1,0 +1,539 @@
+page 126 (
+    name: Edit Applications
+    alias: EDIT-APPLICATIONS
+    title: "&{EDIT_APPLICATIONS}."
+    appearance {
+        pageMode: modalDialog
+        dialogTemplate: @/modal-dialog
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    css {
+        inline:
+            ```css
+            /* ========================================================== */
+            /* 1. STANDARD FORM FIELDS (TEXT, TEL, EMAIL, SELECT, ETC.)    */
+            /* ========================================================== */
+            
+            .t-Form-fieldContainer input[type="text"],
+            .t-Form-fieldContainer input[type="tel"],
+            .t-Form-fieldContainer input[type="email"],
+            .t-Form-fieldContainer input[type="date"],
+            .t-Form-fieldContainer textarea,
+            .t-Form-fieldContainer select.selectlist,
+            .apex-item-text,
+            .apex-item-textarea,
+            .apex-item-select {
+                background-color: rgba(231, 231, 231, 0.733) !important; /* Light blue color */
+                border-radius: 10px !important; /* Consistent 10px roundness */
+                border: 1px solid #cbd5e1 !important;
+                transition: all 0.3s ease !important;
+            }
+            
+            
+            
+            /* Hover Effect for Standard Fields */
+            .t-Form-fieldContainer input[type="text"]:hover,
+            .t-Form-fieldContainer input[type="tel"]:hover,
+            .t-Form-fieldContainer input[type="email"]:hover,
+            .t-Form-fieldContainer input[type="date"]:hover,
+            .t-Form-fieldContainer textarea:hover,
+            .t-Form-fieldContainer select.selectlist:hover,
+            .apex-item-text:hover,
+            .apex-item-textarea:hover,
+            .apex-item-select:hover {
+                border-color: #0563bb !important;
+                background-color: #f8fafc !important; 
+            }
+            
+            /* Focus Effect */
+            .apex-item-text:focus,
+            .apex-item-textarea:focus,
+            .apex-item-select:focus {
+                border-color: #024486 !important;
+                box-shadow: 0 0 0 3px rgba(5, 99, 187, 0.15) !important;
+                outline: none !important;
+            }
+            
+            /* File Upload Button */
+            .apex-item-file {
+                border-radius: 10px !important;
+                transition: all 0.3s ease !important;
+            }
+            .apex-item-file:hover {
+                border-color: #0563bb !important;
+                background-color: #f8fafc !important;
+            }
+            
+            
+            /* ========================================================== */
+            /* 2. DATE PICKER UNIFICATION (INPUT + CALENDAR ICON)          */
+            /* ========================================================== */
+            
+            /* Lock input text container and icon button together tightly without affecting the label */
+            .apex-item-group--datepicker,
+            .apex-item-group.apex-item-group--file {
+                display: inline-flex !important;
+                width: 100% !important;
+                align-items: stretch !important;
+                gap: 0 !important;
+            }
+            
+            /* Left side of the date component (Text Field) */
+            .apex-item-group--datepicker input.apex-item-text,
+            input.apex-item-datepicker {
+                background-color: rgb(232, 244, 255) !important;
+                border-top-left-radius: 10px !important;
+                border-bottom-left-radius: 10px !important;
+                border-top-right-radius: 0px !important;
+                border-bottom-right-radius: 0px !important;
+                border-right: none !important; 
+            }
+            
+            /* Right side of the date component (Calendar Button) */
+            .apex-item-group--datepicker .a-Button--calendar,
+            .apex-item-group--datepicker .apex-item-datepicker-btn,
+            .a-Button--calendar {
+                border-top-left-radius: 0px !important;
+                border-bottom-left-radius: 0px !important;
+                border-top-right-radius: 10px !important; /* Perfectly matches the 10px layout roundness */
+                border-bottom-right-radius: 10px !important;
+                border: 1px solid #cbd5e1 !important;
+                border-left: 1px solid #cbd5e1 !important; 
+                background-color: #ffffff !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                box-shadow: none !important;
+            }
+            
+            /* Grouped Hover Actions for Date Picker */
+            .apex-item-group--datepicker:hover input,
+            .apex-item-group--datepicker:hover .a-Button--calendar {
+                border-color: #0563bb !important;
+            }
+            
+            .apex-item-group--datepicker:hover input {
+                background-color: #f8fafc !important;
+            }
+            
+            /* Grouped Focus Actions for Date Picker */
+            .apex-item-group--datepicker input:focus,
+            .apex-item-group--datepicker input:focus + button {
+                border-color: #024486 !important;
+            }
+            
+            .t-Form-fieldContainer input[type="date"],
+            .apex-item-text.apex-item-datepicker {
+                border-radius: 10px 0 0 10px !important;
+            }
+            
+            /* Calendar Button */
+            .a-Button.a-Button--calendar,
+            .ui-datepicker-trigger {
+                border-radius: 0 10px 10px 0 !important;
+            }
+            
+            
+            /* Target the Floating Label wrapper container to unify the background color */
+            .t-Form-fieldContainer--floatingLabel .t-Form-inputContainer,
+            .t-Form-fieldContainer--floatingLabel .apex-item-wrapper {
+                background-color: rgb(232, 244, 255) !important;
+                border-radius: 10px !important;
+            }
+            
+            /* Ensure the floating label itself doesn't keep a white background block when resting */
+            .t-Form-fieldContainer--floatingLabel .t-Form-label {
+                background-color: transparent !important;
+            }
+            
+            .t-Form-fieldContainer--floatingLabel:hover .t-Form-inputContainer,
+            .t-Form-fieldContainer--floatingLabel:hover .apex-item-wrapper {
+                background-color: #f8fafc !important; 
+            }
+            
+            
+            /* Target the APEX input wrapper container specifically for Select Lists */
+            .t-Form-fieldContainer--floatingLabel .t-Form-inputContainer:has(.apex-item-select),
+            .t-Form-fieldContainer--floatingLabel .t-Form-itemWrapper:has(.apex-item-select) {
+                background-color: rgb(232, 244, 255) !important;
+                border-radius: 10px !important;
+            }
+            
+            /* Force the floating text label backdrop to become completely transparent */
+            .t-Form-fieldContainer--floatingLabel .t-Form-labelContainer .t-Form-label,
+            .t-Form-fieldContainer--floatingLabel .t-Form-inputContainer .t-Form-label {
+                background-color: transparent !important;
+            }
+            
+            /* Handle Hover transitions smoothly for the entire select box area */
+            .t-Form-fieldContainer--floatingLabel:hover .t-Form-inputContainer:has(.apex-item-select),
+            .t-Form-fieldContainer--floatingLabel:hover .t-Form-itemWrapper:has(.apex-item-select) {
+                background-color: #f8fafc !important;
+            }
+            ```
+    }
+    security {
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region buttons (
+        name: Buttons
+        title: "&{BUTTONS}."
+        type: staticContent
+        layout {
+            sequence: 20
+            slot: dialogFooter
+        }
+        appearance {
+            template: @/buttons-container
+            templateOptions: #DEFAULT#
+        }
+        settings {
+            outputAs: text
+        }
+    )
+
+    region edit-applications (
+        name: Edit Applications
+        title: "&{EDIT_APPLICATIONS}."
+        type: form
+        source {
+            location: localDatabase
+            tableName: JOB_VACANCY_APPLICATION
+        }
+        layout {
+            sequence: 10
+            slot: contentBody
+        }
+        appearance {
+            template: @/blank-with-attributes
+            templateOptions: #DEFAULT#
+        }
+        edit {
+            enabled: true
+            allowedOperations: [
+                add
+                update
+                delete
+            ]
+        }
+    )
+
+    pageItem P126_APPLICATION_ID (
+        type: hidden
+        layout {
+            sequence: 30
+            region: @edit-applications
+            slot: regionBody
+        }
+        source {
+            formRegion: @edit-applications
+            column: APPLICATION_ID
+            dataType: number
+        }
+    )
+
+    pageItem P126_DATE_TIME (
+        type: datePicker
+        label {
+            label: "&{DATE_TIME}."
+            alignment: left
+        }
+        layout {
+            sequence: 50
+            region: @edit-applications
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 255
+        }
+        source {
+            formRegion: @edit-applications
+            column: DATE_TIME
+            dataType: date
+        }
+    )
+
+    pageItem P126_ID (
+        type: hidden
+        layout {
+            sequence: 10
+            region: @edit-applications
+            slot: regionBody
+        }
+        source {
+            formRegion: @edit-applications
+            column: ID
+            dataType: number
+            queryOnly: true
+            primaryKey: true
+        }
+        security {
+            sessionStateProtection: checksumRequiredSessionLevel
+        }
+    )
+
+    pageItem P126_IS_ARCHIVED (
+        type: numberField
+        label {
+            label: "&{IS_ARCHIVED}."
+            alignment: left
+        }
+        layout {
+            sequence: 40
+            region: @edit-applications
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            valueRequired: true
+            maxLength: 255
+        }
+        source {
+            formRegion: @edit-applications
+            column: IS_ARCHIVED
+            dataType: number
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    pageItem P126_VACANCY_ID (
+        type: selectList
+        label {
+            label: "&{VACANCY}."
+            alignment: left
+        }
+        lov {
+            type: sharedComponent
+            lov: @job-vacancy-title
+        }
+        layout {
+            sequence: 20
+            region: @edit-applications
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @edit-applications
+            column: VACANCY_ID
+            dataType: number
+        }
+    )
+
+    button cancel (
+        buttonName: CANCEL
+        label: "&{CANCEL}."
+        layout {
+            sequence: 10
+            region: @buttons
+            slot: close
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            action: definedByDynamicAction
+        }
+    )
+
+    button create (
+        buttonName: CREATE
+        label: "&{CREATE}."
+        layout {
+            sequence: 40
+            region: @buttons
+            slot: next
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: insert
+        }
+        serverSideCondition {
+            type: itemIsNull
+            item: P126_ID
+        }
+    )
+
+    button delete (
+        buttonName: DELETE
+        label: "&{DELETE}."
+        layout {
+            sequence: 10
+            region: @buttons
+            slot: next
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: [
+                #DEFAULT#
+                t-Button--danger
+            ]
+        }
+        behavior {
+            executeValidations: false
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: delete
+            requiresConfirmation: true
+        }
+        confirmation {
+            message: &APP_TEXT$DELETE_MSG!RAW.
+            style: danger
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P126_ID
+        }
+    )
+
+    button save (
+        buttonName: SAVE
+        label: "&{APPLY_CHANGES}."
+        layout {
+            sequence: 30
+            region: @buttons
+            slot: next
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: update
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P126_ID
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    dynamicAction cancel-dialog (
+        name: Cancel Dialog
+        execution {
+            sequence: 10
+        }
+        when {
+            event: click
+            selectionType: button
+            button: @cancel
+        }
+
+        action native-dialog-cancel (
+            action: cancelDialog
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    process close-dialog (
+        name: Close Dialog
+        type: closeDialog
+        execution {
+            sequence: 30
+        }
+        advanced {
+            executionMappingIdentifier: 352280481563146385
+        }
+        serverSideCondition {
+            type: requestIsContainedInValue
+            value: CREATE,SAVE,DELETE
+        }
+    )
+
+    process delete-job-application (
+        name: Delete _job_application
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                declare 
+                
+                    v_job_application_count number;
+                
+                begin
+                
+                    select count(*) into v_job_application_count from job_application where id = :P126_APPLICATION_ID;
+                
+                    if v_job_application_count > 0 then
+                        DELETE FROM job_application_certificate WHERE JOB_APPLICATION_ID = :P126_APPLICATION_ID;
+                        delete from  job_application where id = :P126_APPLICATION_ID;
+                    else
+                        raise_application_error(-20070, 'this application does not exist');
+                
+                    end if;
+                
+                end;
+                ```
+        }
+        execution {
+            sequence: 20
+        }
+        advanced {
+            executionMappingIdentifier: 32138823109699507
+        }
+    )
+
+    process initialize-form-edit-applications (
+        name: Initialize form Edit Applications
+        type: formInitialization
+        formRegion: @edit-applications
+        execution {
+            sequence: 10
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 352279660007146385
+        }
+    )
+
+    process process-form-edit-applications (
+        name: Process form Edit Applications
+        type: formAutoRowProcessing
+        formRegion: @edit-applications
+        execution {
+            sequence: 10
+        }
+        advanced {
+            executionMappingIdentifier: 352280096522146385
+        }
+    )
+
+)

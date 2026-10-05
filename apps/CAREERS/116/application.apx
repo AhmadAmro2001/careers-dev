@@ -1,0 +1,77 @@
+app CAREERS (
+    name: careers
+    logo {
+        type: imageAndText
+        imageUrl: #APP_FILES#epromlogo.png
+        text: "&{CAREERS}."
+    }
+    navigation {
+        homeUrl: {
+            page: 131
+        }
+        loginUrl: {
+            page: LOGIN
+        }
+    }
+    navigationMenu {
+        listTemplate: @/side-navigation-menu
+        templateOptions: [
+            #DEFAULT#
+            js-defaultCollapsed
+            js-navCollapsed--hidden
+            t-TreeNav--styleA
+        ]
+        list: @navigation-menu
+    }
+    navigationBar {
+        list: @navigation-bar
+        listTemplate: @/navigation-bar
+        templateOptions: #DEFAULT#
+    }
+    userInterface {
+        currentTheme: @universal-theme
+        globalPage: 0
+        addBuiltWithApexToFooter: false
+    }
+    appFormatMasks {
+        date: YYYY-MM-DD
+        timestamp: DS
+        timestampTimeZone: DS
+    }
+    css {
+        fileUrls: #APP_FILES#careers.css
+    }
+    authentication {
+        scheme: @custom-login-auth
+        publicUser: APEX_PUBLIC_USER
+    }
+    sessionStateProtection {
+        checksumSalt: BA4091BA2B08A0E4FFBCB6DEFAF419DE7428A74F2A60FC8D8B2753AA1A619A62
+    }
+    globalization {
+        translationMethod: textMessages
+        languageDerivedFrom: session
+    }
+    runtime {
+        allowFeedback: true
+    }
+
+    substitution APP_NAME (
+        value {
+            staticValue: "&{CAREERS}."
+        }
+    )
+
+    substitution RECAPTCHAV2_SITE_KEY (
+        value {
+            staticValue: 6LctbpQsAAAAANmz7xFCXxRWkR9ZXucQCJzxgeYW
+        }
+    )
+
+    substitution RECAPTCHAV2_SECRETE_KEY (
+        value {
+            staticValue: 6LctbpQsAAAAAFhRQx3izXU717Bd70ThiPfqEnxT
+        }
+    )
+
+)

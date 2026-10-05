@@ -1,0 +1,20 @@
+appItem APP_ADMIN_ACC_USERNAME (
+)
+
+appItem APP_USER_ACC_ID (
+)
+
+appItem APP_USER_PERS_ID (
+)
+
+appItem G_LOGIN_TYPE (
+)
+
+appItem G_USER_ROLE (
+)
+
+appItem G_VERIFICATION_EMAIL (
+)
+
+appItem PERSONAL_CHECK (
+)

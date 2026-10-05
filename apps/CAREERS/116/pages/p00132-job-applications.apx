@@ -1,0 +1,575 @@
+page 132 (
+    name: job applications
+    alias: JOB-APPLICATIONS
+    title: job applications
+    appearance {
+        pageTemplate: @/blank
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    css {
+        inline:
+            ```css
+            /* ========================================================== */
+            /* CUSTOM NAVBAR                                               */
+            /* ========================================================== */
+            
+            .custom-navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            
+                background: rgb(233, 233, 233);
+            
+                padding: 14px 24px;
+            
+                border-radius: 18px;
+            
+                box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            
+                margin-bottom: 20px;
+            }
+            
+            /* Left Links */
+            .nav-left {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            
+            /* Nav Links */
+            .nav-link {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            
+                text-decoration: none;
+            
+                color: #334155;
+            
+                padding: 10px 18px;
+            
+                border-radius: 12px;
+            
+                font-weight: 600;
+            
+                transition: all 0.3s ease;
+            }
+            
+            /* Hover */
+            .nav-link:hover {
+                background: rgb(232, 244, 255);
+                color: #0563bb;
+            }
+            
+            /* Logout Button */
+            .logout-btn {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            
+                background: #ef4444;
+            
+                color: white !important;
+            
+                text-decoration: none;
+            
+                padding: 10px 18px;
+            
+                border-radius: 12px;
+            
+                font-weight: 600;
+            
+                transition: all 0.3s ease;
+            }
+            
+            /* Logout Hover */
+            .logout-btn:hover {
+                background: #dc2626;
+                transform: translateY(-1px);
+            }
+            
+            /* Icons */
+            .custom-navbar .fa {
+                font-size: 14px;
+            }
+            
+            
+            [data-header="National Id Image"] img,
+            [data-header="NATIONAL_ID_IMAGE"] img {
+                width: 300px !important;
+                height: 100px !important;
+            }
+            
+            
+            img {
+                width: 250px !important;
+                height: 100px !important;
+                object-fit: cover;
+                border-radius: 10px;
+            }
+            
+            .nav-right {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .user-name {
+                color: #333;
+                font-weight: 600;
+            }
+            
+            
+            /* Make navbar wrap on small screens */
+            .custom-navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap; /* مهم جداً */
+            }
+            
+            /* Mobile & small tablets */
+            @media (max-width: 768px) {
+                .custom-navbar {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 12px;
+                }
+            
+                .nav-left,
+                .nav-right {
+                    width: 100%;
+                    justify-content: flex-start;
+                    flex-wrap: wrap;
+                }
+            
+                .nav-link,
+                .logout-btn {
+                    width: 100%;
+                    justify-content: center;
+                }
+            
+                .user-name {
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+            
+            /* Very small screens (phones) */
+            @media (max-width: 480px) {
+                .nav-link,
+                .logout-btn {
+                    padding: 12px;
+                    font-size: 14px;
+                }
+            
+                .custom-navbar {
+                    padding: 12px;
+                }
+            }
+            
+            
+            
+            /* application_2 Region Container */
+            #application_2 {
+                background: #f8fafc;
+                border-radius: 18px;
+                padding: 18px;
+                box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+                border: none;
+            }
+            
+            /* Report Table */
+            #application_2 .t-Report-report {
+                border-collapse: separate;
+                border-spacing: 0 10px;
+                width: 100%;
+            }
+            
+            /* Header */
+            #application_2 .t-Report-colHead {
+                background: #001b47;
+                color: white;
+                font-size: 14px;
+                font-weight: 600;
+                padding: 14px;
+                border: none;
+            }
+            
+            /* Header First/Last Radius */
+            #application_2 .t-Report-colHead:first-child {
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
+            }
+            
+            #application_2 .t-Report-colHead:last-child {
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+            }
+            
+            /* Rows */
+            #application_2 .t-Report-report tbody tr {
+                background: white;
+                transition: 0.3s;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            }
+            
+            /* Rows Links */
+            #application_2 .t-Report-report tbody tr a{
+                color: rgb(0, 48, 65);
+                text-decoration: none;
+                font-weight: 600;
+            }
+            
+            #application_2 .t-Report-report tbody tr a:hover{
+                color: rgb(0, 119, 255);
+            }
+            
+            /* Hover Effect */
+            #application_2 .t-Report-report tbody tr:hover {
+                transform: scale(1.01);
+                background: #f1f5f9;
+            }
+            
+            /* Cells */
+            #application_2 .t-Report-cell {
+                padding: 16px;
+                border: none;
+                font-size: 14px;
+                color: #334155;
+            }
+            
+            /* First Cell Radius */
+            #application_2 .t-Report-cell:first-child {
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
+            }
+            
+            /* Last Cell Radius */
+            #application_2 .t-Report-cell:last-child {
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+            }
+            
+            /* Pagination */
+            #application_2 .t-Report-pagination {
+                margin-top: 15px;
+                text-align: center;
+            }
+            
+            /* Links */
+            #application_2 a {
+                color: rgb(169, 234, 255);
+                text-decoration: none;
+                font-weight: 600;
+            }
+            
+            #application_2 a:hover {
+                color: #9db7ff;
+            }
+            
+            #application_2,
+            #application_2 .t-Region-body,
+            #application_2 .t-Report,
+            #application_2 .t-Report-wrap,
+            #application_2 .t-Report-tableWrap {
+                border: none !important;
+                box-shadow: none !important;
+                background: transparent !important;
+            }
+            
+            /* Remove table borders */
+            #application_2 table,
+            #application_2 th,
+            #application_2 td {
+                border: none !important;
+            }
+            
+            /* Remove outer gray line */
+            #application_2 .t-Report-report {
+                border: none !important;
+                outline: none !important;
+            }
+            
+            
+            .guide-container {
+                width: 100%;
+                max-width: 1030px;
+                margin: 20px auto;
+                box-sizing: border-box;
+            }
+            
+            ```
+    }
+    security {
+        authorizationScheme: @user-schema
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region application2 (
+        name: Application2
+        title: "&{APPLICATION}."
+        type: classicReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select jvp.ID,
+                       jvp.VACANCY_ID,
+                       jvp.DATE_TIME,
+                       jv.title,
+                       jvp.ID AS EDIT,
+                       jvp.ID AS Details,
+                       jvp.application_id
+                  from JOB_VACANCY_APPLICATION jvp
+                  join job_application japp on japp.id = jvp.application_id
+                  join job_vacancy jv on jv.id = jvp.vacancy_id
+                  where japp.account_id = :APP_USER_ACC_ID;
+                ```
+        }
+        layout {
+            sequence: 30
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        advanced {
+            htmlDomId: application_2
+        }
+        componentAppearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Report--altRowsDefault
+                t-Report--rowHighlight
+            ]
+        }
+        messages {
+            whenNoDataFound: you have not entered any data
+        }
+
+        column APPLICATION_ID (
+            reportColumnQueryId: 7
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 70
+            }
+        )
+
+        column DATE_TIME (
+            reportColumnQueryId: 3
+            derivedColumn: N
+            heading {
+                heading: "&{DATE}."
+            }
+            layout {
+                sequence: 50
+            }
+        )
+
+        column DETAILS (
+            reportColumnQueryId: 6
+            derivedColumn: N
+            type: link
+            heading {
+                heading: Details
+                alignment: center
+            }
+            layout {
+                sequence: 60
+                columnAlignment: center
+            }
+            link {
+                target: {
+                    page: 112
+                    items: {
+                        P112_VACANCY_ID: #VACANCY_ID#
+                        P112_DETAILS_FLG: 1
+                    }
+                }
+                linkText: <span role="img"       aria-label="View"       class="fa fa-eye"       title="View"></span>
+            }
+        )
+
+        column EDIT (
+            reportColumnQueryId: 5
+            derivedColumn: N
+            type: link
+            heading {
+                heading: "&{EDIT}."
+                alignment: center
+            }
+            layout {
+                sequence: 20
+                columnAlignment: center
+            }
+            link {
+                target: {
+                    page: 126
+                    items: {
+                        P126_ID: #ID#
+                        P126_APPLICATION_ID: #APPLICATION_ID#
+                    }
+                }
+                linkText: <span role="img" aria-label="Edit" class="fa fa-edit" title="Edit"></span>
+            }
+        )
+
+        column ID (
+            reportColumnQueryId: 1
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 10
+            }
+        )
+
+        column TITLE (
+            reportColumnQueryId: 4
+            derivedColumn: N
+            heading {
+                heading: "&{TITLE}."
+            }
+            layout {
+                sequence: 30
+            }
+        )
+
+        column VACANCY_ID (
+            reportColumnQueryId: 2
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 40
+            }
+        )
+
+    )
+
+    region guide-message (
+        name: guide message
+        type: staticContent
+        source {
+            htmlCode:
+                ```html
+                <div class="grid-box-bg-blue">
+                 
+                    <div class="">
+                        ⚠️
+                    </div> 
+                
+                    <div class="guide-content">
+                        <!-- <div class="guide-title">
+                            User Guide
+                        </div> -->
+                
+                        <p>
+                            View, edit, or delete your submitted applications. Make sure your information is accurate and up to date.
+                        </p>
+                    </div>
+                </div>
+                <div class="grid-box-bg-blue">
+                 
+                    <div class="">
+                        ⚠️
+                    </div> 
+                
+                    <div class="guide-content">
+                        <!-- <div class="guide-title">
+                            User Guide
+                        </div> -->
+                
+                        <p>
+                          To apply for another vacancy, please delete one of your existing applications first.        
+                        </p>
+                        
+                        
+                    </div>
+                
+                    
+                
+                    
+                </div>
+                ```
+        }
+        layout {
+            sequence: 20
+            slot: body
+            columnCssClasses: guide-container
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--noPadding
+                t-Region--removeHeader js-removeLandmark
+                t-Region--scrollBody
+            ]
+        }
+    )
+
+    region navbar (
+        name: navbar
+        title: "&{NAVBAR}."
+        type: appTemplateComponent/appliocantNavbar
+        layout {
+            sequence: 10
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        componentAppearance {
+            display: regionOnly
+        }
+        settings {
+            personalCheck: &PERSONAL_CHECK.
+        }
+    )
+
+    pageItem P132_DETAILS_FLG (
+        type: hidden
+        layout {
+            sequence: 40
+            slot: body
+        }
+    )
+
+    dynamicAction appclosedialog (
+        name: APPCLoseDialog
+        execution {
+            sequence: 10
+        }
+        when {
+            event: apexafterclosedialog
+            selectionType: region
+            region: @application2
+        }
+
+        action native-refresh (
+            action: refresh
+            affectedElements {
+                selectionType: region
+                region: @application2
+            }
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+    )
+
+)

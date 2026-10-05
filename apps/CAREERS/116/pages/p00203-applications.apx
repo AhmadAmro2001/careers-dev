@@ -1,0 +1,1739 @@
+page 203 (
+    name: Applications
+    alias: APPLICATIONS
+    title: "&{APPLICATIONS}."
+    appearance {
+        pageTemplate: @/standard
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    javaScript {
+        functionAndGlobalVariableDeclaration:
+            ```javascript-browser
+            function fixResumeDownloadButtons() {
+                var region$ = apex.jQuery("#cr_docs");
+            
+                region$.find('td[headers="RESUME_DOWNLOAD"]').each(function () {
+                    var cell$ = apex.jQuery(this);
+                    var link$ = cell$.find("a");
+            
+                    // If APEX did not generate a download link, show disabled N/A button
+                    if (link$.length === 0) {
+                        cell$.html(
+                            '<button type="button" class="resume-btn resume-btn-disabled disabled-button" disabled>N/A</button>'
+                        );
+                    } else {
+                        // Style the real APEX download link like a button
+                        link$.addClass("resume-btn");
+                        // link$.text("<span class='fa fa-download'></span> ");
+                    }
+                });
+            }
+            ```
+        executeWhenPageLoads:
+            ```javascript-browser
+            document.addEventListener("change", function (event) {
+                if (event.target.id === "check_all_docs") {
+                    // apex.item("P203_SELECT_ALL").setValue(event.target.checked ? "Y" : "N");
+            
+                    document
+                        .querySelectorAll("#cr_docs input.js-row-check")
+                        .forEach(function (checkbox) {
+                            checkbox.checked = event.target.checked;
+                        });
+                }
+            });
+            
+            // resume download button 
+            fixResumeDownloadButtons();
+            
+            apex.jQuery("#cr_docs").on("apexafterrefresh", function () {
+                fixResumeDownloadButtons();
+            });
+            ```
+    }
+    css {
+        inline:
+            ```css
+            .more-details-btn {
+              background-color: var(--careers-primary-color);
+              color: white !important;
+              padding: 10px 18px;
+              border-radius: 8px;
+              text-decoration: none !important;
+              display: inline-block;
+              font-size: 14px;
+              transition: background-color 0.3s ease;
+            }
+            
+            .more-details-btn:hover {
+              background-color: var(--careers-hover-color);
+              color: white !important;
+            }
+            
+            .disabled-button {
+              background-color: var(--careers-primary-color);
+              color: white !important;
+              padding: 8px 10px;
+              border-radius: 8px;
+              text-decoration: none !important;
+              display: inline-block;
+              font-size: 14px;
+              transition: background-color 0.3s ease;
+            }
+            
+            .disabled-button:hover {
+              background-color: var(--careers-hover-color);
+              color: white !important;
+            }
+            
+            /* download resume css button */
+            
+            
+            #cr_docs td[headers="RESUME_DOWNLOAD"] a {
+              background-color: var(--careers-primary-color);
+              color: white !important;
+              padding: 10px 18px;
+              border-radius: 8px;
+              text-decoration: none !important;
+              display: inline-block;
+              font-size: 13px;
+              transition: background-color 0.3s ease;
+              /* font-weight: bold; */
+            }
+            
+            #cr_docs td[headers="RESUME_DOWNLOAD"] a:hover {
+              background-color: var(--careers-hover-color);
+              color: white !important;
+            }
+            
+            /* ARCHIVE BUTTON */
+            .archive-btn {
+              background-color: var(--careers-primary-color);
+              color: white !important;
+              padding: 8px 14px;
+              border-radius: 8px;
+              text-decoration: none !important;
+              display: inline-block;
+              font-size: 13px;
+              /* font-weight: bold; */
+              cursor: pointer;
+            }
+            
+            .archive-btn:hover {
+              background-color: var(--careers-hover-color);
+            }
+            
+            .archive-disabled {
+                opacity: 0.5;
+                /* pointer-events: none; */
+                /* cursor: not-allowed; */
+            }
+            .applications-count {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                
+                
+            }
+            
+            .applications-count strong {
+                color: #18a52b;
+                font-size: 16px;
+            }
+            ```
+    }
+    security {
+        authorizationScheme: @admin-schema
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region applications (
+        name: Applications
+        title: "&{APPLICATIONS}."
+        type: classicReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select  apex_item.checkbox2(
+                        p_idx        => 1,
+                        p_value      => j.ID,
+                        p_attributes => 'class="js-row-check"'
+                    ) as select_row,
+                       j.ID as JOB_ID,
+                       u.ID as ACCOUNT_ID ,
+                       u.FIRST_NAME,
+                       u.SECOND_NAME,
+                       u.LAST_NAME,
+                       j.LAST_UPDATE_DATE,
+                       va.TITLE,
+                       e.EDUCATION_LEVEL as EDUCATION_DEGREE,
+                       e.EDUCATION_GRADE as EDUCATION_GRADE,
+                       e.EDUCATION_FIELD as EDUCATION_FIELD,
+                       e.GRADUATION_YEAR as GRADE_YEAR,
+                       u.GENDER AS ACCOUNT_GENDER,
+                       j.IS_ARCHIVED as APPLICATION_ARCHIVED,
+                       u.IS_ARCHIVE as ACCOUNT_ARCHIVED,
+                       u.MOBILE_TELEPHONE,
+                       u.NATIONAL_ID,
+                       u.city_id,
+                       j.creation_date,
+                
+                       case
+                           when exp.total_exp_years < 1 then '0-1'
+                           when exp.total_exp_years >= 1  and exp.total_exp_years < 6  then '1-5'
+                           when exp.total_exp_years >= 6  and exp.total_exp_years < 11 then '6-10'
+                           when exp.total_exp_years >= 11 and exp.total_exp_years < 16 then '11-15'
+                           when exp.total_exp_years >= 16 and exp.total_exp_years < 20 then '15-20'
+                           when exp.total_exp_years >= 20 then '20+'
+                           else '0-1'
+                       end as EXP_YEARS,
+                
+                       'More Details' as MORE_DETAILS,
+                       dbms_lob.getlength(jat.FILE_BLOB) as RESUME_DOWNLOAD,
+                        jat.file_name as resume_file_name,
+                        jat.mime_type as resume_mime_type,
+                        jat.id as ID,
+                    
+                
+                        case 
+                            when nvl(j.IS_ARCHIVED, 0) = 1 then 'UNARCHIVE'
+                            else 'ARCHIVE'
+                        end as ARCHIVE_ACTION,
+                
+                        case 
+                            when nvl(j.IS_ARCHIVED, 0) = 1 then 'Unarchive Application'
+                            else 'Archive Application'
+                        end as ARCHIVE_TITLE,
+                
+                        case 
+                            when nvl(j.IS_ARCHIVED, 0) = 1 then 'fa-undo'
+                            else 'fa-archive'
+                        end as ARCHIVE_ICON,
+                
+                        case 
+                            when nvl(j.IS_ARCHIVED, 0) = 1 then 'Unarchive'
+                            else 'Archive'
+                        end as ARCHIVE_APP,
+                
+                        case 
+                            when nvl(j.IS_ARCHIVED, 0) = 1 then 'is-archived'
+                            else 'is-active'
+                        end as ARCHIVE_STATE_CLASS,
+                
+                        j.ID as ARCHIVE_DATA,
+                        '<a href="' ||
+                        apex_escape.html_attribute(
+                            apex_page.get_url(
+                                p_page    => :APP_PAGE_ID,
+                                p_request => 'DOWNLOAD_ZIP',
+                                p_items   => 'P203_JOB_ID,P203_ACCOUNT_ID',
+                                p_values  => j.ID || ',' || u.ID
+                                )
+                            ) ||
+                        '" class="t-Button archive-btn ">
+                            <span class="fa fa-download"></span> '|| ' ' ||'
+                            
+                        </a>' as DOWNLOAD_ZIP
+                
+                from Job_Application j
+                
+                 join ACCOUNT u
+                    on j.Account_ID = u.ID
+                
+                -- left join education_degree e
+                --     on j.ID = e.JOB_APPLICATION_ID
+                left join personal_info pi
+                   on pi.Account_ID = j.Account_ID
+                left join (
+                    select *
+                    from (
+                        select 
+                               e.*,
+                               row_number() over (
+                                   partition by e.personal_id
+                                   order by e.id desc
+                               ) as rn
+                        from education_degree e
+                    )
+                    where rn = 1
+                ) e
+                    on pi.id = e.personal_id
+                
+                
+                
+                left join education_level el
+                    on e.education_level = el.ID
+                
+                left join (
+                    select 
+                           jae.PERSONAL_ID,
+                           sum(months_between(nvl(jae.todate, sysdate), jae.fromdate)) / 12 as total_exp_years
+                    from JOB_APPLICATION_EXPERIENCE jae
+                    group by jae.PERSONAL_ID
+                ) exp
+                    on exp.PERSONAL_ID = pi.ID
+                
+                left join JOB_APPLICATION_ATTACHMENTS jat
+                on jat.id = j.RESUME_FILE_ID and jat.FILE_TYPE_ID = 2
+                right JOIN JOB_VACANCY_APPLICATION jva
+                on jva.APPLICATION_ID = j.ID
+                left join JOB_VACANCY va
+                on va.id = jva.vacancy_id
+                where 
+                (:P203_FIRST_NAME is null or upper(:P203_FIRST_NAME) = upper(u.FIRST_NAME) )
+                and   
+                (:P203_LAST_NAME is null or upper(:P203_LAST_NAME) = upper(u.LAST_NAME))
+                and resume_file_id is not null
+                order by j.CREATION_DATE desc;
+                ```
+            pageItemsToSubmit: [
+                P203_FIRST_NAME
+                P203_LAST_NAME
+            ]
+        }
+        layout {
+            sequence: 30
+            slot: body
+            startNewRow: false
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        advanced {
+            htmlDomId: cr_docs
+        }
+        reportLayout {
+            numberOfRowsType: itemValue
+            item: P203_ROWS
+        }
+        componentAppearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Report--stretch
+                t-Report--altRowsDefault
+                t-Report--rowHighlight
+            ]
+        }
+        pagination {
+            type: rowRangesXToYOfZWithPagination
+            displayPosition: topAndBottomRight
+            partialPageRefresh: false
+        }
+
+        column ACCOUNT_ARCHIVED (
+            reportColumnQueryId: 15
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 220
+            }
+        )
+
+        column ACCOUNT_GENDER (
+            reportColumnQueryId: 13
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 200
+            }
+        )
+
+        column ACCOUNT_ID (
+            reportColumnQueryId: 3
+            derivedColumn: N
+            heading {
+                heading: "&{ID}."
+            }
+            layout {
+                sequence: 30
+                columnAlignment: center
+            }
+            sorting {
+                sortable: false
+            }
+        )
+
+        column APPLICATION_ARCHIVED (
+            reportColumnQueryId: 14
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 210
+            }
+        )
+
+        column ARCHIVE_ACTION (
+            reportColumnQueryId: 26
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 300
+            }
+        )
+
+        column ARCHIVE_APP (
+            reportColumnQueryId: 29
+            derivedColumn: N
+            heading {
+                heading: Archive
+            }
+            layout {
+                sequence: 130
+                columnAlignment: center
+            }
+            columnFormatting {
+                htmlExpression:
+                    ```html
+                    <button type="button"
+                            class="t-Button t-Button--small t-Button--icon js-toggle-archive archive-btn #ARCHIVE_STATE_CLASS#"
+                            title="#ARCHIVE_TITLE#"
+                            data-id="#ARCHIVE_DATA#"
+                            data-archive-action="#ARCHIVE_ACTION#">
+                    
+                        <span class="t-Icon fa #ARCHIVE_ICON#" aria-hidden="true"></span>
+                    </button>
+                    ```
+            }
+            sorting {
+                sortable: false
+            }
+            security {
+                escapeSpecialChars: false
+            }
+        )
+
+        column ARCHIVE_DATA (
+            reportColumnQueryId: 31
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 250
+            }
+        )
+
+        column ARCHIVE_ICON (
+            reportColumnQueryId: 28
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 240
+            }
+        )
+
+        column ARCHIVE_STATE_CLASS (
+            reportColumnQueryId: 30
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 290
+            }
+        )
+
+        column ARCHIVE_TITLE (
+            reportColumnQueryId: 27
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 230
+            }
+        )
+
+        column CITY_ID (
+            reportColumnQueryId: 18
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 330
+            }
+        )
+
+        column CREATION_DATE (
+            reportColumnQueryId: 19
+            derivedColumn: N
+            heading {
+                heading: Creation Date
+            }
+            layout {
+                sequence: 70
+            }
+            sorting {
+                sortable: false
+            }
+        )
+
+        column DOWNLOAD_ZIP (
+            reportColumnQueryId: 32
+            derivedColumn: N
+            heading {
+                heading: Documents
+            }
+            layout {
+                sequence: 120
+                columnAlignment: center
+            }
+            sorting {
+                sortable: false
+            }
+            security {
+                escapeSpecialChars: false
+            }
+        )
+
+        column EDUCATION_DEGREE (
+            reportColumnQueryId: 9
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 140
+            }
+        )
+
+        column EDUCATION_FIELD (
+            reportColumnQueryId: 11
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 160
+            }
+        )
+
+        column EDUCATION_GRADE (
+            reportColumnQueryId: 10
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 150
+            }
+        )
+
+        column EXP_YEARS (
+            reportColumnQueryId: 20
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 180
+            }
+        )
+
+        column FIRST_NAME (
+            reportColumnQueryId: 4
+            derivedColumn: N
+            heading {
+                heading: "&{FIRST_NAME}."
+            }
+            layout {
+                sequence: 50
+            }
+            sorting {
+                sortable: false
+            }
+        )
+
+        column GRADE_YEAR (
+            reportColumnQueryId: 12
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 190
+            }
+        )
+
+        column ID (
+            reportColumnQueryId: 25
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 40
+            }
+        )
+
+        column JOB_ID (
+            reportColumnQueryId: 2
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 20
+            }
+        )
+
+        column LAST_NAME (
+            reportColumnQueryId: 6
+            derivedColumn: N
+            heading {
+                heading: "&{LAST_NAME}."
+            }
+            layout {
+                sequence: 60
+            }
+            sorting {
+                sortable: false
+            }
+        )
+
+        column LAST_UPDATE_DATE (
+            reportColumnQueryId: 7
+            derivedColumn: N
+            heading {
+                heading: Update Date
+            }
+            layout {
+                sequence: 80
+            }
+            sorting {
+                sortable: false
+            }
+        )
+
+        column MOBILE_TELEPHONE (
+            reportColumnQueryId: 16
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 310
+            }
+        )
+
+        column MORE_DETAILS (
+            reportColumnQueryId: 21
+            derivedColumn: N
+            type: link
+            heading {
+                heading: Details
+            }
+            layout {
+                sequence: 100
+                columnAlignment: center
+            }
+            link {
+                target: {
+                    page: 206
+                    items: {
+                        P206_ID: #ACCOUNT_ID#
+                        P206_JOB_ID: #JOB_ID#
+                    }
+                }
+                linkText: <span class="fa fa-eye"></span>
+                linkAttributes: class="more-details-btn"
+            }
+            sorting {
+                sortable: false
+            }
+        )
+
+        column NATIONAL_ID (
+            reportColumnQueryId: 17
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 320
+            }
+        )
+
+        column RESUME_DOWNLOAD (
+            reportColumnQueryId: 22
+            derivedColumn: N
+            type: downloadBlob
+            heading {
+                heading: Resume
+            }
+            layout {
+                sequence: 110
+                columnAlignment: center
+            }
+            appearance {
+                viewFileAs: inline
+                downloadText: "<span class=\"fa fa-download\"></span> "
+            }
+            blobAttributes {
+                tableName: JOB_APPLICATION_ATTACHMENTS
+                blobColumn: FILE_BLOB
+                primaryKeyColumn1: ID
+                mimeTypeColumn: MIME_TYPE
+                filenameColumn: FILE_NAME
+            }
+            sorting {
+                sortable: false
+            }
+        )
+
+        column RESUME_FILE_NAME (
+            reportColumnQueryId: 23
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 270
+            }
+        )
+
+        column RESUME_MIME_TYPE (
+            reportColumnQueryId: 24
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 280
+            }
+        )
+
+        column SECOND_NAME (
+            reportColumnQueryId: 5
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 260
+            }
+        )
+
+        column SELECT_ROW (
+            reportColumnQueryId: 1
+            derivedColumn: N
+            heading {
+                heading: "&{COLUMN_HEADING}!RAW."
+                alignment: center
+            }
+            layout {
+                sequence: 10
+                columnAlignment: center
+            }
+            sorting {
+                sortable: false
+            }
+            security {
+                escapeSpecialChars: false
+            }
+        )
+
+        column TITLE (
+            reportColumnQueryId: 8
+            derivedColumn: N
+            heading {
+                heading: Title
+            }
+            layout {
+                sequence: 90
+            }
+            sorting {
+                sortable: false
+            }
+        )
+
+    )
+
+    region breadcrumb (
+        name: Breadcrumb
+        title: "&{BREADCRUMB}."
+        type: breadcrumb
+        source {
+            breadcrumb: @breadcrumb
+        }
+        layout {
+            sequence: 10
+            slot: breadcrumbBar
+        }
+        appearance {
+            template: @/title-bar
+            templateOptions: [
+                #DEFAULT#
+                t-BreadcrumbRegion--useBreadcrumbTitle
+            ]
+        }
+        config {
+            buildOption: @commented-out
+        }
+        componentAppearance {
+            breadcrumbTemplate: @/breadcrumb
+            templateOptions: #DEFAULT#
+        }
+    )
+
+    region filter (
+        name: Filter
+        title: "&{FILTER}."
+        type: facetedSearch
+        source {
+            filteredRegion: @applications
+        }
+        layout {
+            sequence: 10
+            slot: body
+            columnSpan: 2
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--noPadding
+                t-Region--scrollBody
+            ]
+        }
+        advanced {
+            htmlDomId: facet_filter
+        }
+        settings {
+            compactNosThreshold: 10000
+            showTotalRowCount: selector
+            totalRowCountSelector: #total_count_area
+            displayChartForTopNValues: 10
+        }
+
+        facet P203_ACC_ARCHIVE (
+            type: radioGroup
+            label {
+                label: "&{ACCOUNTS}."
+            }
+            lov {
+                type: staticValues
+                staticValues: STATIC:Archived;1,Available;0
+            }
+            layout {
+                sequence: 90
+            }
+            listEntries {
+                zeroCountEntries: disable
+                sortByTopCounts: false
+                maxDisplayedEntries: 7
+            }
+            advanced {
+                collapsible: true
+                initiallyCollapsed: true
+            }
+            source {
+                databaseColumn: ACCOUNT_ARCHIVED
+            }
+        )
+
+        facet P203_APP_ARCHIVED (
+            type: radioGroup
+            label {
+                label: "&{APPLICATIONS}."
+            }
+            lov {
+                type: staticValues
+                staticValues: STATIC:Archived;1,Available;0
+            }
+            layout {
+                sequence: 100
+            }
+            listEntries {
+                zeroCountEntries: disable
+                sortByTopCounts: false
+                maxDisplayedEntries: 7
+            }
+            advanced {
+                collapsible: true
+                initiallyCollapsed: true
+            }
+            source {
+                databaseColumn: APPLICATION_ARCHIVED
+            }
+            default {
+                type: static
+                staticValue: 0
+            }
+        )
+
+        facet P203_CITY_ID (
+            type: selectList
+            label {
+                label: City
+            }
+            lov {
+                type: sharedComponent
+                lov: @cities
+            }
+            layout {
+                sequence: 110
+            }
+            advanced {
+                collapsible: true
+                initiallyCollapsed: true
+            }
+            source {
+                databaseColumn: CITY_ID
+            }
+        )
+
+        facet P203_EDUCATION_DEGREE (
+            type: checkboxGroup
+            label {
+                label: "&{EDUCATION_DEGREE}."
+            }
+            lov {
+                type: sqlQuery
+                sqlQuery:
+                    ```sql
+                    SELECT NAME,ID 
+                    FROM EDUCATION_LEVEL
+                    
+                    ```
+                includeNullOption: true
+                nullDisplayValue: 0
+            }
+            layout {
+                sequence: 20
+            }
+            listEntries {
+                maxDisplayedEntries: 7
+            }
+            advanced {
+                collapsible: true
+                initiallyCollapsed: true
+            }
+            source {
+                databaseColumn: EDUCATION_DEGREE
+            }
+        )
+
+        facet P203_EDUCATION_FIELD (
+            type: checkboxGroup
+            label {
+                label: "&{EDUCATION_FIELD}."
+            }
+            lov {
+                type: sqlQuery
+                sqlQuery:
+                    ```sql
+                    SELECT NAME,ID 
+                    FROM EDUCATION_FIELD
+                    
+                    ```
+            }
+            layout {
+                sequence: 30
+            }
+            listEntries {
+                maxDisplayedEntries: 7
+            }
+            advanced {
+                collapsible: true
+                initiallyCollapsed: true
+            }
+            source {
+                databaseColumn: EDUCATION_FIELD
+            }
+            dependingOn {
+                facet: @P203_EDUCATION_DEGREE
+            }
+        )
+
+        facet P203_EDUCATION_GRADE (
+            type: checkboxGroup
+            label {
+                label: "&{EDUCATION_GRADE}."
+            }
+            lov {
+                type: sqlQuery
+                sqlQuery:
+                    ```sql
+                    SELECT NAME , ID
+                    FROM EDUCATION_GRADE
+                    ```
+            }
+            layout {
+                sequence: 40
+            }
+            listEntries {
+                maxDisplayedEntries: 7
+            }
+            advanced {
+                collapsible: true
+                initiallyCollapsed: true
+            }
+            source {
+                databaseColumn: EDUCATION_GRADE
+            }
+        )
+
+        facet P203_EXP_YEARS (
+            type: checkboxGroup
+            label {
+                label: "&{EXPERIENCE_YEARS}."
+            }
+            lov {
+                type: staticValues
+                staticValues: STATIC:0-1;0-1,1-5;1-5,6-10;6-10,11-15;11-15,16-20;16-20,20+;20+
+            }
+            layout {
+                sequence: 60
+            }
+            listEntries {
+                maxDisplayedEntries: 7
+            }
+            advanced {
+                collapsible: true
+                initiallyCollapsed: true
+            }
+            source {
+                databaseColumn: EXP_YEARS
+            }
+        )
+
+        facet P203_GENDER (
+            type: radioGroup
+            label {
+                label: "&{GENDER}."
+            }
+            lov {
+                type: staticValues
+                staticValues: STATIC:Male;Male,Female;Female
+            }
+            layout {
+                sequence: 80
+            }
+            listEntries {
+                zeroCountEntries: disable
+                sortByTopCounts: false
+                maxDisplayedEntries: 7
+            }
+            advanced {
+                collapsible: true
+                initiallyCollapsed: true
+            }
+            source {
+                databaseColumn: ACCOUNT_GENDER
+            }
+        )
+
+        facet P203_GRADE_YEAR (
+            type: checkboxGroup
+            label {
+                label: "&{GRADUATION_YEAR}."
+            }
+            lov {
+                type: sharedComponent
+                lov: @grad-year
+            }
+            layout {
+                sequence: 70
+            }
+            listEntries {
+                maxDisplayedEntries: 7
+            }
+            advanced {
+                collapsible: true
+                initiallyCollapsed: true
+            }
+            source {
+                databaseColumn: GRADE_YEAR
+                dataType: number
+            }
+        )
+
+        facet P203_NEW (
+            type: search
+            label {
+                label: "&{NEW}."
+            }
+            layout {
+                sequence: 10
+            }
+        )
+
+    )
+
+    pageItem P203_ACCOUNT_ID (
+        type: hidden
+        layout {
+            sequence: 30
+            region: @applications
+            slot: regionBody
+        }
+    )
+
+    pageItem P203_FIRST_NAME (
+        type: textField
+        label {
+            label: First Name
+            alignment: left
+        }
+        layout {
+            sequence: 40
+            region: @applications
+            slot: sortOrder
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+    )
+
+    pageItem P203_JOB_ID (
+        type: hidden
+        layout {
+            sequence: 40
+            region: @applications
+            slot: regionBody
+        }
+    )
+
+    pageItem P203_LAST_NAME (
+        type: textField
+        label {
+            label: Last Name
+            alignment: left
+        }
+        layout {
+            sequence: 50
+            region: @applications
+            slot: sortOrder
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+    )
+
+    pageItem P203_ROWS (
+        type: numberField
+        label {
+            label: Rows
+            alignment: left
+        }
+        layout {
+            sequence: 60
+            region: @applications
+            slot: sortOrder
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+        default {
+            type: static
+            staticValue: 100
+        }
+    )
+
+    pageItem P203_SELECTED_ID (
+        type: hidden
+        layout {
+            sequence: 20
+            region: @applications
+            slot: regionBody
+        }
+    )
+
+    pageItem P203_SELECT_ALL (
+        type: hidden
+        settings {
+            valueProtected: false
+        }
+        layout {
+            sequence: 10
+            region: @applications
+            slot: regionBody
+        }
+        default {
+            type: static
+            staticValue: N
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    button exportexcel (
+        buttonName: ExportExcel
+        label: "&{EXPORT}."
+        layout {
+            sequence: 10
+            region: @applications
+            slot: edit
+        }
+        appearance {
+            buttonTemplate: @/text-with-icon
+            hot: true
+            templateOptions: [
+                #DEFAULT#
+                t-Button--iconLeft
+            ]
+            cssClasses: more-details-btn
+            icon: fa-send
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+        }
+    )
+
+    button submit (
+        buttonName: Submit
+        label: Submit
+        layout {
+            sequence: 70
+            region: @applications
+            slot: sortOrder
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+            cssClasses: more-details-btn
+        }
+        behavior {
+            action: triggerAction
+        }
+
+        triggerAction native-submit-page (
+            action: submitPage
+            execution {
+                sequence: 10
+            }
+        )
+
+    )
+
+    dynamicAction new (
+        name: New
+        execution {
+            sequence: 10
+            eventScope: dynamic
+        }
+        when {
+            event: click
+            selectionType: jQuerySelector
+            jquerySelector: .js-toggle-archive
+        }
+
+        action native-javascript-code (
+            action: executeJsCode
+            settings {
+                jsCode:
+                    ```javascript-browser
+                    
+                    var btn = this.triggeringElement;
+                    var applicationId = btn.dataset.id;
+                    var action = btn.dataset.archiveAction;
+                    
+                    apex.server.process(
+                        "TOGGLE_APPLICATION_ARCHIVE",
+                        {
+                            x01: applicationId,
+                            x02: action
+                        },
+                        {
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.success) {
+                                    apex.message.showPageSuccess(data.message);
+                                    apex.region("cr_docs").refresh();
+                                    apex.region("facet_filter").refresh();
+                                } else {
+                                    apex.message.showErrors([
+                                        {
+                                            type: "error",
+                                            location: "page",
+                                            message: data.message,
+                                            unsafe: false
+                                        }
+                                    ]);
+                                }
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                apex.message.showErrors([
+                                    {
+                                        type: "error",
+                                        location: "page",
+                                        message: "Error while changing archive status: " + errorThrown,
+                                        unsafe: false
+                                    }
+                                ]);
+                            }
+                        }
+                    );
+                    ```
+            }
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    dynamicAction new_1 (
+        name: New
+        execution {
+            sequence: 20
+        }
+        when {
+            event: ready
+        }
+
+        action native-clear (
+            action: clear
+            affectedElements {
+                selectionType: items
+                items: [
+                    P203_ACCOUNT_ID
+                    P203_JOB_ID
+                ]
+            }
+            execution {
+                sequence: 10
+            }
+        )
+
+    )
+
+    dynamicAction new_2 (
+        name: New
+        execution {
+            sequence: 30
+        }
+        when {
+            event: keyup
+            selectionType: items
+            items: [
+                P203_FIRST_NAME
+                P203_LAST_NAME
+            ]
+        }
+
+        action native-refresh (
+            action: refresh
+            affectedElements {
+                selectionType: region
+                region: @applications
+            }
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    dynamicAction new_3 (
+        name: New
+        execution {
+            sequence: 40
+        }
+        when {
+            event: keyup
+            selectionType: items
+            items: P203_ROWS
+        }
+        config {
+            buildOption: @commented-out
+        }
+
+        action native-submit-page (
+            action: submitPage
+            settings {
+                showProcessing: false
+            }
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    process archive-app (
+        name: TOGGLE_APPLICATION_ARCHIVE
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                -- declare
+                    
+                -- begin
+                    
+                
+                --     PKG_ADMIN.archive_application(
+                --         p_application_id => TO_NUMBER(apex_application.g_x01)
+                --     );
+                
+                --     apex_json.open_object;
+                --     apex_json.write('msg', 'success');
+                --     apex_json.write('err', '');
+                --     apex_json.close_object;
+                -- exception
+                --     when others then
+                --     apex_json.open_object;
+                --     apex_json.write('msg', 'failed');
+                --     apex_json.write('err', sqlerrm);
+                --     apex_json.close_object;
+                -- end;
+                
+                
+                declare
+                    l_application_id number;
+                    l_action         varchar2(20);
+                begin
+                    l_application_id := to_number(apex_application.g_x01);
+                    l_action         := upper(apex_application.g_x02);
+                
+                    if l_action = 'ARCHIVE' then
+                
+                        -- Replace this with your real archive procedure
+                        PKG_ADMIN.archive_application(
+                            p_application_id => TO_NUMBER(apex_application.g_x01)
+                        );
+                
+                        apex_json.open_object;
+                        apex_json.write('success', true);
+                        apex_json.write('message', 'Application archived successfully.');
+                        apex_json.close_object;
+                
+                    elsif l_action = 'UNARCHIVE' then
+                
+                        -- Replace this with your real unarchive procedure
+                        PKG_ADMIN.unarchive_application(
+                            p_application_id => TO_NUMBER(apex_application.g_x01)
+                        );
+                
+                        apex_json.open_object;
+                        apex_json.write('success', true);
+                        apex_json.write('message', 'Application unarchived successfully.');
+                        apex_json.close_object;
+                
+                    else
+                        raise_application_error(-20001, 'Invalid archive action.');
+                    end if;
+                
+                exception
+                    when others then
+                        apex_json.open_object;
+                        apex_json.write('success', false);
+                        apex_json.write('message', sqlerrm);
+                        apex_json.close_object;
+                end;
+                ```
+        }
+        execution {
+            sequence: 10
+            point: ajaxCallback
+        }
+        advanced {
+            executionMappingIdentifier: 338753477791902618
+        }
+    )
+
+    process new (
+        name: New
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                DECLARE
+                    l_zip BLOB;
+                
+                    l_resume_blob       BLOB;
+                    l_resume_name       VARCHAR2(500);
+                
+                    l_national_blob     BLOB;
+                    l_national_name     VARCHAR2(500);
+                
+                    l_graduation_blob   BLOB;
+                    l_graduation_name   VARCHAR2(500);
+                
+                    l_extension         VARCHAR2(100);
+                
+                BEGIN
+                
+                    /* =========================================================
+                       1. GET RESUME
+                       Resume is linked through JOB_APPLICATION.RESUME_FILE_ID
+                       ========================================================= */
+                
+                    BEGIN
+                        SELECT
+                            att.FILE_BLOB,
+                            att.FILE_NAME
+                        INTO
+                            l_resume_blob,
+                            l_resume_name
+                        FROM JOB_APPLICATION j
+                        JOIN JOB_APPLICATION_ATTACHMENTS att
+                            ON att.ID = j.RESUME_FILE_ID
+                        WHERE j.ID = :P203_JOB_ID
+                          AND j.ACCOUNT_ID = :P203_ACCOUNT_ID
+                          AND att.FILE_BLOB IS NOT NULL;
+                
+                    EXCEPTION
+                        WHEN NO_DATA_FOUND THEN
+                            l_resume_blob := NULL;
+                            l_resume_name := NULL;
+                    END;
+                
+                
+                    /* =========================================================
+                       2. GET NATIONAL ID
+                       Personal_Info.NATIONAL_ID_FILE_ID
+                       ========================================================= */
+                
+                    BEGIN
+                        SELECT
+                            att.FILE_BLOB,
+                            att.FILE_NAME
+                        INTO
+                            l_national_blob,
+                            l_national_name
+                        FROM PERSONAL_INFO pi
+                        JOIN JOB_APPLICATION_ATTACHMENTS att
+                            ON att.ID = pi.NATIONAL_ID_FILE_ID
+                        WHERE pi.ACCOUNT_ID = :P203_ACCOUNT_ID
+                          AND att.FILE_BLOB IS NOT NULL
+                        FETCH FIRST 1 ROW ONLY;
+                
+                    EXCEPTION
+                        WHEN NO_DATA_FOUND THEN
+                            l_national_blob := NULL;
+                            l_national_name := NULL;
+                    END;
+                
+                
+                    /* =========================================================
+                       3. GET GRADUATION CERTIFICATE
+                       FILE_TYPE_ID = 1
+                       ========================================================= */
+                
+                    BEGIN
+                        SELECT
+                            att.FILE_BLOB,
+                            att.FILE_NAME
+                        INTO
+                            l_graduation_blob,
+                            l_graduation_name
+                        FROM JOB_APPLICATION_ATTACHMENTS att
+                        WHERE att.ACCOUNT_ID = :P203_ACCOUNT_ID
+                          AND att.FILE_TYPE_ID = 1
+                          AND att.FILE_BLOB IS NOT NULL
+                        ORDER BY att.ID DESC
+                        FETCH FIRST 1 ROW ONLY;
+                
+                    EXCEPTION
+                        WHEN NO_DATA_FOUND THEN
+                            l_graduation_blob := NULL;
+                            l_graduation_name := NULL;
+                    END;
+                
+                
+                    /* =========================================================
+                       4. ADD RESUME IF EXISTS
+                       ========================================================= */
+                
+                    IF l_resume_blob IS NOT NULL THEN
+                
+                        l_extension :=
+                            CASE
+                                WHEN INSTR(l_resume_name, '.', -1) > 0
+                                THEN SUBSTR(l_resume_name, INSTR(l_resume_name, '.', -1))
+                                ELSE ''
+                            END;
+                
+                        apex_zip.add_file(
+                            p_zipped_blob => l_zip,
+                            p_file_name   => :P203_ACCOUNT_ID ||
+                                             '_resume' ||
+                                             l_extension,
+                            p_content     => l_resume_blob
+                        );
+                
+                    END IF;
+                
+                
+                    /* =========================================================
+                       5. ADD NATIONAL ID IF EXISTS
+                       ========================================================= */
+                
+                    IF l_national_blob IS NOT NULL THEN
+                
+                        l_extension :=
+                            CASE
+                                WHEN INSTR(l_national_name, '.', -1) > 0
+                                THEN SUBSTR(l_national_name, INSTR(l_national_name, '.', -1))
+                                ELSE ''
+                            END;
+                
+                        apex_zip.add_file(
+                            p_zipped_blob => l_zip,
+                            p_file_name   => :P203_ACCOUNT_ID ||
+                                             '_national_id' ||
+                                             l_extension,
+                            p_content     => l_national_blob
+                        );
+                
+                    END IF;
+                
+                
+                    /* =========================================================
+                       6. ADD GRADUATION CERTIFICATE IF EXISTS
+                       ========================================================= */
+                
+                    IF l_graduation_blob IS NOT NULL THEN
+                
+                        l_extension :=
+                            CASE
+                                WHEN INSTR(l_graduation_name, '.', -1) > 0
+                                THEN SUBSTR(
+                                    l_graduation_name,
+                                    INSTR(l_graduation_name, '.', -1)
+                                )
+                                ELSE ''
+                            END;
+                
+                        apex_zip.add_file(
+                            p_zipped_blob => l_zip,
+                            p_file_name   => :P203_ACCOUNT_ID ||
+                                             '_graduation_certificate' ||
+                                             l_extension,
+                            p_content     => l_graduation_blob
+                        );
+                
+                    END IF;
+                
+                
+                    /* =========================================================
+                       7. FINISH ZIP
+                       ========================================================= */
+                
+                    apex_zip.finish(
+                        p_zipped_blob => l_zip
+                    );
+                
+                
+                    /* =========================================================
+                       8. DOWNLOAD ZIP
+                       ========================================================= */
+                
+                    owa_util.mime_header(
+                        'application/zip',
+                        FALSE
+                    );
+                
+                    htp.p(
+                        'Content-Length: ' ||
+                        dbms_lob.getlength(l_zip)
+                    );
+                
+                    htp.p(
+                        'Content-Disposition: attachment; filename="' ||
+                        :P203_ACCOUNT_ID ||
+                        '_Documents.zip"'
+                    );
+                
+                    owa_util.http_header_close;
+                
+                    wpg_docload.download_file(l_zip);
+                
+                    apex_application.stop_apex_engine;
+                
+                END;
+                ```
+        }
+        execution {
+            sequence: 10
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 38625832892455043
+        }
+        serverSideCondition {
+            type: expression
+            plsqlExpression: :REQUEST = 'DOWNLOAD_ZIP'
+        }
+    )
+
+    process send-selected-ids (
+        name: send selected ids
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                    apex_collection.create_or_truncate_collection(
+                        p_collection_name => 'SELECTED_APPLICATIONS'
+                    );
+                
+                    for i in 1 .. apex_application.g_f01.count loop
+                        apex_collection.add_member(
+                            p_collection_name => 'SELECTED_APPLICATIONS',
+                            p_n001            => to_number(apex_application.g_f01(i))
+                        );
+                    end loop;
+                end;
+                
+                
+                
+                
+                -- begin
+                --     apex_collection.create_or_truncate_collection(
+                --         p_collection_name => 'SELECTED_APPLICATIONS'
+                --     );
+                
+                --     if :P203_SELECT_ALL = 'Y' then
+                
+                --         for r in (
+                --             select distinct j.id
+                --             from job_application j
+                --             join account u
+                --                 on u.id = j.account_id
+                            
+                --         ) loop
+                --             apex_collection.add_member(
+                --                 p_collection_name => 'SELECTED_APPLICATIONS',
+                --                 p_n001            => r.id
+                --             );
+                --         end loop;
+                
+                --     else
+                
+                --         for i in 1 .. apex_application.g_f01.count loop
+                --             apex_collection.add_member(
+                --                 p_collection_name => 'SELECTED_APPLICATIONS',
+                --                 p_n001            => to_number(apex_application.g_f01(i))
+                --             );
+                --         end loop;
+                
+                --     end if;
+                -- end;
+                ```
+        }
+        execution {
+            sequence: 10
+        }
+        advanced {
+            executionMappingIdentifier: 350431701712683422
+        }
+        serverSideCondition {
+            whenButtonPressed: @exportexcel
+        }
+    )
+
+    branch (
+        name: Go To Page 210
+        execution {
+            sequence: 10
+        }
+        behavior {
+            target: {
+                page: 210
+                clearCache: 210
+                action: resetPagination
+            }
+        }
+        serverSideCondition {
+            whenButtonPressed: @exportexcel
+        }
+    )
+
+)

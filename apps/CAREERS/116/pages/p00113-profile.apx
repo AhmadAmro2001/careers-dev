@@ -1,0 +1,2710 @@
+page 113 (
+    name: Profile
+    alias: PROFILE
+    title: "&{PROFILE}."
+    appearance {
+        pageTemplate: @/blank
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    css {
+        inline:
+            ```css
+            .profile-title{
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+                justify-content:center;
+                padding:10px 0;
+            }
+            
+            .profile-big-icon{
+                font-size:70px;
+                color:#6C63FF;
+                margin-bottom:10px;
+            }
+            
+            .profile-user-name{
+                font-size:22px;
+                font-weight:600;
+                color:#333;
+            }
+            
+            
+            /* Region Container */
+            #modern_report {
+                background: #f8fafc;
+                border-radius: 18px;
+                padding: 18px;
+                box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+                border: none;
+            }
+            
+            /* Report Table */
+            #modern_report .t-Report-report {
+                border-collapse: separate;
+                border-spacing: 0 10px;
+                width: 100%;
+            }
+            
+            /* Header */
+            #modern_report .t-Report-colHead {
+                background: #001b47;
+                color: white;
+                font-size: 14px;
+                font-weight: 600;
+                padding: 14px;
+                border: none;
+            }
+            
+            /* Header First/Last Radius */
+            #modern_report .t-Report-colHead:first-child {
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
+            }
+            
+            #modern_report .t-Report-colHead:last-child {
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+            }
+            
+            /* Rows */
+            #modern_report .t-Report-report tbody tr {
+                background: white;
+                transition: 0.3s;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            }
+            
+            /* Rows Links */
+            #modern_report .t-Report-report tbody tr a{
+                color: rgb(0, 48, 65);
+                text-decoration: none;
+                font-weight: 600;
+            }
+            
+            #modern_report .t-Report-report tbody tr a:hover{
+                color: rgb(0, 119, 255);
+            }
+            
+            /* Hover Effect */
+            #modern_report .t-Report-report tbody tr:hover {
+                transform: scale(1.01);
+                background: #f1f5f9;
+            }
+            
+            /* Cells */
+            #modern_report .t-Report-cell {
+                padding: 16px;
+                border: none;
+                font-size: 14px;
+                color: #334155;
+            }
+            
+            /* First Cell Radius */
+            #modern_report .t-Report-cell:first-child {
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
+            }
+            
+            /* Last Cell Radius */
+            #modern_report .t-Report-cell:last-child {
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+            }
+            
+            /* Pagination */
+            #modern_report .t-Report-pagination {
+                margin-top: 15px;
+                text-align: center;
+            }
+            
+            /* Links */
+            #modern_report a {
+                color: rgb(169, 234, 255);
+                text-decoration: none;
+                font-weight: 600;
+            }
+            
+            #modern_report a:hover {
+                color: #9db7ff;
+            }
+            
+            #modern_report,
+            #modern_report .t-Region-body,
+            #modern_report .t-Report,
+            #modern_report .t-Report-wrap,
+            #modern_report .t-Report-tableWrap {
+                border: none !important;
+                box-shadow: none !important;
+                background: transparent !important;
+            }
+            
+            /* Remove table borders */
+            #modern_report table,
+            #modern_report th,
+            #modern_report td {
+                border: none !important;
+            }
+            
+            /* Remove outer gray line */
+            #modern_report .t-Report-report {
+                border: none !important;
+                outline: none !important;
+            }
+            
+            
+            
+            /* ========================================================== */
+            /* CUSTOM NAVBAR                                               */
+            /* ========================================================== */
+            
+            .custom-navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            
+                background: rgb(233, 233, 233);
+            
+                padding: 14px 24px;
+            
+                border-radius: 18px;
+            
+                box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            
+                margin-bottom: 20px;
+            }
+            
+            /* Left Links */
+            .nav-left {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            
+            /* Nav Links */
+            .nav-link {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            
+                text-decoration: none;
+            
+                color: #334155;
+            
+                padding: 10px 18px;
+            
+                border-radius: 12px;
+            
+                font-weight: 600;
+            
+                transition: all 0.3s ease;
+            }
+            
+            /* Hover */
+            .nav-link:hover {
+                background: rgb(232, 244, 255);
+                color: #0563bb;
+            }
+            
+            /* Logout Button */
+            .logout-btn {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            
+                background: #ef4444;
+            
+                color: white !important;
+            
+                text-decoration: none;
+            
+                padding: 10px 18px;
+            
+                border-radius: 12px;
+            
+                font-weight: 600;
+            
+                transition: all 0.3s ease;
+            }
+            
+            /* Logout Hover */
+            .logout-btn:hover {
+                background: #dc2626;
+                transform: translateY(-1px);
+            }
+            
+            /* Icons */
+            .custom-navbar .fa {
+                font-size: 14px;
+            }
+            
+            
+            [data-header="National Id Image"] img,
+            [data-header="NATIONAL_ID_IMAGE"] img {
+                width: 300px !important;
+                height: 100px !important;
+            }
+            
+            
+            img {
+                width: 250px !important;
+                height: 100px !important;
+                object-fit: cover;
+                border-radius: 10px;
+            }
+            
+            .nav-right {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .user-name {
+                color: #333;
+                font-weight: 600;
+            }
+            
+            
+            /* Make navbar wrap on small screens */
+            .custom-navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap; /* مهم جداً */
+            }
+            
+            /* Mobile & small tablets */
+            @media (max-width: 768px) {
+                .custom-navbar {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 12px;
+                }
+            
+                .nav-left,
+                .nav-right {
+                    width: 100%;
+                    justify-content: flex-start;
+                    flex-wrap: wrap;
+                }
+            
+                .nav-link,
+                .logout-btn {
+                    width: 100%;
+                    justify-content: center;
+                }
+            
+                .user-name {
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+            
+            /* Very small screens (phones) */
+            @media (max-width: 480px) {
+                .nav-link,
+                .logout-btn {
+                    padding: 12px;
+                    font-size: 14px;
+                }
+            
+                .custom-navbar {
+                    padding: 12px;
+                }
+            }
+            
+            
+            /* Region Container */
+            #language_1 {
+                background: #f8fafc;
+                border-radius: 18px;
+                padding: 18px;
+                box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+                border: none;
+            }
+            
+            /* Report Table */
+            #language_1 .t-Report-report {
+                border-collapse: separate;
+                border-spacing: 0 10px;
+                width: 100%;
+            }
+            
+            /* Header */
+            #language_1 .t-Report-colHead {
+                background: #001b47;
+                color: white;
+                font-size: 14px;
+                font-weight: 600;
+                padding: 14px;
+                border: none;
+            }
+            
+            /* Header First/Last Radius */
+            #language_1 .t-Report-colHead:first-child {
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
+            }
+            
+            #language_1 .t-Report-colHead:last-child {
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+            }
+            
+            /* Rows */
+            #language_1 .t-Report-report tbody tr {
+                background: white;
+                transition: 0.3s;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            }
+            
+            /* Rows Links */
+            #language_1 .t-Report-report tbody tr a{
+                color: rgb(0, 48, 65);
+                text-decoration: none;
+                font-weight: 600;
+            }
+            
+            #language_1 .t-Report-report tbody tr a:hover{
+                color: rgb(0, 119, 255);
+            }
+            
+            /* Hover Effect */
+            #language_1 .t-Report-report tbody tr:hover {
+                transform: scale(1.01);
+                background: #f1f5f9;
+            }
+            
+            /* Cells */
+            #language_1 .t-Report-cell {
+                padding: 16px;
+                border: none;
+                font-size: 14px;
+                color: #334155;
+            }
+            
+            /* First Cell Radius */
+            #language_1 .t-Report-cell:first-child {
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
+            }
+            
+            /* Last Cell Radius */
+            #language_1 .t-Report-cell:last-child {
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+            }
+            
+            /* Pagination */
+            #language_1 .t-Report-pagination {
+                margin-top: 15px;
+                text-align: center;
+            }
+            
+            /* Links */
+            #language_1 a {
+                color: rgb(169, 234, 255);
+                text-decoration: none;
+                font-weight: 600;
+            }
+            
+            #language_1 a:hover {
+                color: #9db7ff;
+            }
+            
+            #language_1,
+            #language_1 .t-Region-body,
+            #language_1 .t-Report,
+            #language_1 .t-Report-wrap,
+            #language_1 .t-Report-tableWrap {
+                border: none !important;
+                box-shadow: none !important;
+                background: transparent !important;
+            }
+            
+            /* Remove table borders */
+            #language_1 table,
+            #language_1 th,
+            #language_1 td {
+                border: none !important;
+            }
+            
+            /* Remove outer gray line */
+            #language_1 .t-Report-report {
+                border: none !important;
+                outline: none !important;
+            }
+            
+            
+            
+            
+            
+            
+            /* experience_2 Region Container */
+            #experience_2 {
+                background: #f8fafc;
+                border-radius: 18px;
+                padding: 18px;
+                box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+                border: none;
+            }
+            
+            /* Report Table */
+            #experience_2 .t-Report-report {
+                border-collapse: separate;
+                border-spacing: 0 10px;
+                width: 100%;
+            }
+            
+            /* Header */
+            #experience_2 .t-Report-colHead {
+                background: #001b47;
+                color: white;
+                font-size: 14px;
+                font-weight: 600;
+                padding: 14px;
+                border: none;
+            }
+            
+            /* Header First/Last Radius */
+            #experience_2 .t-Report-colHead:first-child {
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
+            }
+            
+            #experience_2 .t-Report-colHead:last-child {
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+            }
+            
+            /* Rows */
+            #experience_2 .t-Report-report tbody tr {
+                background: white;
+                transition: 0.3s;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            }
+            
+            /* Rows Links */
+            #experience_2 .t-Report-report tbody tr a{
+                color: rgb(0, 48, 65);
+                text-decoration: none;
+                font-weight: 600;
+            }
+            
+            #experience_2 .t-Report-report tbody tr a:hover{
+                color: rgb(0, 119, 255);
+            }
+            
+            /* Hover Effect */
+            #experience_2 .t-Report-report tbody tr:hover {
+                transform: scale(1.01);
+                background: #f1f5f9;
+            }
+            
+            /* Cells */
+            #experience_2 .t-Report-cell {
+                padding: 16px;
+                border: none;
+                font-size: 14px;
+                color: #334155;
+            }
+            
+            /* First Cell Radius */
+            #experience_2 .t-Report-cell:first-child {
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
+            }
+            
+            /* Last Cell Radius */
+            #experience_2 .t-Report-cell:last-child {
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+            }
+            
+            /* Pagination */
+            #experience_2 .t-Report-pagination {
+                margin-top: 15px;
+                text-align: center;
+            }
+            
+            /* Links */
+            #experience_2 a {
+                color: rgb(169, 234, 255);
+                text-decoration: none;
+                font-weight: 600;
+            }
+            
+            #experience_2 a:hover {
+                color: #9db7ff;
+            }
+            
+            #experience_2,
+            #experience_2 .t-Region-body,
+            #experience_2 .t-Report,
+            #experience_2 .t-Report-wrap,
+            #experience_2 .t-Report-tableWrap {
+                border: none !important;
+                box-shadow: none !important;
+                background: transparent !important;
+            }
+            
+            /* Remove table borders */
+            #experience_2 table,
+            #experience_2 th,
+            #experience_2 td {
+                border: none !important;
+            }
+            
+            /* Remove outer gray line */
+            #experience_2 .t-Report-report {
+                border: none !important;
+                outline: none !important;
+            }
+            
+            
+            
+            
+            
+            
+            /* application_2 Region Container */
+            #application_2 {
+                background: #f8fafc;
+                border-radius: 18px;
+                padding: 18px;
+                box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+                border: none;
+            }
+            
+            /* Report Table */
+            #application_2 .t-Report-report {
+                border-collapse: separate;
+                border-spacing: 0 10px;
+                width: 100%;
+            }
+            
+            /* Header */
+            #application_2 .t-Report-colHead {
+                background: #001b47;
+                color: white;
+                font-size: 14px;
+                font-weight: 600;
+                padding: 14px;
+                border: none;
+            }
+            
+            /* Header First/Last Radius */
+            #application_2 .t-Report-colHead:first-child {
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
+            }
+            
+            #application_2 .t-Report-colHead:last-child {
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+            }
+            
+            /* Rows */
+            #application_2 .t-Report-report tbody tr {
+                background: white;
+                transition: 0.3s;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            }
+            
+            /* Rows Links */
+            #application_2 .t-Report-report tbody tr a{
+                color: rgb(0, 48, 65);
+                text-decoration: none;
+                font-weight: 600;
+            }
+            
+            #application_2 .t-Report-report tbody tr a:hover{
+                color: rgb(0, 119, 255);
+            }
+            
+            /* Hover Effect */
+            #application_2 .t-Report-report tbody tr:hover {
+                transform: scale(1.01);
+                background: #f1f5f9;
+            }
+            
+            /* Cells */
+            #application_2 .t-Report-cell {
+                padding: 16px;
+                border: none;
+                font-size: 14px;
+                color: #334155;
+            }
+            
+            /* First Cell Radius */
+            #application_2 .t-Report-cell:first-child {
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
+            }
+            
+            /* Last Cell Radius */
+            #application_2 .t-Report-cell:last-child {
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+            }
+            
+            /* Pagination */
+            #application_2 .t-Report-pagination {
+                margin-top: 15px;
+                text-align: center;
+            }
+            
+            /* Links */
+            #application_2 a {
+                color: rgb(169, 234, 255);
+                text-decoration: none;
+                font-weight: 600;
+            }
+            
+            #application_2 a:hover {
+                color: #9db7ff;
+            }
+            
+            #application_2,
+            #application_2 .t-Region-body,
+            #application_2 .t-Report,
+            #application_2 .t-Report-wrap,
+            #application_2 .t-Report-tableWrap {
+                border: none !important;
+                box-shadow: none !important;
+                background: transparent !important;
+            }
+            
+            /* Remove table borders */
+            #application_2 table,
+            #application_2 th,
+            #application_2 td {
+                border: none !important;
+            }
+            
+            /* Remove outer gray line */
+            #application_2 .t-Report-report {
+                border: none !important;
+                outline: none !important;
+            }
+            
+            
+            /* ========================================================== */
+            /* RESPONSIVE IMPROVEMENTS                                    */
+            /* ========================================================== */
+            
+            /* Tablets */
+            @media (max-width: 992px) {
+            
+                .profile-big-icon {
+                    font-size: 60px;
+                }
+            
+                .profile-user-name {
+                    font-size: 20px;
+                    text-align: center;
+                    word-break: break-word;
+                }
+            
+                #modern_report,
+                #language_1,
+                #experience_2,
+                #application_2 {
+                    padding: 14px;
+                }
+            
+                #modern_report .t-Report-cell,
+                #language_1 .t-Report-cell,
+                #experience_2 .t-Report-cell,
+                #application_2 .t-Report-cell {
+                    padding: 12px;
+                }
+            }
+            
+            
+            /* Mobile */
+            @media (max-width: 768px) {
+            
+                /* Profile Header */
+                .profile-title {
+                    padding: 15px 10px;
+                    text-align: center;
+                }
+            
+                .profile-big-icon {
+                    font-size: 55px;
+                }
+            
+                .profile-user-name {
+                    font-size: 18px;
+                    word-break: break-word;
+                }
+            
+                /* User Email */
+                .user-name {
+                    word-break: break-word;
+                    overflow-wrap: break-word;
+                }
+            
+                /* Region Padding */
+                #modern_report,
+                #language_1,
+                #experience_2,
+                #application_2 {
+                    padding: 10px;
+                }
+            
+                /* Horizontal Scroll For Reports */
+                #modern_report .t-Report-tableWrap,
+                #language_1 .t-Report-tableWrap,
+                #experience_2 .t-Report-tableWrap,
+                #application_2 .t-Report-tableWrap {
+                    overflow-x: auto;
+                    -webkit-overflow-scrolling: touch;
+                }
+            
+                #modern_report .t-Report-report,
+                #language_1 .t-Report-report,
+                #experience_2 .t-Report-report,
+                #application_2 .t-Report-report {
+                    min-width: 700px;
+                }
+            
+                /* Table Text */
+                #modern_report .t-Report-cell,
+                #language_1 .t-Report-cell,
+                #experience_2 .t-Report-cell,
+                #application_2 .t-Report-cell {
+                    font-size: 13px;
+                    padding: 10px;
+                }
+            
+                /* Images */
+                img {
+                    max-width: 100% !important;
+                    height: auto !important;
+                }
+            
+                [data-header="National Id Image"] img,
+                [data-header="NATIONAL_ID_IMAGE"] img {
+                    width: 180px !important;
+                    height: auto !important;
+                }
+            }
+            
+            
+            /* Small Phones */
+            @media (max-width: 480px) {
+            
+                .profile-big-icon {
+                    font-size: 45px;
+                }
+            
+                .profile-user-name {
+                    font-size: 16px;
+                }
+            
+                .custom-navbar {
+                    padding: 10px;
+                }
+            
+                .nav-link,
+                .logout-btn {
+                    font-size: 13px;
+                    padding: 10px;
+                }
+            
+                .user-name {
+                    font-size: 13px;
+                }
+            
+                #modern_report,
+                #language_1,
+                #experience_2,
+                #application_2 {
+                    padding: 8px;
+                }
+            }
+            
+            /* Prevent horizontal overflow */
+            html,
+            body,
+            .t-Body-content,
+            .t-Body-main,
+            .t-Body-contentInner {
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+            
+            /* All regions */
+            .t-Region {
+                max-width: 100%;
+            }
+            
+            /* All images */
+            img {
+                max-width: 100% !important;
+                height: auto !important;
+            }
+            
+            /* Long text */
+            .user-name,
+            .profile-user-name,
+            td,
+            th {
+                overflow-wrap: break-word;
+                word-break: break-word;
+            }
+            
+            
+            .guide-container {
+                width: 100%;
+                max-width: 1030px;
+                margin: 20px auto;
+                box-sizing: border-box;
+            }
+            ```
+    }
+    security {
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region acc-reg (
+        name: Acc_reg
+        title: "&{ACCREG}."
+        type: staticContent
+        source {
+            htmlCode:
+                ```html
+                <div class="profile-title">
+                    <div class="profile-user-name">
+                        &P113_USER_NAME.
+                    </div>
+                </div>
+                ```
+        }
+        layout {
+            sequence: 40
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--removeHeader js-removeLandmark
+                t-Region--noBorder
+                t-Region--scrollBody
+            ]
+        }
+    )
+
+    region application2 (
+        name: Application2
+        title: "&{APPLICATION}."
+        type: classicReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select jvp.ID,
+                       jvp.VACANCY_ID,
+                       jvp.DATE_TIME,
+                       jv.title,
+                       jvp.ID AS EDIT
+                  from JOB_VACANCY_APPLICATION jvp
+                  join job_application japp on japp.id = jvp.application_id
+                  join job_vacancy jv on jv.id = jvp.vacancy_id
+                  where japp.account_id = :APP_USER_ACC_ID;
+                ```
+        }
+        layout {
+            sequence: 110
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        advanced {
+            htmlDomId: application_2
+        }
+        config {
+            buildOption: @commented-out
+        }
+        componentAppearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Report--altRowsDefault
+                t-Report--rowHighlight
+            ]
+        }
+        messages {
+            whenNoDataFound: you have not entered any data
+        }
+
+        column DATE_TIME (
+            reportColumnQueryId: 3
+            derivedColumn: N
+            heading {
+                heading: "&{DATE_TIME}."
+            }
+            layout {
+                sequence: 50
+            }
+        )
+
+        column EDIT (
+            reportColumnQueryId: 5
+            derivedColumn: N
+            type: link
+            heading {
+                heading: "&{EDIT}."
+                alignment: center
+            }
+            layout {
+                sequence: 20
+                columnAlignment: center
+            }
+            link {
+                target: {
+                    page: 126
+                    items: {
+                        P126_ID: #ID#
+                    }
+                }
+                linkText: <span role="img" aria-label="Edit" class="fa fa-edit" title="Edit"></span>
+            }
+        )
+
+        column ID (
+            reportColumnQueryId: 1
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 10
+            }
+        )
+
+        column TITLE (
+            reportColumnQueryId: 4
+            derivedColumn: N
+            heading {
+                heading: "&{TITLE}."
+            }
+            layout {
+                sequence: 30
+            }
+        )
+
+        column VACANCY_ID (
+            reportColumnQueryId: 2
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 40
+            }
+        )
+
+    )
+
+    region education (
+        name: Education
+        title: "&{EDUCATION}."
+        type: classicReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select eduD.GRADUATION_CERTIFICATE_FILE_ID,
+                       eduD.id as eduD_id,
+                       j.id,
+                       j.file_name,
+                       dbms_lob.getlength(j.file_blob) as image,
+                       eduD.EDUCATION_LEVEL as EDUCATION_LEVEL_ID,
+                       eduD.EDUCATION_FIELD as EDUCATION_FIELD_ID,
+                       eduD.GRADUATION_YEAR,
+                       eduD.EDUCATION_GRADE as EDUCATION_GRADE_ID,
+                       eduD.UNIVERSITY,
+                       eduD.OTHER_EDUCATION_FIELD,
+                       eduD.PERSONAL_ID,
+                       eduD.ID AS EDIT,
+                       eduL.name as EDUCATION_LEVEL,
+                       eduF.name as EDUCATION_FIELD,
+                       eduG.name as EDUCATION_GRADE
+                  from EDUCATION_DEGREE eduD
+                  join personal_info pi on pi.id = eduD.personal_id
+                  join education_level eduL on eduL.id = eduD.EDUCATION_LEVEL
+                  join EDUCATION_FIELD eduF on eduF.id = eduD.EDUCATION_FIELD
+                  join EDUCATION_GRADE eduG on eduG.id = eduD.EDUCATION_GRADE
+                  
+                  left join job_application_attachments j
+                           on j.id = eduD.GRADUATION_CERTIFICATE_FILE_ID
+                  where personal_id = :APP_USER_PERS_ID;
+                ```
+        }
+        layout {
+            sequence: 60
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        advanced {
+            htmlDomId: modern_report
+        }
+        componentAppearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Report--altRowsDefault
+                t-Report--rowHighlight
+            ]
+        }
+        pagination {
+            type: nextAndPreviousLinks
+        }
+        messages {
+            whenNoDataFound: you have not entered any data
+        }
+
+        column EDIT (
+            reportColumnQueryId: 13
+            derivedColumn: N
+            type: link
+            heading {
+                heading: "&{EDIT}."
+                alignment: center
+            }
+            layout {
+                sequence: 20
+                columnAlignment: center
+            }
+            link {
+                target: {
+                    page: 116
+                    items: {
+                        P116_ID: #EDUD_ID#
+                    }
+                    action: clearRegions
+                }
+                linkText: <span role="img" aria-label="Edit" class="fa fa-edit" title="Edit"></span>
+            }
+        )
+
+        column EDUCATION_FIELD (
+            reportColumnQueryId: 15
+            derivedColumn: N
+            heading {
+                heading: "&{EDUCATION_FIELD}."
+                alignment: center
+            }
+            layout {
+                sequence: 40
+                columnAlignment: center
+            }
+        )
+
+        column EDUCATION_FIELD_ID (
+            reportColumnQueryId: 7
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 140
+            }
+        )
+
+        column EDUCATION_GRADE (
+            reportColumnQueryId: 16
+            derivedColumn: N
+            heading {
+                heading: "&{EDUCATION_GRADE}."
+                alignment: center
+            }
+            layout {
+                sequence: 60
+                columnAlignment: center
+            }
+        )
+
+        column EDUCATION_GRADE_ID (
+            reportColumnQueryId: 9
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 150
+            }
+        )
+
+        column EDUCATION_LEVEL (
+            reportColumnQueryId: 14
+            derivedColumn: N
+            heading {
+                heading: "&{EDUCATION_LEVEL}."
+                alignment: center
+            }
+            layout {
+                sequence: 30
+                columnAlignment: center
+            }
+        )
+
+        column EDUCATION_LEVEL_ID (
+            reportColumnQueryId: 6
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 130
+            }
+        )
+
+        column EDUD_ID (
+            reportColumnQueryId: 2
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 170
+            }
+        )
+
+        column FILE_NAME (
+            reportColumnQueryId: 4
+            derivedColumn: N
+            heading {
+                heading: "&{FILE_NAME}."
+            }
+            layout {
+                sequence: 110
+            }
+            config {
+                buildOption: @commented-out
+            }
+        )
+
+        column GRADUATION_CERTIFICATE_FILE_ID (
+            reportColumnQueryId: 1
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 160
+            }
+        )
+
+        column GRADUATION_YEAR (
+            reportColumnQueryId: 8
+            derivedColumn: N
+            heading {
+                heading: "&{GRADUATION_YEAR}."
+                alignment: center
+            }
+            layout {
+                sequence: 50
+                columnAlignment: center
+            }
+        )
+
+        column ID (
+            reportColumnQueryId: 3
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 10
+            }
+        )
+
+        column IMAGE (
+            reportColumnQueryId: 5
+            derivedColumn: N
+            type: downloadBlob
+            heading {
+                heading: "&{Graduation_Certificate}."
+                alignment: center
+            }
+            layout {
+                sequence: 90
+                columnAlignment: center
+            }
+            blobAttributes {
+                tableName: JOB_APPLICATION_ATTACHMENTS
+                blobColumn: FILE_BLOB
+                primaryKeyColumn1: ID
+                filenameColumn: FILE_NAME
+            }
+        )
+
+        column OTHER_EDUCATION_FIELD (
+            reportColumnQueryId: 11
+            derivedColumn: N
+            heading {
+                heading: "&{OTHER_EDUCATION_FIELD}."
+                alignment: center
+            }
+            layout {
+                sequence: 100
+                columnAlignment: center
+            }
+        )
+
+        column PERSONAL_ID (
+            reportColumnQueryId: 12
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 120
+            }
+        )
+
+        column UNIVERSITY (
+            reportColumnQueryId: 10
+            derivedColumn: N
+            heading {
+                heading: "&{UNIVERSITY}."
+                alignment: center
+            }
+            layout {
+                sequence: 70
+                columnAlignment: center
+            }
+        )
+
+    )
+
+    region experience (
+        name: Experience
+        title: "&{EXPERIENCE}."
+        type: classicReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select app_exp.ID,
+                       app_exp.POSITION_NAME,
+                       app_exp.COMPANY,
+                       C.name as Country_name,
+                       app_exp.OTHER_DETAILS,
+                       app_exp.FROMDATE,
+                       app_exp.TODATE,
+                       app_exp.ID AS EDIT
+                  from JOB_APPLICATION_EXPERIENCE app_exp
+                  join COUNTRY C on c.id = app_exp.COUNTRY_ID
+                  
+                  where personal_id = :APP_USER_PERS_ID;
+                ```
+        }
+        layout {
+            sequence: 90
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        advanced {
+            htmlDomId: modern_report
+        }
+        config {
+            buildOption: @commented-out
+        }
+        componentAppearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Report--altRowsDefault
+                t-Report--rowHighlight
+            ]
+        }
+        pagination {
+            type: nextAndPreviousLinks
+        }
+
+        column COMPANY (
+            reportColumnQueryId: 3
+            derivedColumn: N
+            heading {
+                heading: "&{COMPANY}."
+            }
+            layout {
+                sequence: 40
+            }
+        )
+
+        column COUNTRY_NAME (
+            reportColumnQueryId: 4
+            derivedColumn: N
+            heading {
+                heading: "&{COUNTRY_NAME}."
+            }
+            layout {
+                sequence: 50
+            }
+        )
+
+        column EDIT (
+            reportColumnQueryId: 8
+            derivedColumn: N
+            type: link
+            heading {
+                heading: "&{EDIT}."
+                alignment: center
+            }
+            layout {
+                sequence: 20
+                columnAlignment: center
+            }
+            link {
+                target: {
+                    page: 118
+                    items: {
+                        P118_ID: #ID#
+                    }
+                    action: clearRegions
+                }
+                linkText: <span role="img" aria-label="Edit" class="fa fa-edit" title="Edit"></span>
+            }
+        )
+
+        column FROMDATE (
+            reportColumnQueryId: 6
+            derivedColumn: N
+            heading {
+                heading: "&{FROMDATE}."
+            }
+            layout {
+                sequence: 70
+            }
+        )
+
+        column ID (
+            reportColumnQueryId: 1
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 10
+            }
+        )
+
+        column OTHER_DETAILS (
+            reportColumnQueryId: 5
+            derivedColumn: N
+            heading {
+                heading: "&{OTHER_DETAILS}."
+            }
+            layout {
+                sequence: 60
+            }
+        )
+
+        column POSITION_NAME (
+            reportColumnQueryId: 2
+            derivedColumn: N
+            heading {
+                heading: "&{POSITION_NAME}."
+            }
+            layout {
+                sequence: 30
+            }
+        )
+
+        column TODATE (
+            reportColumnQueryId: 7
+            derivedColumn: N
+            heading {
+                heading: "&{TODATE}."
+            }
+            layout {
+                sequence: 80
+            }
+        )
+
+    )
+
+    region experience2 (
+        name: Experience2
+        title: "&{EXPERIENCE}."
+        type: classicReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select app_exp.ID,
+                       app_exp.POSITION_NAME,
+                       app_exp.COMPANY,
+                       C.name as Country_name,
+                       app_exp.OTHER_DETAILS,
+                       app_exp.FROMDATE,
+                       app_exp.TODATE,
+                       app_exp.ID AS EDIT
+                  from JOB_APPLICATION_EXPERIENCE app_exp
+                  join COUNTRY C on c.id = app_exp.COUNTRY_ID
+                  
+                  where personal_id = :APP_USER_PERS_ID;
+                ```
+        }
+        layout {
+            sequence: 100
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        advanced {
+            htmlDomId: experience_2
+        }
+        componentAppearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Report--altRowsDefault
+                t-Report--rowHighlight
+            ]
+        }
+        messages {
+            whenNoDataFound: you have not entered any data
+        }
+
+        column COMPANY (
+            reportColumnQueryId: 3
+            derivedColumn: N
+            heading {
+                heading: "&{COMPANY}."
+                alignment: center
+            }
+            layout {
+                sequence: 40
+                columnAlignment: center
+            }
+        )
+
+        column COUNTRY_NAME (
+            reportColumnQueryId: 4
+            derivedColumn: N
+            heading {
+                heading: "&{COUNTRY_NAME}."
+                alignment: center
+            }
+            layout {
+                sequence: 50
+                columnAlignment: center
+            }
+        )
+
+        column EDIT (
+            reportColumnQueryId: 8
+            derivedColumn: N
+            type: link
+            heading {
+                heading: "&{EDIT}."
+                alignment: center
+            }
+            layout {
+                sequence: 20
+                columnAlignment: center
+            }
+            link {
+                target: {
+                    page: 118
+                    items: {
+                        P118_ID: #ID#
+                    }
+                }
+                linkText: <span role="img" aria-label="Edit" class="fa fa-edit" title="Edit"></span>
+            }
+        )
+
+        column FROMDATE (
+            reportColumnQueryId: 6
+            derivedColumn: N
+            heading {
+                heading: From Date
+                alignment: center
+            }
+            layout {
+                sequence: 70
+                columnAlignment: center
+            }
+        )
+
+        column ID (
+            reportColumnQueryId: 1
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 10
+            }
+        )
+
+        column OTHER_DETAILS (
+            reportColumnQueryId: 5
+            derivedColumn: N
+            heading {
+                heading: "&{OTHER_DETAILS}."
+                alignment: center
+            }
+            layout {
+                sequence: 90
+                columnAlignment: center
+            }
+        )
+
+        column POSITION_NAME (
+            reportColumnQueryId: 2
+            derivedColumn: N
+            heading {
+                heading: "&{POSITION_NAME}."
+                alignment: center
+            }
+            layout {
+                sequence: 30
+                columnAlignment: center
+            }
+        )
+
+        column TODATE (
+            reportColumnQueryId: 7
+            derivedColumn: N
+            heading {
+                heading: To Date
+                alignment: center
+            }
+            layout {
+                sequence: 80
+                columnAlignment: center
+            }
+        )
+
+    )
+
+    region guide-message (
+        name: guide message
+        type: staticContent
+        source {
+            htmlCode:
+                ```html
+                <div class="grid-box-bg-blue">
+                 
+                    <div class="">
+                        ⚠️
+                    </div> 
+                
+                    <div class="guide-content">
+                        <!-- <div class="guide-title">
+                            User Guide
+                        </div> -->
+                
+                        <p>
+                           View your personal information and click the Edit button to update any incorrect details.      
+                        </p>
+                    </div>
+                </div>
+                ```
+        }
+        layout {
+            sequence: 30
+            slot: body
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--noPadding
+                t-Region--removeHeader js-removeLandmark
+                t-Region--scrollBody
+            ]
+            cssClasses: guide-container
+        }
+    )
+
+    region language (
+        name: Language
+        title: "&{LANGUAGE}."
+        type: classicReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select app_lang.ID,
+                       lang.name as language,
+                       lang_lev.name as language_Level,
+                       app_lang.ID AS EDIT
+                  from JOB_APPLICATION_LANGUAGE app_lang
+                  join LANGUAGE lang on lang.id = app_lang.LANGUAGE_ID
+                  join LANGUAGE_LEVEL lang_lev on lang_lev.id = app_lang.LANGUAGE_LEVEL_ID
+                  Where Personal_id = :APP_USER_PERS_ID;
+                ```
+        }
+        layout {
+            sequence: 70
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        advanced {
+            htmlDomId: modern_report
+        }
+        serverSideCondition {
+            type: never
+        }
+        config {
+            buildOption: @commented-out
+        }
+        componentAppearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Report--altRowsDefault
+                t-Report--rowHighlight
+            ]
+        }
+        pagination {
+            type: nextAndPreviousLinks
+        }
+
+        column EDIT (
+            reportColumnQueryId: 4
+            derivedColumn: N
+            type: link
+            heading {
+                heading: "&{EDIT}."
+                alignment: center
+            }
+            layout {
+                sequence: 20
+                columnAlignment: center
+            }
+            link {
+                target: {
+                    page: 117
+                    items: {
+                        P117_ID: #ID#
+                    }
+                    action: clearRegions
+                }
+                linkText: <span role="img" aria-label="Edit" class="fa fa-edit" title="Edit"></span>
+            }
+        )
+
+        column ID (
+            reportColumnQueryId: 1
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 10
+            }
+        )
+
+        column LANGUAGE (
+            reportColumnQueryId: 2
+            derivedColumn: N
+            heading {
+                heading: "&{LANGUAGE}."
+            }
+            layout {
+                sequence: 30
+            }
+        )
+
+        column LANGUAGE_LEVEL (
+            reportColumnQueryId: 3
+            derivedColumn: N
+            heading {
+                heading: "&{LANGUAGE_LEVEL}."
+            }
+            layout {
+                sequence: 40
+            }
+        )
+
+    )
+
+    region language_1 (
+        name: Language2
+        title: "&{LANGUAGE}."
+        type: classicReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select app_lang.ID,
+                       lang.name as language,
+                       lang_lev.name as language_Level,
+                       app_lang.ID AS EDIT
+                  from JOB_APPLICATION_LANGUAGE app_lang
+                  join LANGUAGE lang on lang.id = app_lang.LANGUAGE_ID
+                  join LANGUAGE_LEVEL lang_lev on lang_lev.id = app_lang.LANGUAGE_LEVEL_ID
+                  Where Personal_id = :APP_USER_PERS_ID;
+                ```
+        }
+        layout {
+            sequence: 80
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        advanced {
+            htmlDomId: language_1
+        }
+        componentAppearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Report--altRowsDefault
+                t-Report--rowHighlight
+            ]
+        }
+        messages {
+            whenNoDataFound: you have not entered any data
+        }
+
+        column EDIT (
+            reportColumnQueryId: 4
+            derivedColumn: N
+            type: link
+            heading {
+                heading: "&{EDIT}."
+                alignment: center
+            }
+            layout {
+                sequence: 20
+                columnAlignment: center
+            }
+            link {
+                target: {
+                    page: 117
+                    items: {
+                        P117_ID: #ID#
+                    }
+                }
+                linkText: <span role="img" aria-label="Edit" class="fa fa-edit" title="Edit"></span>
+            }
+        )
+
+        column ID (
+            reportColumnQueryId: 1
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 10
+            }
+        )
+
+        column LANGUAGE (
+            reportColumnQueryId: 2
+            derivedColumn: N
+            heading {
+                heading: "&{LANGUAGE}."
+                alignment: center
+            }
+            layout {
+                sequence: 30
+                columnAlignment: center
+            }
+        )
+
+        column LANGUAGE_LEVEL (
+            reportColumnQueryId: 3
+            derivedColumn: N
+            heading {
+                heading: "&{LANGUAGE_LEVEL}."
+                alignment: center
+            }
+            layout {
+                sequence: 40
+                columnAlignment: center
+            }
+        )
+
+    )
+
+    region navbar (
+        name: navbar
+        title: "&{NAVBAR}."
+        type: appTemplateComponent/appliocantNavbar
+        layout {
+            sequence: 20
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        componentAppearance {
+            display: regionOnly
+        }
+        settings {
+            personalCheck: &PERSONAL_CHECK.
+        }
+    )
+
+    region navbar-2 (
+        name: navBar
+        title: "&{NAVBAR_1}."
+        type: staticContent
+        source {
+            htmlCode: "&{PLUG_SOURCE_1 APP_ID=&APP_ID.}!RAW."
+        }
+        layout {
+            sequence: 10
+            slot: body
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--removeHeader js-removeLandmark
+                t-Region--noBorder
+                t-Region--scrollBody
+            ]
+        }
+        advanced {
+            htmlDomId: top_navbar
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    region personal-info-data (
+        name: Personal Info Data
+        title: Personal Data Information
+        type: classicReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select acc.ID AS ACC_ID,
+                       acc.FIRST_NAME,
+                       acc.LAST_NAME,
+                       acc.DATE_OF_BIRTH,
+                       acc.GENDER,
+                       acc.EMAIL,
+                       acc.MOBILE_TELEPHONE,
+                       acc.HOME_TELEPHONE,
+                       acc.ADDRESS,
+                       c.name,
+                       acc.JOIN_DATE,
+                       acc.NATIONAL_ID,
+                       acc.SECOND_NAME,
+                       acc.PASSPORT_NUMBER,
+                       acc.COUNTRY_ID,
+                       cou.name as Country_Name,
+                       acc.COUNTRY_PHONE_CODE_ID,
+                       acc.ID AS EDIT
+                  from ACCOUNT acc
+                  join country cou on cou.id = acc.country_id   
+                  JOIN CITIES c on c.id = acc.city_id 
+                  where acc.id =  :APP_USER_ACC_ID;
+                
+                
+                ```
+        }
+        layout {
+            sequence: 50
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        componentAppearance {
+            template: @/value-attribute-pairs-column
+            templateOptions: [
+                #DEFAULT#
+                t-AVPList--leftAligned
+            ]
+        }
+
+        column ACC_ID (
+            reportColumnQueryId: 1
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 10
+            }
+        )
+
+        column ADDRESS (
+            reportColumnQueryId: 9
+            derivedColumn: N
+            heading {
+                heading: "&{ADDRESS}."
+            }
+            layout {
+                sequence: 130
+            }
+        )
+
+        column COUNTRY_ID (
+            reportColumnQueryId: 15
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 160
+            }
+            uiDefaultsReference {
+                tableName: COUNTRY
+                column: NAME
+            }
+        )
+
+        column COUNTRY_NAME (
+            reportColumnQueryId: 16
+            derivedColumn: N
+            heading {
+                heading: "&{COUNTRY_NAME}."
+            }
+            layout {
+                sequence: 170
+            }
+        )
+
+        column COUNTRY_PHONE_CODE_ID (
+            reportColumnQueryId: 17
+            derivedColumn: N
+            heading {
+                heading: "&{COUNTRY_PHONE_CODE}."
+                alignment: end
+            }
+            layout {
+                sequence: 180
+                columnAlignment: end
+            }
+        )
+
+        column DATE_OF_BIRTH (
+            reportColumnQueryId: 4
+            derivedColumn: N
+            heading {
+                heading: "&{DATE_OF_BIRTH}."
+            }
+            layout {
+                sequence: 60
+            }
+        )
+
+        column EDIT (
+            reportColumnQueryId: 18
+            derivedColumn: N
+            type: link
+            heading {
+                heading: "&{EDIT}."
+                alignment: center
+            }
+            layout {
+                sequence: 20
+                columnAlignment: center
+            }
+            link {
+                target: {
+                    page: 130
+                    items: {
+                        P130_ACCOUNT_ID: #ACC_ID#
+                    }
+                    action: clearRegions
+                }
+                linkText: <span role="img" aria-label="Edit" class="fa fa-edit" title="Edit"></span>
+            }
+        )
+
+        column EMAIL (
+            reportColumnQueryId: 6
+            derivedColumn: N
+            heading {
+                heading: "&{EMAIL}."
+            }
+            layout {
+                sequence: 90
+            }
+        )
+
+        column FIRST_NAME (
+            reportColumnQueryId: 2
+            derivedColumn: N
+            heading {
+                heading: "&{FIRST_NAME}."
+            }
+            layout {
+                sequence: 30
+            }
+        )
+
+        column GENDER (
+            reportColumnQueryId: 5
+            derivedColumn: N
+            heading {
+                heading: "&{GENDER}."
+            }
+            layout {
+                sequence: 70
+            }
+        )
+
+        column HOME_TELEPHONE (
+            reportColumnQueryId: 8
+            derivedColumn: N
+            heading {
+                heading: "&{HOME_TELEPHONE}."
+            }
+            layout {
+                sequence: 110
+            }
+        )
+
+        column JOIN_DATE (
+            reportColumnQueryId: 11
+            derivedColumn: N
+            heading {
+                heading: "&{JOIN_DATE}."
+            }
+            layout {
+                sequence: 140
+            }
+        )
+
+        column LAST_NAME (
+            reportColumnQueryId: 3
+            derivedColumn: N
+            heading {
+                heading: "&{LAST_NAME}."
+            }
+            layout {
+                sequence: 50
+            }
+        )
+
+        column MOBILE_TELEPHONE (
+            reportColumnQueryId: 7
+            derivedColumn: N
+            heading {
+                heading: "&{MOBILE_TELEPHONE}."
+            }
+            layout {
+                sequence: 100
+            }
+        )
+
+        column NAME (
+            reportColumnQueryId: 10
+            derivedColumn: N
+            heading {
+                heading: City
+            }
+            layout {
+                sequence: 120
+            }
+        )
+
+        column NATIONAL_ID (
+            reportColumnQueryId: 12
+            derivedColumn: N
+            heading {
+                heading: "&{NATIONAL_ID}."
+            }
+            layout {
+                sequence: 150
+            }
+        )
+
+        column PASSPORT_NUMBER (
+            reportColumnQueryId: 14
+            derivedColumn: N
+            heading {
+                heading: Passport Number
+            }
+            layout {
+                sequence: 200
+            }
+        )
+
+        column SECOND_NAME (
+            reportColumnQueryId: 13
+            derivedColumn: N
+            heading {
+                heading: "&{SECOND_NAME}."
+            }
+            layout {
+                sequence: 40
+            }
+        )
+
+    )
+
+    region personal-info-data-2 (
+        name: Personal Info Data 2
+        title: "&{PERSONAL_INFO_DATA_2}."
+        type: classicReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select pi.national_id_file_id,
+                       pi.id as pi_id,
+                       j.id,
+                       j.file_name,
+                       dbms_lob.getlength(j.file_blob) as image,
+                       pi.MOTHER_FULL_NAME,
+                       pi.MARITAL_STATUS as MARITAL_STATUS_ID,
+                       pi.MILITARY_STATUS as MILITARY_STATUS_ID,
+                       pi.PASSORT_NUMBER,
+                       pi.ID AS EDIT,
+                       mrs.name as MARITAL_STATUS,
+                       mls.name as MILITARY_STATUS
+                  from PERSONAL_INFO pi 
+                  join MARITAL_STATUS mrs on mrs.id = pi.MARITAL_STATUS
+                  join MILITARY_STATUS mls on mls.id = pi.MILITARY_STATUS
+                  left join job_application_attachments j
+                           on j.account_id = pi.account_id and j.FILE_TYPE_ID = 21
+                where pi.account_id = :APP_USER_ACC_ID;
+                
+                ```
+        }
+        layout {
+            sequence: 10
+            parentRegion: @personal-info-data
+            slot: subRegions
+        }
+        appearance {
+            template: @/blank-with-attributes-no-grid
+            templateOptions: #DEFAULT#
+        }
+        componentAppearance {
+            template: @/value-attribute-pairs-column
+            templateOptions: [
+                #DEFAULT#
+                t-AVPList--leftAligned
+            ]
+        }
+        messages {
+            whenNoDataFound: "&{YOU_HAVE_NOT_ENTERED_ANY_DATA}."
+        }
+
+        column EDIT (
+            reportColumnQueryId: 10
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 90
+            }
+        )
+
+        column FILE_NAME (
+            reportColumnQueryId: 4
+            derivedColumn: N
+            heading {
+                heading: "&{FILE_NAME}."
+            }
+            layout {
+                sequence: 150
+            }
+            config {
+                buildOption: @commented-out
+            }
+        )
+
+        column ID (
+            reportColumnQueryId: 3
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 10
+            }
+        )
+
+        column IMAGE (
+            reportColumnQueryId: 5
+            derivedColumn: N
+            type: displayImage
+            heading {
+                heading: "&{NATIONAL_ID}."
+                alignment: end
+            }
+            layout {
+                sequence: 140
+                columnAlignment: end
+            }
+            blobAttributes {
+                tableName: JOB_APPLICATION_ATTACHMENTS
+                blobColumn: FILE_BLOB
+                primaryKeyColumn1: ID
+                filenameColumn: FILE_NAME
+            }
+        )
+
+        column MARITAL_STATUS (
+            reportColumnQueryId: 11
+            derivedColumn: N
+            heading {
+                heading: "&{MARITAL_STATUS}."
+                alignment: end
+            }
+            layout {
+                sequence: 40
+                columnAlignment: end
+            }
+        )
+
+        column MARITAL_STATUS_ID (
+            reportColumnQueryId: 7
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 100
+            }
+        )
+
+        column MILITARY_STATUS (
+            reportColumnQueryId: 12
+            derivedColumn: N
+            heading {
+                heading: "&{MILITARY_STATUS}."
+                alignment: end
+            }
+            layout {
+                sequence: 50
+                columnAlignment: end
+            }
+        )
+
+        column MILITARY_STATUS_ID (
+            reportColumnQueryId: 8
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 110
+            }
+        )
+
+        column MOTHER_FULL_NAME (
+            reportColumnQueryId: 6
+            derivedColumn: N
+            heading {
+                heading: "&{MOTHER_FULL_NAME}."
+            }
+            layout {
+                sequence: 30
+            }
+        )
+
+        column NATIONAL_ID_FILE_ID (
+            reportColumnQueryId: 1
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 120
+            }
+        )
+
+        column PASSORT_NUMBER (
+            reportColumnQueryId: 9
+            derivedColumn: N
+            heading {
+                heading: "&{PASSPORT_NUMBER}."
+            }
+            layout {
+                sequence: 60
+            }
+        )
+
+        column PI_ID (
+            reportColumnQueryId: 2
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 130
+            }
+        )
+
+    )
+
+    pageItem P113_USER_NAME (
+        type: hidden
+        layout {
+            sequence: 10
+            region: @acc-reg
+            slot: regionBody
+        }
+    )
+
+    button add-experience (
+        buttonName: Add_Experience
+        label: Add Experience
+        layout {
+            sequence: 10
+            region: @experience2
+            slot: regionBody
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 118
+            }
+        }
+    )
+
+    button add-language (
+        buttonName: Add_language
+        label: Add Language
+        layout {
+            sequence: 10
+            region: @language_1
+            slot: regionBody
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 117
+            }
+        }
+    )
+
+    dynamicAction appclosed (
+        name: AppCloseD
+        execution {
+            sequence: 90
+        }
+        when {
+            event: apexafterclosedialog
+            selectionType: region
+            region: @application2
+        }
+
+        action native-refresh (
+            action: refresh
+            affectedElements {
+                selectionType: region
+                region: @application2
+            }
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    dynamicAction experclosed (
+        name: ExperCloseD
+        execution {
+            sequence: 80
+        }
+        when {
+            event: apexafterclosedialog
+            selectionType: region
+            region: @experience2
+        }
+
+        action native-refresh (
+            action: refresh
+            affectedElements {
+                selectionType: region
+                region: @experience2
+            }
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    dynamicAction langclosed (
+        name: LangCloseD
+        execution {
+            sequence: 70
+        }
+        when {
+            event: apexafterclosedialog
+            selectionType: region
+            region: @language_1
+        }
+
+        action native-refresh (
+            action: refresh
+            affectedElements {
+                selectionType: region
+                region: @language_1
+            }
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    dynamicAction new (
+        name: LangCLose
+        execution {
+            sequence: 10
+        }
+        when {
+            event: apexafterclosedialog
+            selectionType: region
+            region: @language
+        }
+
+        action native-javascript-code (
+            action: executeJsCode
+            settings {
+                jsCode: apex.region("LANGUAGE_REPORT")
+            }
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+        action native-refresh (
+            action: refresh
+            affectedElements {
+                selectionType: region
+                region: @language
+            }
+            execution {
+                sequence: 20
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    dynamicAction new-2 (
+        name: EduClose
+        execution {
+            sequence: 50
+        }
+        when {
+            event: apexafterclosedialog
+            selectionType: region
+            region: @education
+        }
+
+        action native-refresh (
+            action: refresh
+            affectedElements {
+                selectionType: region
+                region: @education
+            }
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    dynamicAction new-3 (
+        name: New_1_1
+        execution {
+            sequence: 60
+        }
+        when {
+            event: apexafterclosedialog
+            selectionType: region
+            region: @experience
+        }
+
+        action native-refresh (
+            action: refresh
+            affectedElements {
+                selectionType: region
+                region: @experience
+            }
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    dynamicAction new-4 (
+        name: New_2
+        execution {
+            sequence: 30
+        }
+        when {
+            event: apexafterclosedialog
+            selectionType: region
+            region: @personal-info-data-2
+        }
+
+        action native-refresh (
+            action: refresh
+            affectedElements {
+                selectionType: region
+                region: @personal-info-data-2
+            }
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    dynamicAction new-5 (
+        name: New_2_1
+        execution {
+            sequence: 40
+        }
+        when {
+            event: apexafterclosedialog
+            selectionType: region
+            region: @personal-info-data
+        }
+
+        action native-refresh (
+            action: refresh
+            affectedElements {
+                selectionType: region
+                region: @personal-info-data
+            }
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    process get-profile-data (
+        name: Get Profile Data
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin 
+                
+                
+                    select FIRST_NAME || ' ' || SECOND_NAME || ' ' || LAST_NAME as Full_Name into :P113_USER_NAME
+                    from account where id = :APP_USER_ACC_ID;
+                
+                
+                    select id into :APP_USER_PERS_ID from personal_info where account_id = :APP_USER_ACC_ID;
+                
+                
+                    exception
+                        when no_data_found then
+                            :APP_USER_PERS_ID := null;
+                
+                end ;
+                ```
+        }
+        execution {
+            sequence: 10
+            point: afterHeader
+        }
+        advanced {
+            executionMappingIdentifier: 345353927037189221
+        }
+    )
+
+    process logout-process (
+        name: logout Process
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                    APEX_UTIL.SET_SESSION_STATE('APP_USER_ACC_ID', NULL);
+                    APEX_UTIL.SET_SESSION_STATE('APP_USER_PERS_ID', NULL);
+                    -- apex_authentication.logout;
+                end;
+                ```
+        }
+        execution {
+            sequence: 20
+        }
+        advanced {
+            executionMappingIdentifier: 353496524203439871
+        }
+        serverSideCondition {
+            type: request=Value
+            value: LOGOUT
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    branch (
+        name: logout process
+        execution {
+            sequence: 30
+        }
+        behavior {
+            target: {
+                page: 9999
+            }
+        }
+        serverSideCondition {
+            type: request=Value
+            value: LOGOUT
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+)

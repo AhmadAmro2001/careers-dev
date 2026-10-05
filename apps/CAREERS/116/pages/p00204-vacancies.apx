@@ -1,0 +1,769 @@
+page 204 (
+    name: Vacancies
+    alias: VACANCIES
+    title: "&{VACANCIES}."
+    appearance {
+        pageTemplate: @/standard
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    css {
+        inline:
+            ```css
+            
+            
+            ```
+    }
+    security {
+        authorizationScheme: @admin-schema
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region breadcrumb (
+        name: Breadcrumb
+        title: "&{BREADCRUMB}."
+        type: breadcrumb
+        source {
+            breadcrumb: @breadcrumb
+        }
+        layout {
+            sequence: 10
+            slot: breadcrumbBar
+        }
+        appearance {
+            template: @/title-bar
+            templateOptions: [
+                #DEFAULT#
+                t-BreadcrumbRegion--useBreadcrumbTitle
+            ]
+        }
+        config {
+            buildOption: @commented-out
+        }
+        componentAppearance {
+            breadcrumbTemplate: @/breadcrumb
+            templateOptions: #DEFAULT#
+        }
+    )
+
+    region filter (
+        name: Filter
+        title: "&{FILTER}."
+        type: facetedSearch
+        source {
+            filteredRegion: @vacancies
+        }
+        layout {
+            sequence: 10
+            slot: body
+            columnSpan: 2
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        advanced {
+            htmlDomId: facet_filter
+        }
+        settings {
+            compactNosThreshold: 10000
+            displayChartForTopNValues: 10
+        }
+
+        facet P204_ARCHIVED (
+            type: radioGroup
+            label {
+                label: "&{ARCHIVED}."
+            }
+            lov {
+                type: staticValues
+                staticValues: STATIC:Archived;Yes,Not Archived;No
+            }
+            layout {
+                sequence: 20
+            }
+            listEntries {
+                zeroCountEntries: disable
+                sortByTopCounts: false
+                maxDisplayedEntries: 7
+            }
+            advanced {
+                collapsible: true
+                initiallyCollapsed: true
+            }
+            source {
+                databaseColumn: IS_ARCHIVED
+            }
+            default {
+                type: static
+                staticValue: No
+            }
+        )
+
+        facet P204_CATEGORY (
+            type: checkboxGroup
+            label {
+                label: "&{CATEGORY}."
+            }
+            lov {
+                type: sqlQuery
+                sqlQuery:
+                    ```sql
+                    select name , name as return_value
+                    from career_category
+                    ```
+            }
+            layout {
+                sequence: 10
+            }
+            listEntries {
+                zeroCountEntries: disable
+                sortByTopCounts: false
+                maxDisplayedEntries: 7
+            }
+            advanced {
+                collapsible: true
+                initiallyCollapsed: true
+            }
+            source {
+                databaseColumn: CATEGORY
+            }
+        )
+
+        facet P204_VACANCY_TYPE (
+            type: radioGroup
+            label {
+                label: "&{VACANCY_TYPE}."
+            }
+            lov {
+                type: staticValues
+                staticValues: STATIC:Public;0,EGPC Exclusive;1
+            }
+            layout {
+                sequence: 30
+            }
+            listEntries {
+                zeroCountEntries: disable
+                sortByTopCounts: false
+                maxDisplayedEntries: 7
+            }
+            advanced {
+                collapsible: true
+                initiallyCollapsed: true
+            }
+            source {
+                databaseColumn: IS_MINISTRY_EXCLUSIVE
+                dataType: number
+            }
+        )
+
+    )
+
+    region vacancies (
+        name: Vacancies
+        title: "&{VACANCIES}."
+        type: classicReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select v.ID,
+                       
+                       v.TITLE || ' ' || v.TITLE_CODE AS TITLE,
+                       v.POST_DATE,
+                       
+                       c.NAME AS Category,
+                       v.is_archived as archived_value,
+                       CASE 
+                           WHEN v.IS_ARCHIVED = 1 THEN 'Yes'
+                           ELSE 'No'
+                       END AS IS_ARCHIVED,
+                       
+                       COUNT(va.ID) AS TOTAL_APPLICATIONS,
+                       'Applications' AS SHOW_APP,
+                       'Details' AS VACANCY_DETAILS,
+                       'Edit' AS VACANCY_EDIT,
+                    --    'Archive' AS ARCHIVE_VACANCY,
+                        case 
+                            when nvl(v.IS_ARCHIVED, 0) = 1 then 'UNARCHIVE'
+                            else 'ARCHIVE'
+                        end as ARCHIVE_ACTION,
+                
+                        case 
+                            when nvl(v.IS_ARCHIVED, 0) = 1 then 'Unarchive Vacancy'
+                            else 'Archive Vacancy'
+                        end as ARCHIVE_TITLE,
+                
+                        case 
+                            when nvl(v.IS_ARCHIVED, 0) = 1 then 'fa-undo'
+                            else 'fa-archive'
+                        end as ARCHIVE_ICON,
+                
+                        case 
+                            when nvl(v.IS_ARCHIVED, 0) = 1 then 'is-archived'
+                            else 'is-active'
+                        end as ARCHIVE_STATE_CLASS,
+                
+                        v.ID as ARCHIVE_DATA,
+                
+                        'Archive' as ARCHIVE_VACANCY,
+                        v.IS_MINISTRY_EXCLUSIVE
+                
+                       
+                    from JOB_VACANCY v
+                    LEFT  join JOB_VACANCY_APPLICATION va
+                    on v.ID = va.VACANCY_ID
+                     join CAREER_CATEGORY c
+                    on v.CATEGORY_ID = c.ID
+                    -- where v.is_archived =
+                    -- case
+                    --     when :P204_ARCHIVED = 'Yes' then 1
+                    --     else 0
+                    -- end
+                    GROUP BY v.ID,
+                         v.TITLE,
+                         v.TITLE_CODE,
+                         v.POST_DATE,
+                         v.IS_ARCHIVED,
+                         c.NAME,
+                         v.IS_MINISTRY_EXCLUSIVE
+                    ;
+                ```
+        }
+        layout {
+            sequence: 20
+            slot: body
+            startNewRow: false
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        advanced {
+            htmlDomId: vacancy_report
+        }
+        reportLayout {
+            numberOfRowsType: itemValue
+            item: P204_ROW
+        }
+        componentAppearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Report--stretch
+                t-Report--altRowsDefault
+                t-Report--rowHighlight
+            ]
+        }
+        pagination {
+            type: rowRangesXToYOfZWithPagination
+            displayPosition: topAndBottomRight
+        }
+
+        column ARCHIVED_VALUE (
+            reportColumnQueryId: 5
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 180
+            }
+        )
+
+        column ARCHIVE_ACTION (
+            reportColumnQueryId: 11
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 190
+            }
+        )
+
+        column ARCHIVE_DATA (
+            reportColumnQueryId: 15
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 150
+            }
+        )
+
+        column ARCHIVE_ICON (
+            reportColumnQueryId: 13
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 140
+            }
+        )
+
+        column ARCHIVE_STATE_CLASS (
+            reportColumnQueryId: 14
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 200
+            }
+        )
+
+        column ARCHIVE_TITLE (
+            reportColumnQueryId: 12
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 130
+            }
+        )
+
+        column ARCHIVE_VACANCY (
+            reportColumnQueryId: 16
+            derivedColumn: N
+            heading {
+                heading: "&{ARCHIVE_VACANCY}."
+                alignment: center
+            }
+            layout {
+                sequence: 110
+                columnAlignment: center
+            }
+            columnFormatting {
+                htmlExpression:
+                    ```html
+                    <button type="button"
+                            class="t-Button t-Button--small t-Button--icon js-toggle-vacancy-archive archive-btn #ARCHIVE_STATE_CLASS#"
+                            title="#ARCHIVE_TITLE#"
+                            data-id="#ARCHIVE_DATA#"
+                            data-vacancy-action="#ARCHIVE_ACTION#">
+                    
+                        <span class="t-Icon fa #ARCHIVE_ICON#" aria-hidden="true"></span>
+                    </button>
+                    ```
+            }
+            security {
+                escapeSpecialChars: false
+            }
+        )
+
+        column CATEGORY (
+            reportColumnQueryId: 4
+            derivedColumn: N
+            heading {
+                heading: "&{CATEGORY}."
+                alignment: center
+            }
+            layout {
+                sequence: 50
+                columnAlignment: center
+            }
+        )
+
+        column ID (
+            reportColumnQueryId: 1
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 10
+            }
+        )
+
+        column IS_ARCHIVED (
+            reportColumnQueryId: 6
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 40
+            }
+        )
+
+        column IS_MINISTRY_EXCLUSIVE (
+            reportColumnQueryId: 17
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 170
+            }
+        )
+
+        column POST_DATE (
+            reportColumnQueryId: 3
+            derivedColumn: N
+            heading {
+                heading: "&{POST_DATE}."
+                alignment: center
+            }
+            layout {
+                sequence: 30
+                columnAlignment: center
+            }
+        )
+
+        column SHOW_APP (
+            reportColumnQueryId: 8
+            derivedColumn: N
+            type: link
+            heading {
+                heading: Show Applications
+                alignment: center
+            }
+            layout {
+                sequence: 80
+                columnAlignment: center
+            }
+            link {
+                target: {
+                    page: 207
+                    items: {
+                        P207_SELECTED_ID: #ID#
+                    }
+                }
+                linkText: #SHOW_APP#
+                linkAttributes: class="show-app-btn"
+            }
+        )
+
+        column TITLE (
+            reportColumnQueryId: 2
+            derivedColumn: N
+            heading {
+                heading: "&{TITLE}."
+            }
+            layout {
+                sequence: 20
+            }
+        )
+
+        column TOTAL_APPLICATIONS (
+            reportColumnQueryId: 7
+            derivedColumn: N
+            heading {
+                heading: "&{TOTAL_APPLICATIONS}."
+                alignment: center
+            }
+            layout {
+                sequence: 70
+                columnAlignment: center
+            }
+        )
+
+        column VACANCY_DETAILS (
+            reportColumnQueryId: 9
+            derivedColumn: N
+            type: link
+            heading {
+                heading: "&{VACANCY_DETAILS}."
+                alignment: center
+            }
+            layout {
+                sequence: 90
+                columnAlignment: center
+            }
+            link {
+                target: {
+                    page: 208
+                    items: {
+                        P208_JOB_ID: #ID#
+                    }
+                }
+                linkText: #VACANCY_DETAILS#
+                linkAttributes: class="show-app-btn"
+            }
+        )
+
+        column VACANCY_EDIT (
+            reportColumnQueryId: 10
+            derivedColumn: N
+            type: link
+            heading {
+                heading: "&{VACANCY_EDIT}."
+                alignment: center
+            }
+            layout {
+                sequence: 100
+                columnAlignment: center
+            }
+            link {
+                target: {
+                    page: 209
+                    items: {
+                        P209_ID: #ID#
+                    }
+                }
+                linkText: #VACANCY_EDIT#
+                linkAttributes: class="show-app-btn edit-vacancy-link"
+            }
+        )
+
+    )
+
+    pageItem P204_ROW (
+        type: numberField
+        label {
+            label: Row
+            alignment: left
+        }
+        layout {
+            sequence: 10
+            region: @vacancies
+            slot: sortOrder
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+    )
+
+    button create (
+        buttonName: CREATE
+        label: "&{CREATE}."
+        layout {
+            sequence: 10
+            region: @vacancies
+            slot: edit
+        }
+        appearance {
+            buttonTemplate: @/text-with-icon
+            hot: true
+            templateOptions: [
+                #DEFAULT#
+                t-Button--iconLeft
+            ]
+            cssClasses: show-app-btn
+            icon: fa-plus-square
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 205
+            }
+            warnOnUnsavedChanges: doNotCheck
+        }
+    )
+
+    button submit (
+        buttonName: Submit
+        label: Submit
+        layout {
+            sequence: 20
+            region: @vacancies
+            slot: sortOrder
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+            cssClasses: more-details-btn
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+        }
+    )
+
+    dynamicAction new (
+        name: New
+        execution {
+            sequence: 20
+            eventScope: dynamic
+        }
+        when {
+            event: click
+            selectionType: jQuerySelector
+            jquerySelector: .js-toggle-vacancy-archive
+        }
+
+        action native-javascript-code (
+            action: executeJsCode
+            settings {
+                jsCode:
+                    ```javascript-browser
+                    // let vacancyID = $(this.triggeringElement).data("id");
+                    
+                    // console.log("vacancy id",vacancyID )
+                    
+                    // apex.server.process(
+                    //     "VACANCY_ARCHIVE",
+                    //     {
+                    //         x01: vacancyID
+                    //     },
+                    //     {
+                    //         success: function (data) {
+                                
+                    //             if(data.msg =='success'){
+                    //             location.reload();
+                                
+                    //             }else{
+                    //                 alert(data.err);
+                    //             }
+                    //         },
+                    //         error: function (jqXHR, textStatus, errorThrown) {
+                    //             console.log("Ajax error:", textStatus, errorThrown);
+                    //         }
+                    //     }
+                    // );
+                    
+                    var btn = this.triggeringElement;
+                    var vacancyId = btn.dataset.id;
+                    var action = btn.dataset.vacancyAction;
+                    
+                    apex.server.process(
+                        "TOGGLE_VACANCY_ARCHIVE",
+                        {
+                            x01: vacancyId,
+                            x02: action
+                        },
+                        {
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.success) {
+                                    apex.message.showPageSuccess(data.message);
+                                    apex.region("vacancy_report").refresh();
+                                    apex.region("facet_filter").refresh();
+                                } else {
+                                    apex.message.showErrors([
+                                        {
+                                            type: "error",
+                                            location: "page",
+                                            message: data.message,
+                                            unsafe: false
+                                        }
+                                    ]);
+                                }
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                apex.message.showErrors([
+                                    {
+                                        type: "error",
+                                        location: "page",
+                                        message: "Error while changing vacancy archive status: " + errorThrown,
+                                        unsafe: false
+                                    }
+                                ]);
+                            }
+                        }
+                    );
+                    ```
+            }
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    dynamicAction refresh (
+        name: refresh
+        execution {
+            sequence: 10
+        }
+        when {
+            event: apexafterclosedialog
+            selectionType: region
+            region: @vacancies
+        }
+
+        action native-refresh (
+            action: refresh
+            affectedElements {
+                selectionType: region
+                region: @vacancies
+            }
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    process vacancy-archive (
+        name: TOGGLE_VACANCY_ARCHIVE
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                -- declare
+                    
+                -- begin
+                    
+                
+                --     PKG_ADMIN.archive_vacancy(
+                --         p_vacancy_id => TO_NUMBER(apex_application.g_x01)
+                --     );
+                
+                --     apex_json.open_object;
+                --     apex_json.write('msg', 'success');
+                --     apex_json.write('err', '');
+                --     apex_json.close_object;
+                -- exception
+                --     when others then
+                --     apex_json.open_object;
+                --     apex_json.write('msg', 'failed');
+                --     apex_json.write('err', sqlerrm);
+                --     apex_json.close_object;
+                -- end;
+                
+                declare
+                    l_vacancy_id number;
+                    l_action     varchar2(20);
+                begin
+                    l_vacancy_id := to_number(apex_application.g_x01);
+                    l_action     := upper(apex_application.g_x02);
+                
+                    if l_action = 'ARCHIVE' then
+                
+                        -- Replace with your real archive procedure
+                        PKG_ADMIN.archive_vacancy(
+                            p_vacancy_id => l_vacancy_id
+                        );
+                
+                        apex_json.open_object;
+                        apex_json.write('success', true);
+                        apex_json.write('message', 'Vacancy archived successfully.');
+                        apex_json.close_object;
+                
+                    elsif l_action = 'UNARCHIVE' then
+                
+                        -- Replace with your real unarchive procedure
+                        PKG_ADMIN.unarchive_vacancy(
+                            p_vacancy_id => l_vacancy_id
+                        );
+                
+                        apex_json.open_object;
+                        apex_json.write('success', true);
+                        apex_json.write('message', 'Vacancy unarchived successfully.');
+                        apex_json.close_object;
+                
+                    else
+                        raise_application_error(-20001, 'Invalid vacancy archive action.');
+                    end if;
+                
+                exception
+                    when others then
+                        apex_json.open_object;
+                        apex_json.write('success', false);
+                        apex_json.write('message', sqlerrm);
+                        apex_json.close_object;
+                end;
+                ```
+        }
+        execution {
+            sequence: 10
+            point: ajaxCallback
+        }
+        advanced {
+            executionMappingIdentifier: 345232662620624610
+        }
+    )
+
+)

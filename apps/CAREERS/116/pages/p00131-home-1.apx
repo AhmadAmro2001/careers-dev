@@ -1,0 +1,607 @@
+page 131 (
+    name: HOME_1
+    alias: HOME-1
+    title: HOME
+    appearance {
+        pageTemplate: @/blank
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    css {
+        inline:
+            ```css
+            /* Main Container */
+            #recruitment-process {
+                padding: 35px;
+                background: #fff;
+                border-radius: 16px;
+                box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+                border-left: 6px solid #0066cc;
+                font-family: "Segoe UI", Tahoma, sans-serif;
+            }
+            
+            /* Heading */
+            #recruitment-process h2 {
+                color: #0066cc;
+                font-size: 30px;
+                font-weight: 700;
+                margin-bottom: 20px;
+                text-align: center;
+                position: relative;
+            }
+            
+            #recruitment-process h2::after {
+                content: "";
+                display: block;
+                width: 80px;
+                height: 4px;
+                background: #0066cc;
+                margin: 12px auto 0;
+                border-radius: 2px;
+            }
+            
+            /* Paragraphs */
+            #recruitment-process p {
+                font-size: 16px;
+                line-height: 1.8;
+                color: #555;
+                margin-bottom: 18px;
+                text-align: justify;
+            }
+            
+            /* List */
+            #recruitment-process ul {
+                list-style: none;
+                padding: 0;
+                margin: 20px 0;
+            }
+            
+            #recruitment-process ul li {
+                background: #f5f9ff;
+                margin-bottom: 12px;
+                padding: 14px 18px;
+                border-radius: 10px;
+                border-left: 4px solid #0066cc;
+                font-weight: 600;
+                color: #333;
+                transition: all 0.3s ease;
+            }
+            
+            #recruitment-process ul li:hover {
+                background: #eaf3ff;
+                transform: translateX(5px);
+            }
+            
+            /* Responsive */
+            @media (max-width: 768px) {
+                #recruitment-process {
+                    padding: 20px;
+                    margin: 10px;
+                }
+            
+                #recruitment-process h2 {
+                    font-size: 24px;
+                }
+            
+                #recruitment-process p {
+                    font-size: 15px;
+                }
+            }
+            /* 
+            
+            #stage1-application {
+                max-width: 900px;
+                margin: 20px auto;
+                padding: 35px;
+                background: #c2c1c149;
+                border-radius: 16px;
+                box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+                border-left: 6px solid #0066cc;
+            }
+            
+            #stage1-application h2 {
+                color: #0066cc;
+                font-size: 28px;
+                font-weight: 700;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            
+            #stage1-application p {
+                font-size: 16px;
+                line-height: 1.8;
+                color: #555;
+                margin-bottom: 16px;
+                text-align: justify;
+            } */
+            
+            
+            .recruitment-stage {
+                padding: 35px;
+                background: #fff;
+                border-radius: 16px;
+                box-shadow: 0 6px 20px rgba(0,0,0,.08);
+                border-left: 6px solid #0066cc;
+                transition: all .3s ease;
+            }
+            
+            .recruitment-stage:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 25px rgba(0,0,0,.12);
+            }
+            
+            .recruitment-stage h2 {
+                color: #0066cc;
+                margin-bottom: 20px;
+                font-size: 28px;
+                font-weight: 700;
+            }
+            
+            .recruitment-stage p {
+                color: #555;
+                line-height: 1.8;
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+            
+            
+            
+            
+            /* ========================================================== */
+            /* CUSTOM NAVBAR                                               */
+            /* ========================================================== */
+            
+            .custom-navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            
+                background: rgb(233, 233, 233);
+            
+                padding: 14px 24px;
+            
+                border-radius: 18px;
+            
+                box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            
+                margin-bottom: 20px;
+            }
+            
+            /* Left Links */
+            .nav-left {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            
+            /* Nav Links */
+            .nav-link {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            
+                text-decoration: none;
+            
+                color: #334155;
+            
+                padding: 10px 18px;
+            
+                border-radius: 12px;
+            
+                font-weight: 600;
+            
+                transition: all 0.3s ease;
+            }
+            
+            /* Hover */
+            .nav-link:hover {
+                background: rgb(232, 244, 255);
+                color: #0563bb;
+            }
+            
+            /* Logout Button */
+            .logout-btn {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            
+                background: #ef4444;
+            
+                color: white !important;
+            
+                text-decoration: none;
+            
+                padding: 10px 18px;
+            
+                border-radius: 12px;
+            
+                font-weight: 600;
+            
+                transition: all 0.3s ease;
+            }
+            
+            /* Logout Hover */
+            .logout-btn:hover {
+                background: #dc2626;
+                transform: translateY(-1px);
+            }
+            
+            /* Icons */
+            .custom-navbar .fa {
+                font-size: 14px;
+            }
+            
+            .nav-right {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .user-name {
+                color: #333;
+                font-weight: 600;
+            }
+            
+            /* Make navbar wrap on small screens */
+            .custom-navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap; /* مهم جداً */
+            }
+            
+            /* Mobile & small tablets */
+            @media (max-width: 768px) {
+                .custom-navbar {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 12px;
+                }
+            
+                .nav-left,
+                .nav-right {
+                    width: 100%;
+                    justify-content: flex-start;
+                    flex-wrap: wrap;
+                }
+            
+                .nav-link,
+                .logout-btn {
+                    width: 100%;
+                    justify-content: center;
+                }
+            
+                .user-name {
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+            
+            /* Very small screens (phones) */
+            @media (max-width: 480px) {
+                .nav-link,
+                .logout-btn {
+                    padding: 12px;
+                    font-size: 14px;
+                }
+            
+                .custom-navbar {
+                    padding: 12px;
+                }
+            }
+            ```
+    }
+    security {
+        authorizationScheme: @user-schema
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region image (
+        name: image
+        type: staticContent
+        source {
+            htmlCode:
+                ```html
+                <img src="#APP_FILES#career wf.png"
+                     alt="Recruitment Process"
+                     style="width:100%;">
+                ```
+        }
+        layout {
+            sequence: 30
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--removeHeader js-removeLandmark
+                t-Region--noBorder
+                t-Region--scrollBody
+                margin-bottom-none
+            ]
+        }
+    )
+
+    region navbar (
+        name: navbar
+        title: "&{NAVBAR}."
+        type: appTemplateComponent/appliocantNavbar
+        layout {
+            sequence: 10
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        componentAppearance {
+            display: regionOnly
+        }
+        settings {
+            personalCheck: &PERSONAL_CHECK.
+        }
+    )
+
+    region stage1 (
+        name: stage1
+        title: EPROM RECRUITMENT PROCESS
+        type: staticContent
+        source {
+            htmlCode:
+                ```html
+                <div class="recruitment-stage">
+                
+                    <h2>STAGE 1: APPLICATION</h2>
+                
+                    <p>
+                        Apply for a position of interest through the EPROM Careers Portal under
+                        <strong>Current Vacancies</strong>, ensuring that the role aligns with
+                        your educational background, skills, and professional experience.
+                    </p>
+                
+                    <p>
+                        Once your application has been successfully submitted, you will receive
+                        an automated email acknowledgement confirming receipt of your application.
+                    </p>
+                
+                    <p>
+                        The acknowledgement email will also include a unique application number
+                        generated by the system, which can be used for future reference throughout
+                        the recruitment process.
+                    </p>
+                
+                </div>
+                ```
+        }
+        layout {
+            sequence: 40
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--removeHeader js-removeLandmark
+                t-Region--noBorder
+                js-headingLevel-6
+                t-Region--scrollBody
+            ]
+        }
+        advanced {
+            htmlDomId: stage1-application
+        }
+    )
+
+    region stage2 (
+        name: stage2
+        title: EPROM RECRUITMENT PROCESS
+        type: staticContent
+        source {
+            htmlCode:
+                ```html
+                <div class="recruitment-stage">
+                
+                    <h2>STAGE 2: ASSESSMENT</h2>
+                
+                    <p>
+                        Once your application is submitted into our system, it will be reviewed
+                        against the requirements of the position.
+                    </p>
+                
+                    <p>
+                        Due to the large volume of candidate resumes we receive, only the most
+                        closely aligned candidates will be contacted directly.
+                    </p>
+                
+                    <p>
+                        If you have not been contacted within three months of submitting your
+                        application, your application may be considered unsuccessful for the
+                        position applied for.
+                    </p>
+                
+                </div>
+                ```
+        }
+        layout {
+            sequence: 50
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--removeHeader js-removeLandmark
+                t-Region--noBorder
+                js-headingLevel-6
+                t-Region--scrollBody
+            ]
+        }
+    )
+
+    region stage3 (
+        name: stage3
+        title: EPROM RECRUITMENT PROCESS
+        type: staticContent
+        source {
+            htmlCode:
+                ```html
+                <div class="recruitment-stage">
+                    <h2>STAGE 3: INTERVIEW</h2>
+                
+                    <p>
+                        The interview process may include a telephonic interview with an EPROM
+                        Recruiter and/or Line Manager, followed by a face-to-face or onsite
+                        interview.
+                    </p>
+                
+                    <p>
+                        The primary purpose of the interview process is to assess the candidate's
+                        technical skills, professional experience, and cultural fit with the
+                        needs and values of EPROM.
+                    </p>
+                
+                    <p>
+                        The interview also provides an opportunity for candidates to gain a
+                        better understanding of the role, responsibilities, and career
+                        opportunities available within the organization.
+                    </p>
+                </div>
+                ```
+        }
+        layout {
+            sequence: 60
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--removeHeader js-removeLandmark
+                t-Region--noBorder
+                js-headingLevel-6
+                t-Region--scrollBody
+            ]
+        }
+    )
+
+    region stage4 (
+        name: stage4
+        title: EPROM RECRUITMENT PROCESS
+        type: staticContent
+        source {
+            htmlCode:
+                ```html
+                <div class="recruitment-stage">
+                
+                    <h2>STAGE 4: SELECTION</h2>
+                
+                    <p>
+                        EPROM extends an employment offer to the selected candidate based on the
+                        outcome of the recruitment and interview process.
+                    </p>
+                
+                    <p>
+                        Upon acceptance of the offer, the candidate will be required to complete
+                        medical examinations and fulfill any additional pre-employment
+                        requirements as part of the onboarding process.
+                    </p>
+                
+                    <p>
+                        Once all requirements have been successfully completed, the candidate
+                        will proceed with the joining process and become part of the EPROM team.
+                    </p>
+                
+                </div>
+                ```
+        }
+        layout {
+            sequence: 70
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--removeHeader js-removeLandmark
+                t-Region--noBorder
+                js-headingLevel-6
+                t-Region--scrollBody
+            ]
+        }
+    )
+
+    region summary (
+        name: Summary
+        title: EPROM RECRUITMENT PROCESS
+        type: staticContent
+        source {
+            htmlCode:
+                ```html
+                <div class="recruitment-process">
+                
+                        <h2>EPROM RECRUITMENT PROCESS</h2>
+                
+                    <p>
+                        The Human Resources Recruitment Section manages the recruitment process
+                        from needs identification to job specification by selecting and interviewing
+                        qualified candidates.
+                    </p>
+                
+                    <p>
+                        Line Managers and Department Managers are fully supported by Human Resources
+                        throughout the entire recruitment process. Each candidate is selected based
+                        solely on merit, experience, and ability.
+                    </p>
+                
+                    <p>
+                        Depending on the type of job and the skills and competencies required,
+                        shortlisted candidates may undergo evaluation processes, including:
+                    </p>
+                
+                    <ul>
+                        <li>Written Tests</li>
+                        <li>Personal Interviews</li>
+                    </ul>
+                
+                    <p>
+                        These assessments help identify candidates' skills, qualifications,
+                        and suitability for the position.
+                    </p>
+                
+                </div>
+                ```
+        }
+        layout {
+            sequence: 20
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--removeHeader js-removeLandmark
+                t-Region--noBorder
+                js-headingLevel-6
+                t-Region--scrollBody
+            ]
+        }
+        advanced {
+            htmlDomId: recruitment-process
+        }
+    )
+
+)

@@ -1,0 +1,491 @@
+page 209 (
+    name: Edit Vacancy
+    alias: EDIT-VACANCY
+    title: "&{EDIT_VACANCY}."
+    appearance {
+        pageMode: modalDialog
+        dialogTemplate: @/drawer
+        templateOptions: [
+            #DEFAULT#
+            js-dialog-class-t-Drawer--pullOutEnd
+        ]
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    security {
+        authorizationScheme: @admin-schema
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region edit-vacancy (
+        name: Edit Vacancy
+        title: "&{EDIT_VACANCY}."
+        type: form
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select v.ID,
+                       a.name,
+                       v.TITLE,
+                       v.TITLE_CODE,
+                       v.SUMMARY,
+                       v.QUALIFICATIONS,
+                       v.RESPONSIBILITIES,
+                       v.CATEGORY_ID,
+                       v.AREA_ID,
+                       v.IS_MINISTRY_EXCLUSIVE,
+                       v.MINIMUM_EDUCATION_LEVEL_ID
+                  from JOB_VACANCY v
+                  join Admin a
+                  on a.ID = v.CREATED_BY
+                ```
+        }
+        layout {
+            sequence: 10
+            slot: contentBody
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+    )
+
+    pageItem P209_AREA_ID (
+        type: selectList
+        label {
+            label: "&{CATEGORY}."
+            alignment: left
+        }
+        lov {
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select name , ID
+                from Career_Area
+                ```
+        }
+        layout {
+            sequence: 90
+            region: @edit-vacancy
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        source {
+            formRegion: @edit-vacancy
+            column: AREA_ID
+            dataType: number
+        }
+    )
+
+    pageItem P209_CATEGORY_ID (
+        type: popupLov
+        label {
+            label: "&{AREA}."
+            alignment: left
+        }
+        lov {
+            type: sharedComponent
+            lov: @category-name
+        }
+        layout {
+            sequence: 80
+            region: @edit-vacancy
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @edit-vacancy
+            column: CATEGORY_ID
+            dataType: number
+        }
+    )
+
+    pageItem P209_ID (
+        type: displayOnly
+        label {
+            label: New
+            alignment: left
+        }
+        layout {
+            sequence: 10
+            region: @edit-vacancy
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+        }
+        source {
+            formRegion: @edit-vacancy
+            column: ID
+            dataType: number
+            queryOnly: true
+            primaryKey: true
+        }
+        security {
+            sessionStateProtection: checksumRequiredSessionLevel
+        }
+    )
+
+    pageItem P209_IS_MINISTRY_EXCLUSIVE (
+        type: selectList
+        label {
+            label: "&{VACANCY_TYPE}."
+            alignment: left
+        }
+        lov {
+            type: staticValues
+            staticValues: STATIC:Public;0,EGPC Exclusive;1
+        }
+        layout {
+            sequence: 110
+            region: @edit-vacancy
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @edit-vacancy
+            column: IS_MINISTRY_EXCLUSIVE
+            dataType: number
+        }
+    )
+
+    pageItem P209_MINIMUM_EDUCATION_LEVEL_ID (
+        type: popupLov
+        label {
+            label: "&{MINIMUM_EDUCATION_LEVEL}."
+            alignment: left
+        }
+        lov {
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select name || ' - Rank : '||LEVEL_RANK ,id
+                from Education_level
+                order by LEVEL_RANK asc
+                ```
+        }
+        layout {
+            sequence: 100
+            region: @edit-vacancy
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @edit-vacancy
+            column: MINIMUM_EDUCATION_LEVEL_ID
+            dataType: number
+        }
+    )
+
+    pageItem P209_NAME (
+        type: displayOnly
+        label {
+            label: "&{CREATED_BY}."
+            alignment: left
+        }
+        layout {
+            sequence: 20
+            region: @edit-vacancy
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+        }
+        source {
+            formRegion: @edit-vacancy
+            column: NAME
+            dataType: varchar2
+        }
+    )
+
+    pageItem P209_QUALIFICATIONS (
+        type: richTextEditor
+        label {
+            label: "&{QUALIFICATIONS}."
+            alignment: left
+        }
+        settings {
+            format: html
+            minHeight: 180
+        }
+        layout {
+            sequence: 60
+            region: @edit-vacancy
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @edit-vacancy
+            column: QUALIFICATIONS
+            dataType: clob
+        }
+        sessionState {
+            dataType: clob
+        }
+    )
+
+    pageItem P209_RESPONSIBILITIES (
+        type: richTextEditor
+        label {
+            label: "&{RESPONSIBILITIES}."
+            alignment: left
+        }
+        settings {
+            format: html
+            minHeight: 180
+        }
+        layout {
+            sequence: 70
+            region: @edit-vacancy
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @edit-vacancy
+            column: RESPONSIBILITIES
+            dataType: clob
+        }
+        sessionState {
+            dataType: clob
+        }
+    )
+
+    pageItem P209_SUMMARY (
+        type: richTextEditor
+        label {
+            label: "&{SUMMARY}."
+            alignment: left
+        }
+        settings {
+            format: html
+            minHeight: 180
+        }
+        layout {
+            sequence: 50
+            region: @edit-vacancy
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @edit-vacancy
+            column: SUMMARY
+            dataType: clob
+        }
+        sessionState {
+            dataType: clob
+        }
+    )
+
+    pageItem P209_TITLE (
+        type: textField
+        label {
+            label: "&{TITLE}."
+            alignment: left
+        }
+        layout {
+            sequence: 30
+            region: @edit-vacancy
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+        validation {
+            valueRequired: true
+            maxLength: 200
+        }
+        source {
+            formRegion: @edit-vacancy
+            column: TITLE
+            dataType: varchar2
+        }
+    )
+
+    pageItem P209_TITLE_CODE (
+        type: textField
+        label {
+            label: "&{TITLE_CODE}."
+            alignment: left
+        }
+        layout {
+            sequence: 40
+            region: @edit-vacancy
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+        validation {
+            maxLength: 50
+        }
+        source {
+            formRegion: @edit-vacancy
+            column: TITLE_CODE
+            dataType: varchar2
+        }
+    )
+
+    button save (
+        buttonName: SAVE
+        label: "&{SAVE}."
+        layout {
+            sequence: 100
+            region: @edit-vacancy
+            slot: edit
+        }
+        appearance {
+            buttonTemplate: @/text-with-icon
+            hot: true
+            templateOptions: [
+                #DEFAULT#
+                t-Button--iconLeft
+            ]
+            cssClasses: show-app-btn
+            icon: fa-save
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+        }
+    )
+
+    process close-the-dialoge (
+        name: close the dialoge
+        type: closeDialog
+        execution {
+            sequence: 20
+        }
+        advanced {
+            executionMappingIdentifier: 345232015612624604
+        }
+        serverSideCondition {
+            whenButtonPressed: @save
+        }
+    )
+
+    process edit-vacancy (
+        name: EDIT VACANCY
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                declare 
+                        L_USER VARCHAR2;
+                begin
+                
+                SELECT ID
+                INTO L_USER
+                FROM ADMIN
+                WHERE UPPER(EMAIL) = UPPER(:APP_USER);
+                
+                PKG_ADMIN.edit_vacancy(
+                        p_vacancy_id => :P209_ID,
+                        p_title => :P209_TITLE,
+                        p_summary => :P209_SUMMARY,
+                        p_qualifications => :P209_QUALIFICATIONS,
+                        p_responsibilities => :P209_RESPONSIBILITIES,
+                        p_category_id => :P209_CATEGORY_ID, 
+                        p_minimum_education_level_id => :P209_MINIMUM_EDUCATION_LEVEL_ID,
+                        p_is_ministry_exclusive => :P209_IS_MINISTRY_EXCLUSIVE,
+                        p_updated_by => L_USER,
+                        p_title_code => :P209_TITLE_CODE,
+                        p_area_id => :P209_AREA_ID
+                    );
+                
+                
+                end;
+                ```
+        }
+        execution {
+            sequence: 10
+        }
+        advanced {
+            executionMappingIdentifier: 344522832781824144
+        }
+        serverSideCondition {
+            whenButtonPressed: @save
+        }
+    )
+
+    process initialize-form-edit-vacancy (
+        name: Initialize form Edit Vacancy
+        type: formInitialization
+        formRegion: @edit-vacancy
+        execution {
+            sequence: 10
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 344521079327824126
+        }
+    )
+
+)

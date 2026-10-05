@@ -1,0 +1,136 @@
+page 214 (
+    name: Login Reports
+    alias: LOGIN-REPORTS
+    title: Login Reports
+    appearance {
+        pageTemplate: @/standard
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    security {
+        authorizationScheme: @it-admin-schema
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region new (
+        name: Report Problems
+        type: classicReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select ID,
+                       USER_ACC_ID,
+                       USER_EMAIL,
+                       USER_PROBLEM,
+                       CREATED_AT
+                from USER_PROBLEMS
+                order by CREATED_AT DESC;
+                ```
+        }
+        layout {
+            sequence: 10
+            slot: body
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        componentAppearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Report--stretch
+                t-Report--altRowsDefault
+                t-Report--rowHighlight
+            ]
+        }
+        pagination {
+            type: rowRangesXToYOfZWithPagination
+            displayPosition: topRight
+        }
+
+        column CREATED_AT (
+            reportColumnQueryId: 5
+            derivedColumn: N
+            heading {
+                heading: Created At
+            }
+            layout {
+                sequence: 50
+                columnAlignment: center
+            }
+            sorting {
+                sortable: false
+            }
+        )
+
+        column ID (
+            reportColumnQueryId: 1
+            derivedColumn: N
+            heading {
+                heading: Id
+            }
+            layout {
+                sequence: 10
+                columnAlignment: center
+            }
+            sorting {
+                sortable: false
+            }
+        )
+
+        column USER_ACC_ID (
+            reportColumnQueryId: 2
+            derivedColumn: N
+            heading {
+                heading: Account ID
+            }
+            layout {
+                sequence: 20
+                columnAlignment: center
+            }
+            sorting {
+                sortable: false
+            }
+        )
+
+        column USER_EMAIL (
+            reportColumnQueryId: 3
+            derivedColumn: N
+            heading {
+                heading: User Email
+            }
+            layout {
+                sequence: 30
+                columnAlignment: center
+            }
+            sorting {
+                sortable: false
+            }
+        )
+
+        column USER_PROBLEM (
+            reportColumnQueryId: 4
+            derivedColumn: N
+            heading {
+                heading: User Problem
+            }
+            layout {
+                sequence: 40
+            }
+            sorting {
+                sortable: false
+            }
+        )
+
+    )
+
+)

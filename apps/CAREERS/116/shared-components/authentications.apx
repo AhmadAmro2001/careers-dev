@@ -1,0 +1,65 @@
+authentication app-users-login (
+    name: App Users Login
+    type: custom
+    source {
+        plsqlCode:
+            ```plsql
+             FUNCTION apex_custom_auth (
+                p_username IN VARCHAR2,
+                p_password IN VARCHAR2
+            )
+            RETURN BOOLEAN
+            IS
+                l_login_result NUMBER;
+            BEGIN
+                l_login_result := user_account_package.Login(
+                    p_username => p_username,
+                    p_password => p_password
+                );
+            
+                IF l_login_result IN (1, 2) THEN
+                    APEX_UTIL.SET_SESSION_STATE(
+                        p_name  => 'G_LOGIN_TYPE',
+                        p_value => TO_CHAR(l_login_result)
+                    );
+            
+                    RETURN TRUE;
+                ELSE
+                    APEX_UTIL.SET_CUSTOM_AUTH_STATUS('Invalid login result');
+                    RETURN FALSE;
+                END IF;
+            
+            EXCEPTION
+                WHEN OTHERS THEN
+                    APEX_UTIL.SET_SESSION_STATE(
+                        p_name  => 'G_LOGIN_TYPE',
+                        p_value => NULL
+                    );
+            
+                    APEX_UTIL.SET_CUSTOM_AUTH_STATUS(
+                        REGEXP_REPLACE(SQLERRM, '^ORA-[0-9]+:\s*', '')
+                    );
+            
+                    RETURN FALSE;
+            END ;
+            ```
+    }
+)
+
+authentication custom-login-auth (
+    name: Custom_Login_auth
+    type: custom
+    settings {
+        authFunctionName: USER_ACCOUNT_PACKAGE.AUTHENTICATE
+    }
+)
+
+authentication oracle-apex-accounts (
+    name: Oracle APEX Accounts
+    type: oracleApexAccounts
+)
+
+authentication user-admin-schema (
+    name: User_Admin_Schema
+    type: internalAppExtension
+)

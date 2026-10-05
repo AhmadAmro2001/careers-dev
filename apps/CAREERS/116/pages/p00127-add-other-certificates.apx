@@ -1,0 +1,391 @@
+page 127 (
+    name: add_other_certificates
+    alias: ADD-OTHER-CERTIFICATES
+    title: "&{ADDOTHERCERTIFICATES}."
+    appearance {
+        pageMode: modalDialog
+        dialogTemplate: @/modal-dialog
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    css {
+        inline:
+            ```css
+            
+            /* ========================================================== */
+            /* 1. STANDARD FORM FIELDS (TEXT, TEL, EMAIL, SELECT, ETC.)    */
+            /* ========================================================== */
+            
+            
+            
+            .t-Form-fieldContainer input[type="text"],
+            .t-Form-fieldContainer input[type="tel"],
+            .t-Form-fieldContainer input[type="email"],
+            .t-Form-fieldContainer input[type="date"],
+            .t-Form-fieldContainer textarea,
+            .apex-item-text,
+            .apex-item-textarea {
+                background-color: rgb(232, 244, 255)  !important; 
+                border-radius: 10px !important; /* Consistent 10px roundness */
+                border: 1px solid rgba(232, 244, 255, 0.705) !important;
+                transition: all 0.3s ease !important;
+            }
+            
+            .t-Form-fieldContainer select,
+            .apex-item-select {
+                background-color: rgb(232, 244, 255)  !important; 
+                border-radius: 10px !important;
+            }
+            
+            .t-Form-label::before{
+                background-color: rgb(232, 244, 255)  !important; 
+                border: none;
+                background: transparent;
+            }
+            
+            .t-Form-label:hover::before {
+                background-color: rgb(232, 244, 255)  !important; 
+            }
+            
+            .apex-item-file {
+                border-radius: 10px !important;
+                transition: all 0.3s ease !important;
+            }
+            .apex-item-file:hover {
+                border-color: #0563bb !important;
+                background-color: #f8fafc !important;
+            }
+            
+            .apex-item-group--datepicker,
+            .apex-item-group.apex-item-group--file {
+                display: inline-flex !important;
+                width: 100% !important;
+                align-items: stretch !important;
+                gap: 0 !important;
+            }
+            
+            /* Left side of the date component (Text Field) */
+            .apex-item-group--datepicker input.apex-item-text,
+            input.apex-item-datepicker {
+                background-color: rgb(232, 244, 255)  !important; 
+                border-top-left-radius: 10px !important;
+                border-bottom-left-radius: 10px !important;
+                border-top-right-radius: 0px !important;
+                border-bottom-right-radius: 0px !important;
+                border-right: none !important; 
+            }
+            
+            /* Right side of the date component (Calendar Button) */
+            .apex-item-group--datepicker .a-Button--calendar,
+            .apex-item-group--datepicker .apex-item-datepicker-btn,
+            .a-Button--calendar {
+                border-top-left-radius: 0px !important;
+                border-bottom-left-radius: 0px !important;
+                border-top-right-radius: 10px !important; /* Perfectly matches the 10px layout roundness */
+                border-bottom-right-radius: 10px !important;
+                border: 1px solid #cbd5e1 !important;
+                border-left: 1px solid #cbd5e1 !important; 
+                background-color: rgb(232, 244, 255)  !important; 
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                box-shadow: none !important;
+            }
+            ```
+    }
+    security {
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region other-certificates (
+        name: Other Certificates
+        title: "&{OTHER_CERTIFICATES}."
+        type: form
+        source {
+            location: localDatabase
+            tableName: JOB_APPLICATION_CERTIFICATE
+        }
+        layout {
+            sequence: 10
+            slot: contentBody
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--removeHeader js-removeLandmark
+                t-Region--noBorder
+                t-Region--scrollBody
+            ]
+        }
+    )
+
+    pageItem P127_CERTIFICATE_NAME (
+        type: textField
+        label {
+            label: "&{CERTIFICATE_NAME}."
+            alignment: left
+        }
+        layout {
+            sequence: 30
+            region: @other-certificates
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+        source {
+            formRegion: @other-certificates
+            column: CERTIFICATE_NAME
+            dataType: clob
+        }
+    )
+
+    pageItem P127_DATE_OF_ACQUISITION (
+        type: datePicker
+        label {
+            label: "&{DATE_OF_ACQUISITION}."
+            alignment: left
+        }
+        layout {
+            sequence: 40
+            region: @other-certificates
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+        source {
+            formRegion: @other-certificates
+            column: DATE_OF_ACQUISITION
+            dataType: date
+        }
+    )
+
+    pageItem P127_ID (
+        type: hidden
+        layout {
+            sequence: 10
+            region: @other-certificates
+            slot: regionBody
+        }
+        source {
+            formRegion: @other-certificates
+            column: ID
+            dataType: number
+            queryOnly: true
+            primaryKey: true
+        }
+        security {
+            sessionStateProtection: checksumRequiredSessionLevel
+        }
+    )
+
+    pageItem P127_JOB_VACANCY_CHECK (
+        type: hidden
+        layout {
+            sequence: 70
+            slot: contentBody
+        }
+    )
+
+    pageItem P127_PERSONAL_ID (
+        type: hidden
+        layout {
+            sequence: 50
+            region: @other-certificates
+            slot: regionBody
+        }
+        source {
+            formRegion: @other-certificates
+            column: PERSONAL_ID
+            dataType: number
+        }
+    )
+
+    pageItem P127_VACANCY_ID (
+        type: hidden
+        layout {
+            sequence: 60
+            slot: contentBody
+        }
+    )
+
+    button add-another (
+        buttonName: Add_another
+        label: "&{ADD}."
+        layout {
+            sequence: 10
+            region: @other-certificates
+            slot: create
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: [
+                #DEFAULT#
+                t-Button--stretch
+            ]
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P127_PERSONAL_ID
+        }
+    )
+
+    validation c-date (
+        name: C_Date
+        execution {
+            sequence: 20
+        }
+        validation {
+            type: itemIsNotNull
+            item: P127_DATE_OF_ACQUISITION
+        }
+        error {
+            errorMessage: "&{DATE_IS_REQUIRED}."
+        }
+    )
+
+    validation c-name (
+        name: C_name
+        execution {
+            sequence: 10
+        }
+        validation {
+            type: itemIsNotNull
+            item: P127_CERTIFICATE_NAME
+        }
+        error {
+            errorMessage: "&{CERTIFICATE_NAME_IS_REQUIRED}."
+        }
+    )
+
+    process add (
+        name: add
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                BEGIN
+                
+                    IF NOT apex_collection.collection_exists('CERTIFICATES') THEN
+                        apex_collection.create_collection('CERTIFICATES');
+                    END IF;
+                
+                    apex_collection.add_member(
+                        p_collection_name => 'CERTIFICATES',
+                        p_c001 => :P127_CERTIFICATE_NAME,
+                        p_d001 => :P127_DATE_OF_ACQUISITION
+                    );
+                
+                END;
+                ```
+        }
+        execution {
+            sequence: 10
+        }
+        advanced {
+            executionMappingIdentifier: 17177166521907646
+        }
+        serverSideCondition {
+            whenButtonPressed: @add-another
+        }
+    )
+
+    process check-job-vacancy (
+        name: Check_job_vacancy
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                    :P127_JOB_VACANCY_CHECK := Job_application_pkg.check_application_vacancy(:P127_PERSONAL_ID, :P127_VACANCY_ID);
+                end;
+                ```
+        }
+        execution {
+            sequence: 30
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 352525124353872996
+        }
+    )
+
+    process check-vacancy-id (
+        name: Check vacancy id
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                
+                    if :P127_VACANCY_ID is null then
+                        raise_application_error(-20101, 'choose the job');
+                    end if; 
+                end;
+                 
+                ```
+        }
+        execution {
+            sequence: 20
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 352524773801872381
+        }
+    )
+
+    process close (
+        name: close
+        type: closeDialog
+        execution {
+            sequence: 20
+        }
+        advanced {
+            executionMappingIdentifier: 352594884131134902
+        }
+        serverSideCondition {
+            whenButtonPressed: @add-another
+        }
+    )
+
+    process set-personal-id (
+        name: set personal id
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                    if :APP_USER_PERS_ID is not null then
+                        :P127_PERSONAL_ID := :APP_USER_PERS_ID;
+                    else
+                        raise_application_error(-20100, 'please complete your personal information');
+                    end if;
+                
+                end;
+                ```
+        }
+        execution {
+            sequence: 10
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 352524351455871630
+        }
+    )
+
+)

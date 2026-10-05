@@ -1,0 +1,442 @@
+page 208 (
+    name: Vacancy Details
+    alias: VACANCY-DETAILS
+    title: "&{VACANCY_DETAILS}."
+    appearance {
+        pageMode: modalDialog
+        dialogTemplate: @/modal-dialog
+        templateOptions: [
+            #DEFAULT#
+            ui-dialog--stretch
+        ]
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    security {
+        authorizationScheme: @admin-schema
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region new (
+        name: Vacancy Details
+        type: dynamicContent
+        source {
+            plsqlFunctionBody:
+                ```plsql
+                
+                
+                DECLARE
+                    l_html CLOB;
+                BEGIN
+                    FOR r IN (
+                        select 
+                               v.ID as JOB_ID,
+                               v.TITLE,
+                               to_char(v.POST_DATE, 'DD Mon YYYY HH:MI AM') as POST_DATE,
+                               created_admin.name as created_by,
+                               to_char(v.CREATION_DATE, 'DD Mon YYYY HH:MI AM') as CREATION_DATE,
+                               to_char(v.LAST_UPDATE_DATE, 'DD Mon YYYY HH:MI AM') as LAST_UPDATE_DATE,
+                               c.NAME as CATEGORY_NAME,
+                               v.SUMMARY,
+                               v.RESPONSIBILITIES,
+                               v.QUALIFICATIONS,
+                
+                               case 
+                                   when v.IS_ARCHIVED = 1 then 'Archived'
+                                   else 'Active'
+                               end as VACANCY_STATUS,
+                
+                               case 
+                                   when v.IS_ARCHIVED = 1 then 'archived'
+                                   else 'active'
+                               end as STATUS_CLASS,
+                
+                               case 
+                                   when v.IS_MINISTRY_EXCLUSIVE = 1 then 'EGPC Exclusive'
+                                   else 'Public'
+                               end as MINISTRY_EXCLUSIVE,
+                
+                               ed.NAME as education_level,
+                               v.Last_Updated_By as updated_by
+                        from JOB_VACANCY v
+                        left join CAREER_CATEGORY c
+                            on v.CATEGORY_ID = c.ID
+                        left join admin created_admin
+                            on created_admin.id = v.CREATED_BY
+                        left join admin updated_admin
+                            on updated_admin.id = v.LAST_UPDATED_BY
+                        left join EDUCATION_LEVEL ed
+                            on ed.ID = v.MINIMUM_EDUCATION_LEVEL_ID
+                        where v.ID = :P208_JOB_ID
+                    )
+                    LOOP
+                        l_html := l_html || '
+                        <div class="app-details-card vacancy-app-style">
+                
+                            <div class="app-card-header vacancy-card-header">
+                                <div>
+                                    <h2>' || apex_escape.html(r.TITLE) || '</h2>
+                                    <span class="app-id">Vacancy ID: ' || apex_escape.html(r.JOB_ID) || '</span>
+                                </div>
+                
+                                <span class="vacancy-status-badge ' || apex_escape.html_attribute(r.STATUS_CLASS) || '">
+                                    ' || apex_escape.html(r.VACANCY_STATUS) || '
+                                </span>
+                            </div>
+                
+                            <div class="section-title">Vacancy Information</div>
+                
+                            <div class="app-card-body">
+                                <div class="detail-item">
+                                    <span class="detail-label">Title</span>
+                                    <span class="detail-value">' || apex_escape.html(nvl(r.TITLE, '-')) || '</span>
+                                </div>
+                
+                                <div class="detail-item">
+                                    <span class="detail-label">Category</span>
+                                    <span class="detail-value">' || apex_escape.html(nvl(r.CATEGORY_NAME, '-')) || '</span>
+                                </div>
+                
+                                <div class="detail-item">
+                                    <span class="detail-label">Posted Date</span>
+                                    <span class="detail-value">' || apex_escape.html(nvl(r.POST_DATE, '-')) || '</span>
+                                </div>
+                
+                                <div class="detail-item">
+                                    <span class="detail-label">Visibility</span>
+                                    <span class="detail-value">' || apex_escape.html(nvl(r.MINISTRY_EXCLUSIVE, '-')) || '</span>
+                                </div>
+                
+                                <div class="detail-item">
+                                    <span class="detail-label">Minimum Education</span>
+                                    <span class="detail-value">' || apex_escape.html(nvl(r.education_level, '-')) || '</span>
+                                </div>
+                
+                                <div class="detail-item">
+                                    <span class="detail-label">Status</span>
+                                    <span class="detail-value">' || apex_escape.html(nvl(r.VACANCY_STATUS, '-')) || '</span>
+                                </div>
+                            </div>
+                
+                            <div class="section-title">Summary</div>
+                
+                            <div class="app-card-body">
+                                <div class="detail-item full-width vacancy-text-box">
+                                    <span class="detail-value rich-text-value">' || nvl(r.SUMMARY, '<span class="empty-value">-</span>') || '</span>
+                                </div>
+                            </div>
+                
+                            <div class="section-title">Responsibilities</div>
+                
+                            <div class="app-card-body">
+                                <div class="detail-item full-width vacancy-text-box">
+                                    <span class="detail-value rich-text-value">' || nvl(r.RESPONSIBILITIES, '<span class="empty-value">-</span>') || '</span>
+                                </div>
+                            </div>
+                
+                            <div class="section-title">Qualifications</div>
+                
+                            <div class="app-card-body">
+                                <div class="detail-item full-width vacancy-text-box">
+                                    <span class="detail-value rich-text-value">' || nvl(r.QUALIFICATIONS, '<span class="empty-value">-</span>') || '</span>
+                                </div>
+                            </div>
+                
+                            <div class="section-title">Audit Information</div>
+                
+                            <div class="app-card-body">
+                                <div class="detail-item">
+                                    <span class="detail-label">Created By</span>
+                                    <span class="detail-value">' || apex_escape.html(nvl(r.created_by, '-')) || '</span>
+                                </div>
+                
+                                <div class="detail-item">
+                                    <span class="detail-label">Created Date</span>
+                                    <span class="detail-value">' || apex_escape.html(nvl(r.CREATION_DATE, '-')) || '</span>
+                                </div>
+                
+                                <div class="detail-item">
+                                    <span class="detail-label">Updated By</span>
+                                    <span class="detail-value">' || apex_escape.html(nvl(r.updated_by, '-')) || '</span>
+                                </div>
+                
+                                <div class="detail-item">
+                                    <span class="detail-label">Last Updated</span>
+                                    <span class="detail-value">' || apex_escape.html(nvl(r.LAST_UPDATE_DATE, '-')) || '</span>
+                                </div>
+                            </div>
+                
+                        </div>';
+                    END LOOP;
+                
+                    RETURN l_html;
+                
+                EXCEPTION
+                    WHEN NO_DATA_FOUND THEN
+                        RETURN '<div class="app-details-card">No vacancy found for this ID.</div>';
+                END;
+                ```
+        }
+        layout {
+            sequence: 20
+            slot: contentBody
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--removeHeader js-removeLandmark
+                t-Region--scrollBody
+            ]
+        }
+    )
+
+    region vacancy-details (
+        name: Vacancy Details
+        title: "&{VACANCY_DETAILS}."
+        type: classicReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select 
+                       v.ID as JOB_ID,
+                       v.TITLE,
+                
+                       to_char(v.POST_DATE, 'DD Mon YYYY HH:MI AM') as POST_DATE,
+                       a.name,
+                
+                       to_char(v.CREATION_DATE, 'DD Mon YYYY HH:MI AM') as CREATION_DATE,
+                
+                       v.LAST_UPDATED_BY,
+                       to_char(v.LAST_UPDATE_DATE, 'DD Mon YYYY HH:MI AM') as LAST_UPDATE_DATE,
+                
+                       c.NAME as CATEGORY_NAME,
+                
+                       v.SUMMARY,
+                       v.RESPONSIBILITIES,
+                       v.QUALIFICATIONS,
+                
+                       case 
+                           when v.IS_ARCHIVED = 1 then 'Archived'
+                           else 'Active'
+                       end as VACANCY_STATUS,
+                
+                       case 
+                           when v.IS_ARCHIVED = 1 then 'archived'
+                           else 'active'
+                       end as STATUS_CLASS,
+                
+                       case 
+                           when v.IS_MINISTRY_EXCLUSIVE = 1 then 'EGPC Exclusive'
+                           else 'Public'
+                       end as MINISTRY_EXCLUSIVE,
+                
+                       v.MINIMUM_EDUCATION_LEVEL_ID,
+                
+                       'DETAILS' as DETAILS_CARD
+                
+                from JOB_VACANCY v
+                
+                left join CAREER_CATEGORY c
+                    on v.CATEGORY_ID = c.ID
+                left join Admin a
+                    on a.ID = v.CREATED_BY
+                
+                where v.ID = :P208_JOB_ID
+                ```
+        }
+        layout {
+            sequence: 10
+            slot: contentBody
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--removeHeader js-removeLandmark
+                t-Region--scrollBody
+            ]
+        }
+        config {
+            buildOption: @commented-out
+        }
+        componentAppearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Report--altRowsDefault
+                t-Report--rowHighlight
+            ]
+        }
+        pagination {
+            type: nextAndPreviousLinks
+        }
+
+        column CATEGORY_NAME (
+            reportColumnQueryId: 8
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 80
+            }
+        )
+
+        column CREATION_DATE (
+            reportColumnQueryId: 5
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 50
+            }
+        )
+
+        column DETAILS_CARD (
+            reportColumnQueryId: 16
+            derivedColumn: N
+            heading {
+                heading: "&{DETAILS_CARD}."
+            }
+            layout {
+                sequence: 160
+            }
+            columnFormatting {
+                htmlExpression: "&{COLUMN_HTML_EXPRESSION TITLE=#TITLE!HTML# POST_DATE=#POST_DATE!HTML# NAME=#NAME!HTML# STATUS_CLASS=#STATUS_CLASS# VACANCY_STATUS=#VACANCY_STATUS!HTML# CATEGORY_NAME=#CATEGORY_NAME!HTML# MINIMUM_EDUCATION_LEVEL_ID=#MINIMUM_EDUCATION_LEVEL_ID!HTML# MINISTRY_EXCLUSIVE=#MINISTRY_EXCLUSIVE!HTML# CREATION_DATE=#CREATION_DATE!HTML# LAST_UPDATE_DATE=#LAST_UPDATE_DATE!HTML# LAST_UPDATED_BY=#LAST_UPDATED_BY!HTML# SUMMARY=#SUMMARY!RAW# RESPONSIBILITIES=#RESPONSIBILITIES!RAW# QUALIFICATIONS=#QUALIFICATIONS!RAW#}!RAW."
+            }
+            security {
+                escapeSpecialChars: false
+            }
+        )
+
+        column JOB_ID (
+            reportColumnQueryId: 1
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 10
+            }
+        )
+
+        column LAST_UPDATED_BY (
+            reportColumnQueryId: 6
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 60
+            }
+        )
+
+        column LAST_UPDATE_DATE (
+            reportColumnQueryId: 7
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 70
+            }
+        )
+
+        column MINIMUM_EDUCATION_LEVEL_ID (
+            reportColumnQueryId: 15
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 150
+            }
+        )
+
+        column MINISTRY_EXCLUSIVE (
+            reportColumnQueryId: 14
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 140
+            }
+        )
+
+        column NAME (
+            reportColumnQueryId: 4
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 170
+            }
+        )
+
+        column POST_DATE (
+            reportColumnQueryId: 3
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 30
+            }
+        )
+
+        column QUALIFICATIONS (
+            reportColumnQueryId: 11
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 110
+            }
+        )
+
+        column RESPONSIBILITIES (
+            reportColumnQueryId: 10
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 100
+            }
+        )
+
+        column STATUS_CLASS (
+            reportColumnQueryId: 13
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 130
+            }
+        )
+
+        column SUMMARY (
+            reportColumnQueryId: 9
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 90
+            }
+        )
+
+        column TITLE (
+            reportColumnQueryId: 2
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 20
+            }
+        )
+
+        column VACANCY_STATUS (
+            reportColumnQueryId: 12
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 120
+            }
+        )
+
+    )
+
+    pageItem P208_JOB_ID (
+        type: hidden
+        layout {
+            sequence: 10
+            region: @vacancy-details
+            slot: regionBody
+        }
+    )
+
+)

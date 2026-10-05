@@ -1,0 +1,198 @@
+lov account-password (
+    name: ACCOUNT.PASSWORD
+    source {
+        tableName: ACCOUNT
+    }
+    columnMapping {
+        return: ID
+        display: PASSWORD
+        defaultSort: PASSWORD
+    }
+)
+
+lov career-category-name (
+    name: CAREER_CATEGORY.NAME
+    source {
+        tableName: CAREER_CATEGORY
+    }
+    columnMapping {
+        return: ID
+        display: NAME
+        defaultSort: NAME
+    }
+)
+
+lov category-name (
+    name: CATEGORY_NAME
+    source {
+        type: sqlQuery
+        sqlQuery:
+            ```sql
+            SELECT NAME ,ID
+            FROM CAREER_CATEGORY
+            ```
+    }
+    columnMapping {
+        return: ID
+        display: NAME
+        defaultSort: NAME
+    }
+)
+
+lov cities (
+    name: CITIES
+    source {
+        type: sqlQuery
+        sqlQuery:
+            ```sql
+            select name , id 
+            from cities
+            ```
+    }
+    columnMapping {
+        return: ID
+        display: NAME
+        defaultSort: NAME
+    }
+)
+
+lov country-name (
+    name: COUNTRY.NAME
+    source {
+        tableName: COUNTRY
+    }
+    columnMapping {
+        return: ID
+        display: NAME
+        defaultSort: NAME
+    }
+)
+
+lov education-field-name (
+    name: EDUCATION_FIELD.NAME
+    source {
+        tableName: EDUCATION_FIELD
+    }
+    columnMapping {
+        return: ID
+        display: NAME
+        defaultSort: NAME
+    }
+)
+
+lov education-grade-name (
+    name: EDUCATION_GRADE.NAME
+    source {
+        tableName: EDUCATION_GRADE
+    }
+    columnMapping {
+        return: ID
+        display: NAME
+        defaultSort: NAME
+    }
+)
+
+lov education-level-name (
+    name: EDUCATION_LEVEL.NAME
+    source {
+        tableName: EDUCATION_LEVEL
+    }
+    columnMapping {
+        return: ID
+        display: NAME
+        defaultSort: NAME
+    }
+)
+
+lov education-with-rank (
+    name: EDUCATION WITH RANK
+    source {
+        type: sqlQuery
+        sqlQuery:
+            ```sql
+            select name || ' - Rank : '||LEVEL_RANK ,id
+            from Education_level
+            order by LEVEL_RANK asc
+            ```
+    }
+    columnMapping {
+        return: ID
+    }
+)
+
+lov grad-year (
+    name: GRAD_YEAR
+    source {
+        type: sqlQuery
+        sqlQuery:
+            ```sql
+            SELECT DISTINCT GRADUATION_YEAR
+            FROM EDUCATION_DEGREE
+            ORDER BY GRADUATION_YEAR DESC;
+            ```
+    }
+    columnMapping {
+        return: GRADUATION_YEAR
+        display: GRADUATION_YEAR
+    }
+)
+
+lov job-application-marital-status (
+    name: JOB_APPLICATION.MARITAL_STATUS
+    source {
+        tableName: JOB_APPLICATION
+    }
+    columnMapping {
+        return: ID
+        display: MARITAL_STATUS
+        defaultSort: MARITAL_STATUS
+    }
+)
+
+lov job-vacancy-title (
+    name: JOB_VACANCY.TITLE
+    source {
+        tableName: JOB_VACANCY
+    }
+    columnMapping {
+        return: ID
+        display: TITLE
+        defaultSort: TITLE
+    }
+)
+
+lov language-level-name (
+    name: LANGUAGE_LEVEL.NAME
+    source {
+        tableName: LANGUAGE_LEVEL
+    }
+    columnMapping {
+        return: ID
+        display: NAME
+        defaultSort: NAME
+    }
+)
+
+lov language-name (
+    name: LANGUAGE.NAME
+    source {
+        tableName: LANGUAGE
+    }
+    columnMapping {
+        return: ID
+        display: NAME
+        defaultSort: NAME
+    }
+)
+
+lov marital-status-name (
+    name: MARITAL_STATUS.NAME
+    source {
+        tableName: MARITAL_STATUS
+    }
+    columnMapping {
+        return: ID
+        display: NAME
+        defaultSort: NAME
+    }
+)

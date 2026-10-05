@@ -1,0 +1,68 @@
+plugin appliocantNavbar (
+    name: appliocant-navbar
+    staticId: APPLIOCANT_NAVBAR
+    templateComponent {
+        availableAs: regionOnly
+        partial:
+            ```html
+            <div id="#APEX$DOM_ID#" class="custom-navbar">
+                
+            
+                <div class="nav-left">
+                    <a href="f?p=&APP_ID.:131:&APP_SESSION." class="nav-link">
+                        <span class="fa fa-home"></span>
+                        Home
+                    </a>
+            
+                    <a href="f?p=&APP_ID.:104:&APP_SESSION." class="nav-link">
+                        <span class="fa fa-briefcase"></span>
+                        Vacancies
+                    </a>
+            
+                    <a href="f?p=&APP_ID.:132:&APP_SESSION." class="nav-link">
+                        <span class="fa fa-clipboard"></span>
+                        Applications
+                    </a>
+                    
+                      {if PERSONAL_CHECK/}
+            
+            <a href="f?p=&APP_ID.:113:&APP_SESSION." class="nav-link">
+                <span class="fa fa-user"></span>
+                Profile
+            </a>
+            
+            {else/}
+            
+            <a href="f?p=&APP_ID.:119:&APP_SESSION." class="nav-link">
+                <span class="fa fa-id-card"></span>
+                Personal Data
+            </a>
+            
+            {endif/}
+                  <span id="personalCheck" style="display:none;">&PERSONAL_CHECK.</span>
+                </div>
+            
+                <div class="nav-right">
+            
+                    <span class="user-name">
+                        <span class="fa fa-user-circle" style="font-size:20px;"></span>
+                        &APP_USER.
+                    </span>
+            
+                   
+            
+                    <a href="&LOGOUT_URL." class="logout-btn">
+                    <span class="fa fa-sign-out"></span>
+                    Logout
+                </a>
+                </div>
+            
+            </div>
+            
+            
+            ```
+    }
+    information {
+        version: 1.0
+    }
+)

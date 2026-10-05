@@ -1,0 +1,577 @@
+page 116 (
+    name: Edit Education
+    alias: EDIT-EDUCATION
+    title: "&{EDIT_EDUCATION}."
+    appearance {
+        pageMode: modalDialog
+        dialogTemplate: @/modal-dialog
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    css {
+        inline:
+            ```css
+            
+            /* ========================================================== */
+            /* 1. STANDARD FORM FIELDS (TEXT, TEL, EMAIL, SELECT, ETC.)    */
+            /* ========================================================== */
+            
+            
+            
+            .t-Form-fieldContainer input[type="text"],
+            .t-Form-fieldContainer input[type="tel"],
+            .t-Form-fieldContainer input[type="email"],
+            .t-Form-fieldContainer input[type="date"],
+            .t-Form-fieldContainer textarea,
+            .apex-item-text,
+            .apex-item-textarea {
+                background-color: rgb(232, 244, 255)  !important; 
+                border-radius: 10px !important; /* Consistent 10px roundness */
+                border: 1px solid rgba(232, 244, 255, 0.705) !important;
+                transition: all 0.3s ease !important;
+            }
+            
+            .t-Form-fieldContainer select,
+            .apex-item-select {
+                background-color: rgb(232, 244, 255)  !important; 
+                border-radius: 10px !important;
+            }
+            
+            .t-Form-label::before{
+                background-color: rgb(232, 244, 255)  !important; 
+                border: none;
+                background: transparent;
+            }
+            
+            .t-Form-label:hover::before {
+                background-color: rgb(232, 244, 255)  !important; 
+            }
+            
+            .apex-item-file {
+                border-radius: 10px !important;
+                transition: all 0.3s ease !important;
+            }
+            .apex-item-file:hover {
+                border-color: #0563bb !important;
+                background-color: #f8fafc !important;
+            }
+            
+            .apex-item-group--datepicker,
+            .apex-item-group.apex-item-group--file {
+                display: inline-flex !important;
+                width: 100% !important;
+                align-items: stretch !important;
+                gap: 0 !important;
+            }
+            
+            /* Left side of the date component (Text Field) */
+            .apex-item-group--datepicker input.apex-item-text,
+            input.apex-item-datepicker {
+                background-color: rgb(232, 244, 255)  !important; 
+                border-top-left-radius: 10px !important;
+                border-bottom-left-radius: 10px !important;
+                border-top-right-radius: 0px !important;
+                border-bottom-right-radius: 0px !important;
+                border-right: none !important; 
+            }
+            
+            /* Right side of the date component (Calendar Button) */
+            .apex-item-group--datepicker .a-Button--calendar,
+            .apex-item-group--datepicker .apex-item-datepicker-btn,
+            .a-Button--calendar {
+                border-top-left-radius: 0px !important;
+                border-bottom-left-radius: 0px !important;
+                border-top-right-radius: 10px !important; /* Perfectly matches the 10px layout roundness */
+                border-bottom-right-radius: 10px !important;
+                border: 1px solid #cbd5e1 !important;
+                border-left: 1px solid #cbd5e1 !important; 
+                background-color: rgb(232, 244, 255)  !important; 
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                box-shadow: none !important;
+            }
+            ```
+    }
+    security {
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region buttons (
+        name: Buttons
+        title: "&{BUTTONS}."
+        type: staticContent
+        layout {
+            sequence: 20
+            slot: dialogFooter
+        }
+        appearance {
+            template: @/buttons-container
+            templateOptions: #DEFAULT#
+        }
+        settings {
+            outputAs: text
+        }
+    )
+
+    region edit-education (
+        name: Edit Education
+        title: "&{EDIT_EDUCATION}."
+        type: form
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select EduD.ID,
+                       EduD.EDUCATION_LEVEL,
+                       EduD.EDUCATION_FIELD,
+                       EduD.GRADUATION_YEAR,
+                       EduD.EDUCATION_GRADE,
+                       EduD.JOB_APPLICATION_ID,
+                       EduD.UNIVERSITY,
+                       EduD.OTHER_EDUCATION_FIELD,
+                       EduD.PERSONAL_ID,
+                       EduD.GRADUATION_CERTIFICATE_FILE_ID,
+                       jappat.FILE_BLOB
+                  from EDUCATION_DEGREE EduD
+                  join job_application_attachments jappat on jappat.id = EduD.GRADUATION_CERTIFICATE_FILE_ID
+                  where jappat.FILE_TYPE_ID = 1;
+                ```
+        }
+        layout {
+            sequence: 10
+            slot: contentBody
+        }
+        appearance {
+            template: @/blank-with-attributes
+            templateOptions: #DEFAULT#
+        }
+        edit {
+            enabled: true
+            allowedOperations: [
+                add
+                update
+                delete
+            ]
+        }
+    )
+
+    pageItem P116_EDUCATION_FIELD (
+        type: selectList
+        label {
+            label: "&{EDUCATION_FIELD}."
+            alignment: right
+        }
+        lov {
+            type: sharedComponent
+            lov: @education-field-name
+        }
+        layout {
+            sequence: 30
+            region: @edit-education
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @edit-education
+            column: EDUCATION_FIELD
+            dataType: number
+        }
+    )
+
+    pageItem P116_EDUCATION_GRADE (
+        type: selectList
+        label {
+            label: "&{EDUCATION_GRADE}."
+            alignment: right
+        }
+        lov {
+            type: sharedComponent
+            lov: @education-grade-name
+        }
+        layout {
+            sequence: 50
+            region: @edit-education
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        source {
+            formRegion: @edit-education
+            column: EDUCATION_GRADE
+            dataType: number
+        }
+    )
+
+    pageItem P116_EDUCATION_LEVEL (
+        type: selectList
+        label {
+            label: "&{EDUCATION_LEVEL}."
+            alignment: right
+        }
+        lov {
+            type: sharedComponent
+            lov: @education-level-name
+        }
+        layout {
+            sequence: 20
+            region: @edit-education
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @edit-education
+            column: EDUCATION_LEVEL
+            dataType: number
+        }
+    )
+
+    pageItem P116_FILE_BLOB (
+        type: fileUpload
+        label {
+            label: File Blob
+            alignment: left
+        }
+        storage {
+            type: appTempFiles
+        }
+        layout {
+            sequence: 90
+            region: @edit-education
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+        source {
+            formRegion: @edit-education
+            column: FILE_BLOB
+            dataType: blob
+        }
+    )
+
+    pageItem P116_GRADUATION_YEAR (
+        type: numberField
+        label {
+            label: "&{GRADUATION_YEAR}."
+            alignment: right
+        }
+        layout {
+            sequence: 40
+            region: @edit-education
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            valueRequired: true
+            maxLength: 255
+        }
+        source {
+            formRegion: @edit-education
+            column: GRADUATION_YEAR
+            dataType: number
+        }
+    )
+
+    pageItem P116_ID (
+        type: hidden
+        layout {
+            sequence: 10
+            region: @edit-education
+            slot: regionBody
+        }
+        source {
+            formRegion: @edit-education
+            column: ID
+            dataType: number
+            queryOnly: true
+            primaryKey: true
+        }
+        security {
+            sessionStateProtection: checksumRequiredSessionLevel
+        }
+    )
+
+    pageItem P116_OTHER_EDUCATION_FIELD (
+        type: textField
+        label {
+            label: "&{OTHER_EDUCATION_FIELD}."
+            alignment: right
+        }
+        layout {
+            sequence: 80
+            region: @edit-education
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 255
+        }
+        source {
+            formRegion: @edit-education
+            column: OTHER_EDUCATION_FIELD
+            dataType: varchar2
+        }
+    )
+
+    pageItem P116_PERSONAL_ID (
+        type: hidden
+        layout {
+            sequence: 10
+            region: @edit-education
+            slot: regionBody
+        }
+        source {
+            formRegion: @edit-education
+            column: PERSONAL_ID
+            dataType: number
+        }
+    )
+
+    pageItem P116_UNIVERSITY (
+        type: textarea
+        label {
+            label: "&{UNIVERSITY}."
+            alignment: right
+        }
+        layout {
+            sequence: 70
+            region: @edit-education
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 60
+            height: 4
+        }
+        validation {
+            maxLength: 500
+        }
+        source {
+            formRegion: @edit-education
+            column: UNIVERSITY
+            dataType: varchar2
+        }
+    )
+
+    button cancel (
+        buttonName: CANCEL
+        label: "&{CANCEL}."
+        layout {
+            sequence: 10
+            region: @buttons
+            slot: close
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            action: definedByDynamicAction
+        }
+    )
+
+    button create (
+        buttonName: CREATE
+        label: "&{CREATE}."
+        layout {
+            sequence: 40
+            region: @buttons
+            slot: next
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: insert
+        }
+        serverSideCondition {
+            type: itemIsNull
+            item: P116_ID
+        }
+    )
+
+    button delete (
+        buttonName: DELETE
+        label: "&{DELETE}."
+        layout {
+            sequence: 20
+            region: @buttons
+            slot: delete
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            executeValidations: false
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: delete
+            requiresConfirmation: true
+        }
+        confirmation {
+            message: &APP_TEXT$DELETE_MSG!RAW.
+            style: danger
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P116_ID
+        }
+    )
+
+    button save (
+        buttonName: SAVE
+        label: "&{APPLY_CHANGES}."
+        layout {
+            sequence: 30
+            region: @buttons
+            slot: next
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: update
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P116_ID
+        }
+    )
+
+    dynamicAction cancel-dialog (
+        name: Cancel Dialog
+        execution {
+            sequence: 10
+        }
+        when {
+            event: click
+            selectionType: button
+            button: @cancel
+        }
+
+        action native-dialog-cancel (
+            action: cancelDialog
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    process close-dialog (
+        name: Close Dialog
+        type: closeDialog
+        execution {
+            sequence: 30
+        }
+        advanced {
+            executionMappingIdentifier: 349896320149867878
+        }
+        serverSideCondition {
+            type: requestIsContainedInValue
+            value: CREATE,SAVE,DELETE
+        }
+    )
+
+    process edit-education (
+        name: EDIT Education
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                
+                    user_personal_info_pkg.Update_Education_data(:P116_EDUCATION_LEVEL, :P116_EDUCATION_FIELD,
+                    :P116_GRADUATION_YEAR, :P116_EDUCATION_GRADE, :P116_UNIVERSITY, :P116_OTHER_EDUCATION_FIELD,
+                    :P116_FILE_BLOB ,:P116_ID);
+                
+                END;
+                ```
+        }
+        execution {
+            sequence: 20
+        }
+        advanced {
+            executionMappingIdentifier: 341790415884908919
+        }
+        serverSideCondition {
+            whenButtonPressed: @save
+        }
+    )
+
+    process initialize-form-edit-education (
+        name: Initialize form Edit Education
+        type: formInitialization
+        formRegion: @edit-education
+        execution {
+            sequence: 10
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 349895505718867878
+        }
+    )
+
+    process process-form-edit-education (
+        name: Process form Edit Education
+        type: formAutoRowProcessing
+        formRegion: @edit-education
+        execution {
+            sequence: 10
+        }
+        advanced {
+            executionMappingIdentifier: 349895988504867878
+        }
+        serverSideCondition {
+            whenButtonPressed: @delete
+        }
+    )
+
+)

@@ -1,0 +1,86 @@
+page 213 (
+    name: Attachment Preview
+    alias: ATTACHMENT-PREVIEW
+    title: Attachment Preview
+    appearance {
+        pageTemplate: @/standard
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    security {
+        authorizationScheme: @admin-schema
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    pageItem P213_ATTACHMENT_ID (
+        type: hidden
+        layout {
+            sequence: 10
+            slot: body
+        }
+    )
+
+    process attachment-preview (
+        name: Attachment Preview
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                DECLARE
+                    l_blob       JOB_APPLICATION_ATTACHMENTS.file_blob%TYPE;
+                    l_mime_type  JOB_APPLICATION_ATTACHMENTS.mime_type%TYPE;
+                    l_file_name  JOB_APPLICATION_ATTACHMENTS.file_name%TYPE;
+                BEGIN
+                    SELECT file_blob,
+                           mime_type,
+                           file_name
+                    INTO   l_blob,
+                           l_mime_type,
+                           l_file_name
+                    FROM   JOB_APPLICATION_ATTACHMENTS
+                    WHERE  id = :P213_ATTACHMENT_ID
+                    AND    file_blob IS NOT NULL;
+                
+                    -- Important: only allow image preview here
+                    IF LOWER(l_mime_type) NOT LIKE 'image/%' THEN
+                        owa_util.status_line(415, 'Unsupported Media Type');
+                        owa_util.http_header_close;
+                        apex_application.stop_apex_engine;
+                    END IF;
+                
+                    sys.htp.init;
+                
+                    owa_util.mime_header(l_mime_type, FALSE);
+                    htp.p('Content-Length: ' || dbms_lob.getlength(l_blob));
+                    htp.p('Content-Disposition: inline; filename="' || REPLACE(l_file_name, '"', '') || '"');
+                
+                    owa_util.http_header_close;
+                
+                    wpg_docload.download_file(l_blob);
+                
+                    apex_application.stop_apex_engine;
+                
+                EXCEPTION
+                    WHEN apex_application.e_stop_apex_engine THEN
+                        RAISE;
+                
+                    WHEN NO_DATA_FOUND THEN
+                        owa_util.status_line(404, 'File Not Found');
+                        owa_util.http_header_close;
+                        apex_application.stop_apex_engine;
+                END;
+                ```
+        }
+        execution {
+            sequence: 10
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 31730026792817910
+        }
+    )
+
+)

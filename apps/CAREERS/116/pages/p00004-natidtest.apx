@@ -1,0 +1,167 @@
+page 4 (
+    name: natIDTEST
+    alias: NATIDTEST
+    title: "&{NATIDTEST}."
+    appearance {
+        pageTemplate: @/standard
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    security {
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region breadcrumb (
+        name: Breadcrumb
+        title: "&{BREADCRUMB}."
+        type: breadcrumb
+        source {
+            breadcrumb: @breadcrumb
+        }
+        layout {
+            sequence: 10
+            slot: breadcrumbBar
+        }
+        appearance {
+            template: @/title-bar
+            templateOptions: [
+                #DEFAULT#
+                t-BreadcrumbRegion--useBreadcrumbTitle
+            ]
+        }
+        componentAppearance {
+            breadcrumbTemplate: @/breadcrumb
+            templateOptions: #DEFAULT#
+        }
+    )
+
+    region natidtest (
+        name: natIDTEST
+        title: "&{NATIDTEST}."
+        type: classicReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select pi.national_id_file_id,
+                        pi.id as pi_id,
+                       j.id,
+                       j.file_name,
+                       dbms_lob.getlength(j.file_blob) as image
+                from personal_info pi
+                left join job_application_attachments j
+                       on j.id = pi.national_id_file_id
+                where pi.account_id = :APP_USER_ACC_ID;
+                ```
+        }
+        layout {
+            sequence: 10
+            slot: body
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--noPadding
+                t-Region--scrollBody
+            ]
+        }
+        componentAppearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Report--stretch
+                t-Report--staticRowColors
+                t-Report--rowHighlight
+                t-Report--inline
+                t-Report--hideNoPagination
+            ]
+        }
+        messages {
+            whenNoDataFound: "&{NO_DATA_FOUND}."
+        }
+        printing {
+            enabled: true
+        }
+        output {
+            linkText: "&{DOWNLOAD}."
+            format: pdf
+        }
+        page {
+            borderWidth: 0.5
+            borderColor: #666666
+        }
+
+        column FILE_NAME (
+            reportColumnQueryId: 4
+            derivedColumn: N
+            heading {
+                heading: "&{FILE_NAME}."
+            }
+            layout {
+                sequence: 21
+            }
+        )
+
+        column ID (
+            reportColumnQueryId: 3
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 1
+            }
+        )
+
+        column IMAGE (
+            reportColumnQueryId: 5
+            derivedColumn: N
+            type: displayImage
+            heading {
+                heading: "&{IMAGE}."
+                alignment: center
+            }
+            layout {
+                sequence: 31
+                columnAlignment: center
+            }
+            blobAttributes {
+                tableName: JOB_APPLICATION_ATTACHMENTS
+                blobColumn: FILE_BLOB
+                primaryKeyColumn1: ID
+                filenameColumn: FILE_NAME
+            }
+        )
+
+        column NATIONAL_ID_FILE_ID (
+            reportColumnQueryId: 1
+            derivedColumn: N
+            heading {
+                heading: "&{NATIONAL_ID_FILE_ID}."
+                alignment: end
+            }
+            layout {
+                sequence: 11
+                columnAlignment: end
+            }
+        )
+
+        column PI_ID (
+            reportColumnQueryId: 2
+            derivedColumn: N
+            heading {
+                heading: "&{PI_ID}."
+                alignment: end
+            }
+            layout {
+                sequence: 41
+                columnAlignment: end
+            }
+        )
+
+    )
+
+)

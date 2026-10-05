@@ -1,0 +1,58 @@
+appProcess download-cv (
+    name: DOWNLOAD_CV
+    type: executeCode
+    source {
+        plsqlCode:
+            ```plsql
+            DECLARE
+                l_blob       BLOB;
+                l_mime_type  VARCHAR2(255) := 'application/pdf';
+                l_file_name  VARCHAR2(255) := 'resume.pdf';
+            BEGIN
+                SELECT j.resume
+                INTO   l_blob
+                FROM   job_application j
+                WHERE  j.id = :P203_DOWNLOAD_ID;
+            
+                IF l_blob IS NULL THEN
+                    raise_application_error(-20001, 'No resume found for this application.');
+                END IF;
+            
+                sys.htp.init;
+                sys.owa_util.mime_header(l_mime_type, FALSE);
+            
+                sys.htp.p('Content-Length: ' || dbms_lob.getlength(l_blob));
+                sys.htp.p(
+                    'Content-Disposition: attachment; filename="' || l_file_name || '"'
+                );
+            
+                sys.owa_util.http_header_close;
+                sys.wpg_docload.download_file(l_blob);
+            
+                apex_application.stop_apex_engine;
+            END;
+            ```
+    }
+    execution {
+        sequence: 1
+        point: ajaxCallback
+    }
+    security {
+        authorizationScheme: mustNotBePublicUser
+    }
+)
+
+appProcess personal-check-flag (
+    name: PERSONAL_CHECK_FLAG
+    type: executeCode
+    source {
+        plsqlCode:
+            ```plsql
+            :PERSONAL_CHECK :=
+                JOB_APPLICATION_PKG.check_complete_personal_info(:APP_USER_ACC_ID);
+            ```
+    }
+    execution {
+        sequence: 1
+    }
+)

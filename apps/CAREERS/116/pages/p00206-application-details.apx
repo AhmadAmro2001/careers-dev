@@ -1,0 +1,535 @@
+page 206 (
+    name: Application Details
+    alias: APPLICATION-DETAILS
+    title: "&{APPLICATION_DETAILS}."
+    appearance {
+        pageMode: modalDialog
+        dialogTemplate: @/modal-dialog
+        templateOptions: [
+            #DEFAULT#
+            ui-dialog--stretch
+            t-PageBody--noContentPadding
+        ]
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    css {
+        inline:
+            ```css
+            .attachments-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 18px;
+                margin-top: 15px;
+            }
+            
+            .attachment-preview-card {
+                background: #ffffff;
+                border: 1px solid #e5e7eb;
+                border-radius: 14px;
+                padding: 14px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+                text-align: center;
+            }
+            
+            .attachment-preview-title {
+                font-weight: 700;
+                margin-bottom: 12px;
+                color: #333;
+            }
+            
+            .attachment-preview-img {
+                width: 100%;
+                max-height: 260px;
+                object-fit: contain;
+                border-radius: 10px;
+                border: 1px solid #ddd;
+                background: #f9fafb;
+                margin-bottom: 12px;
+            }
+            
+            .no-preview {
+                min-height: 160px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #777;
+                background: #f9fafb;
+                border: 1px dashed #ccc;
+                border-radius: 10px;
+                padding: 15px;
+            }
+            
+            .cv-download-only {
+                min-height: 160px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            ```
+    }
+    security {
+        authorizationScheme: @admin-schema
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region application-info (
+        name: Application Info
+        title: "&{APPLICATION_INFO}."
+        type: dynamicContent
+        source {
+            plsqlFunctionBody:
+                ```plsql
+                DECLARE
+                    l_first_name         Account.first_name%TYPE;
+                    l_second_name        Account.second_name%TYPE;
+                    l_last_name          Account.last_name%TYPE;
+                    l_gender             Account.gender%TYPE;
+                    l_date_of_birth      Account.date_of_birth%TYPE;
+                    l_address            Account.address%TYPE;
+                    l_city               Account.city%TYPE;
+                    l_country_name       Country.name%TYPE;
+                    l_home_telephone     Account.home_telephone%TYPE;
+                    l_mobile_telephone   Account.mobile_telephone%TYPE;
+                    l_email              Account.email%TYPE;
+                    l_military_status    MILITARY_STATUS.name%TYPE;
+                    l_marital_status     MARITAL_STATUS.name%TYPE;
+                    l_mother_full_name   PERSONAL_INFO.MOTHER_FULL_NAME%TYPE;
+                    -- l_job_vacancy        JOB_VACANCY.TITLE%TYPE;
+                    l_national_id        Account.national_id%TYPE;
+                    l_cv_attachment_id        JOB_APPLICATION_ATTACHMENTS.id%TYPE;
+                    l_grad_attachment_id      JOB_APPLICATION_ATTACHMENTS.id%TYPE;
+                    l_national_attachment_id  JOB_APPLICATION_ATTACHMENTS.id%TYPE;
+                
+                    l_grad_card       CLOB;
+                    l_national_card   CLOB;
+                    l_grad_preview_url      VARCHAR2(4000);
+                    l_national_preview_url  VARCHAR2(4000);
+                
+                    l_cv_btn                  CLOB;
+                    l_grad_btn                CLOB;
+                    l_national_btn            CLOB;
+                BEGIN
+                    SELECT u.first_name,
+                           u.second_name,
+                           u.last_name,
+                           u.gender,
+                           u.date_of_birth,
+                           u.address,
+                           ci.name,
+                           c.name,
+                           u.home_telephone,
+                           u.mobile_telephone,
+                           u.email,
+                           mi.name,
+                           mis.name,
+                           pi.mother_full_name,
+                           u.national_id
+                        --    jv.title
+                    INTO   l_first_name,
+                           l_second_name,
+                           l_last_name,
+                           l_gender,
+                           l_date_of_birth,
+                           l_address,
+                           l_city,
+                           l_country_name,
+                           l_home_telephone,
+                           l_mobile_telephone,
+                           l_email,
+                           l_military_status,
+                           l_marital_status,
+                           l_mother_full_name,
+                           l_national_id
+                        --    l_job_vacancy
+                    FROM   Account u
+                    LEFT JOIN   Country c
+                    ON     c.id = u.country_id
+                    LEFT JOIN   Job_Application j
+                    ON     u.id = j.account_id
+                    LEFT JOIN   personal_info pi
+                    ON     pi.Account_id = u.id
+                    LEFT JOIN   MILITARY_STATUS mi
+                    ON     pi.MILITARY_STATUS = mi.id
+                    LEFT JOIN   MARITAL_STATUS mis
+                    ON     mis.id = pi.MARITAL_STATUS
+                    LEFT JOIN   cities ci
+                    on     ci.id = u.city_id
+                    -- JOIN   JOB_VACANCY_APPLICATION jva
+                    -- ON     jva.APPLICATION_ID = j.id
+                    -- JOIN   JOB_VACANCY jv
+                    -- ON     jv.id = jva.VACANCY_ID
+                    WHERE  u.id = :P206_ID AND j.ID = :P206_JOB_ID;
+                
+                    -- checking if this application of user has blob files
+                    SELECT MAX(jat.id)
+                    INTO   l_cv_attachment_id
+                    FROM   JOB_APPLICATION_ATTACHMENTS jat
+                    join   JOB_APPLICATION ja
+                    on     jat.id = ja.RESUME_FILE_ID
+                    -- WHERE  account_id = :P206_ID
+                    -- AND    job_application_id = :P206_JOB_ID
+                    where  ja.id = :P206_JOB_ID
+                    AND    jat.FILE_TYPE_ID = 2
+                    AND    jat.file_blob IS NOT NULL;
+                
+                    SELECT MAX(id)
+                    INTO   l_grad_attachment_id
+                    FROM   JOB_APPLICATION_ATTACHMENTS
+                    WHERE  account_id = :P206_ID
+                    
+                    AND    FILE_TYPE_ID = 1
+                    AND    file_blob IS NOT NULL;
+                
+                    SELECT MAX(id)
+                    INTO   l_national_attachment_id
+                    FROM   JOB_APPLICATION_ATTACHMENTS
+                    WHERE  account_id = :P206_ID
+                    
+                    AND    FILE_TYPE_ID = 21
+                    AND    file_blob IS NOT NULL;
+                
+                     IF l_cv_attachment_id IS NOT NULL THEN
+                        l_cv_btn :=
+                            '<a class=" download-doc-btn" href="' ||
+                            apex_escape.html_attribute(
+                                apex_util.prepare_url(
+                                    apex_page.get_url(
+                                        p_page   => 211,
+                                        p_items  => 'P211_ATTACHMENT_ID',
+                                        p_values => l_cv_attachment_id
+                                    )
+                                )
+                            ) ||
+                            '">
+                                <span class="fa fa-download"></span> Download CV
+                            </a>';
+                    ELSE
+                        l_cv_btn :=
+                            '<button class="download-doc-btn disabled" disabled>
+                                <span class="fa fa-ban"></span> CV Not Found
+                            </button>';
+                    END IF;
+                
+                
+                    -- IF l_grad_attachment_id IS NOT NULL THEN
+                    --     l_grad_btn :=
+                    --         '<a class="download-doc-btn" href="' ||
+                    --         apex_escape.html_attribute(
+                    --             apex_util.prepare_url(
+                    --                 apex_page.get_url(
+                    --                     p_page   => 211,
+                    --                     p_items  => 'P211_ATTACHMENT_ID',
+                    --                     p_values => l_grad_attachment_id
+                    --                 )
+                    --             )
+                    --         ) ||
+                    --         '">
+                    --             <span class="fa fa-download"></span> Download Graduation Certificate
+                    --         </a>';
+                    -- ELSE
+                    --     l_grad_btn :=
+                    --         '<button class="download-doc-btn disabled" disabled>
+                    --             <span class="fa fa-ban"></span> Graduation Certificate Not Found
+                    --         </button>';
+                    -- END IF;
+                    IF l_grad_attachment_id IS NOT NULL THEN
+                
+                        l_grad_preview_url :=
+                        apex_util.prepare_url(
+                            apex_page.get_url(
+                                p_page   => 213,
+                                p_items  => 'P213_ATTACHMENT_ID',
+                                p_values => l_grad_attachment_id,
+                                p_plain_url => true
+                            )
+                        );
+                    --     l_grad_preview_url :=
+                    --         apex_util.prepare_url(
+                    --         'f?p=' || :APP_ID || ':213:' || :APP_SESSION ||
+                    --         '::NO::P213_ATTACHMENT_ID:' || l_grad_attachment_id
+                    --     );
+                    --      raise_application_error(
+                    --     -20001,
+                    --     'Grad preview URL = ' || apex_escape.html_attribute(l_grad_preview_url)
+                    -- );
+                
+                        l_grad_btn :=
+                        '<a class="download-doc-btn" href="' ||
+                        apex_escape.html_attribute(
+                            apex_util.prepare_url(
+                                apex_page.get_url(
+                                    p_page   => 211,
+                                    p_items  => 'P211_ATTACHMENT_ID',
+                                    p_values => l_grad_attachment_id
+                                )
+                            )
+                        ) ||
+                        '">
+                            <span class="fa fa-download"></span> Download Graduation Certificate
+                        </a>';
+                
+                        l_grad_card :=
+                        '<div class="attachment-preview-card">
+                            <div class="attachment-preview-title">Graduation Certificate</div>
+                            ' || l_grad_btn || '
+                            <img class="attachment-preview-img"
+                                 src="' || apex_escape.html_attribute(l_grad_preview_url) || '"
+                                 alt="Graduation Certificate Preview">
+                            
+                        </div>';
+                
+                    ELSE
+                
+                        l_grad_card :=
+                        '<div class="attachment-preview-card empty">
+                            <div class="attachment-preview-title">Graduation Certificate</div>
+                            <div class="no-preview">
+                                <span class="fa fa-ban"></span>
+                                Graduation Certificate Not Found
+                            </div>
+                        </div>';
+                
+                    END IF;
+                
+                    -- IF l_national_attachment_id IS NOT NULL THEN
+                    --     l_national_btn :=
+                    --         '<a class="download-doc-btn" href="' ||
+                    --         apex_escape.html_attribute(
+                    --             apex_util.prepare_url(
+                    --                 apex_page.get_url(
+                    --                     p_page   => 211,
+                    --                     p_items  => 'P211_ATTACHMENT_ID',
+                    --                     p_values => l_national_attachment_id
+                    --                 )
+                    --             )
+                    --         ) ||
+                    --         '">
+                    --             <span class="fa fa-download"></span> Download National ID
+                    --         </a>';
+                    -- ELSE
+                    --     l_national_btn :=
+                    --         '<button class="download-doc-btn disabled" disabled>
+                    --             <span class="fa fa-ban"></span> National ID Not Found
+                    --         </button>';
+                    -- END IF;
+                    IF l_national_attachment_id IS NOT NULL THEN
+                
+                        l_national_preview_url :=
+                        apex_util.prepare_url(
+                            apex_page.get_url(
+                                p_page   => 213,
+                                p_items  => 'P213_ATTACHMENT_ID',
+                                p_values => l_national_attachment_id,
+                                p_plain_url => true
+                            )
+                        );
+                
+                        l_national_btn :=
+                        '<a class="download-doc-btn" href="' ||
+                        apex_escape.html_attribute(
+                            apex_util.prepare_url(
+                                apex_page.get_url(
+                                    p_page   => 211,
+                                    p_items  => 'P211_ATTACHMENT_ID',
+                                    p_values => l_national_attachment_id
+                                )
+                            )
+                        ) ||
+                        '">
+                            <span class="fa fa-download"></span> Download National ID
+                        </a>';
+                
+                        l_national_card :=
+                        '<div class="attachment-preview-card">
+                            <div class="attachment-preview-title">National ID</div>
+                            ' || l_national_btn || '
+                            <img class="attachment-preview-img"
+                                 src="' || apex_escape.html_attribute(l_national_preview_url) || '"
+                                 alt="National ID Preview">
+                            
+                        </div>';
+                
+                    ELSE
+                
+                        l_national_card :=
+                        '<div class="attachment-preview-card empty">
+                            <div class="attachment-preview-title">National ID</div>
+                            <div class="no-preview">
+                                <span class="fa fa-ban"></span>
+                                National ID Not Found
+                            </div>
+                        </div>';
+                
+                    END IF;
+                
+                
+                    return ('
+                    <div class="app-details-card">
+                
+                        <div class="app-card-header">
+                            <h2>' || apex_escape.html(l_first_name || ' ' || l_second_name || ' ' || l_last_name) || '</h2>
+                            <span class="app-id">Account ID: ' || apex_escape.html(:P206_ID) || '</span> - <span class="app-id">Application ID: ' || apex_escape.html(:P206_JOB_ID) || '</span>
+                        </div>
+                
+                        <div class="section-title">Personal Information</div>
+                
+                        <div class="app-card-body">
+                            <div class="detail-item">
+                                <span class="detail-label">First Name</span>
+                                <span class="detail-value">' || apex_escape.html(NVL(l_first_name, '-')) || '</span>
+                            </div>
+                
+                            <div class="detail-item">
+                                <span class="detail-label">Second Name</span>
+                                <span class="detail-value">' || apex_escape.html(NVL(l_second_name, '-')) || '</span>
+                            </div>
+                
+                            <div class="detail-item">
+                                <span class="detail-label">Last Name</span>
+                                <span class="detail-value">' || apex_escape.html(NVL(l_last_name, '-')) || '</span>
+                            </div>
+                
+                            <div class="detail-item">
+                                <span class="detail-label">Gender</span>
+                                <span class="detail-value">' || apex_escape.html(NVL(l_gender, '-')) || '</span>
+                            </div>
+                
+                            <div class="detail-item">
+                                <span class="detail-label">Date of Birth</span>
+                                <span class="detail-value">' || apex_escape.html(NVL(TO_CHAR(l_date_of_birth, 'DD-MON-YYYY'), '-')) || '</span>
+                            </div>
+                
+                            <div class="detail-item">
+                                <span class="detail-label">National ID</span>
+                                <span class="detail-value">' || apex_escape.html(NVL(l_national_id, '-')) || '</span>
+                            </div>
+                
+                            <div class="detail-item">
+                                <span class="detail-label">Military Status</span>
+                                <span class="detail-value">' || apex_escape.html(NVL(l_military_status, '-')) || '</span>
+                            </div>
+                
+                            <div class="detail-item">
+                                <span class="detail-label">Marital Status</span>
+                                <span class="detail-value">' || apex_escape.html(NVL(l_marital_status, '-')) || '</span>
+                            </div>
+                
+                            <div class="detail-item">
+                                <span class="detail-label">Mother Full Name</span>
+                                <span class="detail-value">' || apex_escape.html(NVL(l_mother_full_name, '-')) || '</span>
+                            </div>
+                        </div>
+                
+                        <div class="section-title">Contact Information</div>
+                
+                        <div class="app-card-body">
+                            <div class="detail-item">
+                                <span class="detail-label">Email</span>
+                                <span class="detail-value">' || apex_escape.html(NVL(l_email, '-')) || '</span>
+                            </div>
+                
+                            <div class="detail-item">
+                                <span class="detail-label">Mobile Telephone</span>
+                                <span class="detail-value">' || apex_escape.html(NVL(l_mobile_telephone, '-')) || '</span>
+                            </div>
+                
+                            <div class="detail-item">
+                                <span class="detail-label">Home Telephone</span>
+                                <span class="detail-value">' || apex_escape.html(NVL(l_home_telephone, '-')) || '</span>
+                            </div>
+                
+                            <div class="detail-item">
+                                <span class="detail-label">Country</span>
+                                <span class="detail-value">' || apex_escape.html(NVL(l_country_name, '-')) || '</span>
+                            </div>
+                
+                            <div class="detail-item">
+                                <span class="detail-label">City</span>
+                                <span class="detail-value">' || apex_escape.html(NVL(l_city, '-')) || '</span>
+                            </div>
+                
+                            <div class="detail-item ">
+                                <span class="detail-label">Address</span>
+                                <span class="detail-value">' || apex_escape.html(NVL(l_address, '-')) || '</span>
+                            </div>
+                
+                            
+                        </div>
+                
+                
+                
+                        <div class="section-title">Attachments</div>
+                
+                        
+                        <div class="attachments-grid">
+                
+                        <div class="attachment-preview-card">
+                            <div class="attachment-preview-title">Resume</div>
+                            <div class="cv-download-only">
+                                ' || l_cv_btn || '
+                            </div>
+                        </div>
+                
+                        ' || l_grad_card || '
+                
+                        ' || l_national_card || '
+                
+                        </div>
+                        </div>
+                    
+                    ');
+                
+                EXCEPTION
+                    WHEN NO_DATA_FOUND THEN
+                        return ('<div class="app-details-card">No application found for this ID.</div>');
+                END;
+                
+                
+                
+                        -- <div class="section-title">Application Information</div>
+                
+                        -- <div class="app-card-body ">
+                        --     <div class="detail-item full-width">
+                        --         <span class="detail-label">Job Vacancy</span>
+                        --         <span class="detail-value">' || apex_escape.html(NVL(l_job_vacancy, '-')) || '</span>
+                        --     </div>
+                        -- </div>
+                ```
+        }
+        layout {
+            sequence: 10
+            slot: contentBody
+            column: 1
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--removeHeader js-removeLandmark
+                t-Region--scrollBody
+            ]
+        }
+    )
+
+    pageItem P206_ID (
+        type: hidden
+        layout {
+            sequence: 10
+            region: @application-info
+            slot: regionBody
+        }
+    )
+
+    pageItem P206_JOB_ID (
+        type: hidden
+        layout {
+            sequence: 20
+            region: @application-info
+            slot: regionBody
+        }
+    )
+
+)

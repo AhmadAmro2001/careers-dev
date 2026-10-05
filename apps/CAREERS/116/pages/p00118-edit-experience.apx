@@ -1,0 +1,530 @@
+page 118 (
+    name: Edit Experience
+    alias: EDIT-EXPERIENCE
+    title: "&{EDIT_EXPERIENCE}."
+    appearance {
+        pageMode: modalDialog
+        dialogTemplate: @/modal-dialog
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    css {
+        inline:
+            ```css
+            
+            /* ========================================================== */
+            /* 1. STANDARD FORM FIELDS (TEXT, TEL, EMAIL, SELECT, ETC.)    */
+            /* ========================================================== */
+            
+            
+            
+            .t-Form-fieldContainer input[type="text"],
+            .t-Form-fieldContainer input[type="tel"],
+            .t-Form-fieldContainer input[type="email"],
+            .t-Form-fieldContainer input[type="date"],
+            .t-Form-fieldContainer textarea,
+            .apex-item-text,
+            .apex-item-textarea {
+                background-color: rgb(232, 244, 255)  !important; 
+                border-radius: 10px !important; /* Consistent 10px roundness */
+                border: 1px solid rgba(232, 244, 255, 0.705) !important;
+                transition: all 0.3s ease !important;
+            }
+            
+            .t-Form-fieldContainer select,
+            .apex-item-select {
+                background-color: rgb(232, 244, 255)  !important; 
+                border-radius: 10px !important;
+            }
+            
+            .t-Form-label::before{
+                background-color: rgb(232, 244, 255)  !important; 
+                border: none;
+                background: transparent;
+            }
+            
+            .t-Form-label:hover::before {
+                background-color: rgb(232, 244, 255)  !important; 
+            }
+            
+            .apex-item-file {
+                border-radius: 10px !important;
+                transition: all 0.3s ease !important;
+            }
+            .apex-item-file:hover {
+                border-color: #0563bb !important;
+                background-color: #f8fafc !important;
+            }
+            
+            .apex-item-group--datepicker,
+            .apex-item-group.apex-item-group--file {
+                display: inline-flex !important;
+                width: 100% !important;
+                align-items: stretch !important;
+                gap: 0 !important;
+            }
+            
+            /* Left side of the date component (Text Field) */
+            .apex-item-group--datepicker input.apex-item-text,
+            input.apex-item-datepicker {
+                background-color: rgb(232, 244, 255)  !important; 
+                border-top-left-radius: 10px !important;
+                border-bottom-left-radius: 10px !important;
+                border-top-right-radius: 0px !important;
+                border-bottom-right-radius: 0px !important;
+                border-right: none !important; 
+            }
+            
+            /* Right side of the date component (Calendar Button) */
+            .apex-item-group--datepicker .a-Button--calendar,
+            .apex-item-group--datepicker .apex-item-datepicker-btn,
+            .a-Button--calendar {
+                border-top-left-radius: 0px !important;
+                border-bottom-left-radius: 0px !important;
+                border-top-right-radius: 10px !important; /* Perfectly matches the 10px layout roundness */
+                border-bottom-right-radius: 10px !important;
+                border: 1px solid #cbd5e1 !important;
+                border-left: 1px solid #cbd5e1 !important; 
+                background-color: rgb(232, 244, 255)  !important; 
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                box-shadow: none !important;
+            }
+            ```
+    }
+    security {
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region buttons (
+        name: Buttons
+        title: "&{BUTTONS}."
+        type: staticContent
+        layout {
+            sequence: 20
+            slot: dialogFooter
+        }
+        appearance {
+            template: @/buttons-container
+            templateOptions: #DEFAULT#
+        }
+        settings {
+            outputAs: text
+        }
+    )
+
+    region edit-experience (
+        name: Edit Experience
+        title: "&{EDIT_EXPERIENCE}."
+        type: form
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select ID,
+                       POSITION_NAME,
+                       COMPANY,
+                       FROMDATE,
+                       OTHER_DETAILS,
+                       JOB_APPLICATION_ID,
+                       COUNTRY_ID,
+                       PERSONAL_ID,
+                       TODATE
+                  from JOB_APPLICATION_EXPERIENCE
+                ```
+        }
+        layout {
+            sequence: 10
+            slot: contentBody
+        }
+        appearance {
+            template: @/blank-with-attributes
+            templateOptions: #DEFAULT#
+        }
+        edit {
+            enabled: true
+            allowedOperations: [
+                add
+                update
+                delete
+            ]
+        }
+    )
+
+    pageItem P118_COMPANY (
+        type: textField
+        label {
+            label: "&{COMPANY}."
+            alignment: left
+        }
+        layout {
+            sequence: 30
+            region: @edit-experience
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            width: 60
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @edit-experience
+            column: COMPANY
+            dataType: clob
+        }
+    )
+
+    pageItem P118_COUNTRY_ID (
+        type: selectList
+        label {
+            label: "&{COUNTRY}."
+            alignment: left
+        }
+        lov {
+            type: sharedComponent
+            lov: @country-name
+        }
+        layout {
+            sequence: 80
+            region: @edit-experience
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        source {
+            formRegion: @edit-experience
+            column: COUNTRY_ID
+            dataType: number
+        }
+    )
+
+    pageItem P118_FROMDATE (
+        type: datePicker
+        label {
+            label: "&{FROMDATE}."
+            alignment: left
+        }
+        layout {
+            sequence: 40
+            region: @edit-experience
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            valueRequired: true
+            maxLength: 255
+        }
+        source {
+            formRegion: @edit-experience
+            column: FROMDATE
+            dataType: date
+        }
+    )
+
+    pageItem P118_ID (
+        type: hidden
+        layout {
+            sequence: 10
+            region: @edit-experience
+            slot: regionBody
+        }
+        source {
+            formRegion: @edit-experience
+            column: ID
+            dataType: number
+            queryOnly: true
+            primaryKey: true
+        }
+        security {
+            sessionStateProtection: checksumRequiredSessionLevel
+        }
+    )
+
+    pageItem P118_OTHER_DETAILS (
+        type: textarea
+        label {
+            label: "&{OTHER_DETAILS}."
+            alignment: left
+        }
+        layout {
+            sequence: 70
+            region: @edit-experience
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 60
+            height: 4
+        }
+        source {
+            formRegion: @edit-experience
+            column: OTHER_DETAILS
+            dataType: clob
+        }
+        sessionState {
+            dataType: clob
+        }
+    )
+
+    pageItem P118_PERSONAL_ID (
+        type: hidden
+        layout {
+            sequence: 90
+            region: @edit-experience
+            slot: regionBody
+        }
+        source {
+            formRegion: @edit-experience
+            column: PERSONAL_ID
+            dataType: number
+        }
+    )
+
+    pageItem P118_POSITION_NAME (
+        type: textField
+        label {
+            label: "&{POSITION_NAME}."
+            alignment: left
+        }
+        layout {
+            sequence: 20
+            region: @edit-experience
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            width: 60
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @edit-experience
+            column: POSITION_NAME
+            dataType: clob
+        }
+    )
+
+    pageItem P118_TODATE (
+        type: datePicker
+        label {
+            label: "&{TODATE}."
+            alignment: left
+        }
+        layout {
+            sequence: 50
+            region: @edit-experience
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 255
+        }
+        source {
+            formRegion: @edit-experience
+            column: TODATE
+            dataType: date
+        }
+    )
+
+    button cancel (
+        buttonName: CANCEL
+        label: "&{CANCEL}."
+        layout {
+            sequence: 10
+            region: @buttons
+            slot: close
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            action: definedByDynamicAction
+        }
+    )
+
+    button create (
+        buttonName: CREATE
+        label: "&{CREATE}."
+        layout {
+            sequence: 40
+            region: @buttons
+            slot: next
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: insert
+        }
+        serverSideCondition {
+            type: itemIsNull
+            item: P118_ID
+        }
+    )
+
+    button delete (
+        buttonName: DELETE
+        label: "&{DELETE}."
+        layout {
+            sequence: 20
+            region: @buttons
+            slot: delete
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            executeValidations: false
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: delete
+            requiresConfirmation: true
+        }
+        confirmation {
+            message: &APP_TEXT$DELETE_MSG!RAW.
+            style: danger
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P118_ID
+        }
+    )
+
+    button save (
+        buttonName: SAVE
+        label: "&{APPLY_CHANGES}."
+        layout {
+            sequence: 30
+            region: @buttons
+            slot: next
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: update
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P118_ID
+        }
+    )
+
+    dynamicAction cancel-dialog (
+        name: Cancel Dialog
+        execution {
+            sequence: 10
+        }
+        when {
+            event: click
+            selectionType: button
+            button: @cancel
+        }
+
+        action native-dialog-cancel (
+            action: cancelDialog
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    process close-dialog (
+        name: Close Dialog
+        type: closeDialog
+        execution {
+            sequence: 50
+        }
+        advanced {
+            executionMappingIdentifier: 349867631969629330
+        }
+        serverSideCondition {
+            type: requestIsContainedInValue
+            value: CREATE,SAVE,DELETE
+        }
+    )
+
+    process initialize-form-edit-experience (
+        name: Initialize form Edit Experience
+        type: formInitialization
+        formRegion: @edit-experience
+        execution {
+            sequence: 10
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 349866856927629330
+        }
+    )
+
+    process process-form-edit-experience (
+        name: Process form Edit Experience
+        type: formAutoRowProcessing
+        formRegion: @edit-experience
+        execution {
+            sequence: 10
+        }
+        advanced {
+            executionMappingIdentifier: 349867245995629330
+        }
+    )
+
+    process set-p-id (
+        name: set_p_id
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                    :P118_PERSONAL_ID := :APP_USER_PERS_ID;
+                
+                end;
+                ```
+        }
+        execution {
+            sequence: 20
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 32138247627699501
+        }
+    )
+
+)

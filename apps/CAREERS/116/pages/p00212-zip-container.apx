@@ -1,0 +1,153 @@
+page 212 (
+    name: Zip Container
+    alias: ZIP-CONTAINER
+    title: "&{ZIP_CONTAINER}."
+    appearance {
+        pageTemplate: @/standard
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    security {
+        authorizationScheme: @admin-schema
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    pageItem P212_VACANCY_ID (
+        type: textField
+        label {
+            label: "&{VACANCY_ID}."
+            alignment: left
+        }
+        layout {
+            sequence: 10
+            slot: body
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+    )
+
+    process new (
+        name: New
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                DECLARE
+                    l_zip_blob       BLOB;
+                    l_file_count     NUMBER := 0;
+                    l_zip_name       VARCHAR2(255);
+                    l_full_name      VARCHAR2(500);
+                    l_file_name      VARCHAR2(500);
+                BEGIN
+                    -- IF :P212_VACANCY_ID IS NULL THEN
+                    --     raise_application_error(-20001, 'Please select a vacancy before downloading resumes.');
+                    -- END IF;
+                    l_zip_name := 'resumes_' || TO_CHAR(SYSDATE, 'YYYYMMDD_HH24MISS') || '.zip';
+                
+                    FOR r IN (
+                        SELECT
+                               j.id AS job_application_id,
+                               u.id AS account_id,
+                               u.first_name || ' ' || u.second_name || ' ' || u.last_name AS full_name,
+                               jaa.file_name,
+                               jaa.file_blob
+                        FROM job_application j
+                        JOIN account u
+                            ON u.id = j.account_id
+                        JOIN job_application_attachments jaa
+                            ON jaa.id = j.RESUME_FILE_ID
+                        LEFT JOIN job_vacancy_application jva
+                            ON jva.application_id = j.id
+                        WHERE jaa.file_blob IS NOT NULL
+                
+                        AND (
+                            EXISTS (
+                                SELECT 1
+                                FROM apex_collections c
+                                WHERE c.collection_name = 'SELECTED_APPLICATIONS'
+                                AND c.n001 = j.id
+                            )
+                            OR NOT EXISTS (
+                                SELECT 1
+                                FROM apex_collections c
+                                WHERE c.collection_name = 'SELECTED_APPLICATIONS'
+                            )
+                        )
+                        AND jaa.file_type_id = 2
+                       AND (
+                                :P212_VACANCY_ID IS NULL
+                                OR jva.vacancy_id = :P212_VACANCY_ID
+                            )
+                
+                        ORDER BY j.id
+                    )
+                    LOOP
+                        l_file_count := l_file_count + 1;
+                
+                        l_full_name := REGEXP_REPLACE(
+                            TRIM(NVL(r.full_name, 'Unknown_Applicant')),
+                            '[^A-Za-z0-9 _.-]',
+                            '_'
+                        );
+                
+                        l_file_name := REGEXP_REPLACE(
+                            NVL(r.file_name, 'resume_' || r.job_application_id || '.pdf'),
+                            '[\/:*?"<>|]',
+                            '_'
+                        );
+                
+                        apex_zip.add_file(
+                            p_zipped_blob => l_zip_blob,
+                            p_file_name   => r.account_id || '_' || l_full_name || '_' || l_file_name,
+                            p_content     => r.file_blob
+                        );
+                    END LOOP;
+                
+                    IF l_file_count = 0 THEN
+                        raise_application_error(-20001, 'No resumes found for the current selection.');
+                    END IF;
+                
+                    apex_zip.finish(
+                        p_zipped_blob => l_zip_blob
+                    );
+                
+                    sys.htp.init;
+                
+                    sys.owa_util.mime_header(
+                        'application/zip',
+                        FALSE
+                    );
+                
+                    sys.htp.p('Content-Length: ' || dbms_lob.getlength(l_zip_blob));
+                
+                    sys.htp.p(
+                        'Content-Disposition: attachment; filename="' || l_zip_name || '"'
+                    );
+                
+                    sys.htp.p('Cache-Control: no-cache');
+                
+                    sys.owa_util.http_header_close;
+                
+                    sys.wpg_docload.download_file(l_zip_blob);
+                
+                    apex_application.stop_apex_engine;
+                END;
+                ```
+        }
+        execution {
+            sequence: 10
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 350434540867683450
+        }
+    )
+
+)

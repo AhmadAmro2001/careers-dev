@@ -1,0 +1,83 @@
+page 211 (
+    name: download page
+    alias: DOWNLOAD-PAGE
+    title: "&{DOWNLOAD_PAGE}."
+    appearance {
+        pageTemplate: @/standard
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    security {
+        authorizationScheme: @admin-schema
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    pageItem P211_ATTACHMENT_ID (
+        type: hidden
+        layout {
+            sequence: 10
+            slot: body
+        }
+    )
+
+    process new (
+        name: New
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                DECLARE
+                    l_file_blob      BLOB;
+                    l_file_name      VARCHAR2(255);
+                    l_mime_type      VARCHAR2(255);
+                BEGIN
+                    SELECT file_blob,
+                           file_name,
+                           mime_type
+                    INTO   l_file_blob,
+                           l_file_name,
+                           l_mime_type
+                    FROM   JOB_APPLICATION_ATTACHMENTS
+                
+                    WHERE  id = :P211_ATTACHMENT_ID;
+                
+                    sys.htp.init;
+                
+                    sys.owa_util.mime_header(
+                        NVL(l_mime_type, 'application/octet-stream'),
+                        FALSE
+                    );
+                
+                    sys.htp.p('Content-length: ' || dbms_lob.getlength(l_file_blob));
+                
+                    sys.htp.p(
+                        'Content-Disposition: attachment; filename="' ||
+                        REPLACE(NVL(l_file_name, 'attachment'), '"', '') ||
+                        '"'
+                    );
+                
+                    sys.owa_util.http_header_close;
+                
+                    sys.wpg_docload.download_file(l_file_blob);
+                
+                    apex_application.stop_apex_engine;
+                
+                EXCEPTION
+                    WHEN NO_DATA_FOUND THEN
+                        raise_application_error(-20001, 'Attachment not found.');
+                END;
+                ```
+        }
+        execution {
+            sequence: 10
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 350433822884683443
+        }
+    )
+
+)

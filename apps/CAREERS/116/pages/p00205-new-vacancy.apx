@@ -1,0 +1,525 @@
+page 205 (
+    name: New Vacancy
+    alias: NEW-VACANCY
+    title: "&{NEW_VACANCY}."
+    appearance {
+        pageMode: modalDialog
+        dialogTemplate: @/drawer
+        templateOptions: [
+            #DEFAULT#
+            js-dialog-class-t-Drawer--pullOutEnd
+        ]
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    security {
+        authorizationScheme: @admin-schema
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region new-vacancy (
+        name: New Vacancy
+        title: "&{NEW_VACANCY}."
+        type: form
+        source {
+            location: localDatabase
+            tableName: JOB_VACANCY
+        }
+        layout {
+            sequence: 10
+            slot: contentBody
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--removeHeader js-removeLandmark
+                t-Region--scrollBody
+            ]
+        }
+    )
+
+    pageItem P205_AREA_ID (
+        type: selectList
+        label {
+            label: "&{CATEGORY}."
+            alignment: left
+        }
+        lov {
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select name , ID 
+                from Career_Area
+                ```
+        }
+        layout {
+            sequence: 100
+            region: @new-vacancy
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        source {
+            formRegion: @new-vacancy
+            column: AREA_ID
+            dataType: number
+        }
+    )
+
+    pageItem P205_CATEGORY_ID (
+        type: selectList
+        label {
+            label: "&{AREA}."
+            alignment: left
+        }
+        lov {
+            type: sharedComponent
+            lov: @category-name
+        }
+        layout {
+            sequence: 90
+            region: @new-vacancy
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @new-vacancy
+            column: CATEGORY_ID
+            dataType: number
+        }
+    )
+
+    pageItem P205_CREATED_BY (
+        type: hidden
+        layout {
+            sequence: 120
+            region: @new-vacancy
+            slot: regionBody
+        }
+        source {
+            formRegion: @new-vacancy
+            column: CREATED_BY
+            dataType: varchar2
+        }
+    )
+
+    pageItem P205_CREATION_DATE (
+        type: hidden
+        layout {
+            sequence: 130
+            region: @new-vacancy
+            slot: regionBody
+        }
+        source {
+            formRegion: @new-vacancy
+            column: CREATION_DATE
+            dataType: date
+        }
+    )
+
+    pageItem P205_ID (
+        type: hidden
+        layout {
+            sequence: 10
+            region: @new-vacancy
+            slot: regionBody
+        }
+        source {
+            formRegion: @new-vacancy
+            column: ID
+            dataType: number
+            queryOnly: true
+            primaryKey: true
+        }
+        security {
+            sessionStateProtection: checksumRequiredSessionLevel
+        }
+    )
+
+    pageItem P205_IS_ARCHIVED (
+        type: hidden
+        layout {
+            sequence: 110
+            region: @new-vacancy
+            slot: regionBody
+        }
+        source {
+            formRegion: @new-vacancy
+            column: IS_ARCHIVED
+            dataType: number
+        }
+    )
+
+    pageItem P205_IS_MINISTRY_EXCLUSIVE (
+        type: selectList
+        label {
+            label: "&{VACANCY_TYPE}."
+            alignment: left
+        }
+        lov {
+            type: staticValues
+            staticValues: STATIC:Public;0,EGPC Exclusive;1
+        }
+        layout {
+            sequence: 160
+            region: @new-vacancy
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @new-vacancy
+            column: IS_MINISTRY_EXCLUSIVE
+            dataType: number
+        }
+    )
+
+    pageItem P205_LAST_UPDATED_BY (
+        type: hidden
+        layout {
+            sequence: 140
+            region: @new-vacancy
+            slot: regionBody
+        }
+        source {
+            formRegion: @new-vacancy
+            column: LAST_UPDATED_BY
+            dataType: varchar2
+        }
+    )
+
+    pageItem P205_LAST_UPDATE_DATE (
+        type: hidden
+        layout {
+            sequence: 150
+            region: @new-vacancy
+            slot: regionBody
+        }
+        source {
+            formRegion: @new-vacancy
+            column: LAST_UPDATE_DATE
+            dataType: date
+        }
+    )
+
+    pageItem P205_MINIMUM_EDUCATION_LEVEL_ID (
+        type: selectList
+        label {
+            label: "&{MINIMUM_EDUCATION_LEVEL}."
+            alignment: left
+        }
+        lov {
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select name || ' - Rank : '||LEVEL_RANK ,id
+                from Education_level
+                order by LEVEL_RANK asc
+                ```
+        }
+        layout {
+            sequence: 170
+            region: @new-vacancy
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @new-vacancy
+            column: MINIMUM_EDUCATION_LEVEL_ID
+            dataType: number
+        }
+    )
+
+    pageItem P205_POST_DATE (
+        type: hidden
+        layout {
+            sequence: 80
+            region: @new-vacancy
+            slot: regionBody
+        }
+        source {
+            formRegion: @new-vacancy
+            column: POST_DATE
+            dataType: date
+        }
+    )
+
+    pageItem P205_QUALIFICATIONS (
+        type: richTextEditor
+        label {
+            label: "&{QUALIFICATIONS}."
+            alignment: left
+        }
+        settings {
+            format: html
+            minHeight: 180
+        }
+        layout {
+            sequence: 60
+            region: @new-vacancy
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @new-vacancy
+            column: QUALIFICATIONS
+            dataType: clob
+        }
+        sessionState {
+            dataType: clob
+        }
+    )
+
+    pageItem P205_RESPONSIBILITIES (
+        type: richTextEditor
+        label {
+            label: "&{RESPONSIBILITIES}."
+            alignment: left
+        }
+        settings {
+            format: html
+            minHeight: 180
+        }
+        layout {
+            sequence: 70
+            region: @new-vacancy
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @new-vacancy
+            column: RESPONSIBILITIES
+            dataType: clob
+        }
+        sessionState {
+            dataType: clob
+        }
+    )
+
+    pageItem P205_SUMMARY (
+        type: richTextEditor
+        label {
+            label: "&{SUMMARY}."
+            alignment: left
+        }
+        settings {
+            format: html
+            minHeight: 180
+        }
+        layout {
+            sequence: 50
+            region: @new-vacancy
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @new-vacancy
+            column: SUMMARY
+            dataType: clob
+        }
+        sessionState {
+            dataType: clob
+        }
+    )
+
+    pageItem P205_TITLE (
+        type: textField
+        label {
+            label: "&{TITLE}."
+            alignment: left
+        }
+        layout {
+            sequence: 30
+            region: @new-vacancy
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+        validation {
+            valueRequired: true
+            maxLength: 200
+        }
+        source {
+            formRegion: @new-vacancy
+            column: TITLE
+            dataType: varchar2
+        }
+    )
+
+    pageItem P205_TITLE_CODE (
+        type: textField
+        label {
+            label: "&{CODE}."
+            alignment: left
+        }
+        layout {
+            sequence: 40
+            region: @new-vacancy
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+        validation {
+            maxLength: 50
+        }
+        source {
+            formRegion: @new-vacancy
+            column: TITLE_CODE
+            dataType: varchar2
+        }
+    )
+
+    button create (
+        buttonName: CREATE
+        label: "&{CREATE}."
+        layout {
+            sequence: 150
+            region: @new-vacancy
+            slot: create
+        }
+        appearance {
+            buttonTemplate: @/text-with-icon
+            hot: true
+            templateOptions: [
+                #DEFAULT#
+                t-Button--iconLeft
+            ]
+            icon: fa-plus-square
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+        }
+    )
+
+    process add-new-vacancy (
+        name: ADD_NEW_VACANCY
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                declare
+                       L_USER VARCHAR2;
+                begin
+                
+                    SELECT ID
+                    INTO L_USER
+                    FROM ADMIN
+                    WHERE UPPER(EMAIL) = UPPER(:APP_USER);
+                
+                     PKG_ADMIN.create_new_vacancy(
+                        p_new_title =>           :P205_TITLE,
+                        p_new_category_id =>     :P205_CATEGORY_ID,
+                        p_new_summary =>         :P205_SUMMARY,
+                        p_new_responsibilities =>:P205_RESPONSIBILITIES ,
+                        p_new_qualifications =>  :P205_QUALIFICATIONS,
+                        p_new_education_id =>    :P205_MINIMUM_EDUCATION_LEVEL_ID,
+                        p_new_vacancy_type =>    :P205_IS_MINISTRY_EXCLUSIVE,
+                        p_admin_user  =>         L_USER,
+                        p_title_code =>          :P205_TITLE_CODE,
+                        p_area_id   =>           :P205_AREA_ID
+                    );
+                
+                
+                end;
+                ```
+        }
+        execution {
+            sequence: 10
+        }
+        advanced {
+            executionMappingIdentifier: 345235558206624639
+        }
+        serverSideCondition {
+            whenButtonPressed: @create
+        }
+    )
+
+    process close-dialoge (
+        name: CLOSE_DIALOGE
+        type: closeDialog
+        execution {
+            sequence: 20
+        }
+        advanced {
+            executionMappingIdentifier: 345235818235624642
+        }
+        serverSideCondition {
+            whenButtonPressed: @create
+        }
+    )
+
+    process initialize-form-new-vacancy (
+        name: Initialize form New Vacancy
+        type: formInitialization
+        formRegion: @new-vacancy
+        execution {
+            sequence: 10
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 345233979778624623
+        }
+    )
+
+)

@@ -1,0 +1,64 @@
+file CareerBackGround.jpg (
+    mimeType: image/jpeg
+    charSet: utf-8
+)
+
+file CareerBackGround4.jpg (
+    mimeType: image/jpeg
+    charSet: utf-8
+)
+
+file "career wf.png" (
+    mimeType: image/png
+    charSet: utf-8
+)
+
+file career_logo-removebg-preview.png (
+    mimeType: image/png
+    charSet: utf-8
+)
+
+file careers.css (
+    mimeType: text/css
+    charSet: utf-8
+)
+
+file careers.min.css (
+    mimeType: text/css
+    charSet: utf-8
+)
+
+file epromlogo.png (
+    mimeType: image/png
+    charSet: utf-8
+)
+
+file homeImage.png (
+    mimeType: image/png
+    charSet: utf-8
+)
+
+file "icons/app-icon-144-rounded.png" (
+    mimeType: image/png
+    charSet: utf-8
+)
+
+file "icons/app-icon-192.png" (
+    mimeType: image/png
+    charSet: utf-8
+)
+
+file "icons/app-icon-256-rounded.png" (
+    mimeType: image/png
+    charSet: utf-8
+)
+
+file "icons/app-icon-32.png" (
+    mimeType: image/png
+    charSet: utf-8
+)
+
+file "icons/app-icon-512.png" (
+    mimeType: image/png
+    charSet: utf-8
+)

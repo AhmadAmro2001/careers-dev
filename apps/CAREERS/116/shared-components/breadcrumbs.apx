@@ -1,0 +1,43 @@
+breadcrumb breadcrumb (
+    name: Breadcrumb
+
+    entry applications (
+        name: "&{APPLICATIONS}."
+        pageNumber: 203
+        execution {
+            sequence: 10
+        }
+        link {
+            target: {
+                page: 203
+            }
+        }
+    )
+
+    entry dashboard (
+        name: "&{DASHBOARD}."
+        pageNumber: 202
+        execution {
+            sequence: 10
+        }
+        link {
+            target: {
+                page: 202
+            }
+        }
+    )
+
+    entry vacancies (
+        name: "&{VACANCIES}."
+        pageNumber: 204
+        execution {
+            sequence: 10
+        }
+        link {
+            target: {
+                page: 204
+            }
+        }
+    )
+
+)

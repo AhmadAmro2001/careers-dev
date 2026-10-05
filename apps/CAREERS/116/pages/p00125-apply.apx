@@ -1,0 +1,1114 @@
+page 125 (
+    name: Apply
+    alias: APPLY
+    title: "&{APPLY}."
+    appearance {
+        pageTemplate: @/blank
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    css {
+        inline:
+            ```css
+            
+            /* ========================================================== */
+            /* CUSTOM NAVBAR                                               */
+            /* ========================================================== */
+            
+            .custom-navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            
+                background: rgb(233, 233, 233);
+            
+                padding: 14px 24px;
+            
+                border-radius: 18px;
+            
+                box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            
+                margin-bottom: 20px;
+            }
+            
+            /* Left Links */
+            .nav-left {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            
+            /* Nav Links */
+            .nav-link {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            
+                text-decoration: none;
+            
+                color: #334155;
+            
+                padding: 10px 18px;
+            
+                border-radius: 12px;
+            
+                font-weight: 600;
+            
+                transition: all 0.3s ease;
+            }
+            
+            /* Hover */
+            .nav-link:hover {
+                background: rgb(232, 244, 255);
+                color: #0563bb;
+            }
+            
+            /* Logout Button */
+            .logout-btn {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            
+                background: #ef4444;
+            
+                color: white !important;
+            
+                text-decoration: none;
+            
+                padding: 10px 18px;
+            
+                border-radius: 12px;
+            
+                font-weight: 600;
+            
+                transition: all 0.3s ease;
+            }
+            
+            /* Logout Hover */
+            .logout-btn:hover {
+                background: #dc2626;
+                transform: translateY(-1px);
+            }
+            
+            /* Icons */
+            .custom-navbar .fa {
+                font-size: 14px;
+            }
+            
+            .nav-right {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .user-name {
+                color: #333;
+                font-weight: 600;
+            }
+            
+            /* Make navbar wrap on small screens */
+            .custom-navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap; /* مهم جداً */
+            }
+            
+            /* Mobile & small tablets */
+            @media (max-width: 768px) {
+                .custom-navbar {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 12px;
+                }
+            
+                .nav-left,
+                .nav-right {
+                    width: 100%;
+                    justify-content: flex-start;
+                    flex-wrap: wrap;
+                }
+            
+                .nav-link,
+                .logout-btn {
+                    width: 100%;
+                    justify-content: center;
+                }
+            
+                .user-name {
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+            
+            /* Very small screens (phones) */
+            @media (max-width: 480px) {
+                .nav-link,
+                .logout-btn {
+                    padding: 12px;
+                    font-size: 14px;
+                }
+            
+                .custom-navbar {
+                    padding: 12px;
+                }
+            }
+            
+            
+            
+            /* Style all job detail regions */
+            #job-summary,
+            #project-description,
+            #responsibilities,
+            #qualifications,
+            #benefits,
+            #skills{
+            
+                background:#ffffff;
+                border-left:6px solid #1565C0;
+                border-radius:18px;
+                padding:30px;
+                margin-bottom:30px;
+            
+                box-shadow:0 8px 20px rgba(0,0,0,.08);
+            
+                transition:.3s;
+            }
+            
+            /* Hover effect */
+            #job-summary:hover,
+            #project-description:hover,
+            #responsibilities:hover,
+            #qualifications:hover,
+            #benefits:hover,
+            #skills:hover{
+            
+                transform:translateY(-3px);
+                box-shadow:0 12px 28px rgba(0,0,0,.12);
+            
+            }
+            
+            #job-summary .t-Region-title,
+            #project-description .t-Region-title,
+            #responsibilities .t-Region-title,
+            #qualifications .t-Region-title,
+            #benefits .t-Region-title,
+            #skills .t-Region-title{
+            
+                color:#1565C0;
+                font-size:28px;
+                font-weight:700;
+                text-align:center;
+                text-transform:uppercase;
+                letter-spacing:1px;
+            }
+            
+            
+            #job-summary .t-Region-title::after,
+            #project-description .t-Region-title::after,
+            #responsibilities .t-Region-title::after,
+            #qualifications .t-Region-title::after,
+            #benefits .t-Region-title::after,
+            #skills .t-Region-title::after{
+            
+                content:"";
+                display:block;
+                width:80px;
+                height:4px;
+                background:#1565C0;
+                margin:12px auto 0;
+                border-radius:5px;
+            
+            }
+            
+            
+            #job-summary,
+            #project-description,
+            #responsibilities,
+            #qualifications,
+            #benefits,
+            #skills{
+            
+                font-size:16px;
+                color:#444;
+                line-height:1.9;
+                font-family:"Segoe UI",sans-serif;
+            
+            }
+            
+            
+            .no-word-break {
+                white-space: normal !important;
+                word-break: keep-all !important;
+                overflow-wrap: normal !important;
+                word-wrap: normal !important;
+                hyphens: manual !important;
+            }
+            ```
+    }
+    security {
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region apply-reg (
+        name: apply_reg
+        title: Apply
+        type: staticContent
+        layout {
+            sequence: 40
+            slot: body
+            startNewRow: false
+            column: 8
+            columnSpan: 4
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+    )
+
+    region job-summary (
+        name: Job_summary
+        title: "&{JOB_DETAILS}."
+        type: staticContent
+        layout {
+            sequence: 30
+            slot: body
+            column: 2
+            columnSpan: 6
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        advanced {
+            htmlDomId: job-summary
+        }
+    )
+
+    region navbar (
+        name: navbar
+        title: "&{NAVBAR}."
+        type: appTemplateComponent/appliocantNavbar
+        layout {
+            sequence: 10
+            slot: body
+            column: 2
+            columnSpan: 10
+        }
+        componentAppearance {
+            display: regionOnly
+        }
+        settings {
+            personalCheck: &PERSONAL_CHECK.
+        }
+    )
+
+    region other-certificates-for-person (
+        name: Other certificates for person
+        title: "&{YOUR_CERTIFICATES}."
+        type: classicReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                SELECT
+                    seq_id,
+                    c001 AS certificate_name,
+                    d001 AS certificate_date
+                FROM apex_collections
+                WHERE collection_name = 'CERTIFICATES'
+                ```
+        }
+        layout {
+            sequence: 60
+            parentRegion: @apply-reg
+            slot: regionBody
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        componentAppearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Report--altRowsDefault
+                t-Report--rowHighlight
+            ]
+        }
+        pagination {
+            type: nextAndPreviousLinks
+        }
+        messages {
+            whenNoDataFound: Enter Your Certificates
+        }
+
+        column CERTIFICATE_DATE (
+            reportColumnQueryId: 3
+            derivedColumn: N
+            heading {
+                heading: "&{CERTIFICATE_DATE}."
+            }
+            layout {
+                sequence: 30
+            }
+        )
+
+        column CERTIFICATE_NAME (
+            reportColumnQueryId: 2
+            derivedColumn: N
+            heading {
+                heading: "&{CERTIFICATE_NAME}."
+            }
+            layout {
+                sequence: 20
+            }
+        )
+
+        column SEQ_ID (
+            reportColumnQueryId: 1
+            derivedColumn: N
+            heading {
+                heading: "&{SEQ_ID}."
+                alignment: end
+            }
+            layout {
+                sequence: 10
+                columnAlignment: end
+            }
+        )
+
+    )
+
+    region resume (
+        name: Resume
+        title: "&{RESUME}."
+        type: staticContent
+        layout {
+            sequence: 50
+            parentRegion: @apply-reg
+            slot: regionBody
+            startNewRow: false
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+    )
+
+    pageItem P125_ACC_ID (
+        type: hidden
+        layout {
+            sequence: 100
+            slot: body
+        }
+    )
+
+    pageItem P125_EDUCATION_LEVEL (
+        type: displayOnly
+        label {
+            label: "&{MINIMUM_EDUCATION_LEVEL}."
+            alignment: left
+        }
+        layout {
+            sequence: 180
+            region: @job-summary
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            cssClasses: no-word-break
+        }
+        advanced {
+            cssClasses: no-word-break
+        }
+    )
+
+    pageItem P125_EMAIL (
+        type: hidden
+        layout {
+            sequence: 90
+            slot: body
+        }
+    )
+
+    pageItem P125_JOB_SUMMARY (
+        type: displayOnly
+        label {
+            alignment: left
+        }
+        settings {
+            format: html
+        }
+        layout {
+            sequence: 140
+            region: @job-summary
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            cssClasses: no-word-break
+        }
+        advanced {
+            cssClasses: no-word-break
+        }
+    )
+
+    pageItem P125_JOB_TITLE (
+        type: hidden
+        layout {
+            sequence: 120
+            slot: body
+        }
+    )
+
+    pageItem P125_JOB_VACANCY_CHECK (
+        type: hidden
+        layout {
+            sequence: 80
+            slot: body
+        }
+    )
+
+    pageItem P125_PAGE_FLAG (
+        type: hidden
+        layout {
+            sequence: 130
+            slot: body
+        }
+    )
+
+    pageItem P125_PERSONAL_ID (
+        type: hidden
+        layout {
+            sequence: 110
+            slot: body
+        }
+    )
+
+    pageItem P125_QUALIFICATIONS (
+        type: displayOnly
+        label {
+            label: "&{QUALIFICATIONS_1}."
+            alignment: left
+        }
+        settings {
+            format: html
+        }
+        layout {
+            sequence: 160
+            region: @job-summary
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            cssClasses: no-word-break
+        }
+        advanced {
+            cssClasses: no-word-break
+        }
+    )
+
+    pageItem P125_RESP (
+        type: displayOnly
+        label {
+            label: "&{RESPONSIBILITIES_1}."
+            alignment: left
+        }
+        settings {
+            format: html
+        }
+        layout {
+            sequence: 150
+            region: @job-summary
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            cssClasses: no-word-break
+        }
+        advanced {
+            cssClasses: no-word-break
+        }
+    )
+
+    pageItem P125_RESUME (
+        type: fileUpload
+        label {
+            label: "&{RESUME}."
+            alignment: left
+        }
+        storage {
+            type: appTempFiles
+        }
+        layout {
+            sequence: 10
+            region: @resume
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+    )
+
+    pageItem P125_VACANCY_ID (
+        type: hidden
+        layout {
+            sequence: 20
+            slot: body
+        }
+    )
+
+    button add-certificate (
+        buttonName: Add_Certificate
+        label: "&{ADD_CERTIFICATE}."
+        layout {
+            sequence: 20
+            region: @other-certificates-for-person
+            slot: copy
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 127
+                items: {
+                    P127_VACANCY_ID: &P125_VACANCY_ID.
+                }
+            }
+        }
+    )
+
+    button clear (
+        buttonName: Clear
+        label: "&{CLEAR}."
+        layout {
+            sequence: 10
+            region: @other-certificates-for-person
+            slot: delete
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: [
+                #DEFAULT#
+                t-Button--large
+                t-Button--warning
+                t-Button--pillEnd
+                t-Button--stretch
+            ]
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+        }
+    )
+
+    button submit (
+        buttonName: Submit
+        label: "&{SUBMIT}."
+        layout {
+            sequence: 70
+            region: @apply-reg
+            slot: regionBody
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: [
+                #DEFAULT#
+                t-Button--large
+                t-Button--success
+                t-Button--pillStart
+                t-Button--stretch
+            ]
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+        }
+        advanced {
+            htmlDomId: SUBMIT_BUTTON
+        }
+    )
+
+    dynamicAction add-certificate (
+        name: Add certificate
+        execution {
+            sequence: 20
+        }
+        when {
+            event: apexafterclosedialog
+            selectionType: region
+            region: @other-certificates-for-person
+        }
+
+        action native-refresh (
+            action: refresh
+            affectedElements {
+                selectionType: region
+                region: @other-certificates-for-person
+            }
+            execution {
+                sequence: 30
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    dynamicAction new (
+        name: New
+        execution {
+            sequence: 30
+        }
+        when {
+            event: ready
+        }
+        config {
+            buildOption: @commented-out
+        }
+
+        action native-execute-plsql-code (
+            action: executeServerSideCode
+            settings {
+                plsqlCode:
+                    ```plsql
+                    DECLARE
+                        l_id       NUMBER;
+                        l_ischeck  NUMBER;
+                    BEGIN
+                    
+                        SELECT id
+                        INTO l_id
+                        FROM account
+                        WHERE email = :APP_USER;
+                    
+                        SELECT COUNT(*)
+                        INTO l_ischeck
+                        FROM job_application ja
+                        JOIN job_vacancy_application jva
+                            ON ja.id = jva.application_id
+                        WHERE jva.vacancy_id = :P125_VACANCY_ID
+                          AND ja.account_id = l_id;
+                    
+                        IF l_ischeck > 0 THEN
+                            :P125_PAGE_FLAG := 'Y';
+                        ELSE
+                            :P125_PAGE_FLAG := 'N';
+                        END IF;
+                    
+                    END;
+                    ```
+                itemsToSubmit: P125_PAGE_FLAG
+            }
+            execution {
+                sequence: 10
+            }
+        )
+
+        action native-javascript-code (
+            action: executeJsCode
+            settings {
+                jsCode:
+                    ```javascript-browser
+                    var btn = apex.item("SUBMIT_BUTTON");
+                    
+                    if ($v("P125_PAGE_FLAG") === "Y") {
+                        btn.disable();
+                    } else {
+                        btn.enable();
+                    }
+                    ```
+            }
+            execution {
+                sequence: 20
+            }
+        )
+
+    )
+
+    validation c-date (
+        name: C_Date
+        execution {
+            sequence: 20
+        }
+        validation {
+            type: itemIsNotNull
+            item: P125_DATE_OF_ACQUISITION
+        }
+        error {
+            errorMessage: "&{DATE_IS_REQUIRED}."
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    validation c-name (
+        name: C_name
+        execution {
+            sequence: 10
+        }
+        validation {
+            type: itemIsNotNull
+            item: P125_CERTIFICATE_NAME
+        }
+        error {
+            errorMessage: "&{CERTIFICATE_NAME_IS_REQUIRED}."
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    validation resume (
+        name: Resume
+        execution {
+            sequence: 30
+        }
+        validation {
+            type: itemIsNotNull
+            item: P125_RESUME
+        }
+        error {
+            errorMessage: "&{RESUME_IS_REQUIRED}."
+        }
+        serverSideCondition {
+            whenButtonPressed: @submit
+        }
+    )
+
+    process check-job-vacancy (
+        name: Check_job_vacancy
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                    :P125_JOB_VACANCY_CHECK := Job_application_pkg.check_application_vacancy(:P125_PERSONAL_ID, :P125_VACANCY_ID);
+                end;
+                ```
+        }
+        execution {
+            sequence: 40
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 351443528476669613
+        }
+    )
+
+    process check-vacancy-id (
+        name: Check vacancy id
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                
+                    if :P125_VACANCY_ID is null then
+                        raise_application_error(-20101, 'choose the job');
+                    end if; 
+                end;
+                 
+                ```
+        }
+        execution {
+            sequence: 30
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 351443168743669613
+        }
+    )
+
+    process clear-certificates (
+        name: Clear Certificates
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                Begin
+                
+                    apex_collection.delete_collection('CERTIFICATES');
+                
+                
+                end;
+                ```
+        }
+        execution {
+            sequence: 30
+        }
+        advanced {
+            executionMappingIdentifier: 351442796671669612
+        }
+        serverSideCondition {
+            whenButtonPressed: @clear
+        }
+    )
+
+    process get-vacancy-details (
+        name: get_vacancy_details
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                
+                
+                    select jv.title, jv.summary, jv.RESPONSIBILITIES, jv.QUALIFICATIONS, eduL.name as education_level 
+                    into :P125_JOB_TITLE ,:P125_JOB_SUMMARY
+                    , :P125_RESP, :P125_QUALIFICATIONS, :P125_EDUCATION_LEVEL from JOB_VACANCY jv
+                    join education_level eduL on eduL.id = jv.MINIMUM_EDUCATION_LEVEL_ID
+                    where jv.id = :P125_VACANCY_ID;
+                 
+                
+                end;
+                ```
+        }
+        execution {
+            sequence: 50
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 35282063850981436
+        }
+    )
+
+    process initialize-form-apply-test (
+        name: Initialize form Apply test
+        type: formInitialization
+        execution {
+            sequence: 10
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 351436993690669599
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    process send-email (
+        name: Send_Email
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                -- declare
+                --     v_email varchar2(200);
+                --     v_first_name varchar2(200);
+                
+                -- begin
+                
+                --     select email, FIRST_NAME into v_email, v_first_name from account where id = :APP_USER_ACC_ID;
+                
+                --      -- send email
+                --     APEX_MAIL.SEND(
+                --         p_to   => v_email,
+                --         p_from => 'apex@eprom.com.eg',
+                --         p_subj => 'Job Application is submitted',
+                --         p_body => 'MR ' || v_first_name || ' ' || 'Job Application is submitted'
+                --     );
+                
+                --     APEX_MAIL.PUSH_QUEUE;
+                
+                -- end;
+                
+                
+                DECLARE
+                    v_first_name VARCHAR2(200);
+                BEGIN
+                    SELECT email, first_name
+                    INTO :P125_EMAIL, v_first_name
+                    FROM account
+                    WHERE id = :APP_USER_ACC_ID;
+                
+                    APEX_MAIL.SEND(
+                        p_to   => :P125_EMAIL,
+                        p_from => 'apex@eprom.com.eg',
+                        p_subj => 'Job Application Submitted',
+                        p_body => 'Dear Mr. ' || v_first_name || ',' || chr(10) || chr(10) ||
+                                  'Your job application has been submitted successfully.' || chr(10) ||
+                                  'Thank you for applying.'
+                    );
+                
+                    APEX_MAIL.PUSH_QUEUE;
+                
+                EXCEPTION
+                    WHEN NO_DATA_FOUND THEN
+                        NULL; -- or raise an application error
+                END;
+                
+                
+                -- BEGIN
+                --     APEX_MAIL.SEND(
+                --         p_to   => 'Amoner@Eprom.com.Eg',
+                --         p_from => 'apex@eprom.com.eg',
+                --         p_subj => 'APEX Test',
+                --         p_body => 'Test email'
+                --     );
+                
+                --     APEX_MAIL.PUSH_QUEUE;
+                -- END;
+                ```
+        }
+        execution {
+            sequence: 20
+        }
+        advanced {
+            executionMappingIdentifier: 30352874558074634
+        }
+        serverSideCondition {
+            whenButtonPressed: @submit
+        }
+    )
+
+    process set-personal-id (
+        name: set personal id
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                    if :APP_USER_PERS_ID is not null then
+                        :P125_PERSONAL_ID := :APP_USER_PERS_ID;
+                        select email into :P125_EMAIL from account where id = :APP_USER_ACC_ID;
+                    else
+                        raise_application_error(-20100, 'please complete your personal information');
+                    end if;
+                
+                end;
+                ```
+        }
+        execution {
+            sequence: 20
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 351441985706669612
+        }
+    )
+
+    process submit-process (
+        name: Submit Process
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                
+                
+                declare
+                
+                    v_app_id number;
+                
+                begin
+                
+                    -- insert the job_application items 
+                    v_app_id := Job_application_pkg.Save_Job_application(:P125_RESUME, :APP_USER_ACC_ID);
+                
+                
+                    -- insert certificates
+                    IF APEX_COLLECTION.COLLECTION_EXISTS('CERTIFICATES') THEN
+                        FOR rec IN (
+                            SELECT
+                                c001,
+                                d001
+                            FROM apex_collections
+                            WHERE collection_name = 'CERTIFICATES'
+                        )
+                        LOOP
+                
+                            Job_application_pkg.Save_other_certificates(v_app_id,
+                                rec.c001,
+                                rec.d001);
+                
+                        END LOOP;
+                        apex_collection.delete_collection('CERTIFICATES');
+                    END IF;
+                    --insert into job_vacancy_application
+                    Job_application_pkg.Save_Vacancy_application(v_app_id, :P125_VACANCY_ID);
+                
+                    
+                EXCEPTION
+                    WHEN OTHERS THEN
+                
+                        -- Log the actual Oracle error
+                        APEX_DEBUG.ERROR(
+                            'Page 125 Submit Error: ' || SQLERRM ||
+                            ' | Error Code: ' || SQLCODE ||
+                            ' | Backtrace: ' || DBMS_UTILITY.FORMAT_ERROR_BACKTRACE
+                        );
+                
+                        -- Add custom error to APEX
+                        APEX_ERROR.ADD_ERROR(
+                            p_message =>
+                                'Unable to submit your application. ' ||
+                                'Your attachment may be corrupted or invalid. ' ||
+                                'Please change your PDF attachment and try again.',
+                
+                            p_display_location =>
+                                APEX_ERROR.C_INLINE_IN_NOTIFICATION
+                        );
+                
+                end;
+                ```
+        }
+        execution {
+            sequence: 10
+        }
+        advanced {
+            executionMappingIdentifier: 351442370051669612
+        }
+        serverSideCondition {
+            whenButtonPressed: @submit
+        }
+    )
+
+    branch (
+        execution {
+            sequence: 10
+        }
+        behavior {
+            target: {
+                page: 104
+            }
+        }
+        serverSideCondition {
+            whenButtonPressed: @submit
+        }
+    )
+
+)

@@ -1,0 +1,706 @@
+page 114 (
+    name: Edit Account Data
+    alias: EDIT-ACCOUNT-DATA
+    title: "&{EDIT_ACCOUNT_DATA}."
+    appearance {
+        pageMode: modalDialog
+        dialogTemplate: @/modal-dialog
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    security {
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region buttons (
+        name: Buttons
+        title: "&{BUTTONS}."
+        type: staticContent
+        layout {
+            sequence: 20
+            slot: dialogFooter
+        }
+        appearance {
+            template: @/buttons-container
+            templateOptions: #DEFAULT#
+        }
+        settings {
+            outputAs: text
+        }
+    )
+
+    region edit-account-data (
+        name: Edit Account Data
+        title: "&{EDIT_ACCOUNT_DATA}."
+        type: form
+        source {
+            location: localDatabase
+            tableName: ACCOUNT
+        }
+        layout {
+            sequence: 10
+            slot: contentBody
+        }
+        appearance {
+            template: @/blank-with-attributes
+            templateOptions: #DEFAULT#
+        }
+        edit {
+            enabled: true
+            allowedOperations: [
+                add
+                update
+                delete
+            ]
+        }
+    )
+
+    pageItem P114_ADDRESS (
+        type: textarea
+        label {
+            label: "&{ADDRESS}."
+            alignment: left
+        }
+        layout {
+            sequence: 130
+            region: @edit-account-data
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 60
+            height: 4
+        }
+        validation {
+            maxLength: 500
+        }
+        source {
+            formRegion: @edit-account-data
+            column: ADDRESS
+            dataType: varchar2
+        }
+    )
+
+    pageItem P114_CITY (
+        type: textField
+        label {
+            label: "&{CITY}."
+            alignment: left
+        }
+        layout {
+            sequence: 140
+            region: @edit-account-data
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 200
+        }
+        source {
+            formRegion: @edit-account-data
+            column: CITY
+            dataType: varchar2
+        }
+    )
+
+    pageItem P114_COUNTRY_ID (
+        type: selectList
+        label {
+            label: "&{COUNTRY}."
+            alignment: left
+        }
+        lov {
+            type: sharedComponent
+            lov: @country-name
+        }
+        layout {
+            sequence: 170
+            region: @edit-account-data
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        source {
+            formRegion: @edit-account-data
+            column: COUNTRY_ID
+            dataType: number
+        }
+    )
+
+    pageItem P114_COUNTRY_PHONE_CODE_ID (
+        type: textField
+        label {
+            label: "&{COUNTRY_PHONE_CODE_1}."
+            alignment: left
+        }
+        layout {
+            sequence: 180
+            region: @edit-account-data
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+        advanced {
+            customAttributes: readonly
+        }
+        source {
+            formRegion: @edit-account-data
+            column: COUNTRY_PHONE_CODE_ID
+            dataType: number
+        }
+    )
+
+    pageItem P114_DATE_OF_BIRTH (
+        type: datePicker
+        label {
+            label: "&{DATE_OF_BIRTH}."
+            alignment: left
+        }
+        layout {
+            sequence: 70
+            region: @edit-account-data
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 255
+        }
+        source {
+            formRegion: @edit-account-data
+            column: DATE_OF_BIRTH
+            dataType: date
+        }
+    )
+
+    pageItem P114_EMAIL (
+        type: textField
+        label {
+            label: "&{EMAIL}."
+            alignment: left
+        }
+        layout {
+            sequence: 90
+            region: @edit-account-data
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 200
+        }
+        source {
+            formRegion: @edit-account-data
+            column: EMAIL
+            dataType: varchar2
+        }
+    )
+
+    pageItem P114_FIRST_NAME (
+        type: textField
+        label {
+            label: "&{FIRST_NAME}."
+            alignment: right
+        }
+        layout {
+            sequence: 40
+            region: @edit-account-data
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 200
+        }
+        source {
+            formRegion: @edit-account-data
+            column: FIRST_NAME
+            dataType: varchar2
+        }
+    )
+
+    pageItem P114_GENDER (
+        type: textField
+        label {
+            label: "&{GENDER}."
+            alignment: left
+        }
+        layout {
+            sequence: 80
+            region: @edit-account-data
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 50
+        }
+        source {
+            formRegion: @edit-account-data
+            column: GENDER
+            dataType: varchar2
+        }
+    )
+
+    pageItem P114_HOME_TELEPHONE (
+        type: textField
+        label {
+            label: "&{HOME_TELEPHONE}."
+            alignment: left
+        }
+        layout {
+            sequence: 120
+            region: @edit-account-data
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 200
+        }
+        source {
+            formRegion: @edit-account-data
+            column: HOME_TELEPHONE
+            dataType: varchar2
+        }
+    )
+
+    pageItem P114_ID (
+        type: hidden
+        layout {
+            sequence: 10
+            region: @edit-account-data
+            slot: regionBody
+        }
+        source {
+            formRegion: @edit-account-data
+            column: ID
+            dataType: number
+            queryOnly: true
+            primaryKey: true
+        }
+        security {
+            sessionStateProtection: checksumRequiredSessionLevel
+        }
+    )
+
+    pageItem P114_LAST_NAME (
+        type: textField
+        label {
+            label: "&{LAST_NAME}."
+            alignment: left
+        }
+        layout {
+            sequence: 60
+            region: @edit-account-data
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 200
+        }
+        source {
+            formRegion: @edit-account-data
+            column: LAST_NAME
+            dataType: varchar2
+        }
+    )
+
+    pageItem P114_NATIONAL_ID (
+        type: textField
+        label {
+            label: "&{NATIONAL_ID}."
+            alignment: left
+        }
+        layout {
+            sequence: 150
+            region: @edit-account-data
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 14
+        }
+        source {
+            formRegion: @edit-account-data
+            column: NATIONAL_ID
+            dataType: varchar2
+        }
+    )
+
+    pageItem P114_PASSPORT_NUMBER (
+        type: textField
+        label {
+            label: "&{PASSPORT_NUMBER}."
+            alignment: left
+        }
+        layout {
+            sequence: 160
+            region: @edit-account-data
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 200
+        }
+        source {
+            formRegion: @edit-account-data
+            column: PASSPORT_NUMBER
+            dataType: varchar2
+        }
+    )
+
+    pageItem P114_SECOND_NAME (
+        type: textField
+        label {
+            label: "&{SECOND_NAME}."
+            alignment: left
+        }
+        layout {
+            sequence: 50
+            region: @edit-account-data
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 200
+        }
+        source {
+            formRegion: @edit-account-data
+            column: SECOND_NAME
+            dataType: varchar2
+        }
+    )
+
+    button cancel (
+        buttonName: CANCEL
+        label: "&{CANCEL}."
+        layout {
+            sequence: 10
+            region: @buttons
+            slot: close
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            action: definedByDynamicAction
+        }
+    )
+
+    button create (
+        buttonName: CREATE
+        label: "&{CREATE}."
+        layout {
+            sequence: 40
+            region: @buttons
+            slot: next
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: insert
+        }
+        serverSideCondition {
+            type: itemIsNull
+            item: P114_ID
+        }
+    )
+
+    button delete (
+        buttonName: DELETE
+        label: "&{DELETE}."
+        layout {
+            sequence: 20
+            region: @buttons
+            slot: delete
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            executeValidations: false
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: delete
+            requiresConfirmation: true
+        }
+        confirmation {
+            message: &APP_TEXT$DELETE_MSG!RAW.
+            style: danger
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P114_ID
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    button save (
+        buttonName: SAVE
+        label: "&{APPLY_CHANGES}."
+        layout {
+            sequence: 30
+            region: @buttons
+            slot: next
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: update
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P114_ID
+        }
+    )
+
+    dynamicAction cancel-dialog (
+        name: Cancel Dialog
+        execution {
+            sequence: 10
+        }
+        when {
+            event: click
+            selectionType: button
+            button: @cancel
+        }
+
+        action native-dialog-cancel (
+            action: cancelDialog
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    dynamicAction pass-natid (
+        name: pass_natId
+        execution {
+            sequence: 40
+        }
+        when {
+            selectionType: items
+            items: P114_COUNTRY_ID
+        }
+        clientSideCondition {
+            type: jsExpression
+            javaScriptExpression: $v('P114_COUNTRY_ID').trim() === '' || $v('P114_COUNTRY_ID').trim() === '63';
+        }
+
+        action native-hide (
+            action: hide
+            affectedElements {
+                selectionType: items
+                items: P114_NATIONAL_ID
+            }
+            execution {
+                sequence: 10
+                fireWhenEventResultIs: false
+            }
+        )
+
+        action native-show (
+            action: show
+            affectedElements {
+                selectionType: items
+                items: P114_NATIONAL_ID
+            }
+            execution {
+                sequence: 10
+            }
+        )
+
+    )
+
+    dynamicAction passport-or-natid (
+        name: passport_or_natID
+        execution {
+            sequence: 20
+        }
+        when {
+            selectionType: items
+            items: P114_COUNTRY_ID
+        }
+        clientSideCondition {
+            type: jsExpression
+            javaScriptExpression: $v('P114_COUNTRY_ID').trim() !== '' && $v('P114_COUNTRY_ID').trim() !== '63'
+        }
+
+        action native-hide (
+            action: hide
+            affectedElements {
+                selectionType: items
+                items: P114_PASSPORT_NUMBER
+            }
+            execution {
+                sequence: 10
+                fireWhenEventResultIs: false
+            }
+        )
+
+        action native-show (
+            action: show
+            affectedElements {
+                selectionType: items
+                items: P114_PASSPORT_NUMBER
+            }
+            execution {
+                sequence: 10
+            }
+        )
+
+    )
+
+    dynamicAction select-country-phone-code (
+        name: select country phone code
+        execution {
+            sequence: 50
+        }
+        when {
+            selectionType: items
+            items: P114_COUNTRY_ID
+        }
+
+        action native-refresh (
+            action: refresh
+            affectedElements {
+                selectionType: items
+                items: P114_COUNTRY_PHONE_CODE_ID
+            }
+            execution {
+                sequence: 20
+                fireOnInit: false
+            }
+        )
+
+        action native-set-value (
+            action: setValue
+            settings {
+                type: sqlQuery
+                sqlQuery: select country.phone_code from country country where id = :P114_COUNTRY_ID;
+                itemsToSubmit: P114_COUNTRY_ID
+            }
+            affectedElements {
+                selectionType: items
+                items: P114_COUNTRY_PHONE_CODE_ID
+            }
+            execution {
+                sequence: 10
+            }
+        )
+
+    )
+
+    process close-dialog (
+        name: Close Dialog
+        type: closeDialog
+        execution {
+            sequence: 50
+        }
+        advanced {
+            executionMappingIdentifier: 349766365129374272
+        }
+        serverSideCondition {
+            type: requestIsContainedInValue
+            value: CREATE,SAVE,DELETE
+        }
+    )
+
+    process initialize-form-edit-account-data (
+        name: Initialize form Edit Account Data
+        type: formInitialization
+        formRegion: @edit-account-data
+        execution {
+            sequence: 10
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 349765523319374271
+        }
+    )
+
+    process process-form-edit-account-data (
+        name: Process form Edit Account Data
+        type: formAutoRowProcessing
+        formRegion: @edit-account-data
+        execution {
+            sequence: 10
+        }
+        advanced {
+            executionMappingIdentifier: 349765978296374271
+        }
+    )
+
+)

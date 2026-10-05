@@ -1,0 +1,912 @@
+page 210 (
+    name: Excel Application Report
+    alias: EXCEL-APPLICATION-REPORT
+    title: "&{EXCEL_APPLICATION_REPORT}."
+    appearance {
+        pageMode: modalDialog
+        dialogTemplate: @/modal-dialog
+        templateOptions: [
+            #DEFAULT#
+            ui-dialog--stretch
+        ]
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    javaScript {
+        executeWhenPageLoads:
+            ```javascript-browser
+            apex.server.process("CHECK_REPORT_COUNT", {
+              pageItems: "#P210_VACANCY_ID"
+            }, {
+              dataType: "json",
+              success: function(data) {
+                console.log("Ajax result:", data);
+            
+                var btn = $("#DOWNLOAD_RESUMES");
+            
+                console.log("Button found:", btn.length);
+            
+                if (data.status === "DISABLE") {
+                  btn
+                    .attr("disabled", "disabled")
+                    .addClass("is-disabled")
+                    .css({
+                      "pointer-events": "none",
+                      "opacity": "0.5",
+                      "cursor": "not-allowed"
+                    });
+                } else {
+                  btn
+                    .removeAttr("disabled")
+                    .removeClass("is-disabled")
+                    .css({
+                      "pointer-events": "",
+                      "opacity": "",
+                      "cursor": ""
+                    });
+                }
+              }
+            });
+            ```
+    }
+    css {
+        inline:
+            ```css
+            .a-IRR-table td[headers="EXPERIENCE_DETAILS"] {
+                white-space: pre-line;
+            }
+            
+            
+            #DOWNLOAD_RESUMES.is-disabled {
+              opacity: 0.5;
+              pointer-events: none;
+              cursor: not-allowed;
+            }
+            ```
+    }
+    security {
+        authorizationScheme: @admin-schema
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region excel-download (
+        name: Excel Download
+        title: "&{EXCEL_DOWNLOAD}."
+        type: interactiveReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                with
+                params as (
+                    select to_number(
+                               trim(:P210_VACANCY_ID)
+                               default null on conversion error
+                           ) as vacancy_id
+                    from dual
+                ),
+                application_base as (
+                    select /*+ materialize */
+                           j.id,
+                           j.account_id,
+                           j.resume_file_id,
+                           j.creation_date
+                    from job_application j
+                    join account u
+                      on u.id = j.account_id
+                    cross join params p
+                    where (
+                        exists (
+                            select 1
+                            from apex_collections c
+                            where c.collection_name = 'SELECTED_APPLICATIONS'
+                              and c.n001 = j.id
+                        )
+                        or not exists (
+                            select 1
+                            from apex_collections c
+                            where c.collection_name = 'SELECTED_APPLICATIONS'
+                        )
+                    )
+                    and (
+                        p.vacancy_id is null
+                        or exists (
+                            select 1
+                            from job_vacancy_application jva
+                            where jva.application_id = j.id
+                              and jva.vacancy_id = p.vacancy_id
+                        )
+                    )
+                ),
+                latest_education as (
+                    select *
+                    from (
+                        select
+                            ed.*,
+                            row_number() over (
+                                partition by ed.personal_id
+                                order by ed.id desc
+                            ) as rn
+                        from education_degree ed
+                        join personal_info pi
+                          on pi.id = ed.personal_id
+                        where exists (
+                            select 1
+                            from application_base a
+                            where a.account_id = pi.account_id
+                        )
+                    )
+                    where rn = 1
+                ),
+                application_personals as (
+                    select distinct
+                           pi.id as personal_id
+                    from application_base a
+                    join personal_info pi
+                      on pi.account_id = a.account_id
+                ),
+                experience_by_person as (
+                    select
+                        e.personal_id,
+                        xmlagg(
+                            xmlelement(
+                                line,
+                                regexp_replace(
+                                    to_char(e.fromdate, 'dd/mm/yyyy')
+                                    || ' - '
+                                    || nvl(to_char(e.todate, 'dd/mm/yyyy'), 'Present')
+                                    || ' | '
+                                    || e.position_name
+                                    || ' | '
+                                    || e.company
+                                    || case
+                                           when e.other_details is not null
+                                           then ' | ' || e.other_details
+                                           else null
+                                       end,
+                                    '[[:cntrl:]]',
+                                    ' '
+                                )
+                                || chr(10)
+                            )
+                            order by e.fromdate desc
+                        ).extract('//text()').getclobval() as experience_details
+                    from job_application_experience e
+                    join application_personals p
+                      on p.personal_id = e.personal_id
+                    group by e.personal_id
+                )
+                select
+                    a.id,
+                    u.id as account_id,
+                    u.first_name || ' ' || u.second_name || ' ' || u.last_name as full_name,
+                    u.national_id,
+                    u.date_of_birth,
+                    u.mobile_telephone || '/' || u.home_telephone as phone_numbers,
+                    u.city,
+                    ed.university,
+                    el.name,
+                    ed.graduation_year,
+                    ef.name as field,
+                
+                    case
+                        when el.name in ('Doctorate Degree', 'Master''s Degree')
+                        then el.name
+                        else 'N/A'
+                    end as higher_degree,
+                
+                    case
+                        when el.name in ('Doctorate Degree', 'Master''s Degree')
+                        then to_char(ed.graduation_year)
+                        else 'N/A'
+                    end as higher_degree_year,
+                
+                    u.email,
+                    e.experience_details
+                
+                from application_base a
+                join account u
+                  on u.id = a.account_id
+                cross join params p
+                
+                left join personal_info pi
+                  on pi.account_id = a.account_id
+                
+                left join latest_education ed
+                  on ed.personal_id = pi.id
+                
+                left join education_level el
+                  on el.id = ed.education_level
+                
+                left join education_field ef
+                  on ef.id = ed.education_field
+                
+                left join experience_by_person e
+                  on e.personal_id = pi.id
+                
+                left join job_vacancy_application jva
+                  on jva.application_id = a.id
+                 and (
+                     p.vacancy_id is null
+                     or jva.vacancy_id = p.vacancy_id
+                 )
+                
+                left join job_application_attachments jaa
+                  on jaa.id = a.resume_file_id
+                 and jaa.file_type_id = 2
+                
+                order by a.creation_date desc
+                
+                
+                -- select j.ID, 
+                --        u.ID as account_id,
+                --        u.FIRST_NAME || ' ' || u.SECOND_NAME || ' ' || u.LAST_NAME as FULL_NAME,
+                --        u.NATIONAL_ID ,
+                --        u.DATE_OF_BIRTH ,
+                --        u.MOBILE_TELEPHONE || '/' || u.HOME_TELEPHONE as phone_numbers,
+                --        u.CITY,
+                --        ed.UNIVERSITY,
+                --        el.NAME,
+                --        ed.GRADUATION_YEAR,
+                --        ef.name as field,
+                --        case
+                --             when el.name in ('Doctorate Degree', 'Master''s Degree') then el.name
+                --             else 'N/A'
+                --        end as higher_degree,
+                --        case
+                --             when el.name in ('Doctorate Degree', 'Master''s Degree') then to_char(ed.graduation_year)
+                --             else 'N/A'
+                --        end as higher_degree_year,
+                --        u.EMAIL,
+                --     --    jae.FROMDATE,
+                --     --    jae.TODATE,
+                --     --    jae.POSITION_NAME,
+                --     --    jae.COMPANY,
+                --     --    jae.OTHER_DETAILS
+                --         jae.experience_details  
+                       
+                
+                       
+                
+                
+                       
+                
+                      
+                
+                -- from Job_Application j
+                -- join Account u
+                -- on u.ID = j.ACCOUNT_ID
+                -- left join personal_info pi
+                --    on pi.Account_ID = j.Account_ID
+                -- -- left join education_degree ed
+                -- --     on ed.job_application_id = j.id
+                -- left join (
+                --     select *
+                --     from (
+                --         select 
+                --                ed.*,
+                --                row_number() over (
+                --                    partition by ed.personal_id
+                --                    order by ed.id desc
+                --                ) as rn
+                --         from education_degree ed
+                --     )
+                --     where rn = 1
+                -- ) ed
+                --     on pi.id = ed.personal_id
+                -- left join education_level el
+                --     on ed.education_level = el.id
+                -- left join education_field ef
+                --     on ef.id = ed.education_field
+                -- -- left join job_application_experience jae
+                -- --     on jae.job_application_id = j.id
+                -- left join (
+                --     select
+                --         jae.personal_id,
+                --         listagg(
+                --             to_char(jae.fromdate, 'dd/mm/yyyy')
+                --             || ' - ' ||
+                --             nvl(to_char(jae.todate, 'dd/mm/yyyy'), 'Present')
+                --             || ' | ' ||
+                --             jae.position_name
+                --             || ' | ' ||
+                --             jae.company
+                --             || case
+                --                 when jae.other_details is not null then ' | ' || jae.other_details
+                --                 else null
+                --                end,
+                --             chr(10)
+                --         ) within group (order by jae.fromdate desc) as experience_details
+                --     from job_application_experience jae
+                --     group by jae.personal_id
+                -- ) jae
+                --     on jae.personal_id = pi.id
+                -- left join Job_Vacancy_Application jva
+                -- on jva.APPLICATION_ID = j.ID
+                -- left join JOB_APPLICATION_ATTACHMENTS jaa
+                -- on j.RESUME_FILE_ID = jaa.id and jaa.FILE_TYPE_ID = 2
+                -- -- jat.id = j.RESUME_FILE_ID
+                -- where (
+                --     exists (
+                --         select 1
+                --         from apex_collections c
+                --         where c.collection_name = 'SELECTED_APPLICATIONS'
+                --         and c.n001 = j.id
+                --     )
+                --     or not exists (
+                --         select 1
+                --         from apex_collections c
+                --         where c.collection_name = 'SELECTED_APPLICATIONS'
+                --     )
+                -- )
+                
+                -- and (
+                --     :P210_VACANCY_ID is null
+                --     or jva.vacancy_id = :P210_VACANCY_ID
+                -- )
+                
+                -- order by j.CREATION_DATE desc
+                -- ;
+                
+                
+                ```
+            pageItemsToSubmit: P210_VACANCY_ID
+        }
+        layout {
+            sequence: 10
+            slot: contentBody
+        }
+        appearance {
+            template: @/interactive-report
+            templateOptions: [
+                #DEFAULT#
+                t-IRR-region--hideHeader js-addHiddenHeadingRoleDesc
+            ]
+        }
+        pagination {
+            type: rowRangesXToY
+        }
+        performance {
+            maxRowsToProcess: 1000000
+        }
+        searchBar {
+            rowsPerPageSelector: true
+        }
+        actionsMenu {
+            rowsPerPage: false
+            savePublicReport: true
+        }
+        download {
+            formats: excel
+        }
+        advanced {
+            savedReportMappingIdentifier: 350429770200683402
+        }
+
+        column ACCOUNT_ID (
+            type: plainText
+            heading {
+                heading: "&{رقم_التسجيل}."
+                alignment: end
+            }
+            layout {
+                sequence: 20
+                columnAlignment: end
+            }
+            source {
+                dataType: NUMBER
+            }
+            advanced {
+                endUserAlias: B
+            }
+        )
+
+        column CITY (
+            type: plainText
+            heading {
+                heading: "&{المدينة}."
+                alignment: end
+            }
+            layout {
+                sequence: 70
+            }
+            source {
+                dataType: STRING
+            }
+            advanced {
+                endUserAlias: G
+            }
+        )
+
+        column DATE_OF_BIRTH (
+            type: plainText
+            heading {
+                heading: "&{تاريخ_الميلاد}."
+                alignment: end
+            }
+            layout {
+                sequence: 50
+            }
+            source {
+                dataType: DATE
+            }
+            advanced {
+                endUserAlias: E
+            }
+        )
+
+        column EMAIL (
+            type: plainText
+            heading {
+                heading: "&{بريد_إليكترونى}."
+                alignment: end
+            }
+            layout {
+                sequence: 140
+            }
+            source {
+                dataType: STRING
+            }
+            advanced {
+                endUserAlias: N
+            }
+        )
+
+        column EXPERIENCE_DETAILS (
+            type: plainText
+            heading {
+                heading: خبره عمل
+                alignment: end
+            }
+            layout {
+                sequence: 170
+            }
+            source {
+                dataType: CLOB
+            }
+            columnFilter {
+                type: none
+            }
+            advanced {
+                endUserAlias: W
+            }
+            enableUsersTo {
+                sort: false
+                controlBreak: false
+                aggregate: false
+                compute: false
+                chart: false
+                groupBy: false
+                pivot: false
+            }
+        )
+
+        column FIELD (
+            type: plainText
+            heading {
+                heading: "&{التخصص}."
+                alignment: end
+            }
+            layout {
+                sequence: 110
+            }
+            source {
+                dataType: STRING
+            }
+            advanced {
+                endUserAlias: K
+            }
+        )
+
+        column FULL_NAME (
+            type: plainText
+            heading {
+                heading: "&{اسم_المتقدم_للوظيفة}."
+                alignment: end
+            }
+            layout {
+                sequence: 30
+            }
+            source {
+                dataType: STRING
+            }
+            advanced {
+                endUserAlias: C
+            }
+        )
+
+        column GRADUATION_YEAR (
+            type: plainText
+            heading {
+                heading: "&{سنة_التخرج}."
+                alignment: end
+            }
+            layout {
+                sequence: 100
+                columnAlignment: end
+            }
+            source {
+                dataType: NUMBER
+            }
+            advanced {
+                endUserAlias: J
+            }
+        )
+
+        column HIGHER_DEGREE (
+            type: plainText
+            heading {
+                heading: "&{دراسات_عليا}."
+                alignment: end
+            }
+            layout {
+                sequence: 120
+            }
+            source {
+                dataType: STRING
+            }
+            advanced {
+                endUserAlias: L
+            }
+        )
+
+        column HIGHER_DEGREE_YEAR (
+            type: plainText
+            heading {
+                heading: "&{سنة_الحصول_عليها}."
+                alignment: end
+            }
+            layout {
+                sequence: 130
+            }
+            source {
+                dataType: STRING
+            }
+            advanced {
+                endUserAlias: M
+            }
+        )
+
+        column ID (
+            type: hidden
+            heading {
+                heading: "&{ID}."
+            }
+            layout {
+                sequence: 10
+            }
+            source {
+                dataType: NUMBER
+            }
+            advanced {
+                endUserAlias: A
+            }
+        )
+
+        column NAME (
+            type: plainText
+            heading {
+                heading: مؤهل دراسي
+                alignment: end
+            }
+            layout {
+                sequence: 160
+            }
+            source {
+                dataType: STRING
+            }
+            advanced {
+                endUserAlias: V
+            }
+        )
+
+        column NATIONAL_ID (
+            type: plainText
+            heading {
+                heading: "&{الرقم_القومى}."
+                alignment: end
+            }
+            layout {
+                sequence: 40
+            }
+            source {
+                dataType: STRING
+            }
+            advanced {
+                endUserAlias: D
+            }
+        )
+
+        column PHONE_NUMBERS (
+            type: plainText
+            heading {
+                heading: "&{رقم_التليفون_موبايل}."
+                alignment: end
+            }
+            layout {
+                sequence: 60
+            }
+            source {
+                dataType: STRING
+            }
+            advanced {
+                endUserAlias: F
+            }
+        )
+
+        column UNIVERSITY (
+            type: plainText
+            heading {
+                heading: "&{الجامعةالكلية}."
+                alignment: end
+            }
+            layout {
+                sequence: 80
+            }
+            source {
+                dataType: STRING
+            }
+            advanced {
+                endUserAlias: H
+            }
+        )
+
+        page {
+            borderWidth: 0.5
+            borderColor: #666666
+        }
+
+        savedReport 3504787 (
+            visibility: primaryDefault
+            view {
+                rowsPerPage: 1000
+            }
+
+            displayColumn ACCOUNT_ID (
+                sequence: 1
+            )
+
+            displayColumn CITY (
+                sequence: 7
+            )
+
+            displayColumn DATE_OF_BIRTH (
+                sequence: 4
+            )
+
+            displayColumn EMAIL (
+                sequence: 8
+            )
+
+            displayColumn EXPERIENCE_DETAILS (
+                sequence: 14
+            )
+
+            displayColumn FIELD (
+                sequence: 5
+            )
+
+            displayColumn FULL_NAME (
+                sequence: 2
+            )
+
+            displayColumn GRADUATION_YEAR (
+                sequence: 11
+            )
+
+            displayColumn HIGHER_DEGREE (
+                sequence: 9
+            )
+
+            displayColumn HIGHER_DEGREE_YEAR (
+                sequence: 12
+            )
+
+            displayColumn NAME (
+                sequence: 13
+            )
+
+            displayColumn NATIONAL_ID (
+                sequence: 3
+            )
+
+            displayColumn PHONE_NUMBERS (
+                sequence: 10
+            )
+
+            displayColumn UNIVERSITY (
+                sequence: 6
+            )
+
+        )
+
+    )
+
+    pageItem P210_VACANCY_ID (
+        type: hidden
+        layout {
+            sequence: 10
+            region: @excel-download
+            slot: regionBody
+        }
+        sessionState {
+            storage: request
+        }
+    )
+
+    button DOWNLOAD_RESUMES (
+        buttonName: DOWNLOAD_RESUMES
+        label: "&{DOWNLOAD_RESUMES}."
+        layout {
+            sequence: 20
+            region: @excel-download
+            slot: sortOrder
+        }
+        appearance {
+            buttonTemplate: @/text-with-icon
+            hot: true
+            showAsDisabled: true
+            templateOptions: [
+                #DEFAULT#
+                t-Button--iconLeft
+            ]
+            icon: fa-download
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 212
+                items: {
+                    P212_VACANCY_ID: &P210_VACANCY_ID.
+                }
+            }
+        }
+        advanced {
+            htmlDomId: DOWNLOAD_RESUMES
+        }
+    )
+
+    dynamicAction new (
+        name: New
+        execution {
+            sequence: 10
+        }
+        when {
+            event: apexafterclosedialog
+            selectionType: region
+            region: @excel-download
+        }
+        config {
+            buildOption: @commented-out
+        }
+
+        action native-clear (
+            action: clear
+            affectedElements {
+                selectionType: items
+                items: P210_VACANCY_ID
+            }
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    dynamicAction new_1 (
+        name: New
+        execution {
+            sequence: 20
+        }
+        when {
+            event: region/interactiveGrid/interactivegridreportchange
+            selectionType: button
+            button: @DOWNLOAD_RESUMES
+        }
+        config {
+            buildOption: @commented-out
+        }
+
+        action native-javascript-code (
+            action: executeServerSideCode
+            settings {
+                plsqlCode: NULL;
+                itemsToSubmit: P210_VACANCY_ID
+            }
+            execution {
+                sequence: 10
+                fireOnInit: false
+            }
+        )
+
+        action native-javascript-code_1 (
+            action: executeJsCode
+            settings {
+                jsCode: apex.navigation.redirect("f?p=&APP_ID.:212:&SESSION.::NO::");
+            }
+            execution {
+                sequence: 20
+                fireOnInit: false
+            }
+        )
+
+    )
+
+    process check-report-count (
+        name: CHECK_REPORT_COUNT
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                DECLARE
+                    l_count NUMBER;
+                BEGIN
+                
+                    SELECT COUNT(DISTINCT j.id)
+                    INTO l_count
+                    FROM job_application j
+                
+                    LEFT JOIN job_vacancy_application jva
+                        ON jva.application_id = j.id
+                
+                    LEFT JOIN job_application_attachments jaa
+                        ON jaa.job_application_id = j.id
+                       AND jaa.file_type_id = 2
+                
+                    WHERE
+                        (
+                            EXISTS (
+                                SELECT 1
+                                FROM apex_collections c
+                                WHERE c.collection_name = 'SELECTED_APPLICATIONS'
+                                AND c.n001 = j.id
+                            )
+                            OR
+                            NOT EXISTS (
+                                SELECT 1
+                                FROM apex_collections c
+                                WHERE c.collection_name = 'SELECTED_APPLICATIONS'
+                            )
+                        )
+                
+                        AND jaa.id IS NOT NULL
+                
+                        AND (
+                            :P210_VACANCY_ID IS NULL
+                            OR jva.vacancy_id = :P210_VACANCY_ID
+                        );
+                
+                    apex_json.open_object;
+                
+                    apex_json.write(
+                        'status',
+                        CASE
+                            WHEN l_count > 500 THEN 'DISABLE'
+                            ELSE 'ENABLE'
+                        END
+                    );
+                
+                    apex_json.write(
+                        'count',
+                        l_count
+                    );
+                
+                    apex_json.close_object;
+                
+                END;
+                ```
+        }
+        execution {
+            sequence: 10
+            point: ajaxCallback
+        }
+        advanced {
+            executionMappingIdentifier: 341529646710672524
+        }
+    )
+
+)

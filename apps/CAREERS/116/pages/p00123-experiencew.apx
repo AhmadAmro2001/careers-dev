@@ -1,0 +1,1311 @@
+page 123 (
+    name: ExperienceW
+    alias: EXPERIENCEW
+    title: "&{EXPERIENCE}."
+    appearance {
+        pageTemplate: @/blank
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    css {
+        inline:
+            ```css
+            /* Region Container */
+            #modern_report {
+                background: #f8fafc;
+                border-radius: 18px;
+                padding: 18px;
+                box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+                border: none;
+            }
+            
+            /* Report Table */
+            #modern_report .t-Report-report {
+                border-collapse: separate;
+                border-spacing: 0 10px;
+                width: 100%;
+            }
+            
+            /* Header */
+            #modern_report .t-Report-colHead {
+                background: #001b47;
+                color: white;
+                font-size: 14px;
+                font-weight: 600;
+                padding: 14px;
+                border: none;
+            }
+            
+            /* Header First/Last Radius */
+            #modern_report .t-Report-colHead:first-child {
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
+            }
+            
+            #modern_report .t-Report-colHead:last-child {
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+            }
+            
+            /* Rows */
+            #modern_report .t-Report-report tbody tr {
+                background: white;
+                transition: 0.3s;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            }
+            
+            /* Rows Links */
+            #modern_report .t-Report-report tbody tr a{
+                color: rgb(0, 48, 65);
+                text-decoration: none;
+                font-weight: 600;
+            }
+            
+            #modern_report .t-Report-report tbody tr a:hover{
+                color: rgb(0, 119, 255);
+            }
+            
+            /* Hover Effect */
+            #modern_report .t-Report-report tbody tr:hover {
+                transform: scale(1.01);
+                background: #f1f5f9;
+            }
+            
+            /* Cells */
+            #modern_report .t-Report-cell {
+                padding: 16px;
+                border: none;
+                font-size: 14px;
+                color: #334155;
+            }
+            
+            /* First Cell Radius */
+            #modern_report .t-Report-cell:first-child {
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
+            }
+            
+            /* Last Cell Radius */
+            #modern_report .t-Report-cell:last-child {
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+            }
+            
+            /* Pagination */
+            #modern_report .t-Report-pagination {
+                margin-top: 15px;
+                text-align: center;
+            }
+            
+            /* Links */
+            #modern_report a {
+                color: rgb(169, 234, 255);
+                text-decoration: none;
+                font-weight: 600;
+            }
+            
+            #modern_report a:hover {
+                color: #9db7ff;
+            }
+            
+            #modern_report,
+            #modern_report .t-Region-body,
+            #modern_report .t-Report,
+            #modern_report .t-Report-wrap,
+            #modern_report .t-Report-tableWrap {
+                border: none !important;
+                box-shadow: none !important;
+                background: transparent !important;
+            }
+            
+            /* Remove table borders */
+            #modern_report table,
+            #modern_report th,
+            #modern_report td {
+                border: none !important;
+            }
+            
+            /* Remove outer gray line */
+            #modern_report .t-Report-report {
+                border: none !important;
+                outline: none !important;
+            }
+            
+            
+            /* ========================================================== */
+            /* 1. STANDARD FORM FIELDS (TEXT, TEL, EMAIL, SELECT, ETC.)    */
+            /* ========================================================== */
+            
+            
+            
+            .t-Form-fieldContainer input[type="text"],
+            .t-Form-fieldContainer input[type="tel"],
+            .t-Form-fieldContainer input[type="email"],
+            .t-Form-fieldContainer input[type="date"],
+            .t-Form-fieldContainer textarea,
+            .apex-item-text,
+            .apex-item-textarea {
+                background-color: rgb(232, 244, 255)  !important; 
+                border-radius: 10px !important; /* Consistent 10px roundness */
+                border: 1px solid rgba(232, 244, 255, 0.705) !important;
+                transition: all 0.3s ease !important;
+            }
+            
+            .t-Form-fieldContainer select,
+            .apex-item-select {
+                background-color: rgb(232, 244, 255)  !important; 
+                border-radius: 10px !important;
+            }
+            
+            .t-Form-label::before{
+                background-color: rgb(232, 244, 255)  !important; 
+                border: none;
+                background: transparent;
+            }
+            
+            .t-Form-label:hover::before {
+                background-color: rgb(232, 244, 255)  !important; 
+            }
+            
+            .apex-item-file {
+                border-radius: 10px !important;
+                transition: all 0.3s ease !important;
+            }
+            .apex-item-file:hover {
+                border-color: #0563bb !important;
+                background-color: #f8fafc !important;
+            }
+            
+            .apex-item-group--datepicker,
+            .apex-item-group.apex-item-group--file {
+                display: inline-flex !important;
+                width: 100% !important;
+                align-items: stretch !important;
+                gap: 0 !important;
+            }
+            
+            /* Left side of the date component (Text Field) */
+            .apex-item-group--datepicker input.apex-item-text,
+            input.apex-item-datepicker {
+                background-color: rgb(232, 244, 255)  !important; 
+                border-top-left-radius: 10px !important;
+                border-bottom-left-radius: 10px !important;
+                border-top-right-radius: 0px !important;
+                border-bottom-right-radius: 0px !important;
+                border-right: none !important; 
+            }
+            
+            /* Right side of the date component (Calendar Button) */
+            .apex-item-group--datepicker .a-Button--calendar,
+            .apex-item-group--datepicker .apex-item-datepicker-btn,
+            .a-Button--calendar {
+                border-top-left-radius: 0px !important;
+                border-bottom-left-radius: 0px !important;
+                border-top-right-radius: 10px !important; /* Perfectly matches the 10px layout roundness */
+                border-bottom-right-radius: 10px !important;
+                border: 1px solid #cbd5e1 !important;
+                border-left: 1px solid #cbd5e1 !important; 
+                background-color: rgb(232, 244, 255)  !important; 
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                box-shadow: none !important;
+            }
+            
+            /* ========================================================== */
+            /* CUSTOM NAVBAR                                               */
+            /* ========================================================== */
+            
+            .custom-navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            
+                background: rgb(233, 233, 233);
+            
+                padding: 14px 24px;
+            
+                border-radius: 18px;
+            
+                box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            
+                margin-bottom: 20px;
+            }
+            
+            /* Left Links */
+            .nav-left {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            
+            /* Nav Links */
+            .nav-link {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            
+                text-decoration: none;
+            
+                color: #334155;
+            
+                padding: 10px 18px;
+            
+                border-radius: 12px;
+            
+                font-weight: 600;
+            
+                transition: all 0.3s ease;
+            }
+            
+            /* Hover */
+            .nav-link:hover {
+                background: rgb(232, 244, 255);
+                color: #0563bb;
+            }
+            
+            /* Logout Button */
+            .logout-btn {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            
+                background: #ef4444;
+            
+                color: white !important;
+            
+                text-decoration: none;
+            
+                padding: 10px 18px;
+            
+                border-radius: 12px;
+            
+                font-weight: 600;
+            
+                transition: all 0.3s ease;
+            }
+            
+            /* Logout Hover */
+            .logout-btn:hover {
+                background: #dc2626;
+                transform: translateY(-1px);
+            }
+            
+            /* Icons */
+            .custom-navbar .fa {
+                font-size: 14px;
+            }
+            
+            /* Restructured to prevent global layout breaks */
+            [data-header="National Id Image"] img,
+            [data-header="NATIONAL_ID_IMAGE"] img {
+                width: 100% !important;
+                max-width: 300px !important;
+                height: auto !important;
+            }
+            
+            /* Scoped inside #modern_report region container to protect template layouts globally */
+            #modern_report img {
+                width: 250px !important;
+                height: 130px !important;
+                object-fit: cover;
+                border-radius: 10px;
+            }
+            
+            .nav-right {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .user-name {
+                color: #333;
+                font-weight: 600;
+            }
+            
+            /* Make navbar wrap on small screens */
+            .custom-navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap; /* مهم جداً */
+            }
+            
+            /* Mobile & small tablets */
+            @media (max-width: 768px) {
+                .custom-navbar {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 12px;
+                }
+            
+                .nav-left,
+                .nav-right {
+                    width: 100%;
+                    justify-content: flex-start;
+                    flex-wrap: wrap;
+                }
+            
+                .nav-link,
+                .logout-btn {
+                    width: 100%;
+                    justify-content: center;
+                }
+            
+                .user-name {
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+            
+            /* Very small screens (phones) */
+            @media (max-width: 400px) {
+                .nav-link,
+                .logout-btn {
+                    padding: 9px;
+                    font-size: 12px;
+                }
+            
+                .custom-navbar {
+                    padding: 10px;
+                }
+            }
+            
+            
+            /* ========================================================== */
+            /* OPTIMIZED: LARGER INLINE LABELS & WIDER VIEWPORTS ON MOBILE */
+            /* ========================================================== */
+            @media (max-width: 768px) {
+                /* Make the region match the screen edges with minimal layout margins */
+                #modern_report {
+                    padding: 12px 6px !important;
+                }
+            
+                #modern_report img {
+                    width: 100% !important;
+                    max-width: 220px !important;
+                    height: auto !important;
+                    margin-top: 4px;
+                }
+            
+                /* Force block rendering to stretch to full outer width dimensions */
+                #modern_report .t-Report-report, 
+                #modern_report tbody, 
+                #modern_report tr { 
+                    display: block !important; 
+                    width: 100% !important;
+                }
+                
+                /* Safely drop original desktop header alignments */
+                #modern_report .t-Report-colHead {
+                    display: none !important;
+                }
+                
+                /* Expanded card dimensions with larger side margins */
+                #modern_report .t-Report-report tbody tr {
+                    margin-bottom: 22px !important;
+                    border: 1px solid #cbd5e1 !important;
+                    border-radius: 14px !important;
+                    padding: 14px 16px !important; /* Increased internal row card padding */
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+                    background: #ffffff !important;
+                }
+                
+                /* Make cell rows larger and text cleaner to digest */
+                #modern_report .t-Report-cell {
+                    display: flex !important;
+                    justify-content: space-between !important;
+                    align-items: center !important;
+                    text-align: right !important;
+                    padding: 14px 0 !important; /* Larger cell separation gap */
+                    border-bottom: 1px dashed #e2e8f0 !important;
+                    font-size: 15px !important; /* Upgraded text display size */
+                    color: #1e293b !important;
+                }
+                
+                #modern_report .t-Report-cell:last-child {
+                    border-bottom: none !important;
+                }
+            
+                #modern_report .t-Report-cell:first-child,
+                #modern_report .t-Report-cell:last-child {
+                    border-radius: 0 !important;
+                }
+            
+                /* Fixed bold headers for data side-by-side positioning */
+                #modern_report .t-Report-cell::before {
+                    font-size: 15px !important; /* Matches data content size precisely */
+                    font-weight: 700 !important;
+                    color: #001b47 !important;
+                    text-align: left !important;
+                    padding-right: 20px;
+                    white-space: nowrap;
+                }
+            
+                /* Order text strings matching data arrays */
+                #modern_report .t-Report-cell:nth-of-type(1)::before { content: "Position Name"; }
+                #modern_report .t-Report-cell:nth-of-type(2)::before { content: "Company"; }
+                #modern_report .t-Report-cell:nth-of-type(3)::before { content: "Fromdate"; }
+                #modern_report .t-Report-cell:nth-of-type(4)::before { content: "Other Details"; }
+                #modern_report .t-Report-cell:nth-of-type(5)::before { content: "Todate"; }
+                #modern_report .t-Report-cell:nth-of-type(6)::before { content: "Country Name"; }
+            }
+            ```
+    }
+    security {
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region experience (
+        name: Experience
+        title: "&{EXPERIENCE}."
+        type: form
+        source {
+            location: localDatabase
+            tableName: JOB_APPLICATION_EXPERIENCE
+        }
+        layout {
+            sequence: 20
+            parentRegion: @experiencew
+            slot: wizardSubRegions
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--noBorder
+                t-Region--scrollBody
+            ]
+        }
+        edit {
+            enabled: true
+            allowedOperations: [
+                add
+                update
+                delete
+            ]
+        }
+    )
+
+    region experiencew (
+        name: ExperienceW
+        title: "&{EXPERIENCEW}."
+        type: list
+        source {
+            list: @personal-infow
+        }
+        layout {
+            sequence: 20
+            slot: body
+        }
+        appearance {
+            template: @/wizard-container
+            templateOptions: [
+                #DEFAULT#
+                t-Wizard--hideStepsXSmall
+            ]
+        }
+        componentAppearance {
+            listTemplate: @/wizard-progress
+            templateOptions: [
+                #DEFAULT#
+                t-WizardSteps--displayLabels
+            ]
+        }
+    )
+
+    region navbar (
+        name: navbar
+        title: "&{NAVBAR}."
+        type: appTemplateComponent/appliocantNavbar
+        layout {
+            sequence: 10
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        componentAppearance {
+            display: regionOnly
+        }
+    )
+
+    region personal-eperience (
+        name: Personal_Eperience
+        title: "&{PERSONALEPERIENCE}."
+        type: classicReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select app_exp.ID,
+                       app_exp.POSITION_NAME,
+                       app_exp.COMPANY,
+                       C.name as Country_name,
+                       app_exp.OTHER_DETAILS,
+                       app_exp.FROMDATE,
+                       app_exp.TODATE
+                  from JOB_APPLICATION_EXPERIENCE app_exp
+                  join COUNTRY C on c.id = app_exp.COUNTRY_ID
+                  
+                  where personal_id = :APP_USER_PERS_ID;
+                ```
+        }
+        layout {
+            sequence: 10
+            parentRegion: @experiencew
+            slot: wizardSubRegions
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--removeHeader js-removeLandmark
+                t-Region--noBorder
+                t-Region--scrollBody
+            ]
+        }
+        advanced {
+            htmlDomId: modern_report
+        }
+        componentAppearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Report--altRowsDefault
+                t-Report--rowHighlight
+            ]
+        }
+
+        column COMPANY (
+            reportColumnQueryId: 3
+            derivedColumn: N
+            heading {
+                heading: "&{COMPANY}."
+                alignment: center
+            }
+            layout {
+                sequence: 30
+                columnAlignment: center
+            }
+        )
+
+        column COUNTRY_NAME (
+            reportColumnQueryId: 4
+            derivedColumn: N
+            heading {
+                heading: "&{COUNTRY_NAME}."
+                alignment: center
+            }
+            layout {
+                sequence: 60
+                columnAlignment: center
+            }
+        )
+
+        column FROMDATE (
+            reportColumnQueryId: 6
+            derivedColumn: N
+            heading {
+                heading: From Date
+                alignment: center
+            }
+            layout {
+                sequence: 40
+                columnAlignment: center
+            }
+        )
+
+        column ID (
+            reportColumnQueryId: 1
+            derivedColumn: N
+            type: hidden
+            layout {
+                sequence: 10
+            }
+        )
+
+        column OTHER_DETAILS (
+            reportColumnQueryId: 5
+            derivedColumn: N
+            heading {
+                heading: "&{OTHER_DETAILS}."
+                alignment: center
+            }
+            layout {
+                sequence: 70
+                columnAlignment: center
+            }
+        )
+
+        column POSITION_NAME (
+            reportColumnQueryId: 2
+            derivedColumn: N
+            heading {
+                heading: "&{POSITION_NAME}."
+                alignment: center
+            }
+            layout {
+                sequence: 20
+                columnAlignment: center
+            }
+        )
+
+        column TODATE (
+            reportColumnQueryId: 7
+            derivedColumn: N
+            heading {
+                heading: To Date
+                alignment: center
+            }
+            layout {
+                sequence: 50
+                columnAlignment: center
+            }
+        )
+
+    )
+
+    pageItem P123_COMPANY (
+        type: textField
+        label {
+            label: "&{COMPANY}."
+            alignment: left
+        }
+        layout {
+            sequence: 30
+            region: @experience
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            width: 60
+        }
+        source {
+            formRegion: @experience
+            column: COMPANY
+            dataType: clob
+        }
+    )
+
+    pageItem P123_COUNTRY_ID (
+        type: selectList
+        label {
+            label: "&{COUNTRY}."
+            alignment: left
+        }
+        lov {
+            type: sharedComponent
+            lov: @country-name
+        }
+        layout {
+            sequence: 40
+            region: @experience
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        source {
+            formRegion: @experience
+            column: COUNTRY_ID
+            dataType: number
+        }
+    )
+
+    pageItem P123_EXP_CHECK (
+        type: hidden
+        layout {
+            sequence: 40
+            slot: body
+        }
+    )
+
+    pageItem P123_FROMDATE (
+        type: datePicker
+        label {
+            label: From Date
+            alignment: left
+        }
+        layout {
+            sequence: 50
+            region: @experience
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 255
+        }
+        source {
+            formRegion: @experience
+            column: FROMDATE
+            dataType: date
+        }
+    )
+
+    pageItem P123_ID (
+        type: hidden
+        layout {
+            sequence: 10
+            region: @experience
+            slot: regionBody
+        }
+        source {
+            formRegion: @experience
+            column: ID
+            dataType: number
+            queryOnly: true
+            primaryKey: true
+        }
+        security {
+            sessionStateProtection: checksumRequiredSessionLevel
+        }
+    )
+
+    pageItem P123_OTHER_DETAILS (
+        type: textarea
+        label {
+            label: "&{OTHER_DETAILS}."
+            alignment: left
+        }
+        layout {
+            sequence: 70
+            region: @experience
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 60
+            height: 4
+        }
+        source {
+            formRegion: @experience
+            column: OTHER_DETAILS
+            dataType: clob
+        }
+        sessionState {
+            dataType: clob
+        }
+    )
+
+    pageItem P123_PERSONAL_ID (
+        type: hidden
+        layout {
+            sequence: 90
+            region: @experience
+            slot: regionBody
+        }
+        source {
+            formRegion: @experience
+            column: PERSONAL_ID
+            dataType: number
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P123_PERSONAL_ID
+        }
+    )
+
+    pageItem P123_POSITION_NAME (
+        type: textField
+        label {
+            label: "&{POSITION_NAME}."
+            alignment: left
+        }
+        layout {
+            sequence: 20
+            region: @experience
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            width: 60
+        }
+        source {
+            formRegion: @experience
+            column: POSITION_NAME
+            dataType: clob
+        }
+    )
+
+    pageItem P123_TODATE (
+        type: datePicker
+        label {
+            label: To Date
+            alignment: left
+        }
+        layout {
+            sequence: 60
+            region: @experience
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 255
+        }
+        source {
+            formRegion: @experience
+            column: TODATE
+            dataType: varchar2
+        }
+    )
+
+    button cancel (
+        buttonName: CANCEL
+        label: "&{CANCEL}."
+        layout {
+            sequence: 10
+            region: @experience
+            slot: close
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 1
+            }
+            warnOnUnsavedChanges: doNotCheck
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    button finish (
+        buttonName: FINISH_1
+        label: "&{ADD}."
+        layout {
+            sequence: 10
+            region: @experience
+            slot: create
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: insert
+        }
+    )
+
+    button finish-2 (
+        buttonName: FINISH
+        label: "&{FINISH}."
+        layout {
+            sequence: 10
+            region: @experiencew
+            slot: next
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+        }
+    )
+
+    button fresh-grad (
+        buttonName: Fresh_grad
+        label: I Am Fresh Graduate
+        layout {
+            sequence: 20
+            region: @experience
+            slot: edit
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: [
+                #DEFAULT#
+                t-Button--warning
+            ]
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+        }
+    )
+
+    button previous (
+        buttonName: PREVIOUS
+        label: "&{PREVIOUS}."
+        layout {
+            sequence: 20
+            region: @experiencew
+            slot: previous
+        }
+        appearance {
+            buttonTemplate: @/icon
+            templateOptions: #DEFAULT#
+            icon: fa-chevron-left
+        }
+        behavior {
+            executeValidations: false
+            warnOnUnsavedChanges: doNotCheck
+        }
+    )
+
+    button skip-for-now (
+        buttonName: Skip_For_Now
+        label: "&{SKIP_FOR_NOW}."
+        layout {
+            sequence: 10
+            region: @experience
+            slot: edit
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: [
+                #DEFAULT#
+                t-Button--warning
+            ]
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 104
+                action: clearRegions
+            }
+            warnOnUnsavedChanges: doNotCheck
+        }
+    )
+
+    validation comp-val (
+        name: comp_val
+        execution {
+            sequence: 30
+        }
+        validation {
+            type: itemIsNotNull
+            item: P123_COMPANY
+        }
+        error {
+            errorMessage: "&{THE_FIELD_IS_REQUIRED}."
+        }
+        serverSideCondition {
+            whenButtonPressed: @finish
+        }
+    )
+
+    validation country-val (
+        name: country_val
+        execution {
+            sequence: 60
+        }
+        validation {
+            type: itemIsNotNull
+            item: P123_COUNTRY_ID
+        }
+        error {
+            errorMessage: "&{THE_FIELD_IS_REQUIRED}."
+        }
+        serverSideCondition {
+            whenButtonPressed: @finish
+        }
+    )
+
+    validation date-val (
+        name: Date_val
+        execution {
+            sequence: 70
+        }
+        validation {
+            plsqlExpression: :P123_TODATE > :P123_FROMDATE
+        }
+        error {
+            errorMessage: to date must be after from date!
+        }
+    )
+
+    validation exp-val (
+        name: Exp_val
+        execution {
+            sequence: 10
+        }
+        validation {
+            type: itemIsNotZero
+            item: P123_EXP_CHECK
+        }
+        error {
+            errorMessage: "&{ENTER_YOUR_EXPERIENCE_FIRST}."
+        }
+        serverSideCondition {
+            whenButtonPressed: @finish-2
+        }
+    )
+
+    validation fromdate-val (
+        name: fromDate_val
+        execution {
+            sequence: 40
+        }
+        validation {
+            type: itemIsNotNull
+            item: P123_FROMDATE
+        }
+        error {
+            errorMessage: "&{THE_FIELD_IS_REQUIRED}."
+        }
+        serverSideCondition {
+            whenButtonPressed: @finish
+        }
+    )
+
+    validation pos-name-val (
+        name: Pos_name_val
+        execution {
+            sequence: 20
+        }
+        validation {
+            type: itemIsNotNull
+            item: P123_POSITION_NAME
+        }
+        error {
+            errorMessage: "&{THE_FIELD_IS_REQUIRED}."
+        }
+        serverSideCondition {
+            whenButtonPressed: @finish
+        }
+    )
+
+    validation todate-val (
+        name: toDate_val
+        execution {
+            sequence: 50
+        }
+        validation {
+            type: itemIsNotNull
+            item: P123_TODATE
+        }
+        error {
+            errorMessage: "&{THE_FIELD_IS_REQUIRED}."
+        }
+        serverSideCondition {
+            whenButtonPressed: @finish
+        }
+    )
+
+    process exp-check (
+        name: Exp_Check
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                BEGIN
+                
+                    SELECT 1
+                    INTO :P123_EXP_CHECK
+                    FROM JOB_APPLICATION_EXPERIENCE
+                    WHERE personal_id = :APP_USER_PERS_ID
+                    FETCH FIRST 1 ROW ONLY;
+                
+                EXCEPTION
+                    WHEN NO_DATA_FOUND THEN
+                        :P123_EXP_CHECK := 0;
+                END;
+                ```
+        }
+        execution {
+            sequence: 20
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 351146892297910054
+        }
+    )
+
+    process logout-process (
+        name: logout Process
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                    APEX_UTIL.SET_SESSION_STATE('APP_USER_ACC_ID', NULL);
+                    APEX_UTIL.SET_SESSION_STATE('APP_USER_PERS_ID', NULL);
+                    -- apex_authentication.logout;
+                end;
+                ```
+        }
+        execution {
+            sequence: 60
+        }
+        advanced {
+            executionMappingIdentifier: 22280936635132377
+        }
+        serverSideCondition {
+            type: request=Value
+            value: LOGOUT
+        }
+    )
+
+    process personal-check-flag-after-finish (
+        name: PERSONAL_CHECK_FLAG_AFTER_FINISH
+        type: executeCode
+        source {
+            plsqlCode: :PERSONAL_CHECK := 1;
+        }
+        execution {
+            sequence: 50
+        }
+        advanced {
+            executionMappingIdentifier: 30352278047074628
+        }
+    )
+
+    process process-form-experience (
+        name: Process form Experience
+        type: formAutoRowProcessing
+        formRegion: @experience
+        execution {
+            sequence: 30
+        }
+        advanced {
+            executionMappingIdentifier: 351166808273918373
+        }
+    )
+
+    process process-form-experience-fresh-grad (
+        name: Process form Experience Fresh Grad
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                declare
+                
+                v_exp_check number;
+                v_country_id number;
+                
+                begin
+                
+                if :APP_USER_PERS_ID IS NOT NULL THEN
+                    SELECT a.COUNTRY_ID
+                    INTO v_country_id
+                        FROM PERSONAL_INFO pi
+                        JOIN ACCOUNT a
+                            ON a.ID = pi.ACCOUNT_ID
+                        WHERE pi.ID = :APP_USER_PERS_ID;
+                
+                    select count(*) into v_exp_check from JOB_APPLICATION_EXPERIENCE where personal_id = :APP_USER_PERS_ID;
+                END IF;
+                
+                if v_exp_check > 0 then
+                    raise_application_error(-20200, 'you already added experience!');
+                end if;
+                
+                insert into JOB_APPLICATION_EXPERIENCE(POSITION_NAME, COMPANY, FROMDATE, OTHER_DETAILS, COUNTRY_ID, PERSONAL_ID, TODATE)Values('fresh grad', 'N/A', sysdate, null, v_country_id, :APP_USER_PERS_ID, sysdate);
+                
+                
+                end;
+                ```
+        }
+        execution {
+            sequence: 40
+        }
+        advanced {
+            executionMappingIdentifier: 57701978896386128
+        }
+        serverSideCondition {
+            whenButtonPressed: @fresh-grad
+        }
+    )
+
+    process set-p-id (
+        name: set_p_id
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                    :P123_PERSONAL_ID := :APP_USER_PERS_ID;
+                
+                END;
+                ```
+        }
+        execution {
+            sequence: 10
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 351145904881909239
+        }
+    )
+
+    branch (
+        name: logout process
+        execution {
+            sequence: 30
+        }
+        behavior {
+            target: {
+                page: 9999
+            }
+        }
+        serverSideCondition {
+            type: request=Value
+            value: LOGOUT
+        }
+    )
+
+    branch (
+        name: Go To Page 122
+        execution {
+            sequence: 10
+            point: validating
+        }
+        behavior {
+            target: {
+                page: 121
+            }
+        }
+        serverSideCondition {
+            whenButtonPressed: @previous
+        }
+    )
+
+    branch (
+        name: Go To Page Home
+        execution {
+            sequence: 1
+        }
+        behavior {
+            target: {
+                page: 104
+            }
+        }
+        serverSideCondition {
+            whenButtonPressed: @finish-2
+        }
+    )
+
+)

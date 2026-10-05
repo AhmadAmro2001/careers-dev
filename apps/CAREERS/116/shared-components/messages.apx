@@ -1,0 +1,3773 @@
+textMessage ACCOUNTS (
+    message {
+        text: Accounts
+        language: ar
+    }
+)
+
+textMessage ACCOUNTS (
+    message {
+        text: Accounts
+        language: en
+    }
+)
+
+textMessage ACCOUNT_ID (
+    message {
+        text: Account Id
+        language: ar
+    }
+)
+
+textMessage ACCOUNT_ID (
+    message {
+        text: Account Id
+        language: en
+    }
+)
+
+textMessage ACCOUNT_ID_1 (
+    message {
+        text: Account ID
+        language: ar
+    }
+)
+
+textMessage ACCOUNT_ID_1 (
+    message {
+        text: Account ID
+        language: en
+    }
+)
+
+textMessage ACCREG (
+    message {
+        text: Acc_reg
+        language: ar
+    }
+)
+
+textMessage ACCREG (
+    message {
+        text: Acc_reg
+        language: en
+    }
+)
+
+textMessage ADD (
+    message {
+        text: Add
+        language: ar
+    }
+)
+
+textMessage ADD (
+    message {
+        text: Add
+        language: en
+    }
+)
+
+textMessage ADDOTHERCERTIFICATES (
+    message {
+        text: add_other_certificates
+        language: ar
+    }
+)
+
+textMessage ADDOTHERCERTIFICATES (
+    message {
+        text: add_other_certificates
+        language: en
+    }
+)
+
+textMessage ADDRESS (
+    message {
+        text: Address
+        language: ar
+    }
+)
+
+textMessage ADDRESS (
+    message {
+        text: Address
+        language: en
+    }
+)
+
+textMessage ADD_CERTIFICATE (
+    message {
+        text: Add Certificate
+        language: ar
+    }
+)
+
+textMessage ADD_CERTIFICATE (
+    message {
+        text: Add Certificate
+        language: en
+    }
+)
+
+textMessage ADD_EDUCATION (
+    message {
+        text: Add Education
+        language: ar
+    }
+)
+
+textMessage ADD_EDUCATION (
+    message {
+        text: Add Education
+        language: en
+    }
+)
+
+textMessage ADD_OTHER_CERTIFICATES (
+    message {
+        text: Add Other Certificates
+        language: ar
+    }
+)
+
+textMessage ADD_OTHER_CERTIFICATES (
+    message {
+        text: Add Other Certificates
+        language: en
+    }
+)
+
+textMessage ALREADY_HAVE_ACCOUNT (
+    message {
+        text: Already have account?
+        language: ar
+    }
+)
+
+textMessage ALREADY_HAVE_ACCOUNT (
+    message {
+        text: Already have account?
+        language: en
+    }
+)
+
+textMessage APPLICATION (
+    message {
+        text: Application
+        language: ar
+    }
+)
+
+textMessage APPLICATION (
+    message {
+        text: Application
+        language: en
+    }
+)
+
+textMessage APPLICATIONS (
+    message {
+        text: Applications
+        language: ar
+    }
+)
+
+textMessage APPLICATIONS (
+    message {
+        text: Applications
+        language: en
+    }
+)
+
+textMessage APPLICATION_DETAILS (
+    message {
+        text: Application Details
+        language: ar
+    }
+)
+
+textMessage APPLICATION_DETAILS (
+    message {
+        text: Application Details
+        language: en
+    }
+)
+
+textMessage APPLICATION_ID (
+    message {
+        text: Application Id
+        language: ar
+    }
+)
+
+textMessage APPLICATION_ID (
+    message {
+        text: Application Id
+        language: en
+    }
+)
+
+textMessage APPLICATION_INFO (
+    message {
+        text: Application Info
+        language: ar
+    }
+)
+
+textMessage APPLICATION_INFO (
+    message {
+        text: Application Info
+        language: en
+    }
+)
+
+textMessage APPLY (
+    message {
+        text: Apply
+        language: ar
+    }
+)
+
+textMessage APPLY (
+    message {
+        text: Apply
+        language: en
+    }
+)
+
+textMessage APPLY_CHANGES (
+    message {
+        text: Apply Changes
+        language: ar
+    }
+)
+
+textMessage APPLY_CHANGES (
+    message {
+        text: Apply Changes
+        language: en
+    }
+)
+
+textMessage APPLY_NOW (
+    message {
+        text: Apply Now
+        language: ar
+    }
+)
+
+textMessage APPLY_NOW (
+    message {
+        text: Apply Now
+        language: en
+    }
+)
+
+textMessage APPLY_TEST (
+    message {
+        text: Apply test
+        language: ar
+    }
+)
+
+textMessage APPLY_TEST (
+    message {
+        text: Apply test
+        language: en
+    }
+)
+
+textMessage APPLY_TO_JOB (
+    message {
+        text: Apply To Job
+        language: ar
+    }
+)
+
+textMessage APPLY_TO_JOB (
+    message {
+        text: Apply To Job
+        language: en
+    }
+)
+
+textMessage ARCHIVED (
+    message {
+        text: Archived
+        language: ar
+    }
+)
+
+textMessage ARCHIVED (
+    message {
+        text: Archived
+        language: en
+    }
+)
+
+textMessage ARCHIVE_APP (
+    message {
+        text: Archive App
+        language: ar
+    }
+)
+
+textMessage ARCHIVE_APP (
+    message {
+        text: Archive App
+        language: en
+    }
+)
+
+textMessage ARCHIVE_VACANCY (
+    message {
+        text: Archive Vacancy
+        language: ar
+    }
+)
+
+textMessage ARCHIVE_VACANCY (
+    message {
+        text: Archive Vacancy
+        language: en
+    }
+)
+
+textMessage AREA (
+    message {
+        text: Area
+        language: ar
+    }
+)
+
+textMessage AREA (
+    message {
+        text: Area
+        language: en
+    }
+)
+
+textMessage BREADCRUMB (
+    message {
+        text: Breadcrumb
+        language: ar
+    }
+)
+
+textMessage BREADCRUMB (
+    message {
+        text: Breadcrumb
+        language: en
+    }
+)
+
+textMessage BUTTONS (
+    message {
+        text: Buttons
+        language: ar
+    }
+)
+
+textMessage BUTTONS (
+    message {
+        text: Buttons
+        language: en
+    }
+)
+
+textMessage CANCEL (
+    message {
+        text: Cancel
+        language: ar
+    }
+)
+
+textMessage CANCEL (
+    message {
+        text: Cancel
+        language: en
+    }
+)
+
+textMessage CAREERS (
+    message {
+        text: careers
+        language: ar
+    }
+)
+
+textMessage CAREERS (
+    message {
+        text: careers
+        language: en
+    }
+)
+
+textMessage CAREERS_1 (
+    message {
+        text: Careers
+        language: ar
+    }
+)
+
+textMessage CAREERS_1 (
+    message {
+        text: Careers
+        language: en
+    }
+)
+
+textMessage CAREERS_LOG_IN (
+    message {
+        text: careers - Log In
+        language: ar
+    }
+)
+
+textMessage CAREERS_LOG_IN (
+    message {
+        text: careers - Log In
+        language: en
+    }
+)
+
+textMessage CATEGORY (
+    message {
+        text: Category
+        language: ar
+    }
+)
+
+textMessage CATEGORY (
+    message {
+        text: Category
+        language: en
+    }
+)
+
+textMessage CATEGORY_ID (
+    message {
+        text: Category Id
+        language: ar
+    }
+)
+
+textMessage CATEGORY_ID (
+    message {
+        text: Category Id
+        language: en
+    }
+)
+
+textMessage CATEGORY_NAME (
+    message {
+        text: Category Name
+        language: ar
+    }
+)
+
+textMessage CATEGORY_NAME (
+    message {
+        text: Category Name
+        language: en
+    }
+)
+
+textMessage CERTIFICATE_DATE (
+    message {
+        text: Certificate Date
+        language: ar
+    }
+)
+
+textMessage CERTIFICATE_DATE (
+    message {
+        text: Certificate Date
+        language: en
+    }
+)
+
+textMessage CERTIFICATE_NAME (
+    message {
+        text: Certificate Name
+        language: ar
+    }
+)
+
+textMessage CERTIFICATE_NAME (
+    message {
+        text: Certificate Name
+        language: en
+    }
+)
+
+textMessage CERTIFICATE_NAME_IS_REQUIRED (
+    message {
+        text: Certificate name is required!
+        language: ar
+    }
+)
+
+textMessage CERTIFICATE_NAME_IS_REQUIRED (
+    message {
+        text: Certificate name is required!
+        language: en
+    }
+)
+
+textMessage CITY (
+    message {
+        text: City
+        language: ar
+    }
+)
+
+textMessage CITY (
+    message {
+        text: City
+        language: en
+    }
+)
+
+textMessage CLEAR (
+    message {
+        text: Clear
+        language: ar
+    }
+)
+
+textMessage CLEAR (
+    message {
+        text: Clear
+        language: en
+    }
+)
+
+textMessage CLEAR_CERTIFICATES (
+    message {
+        text: Clear Certificates
+        language: ar
+    }
+)
+
+textMessage CLEAR_CERTIFICATES (
+    message {
+        text: Clear Certificates
+        language: en
+    }
+)
+
+textMessage CODE (
+    message {
+        text: Code
+        language: ar
+    }
+)
+
+textMessage CODE (
+    message {
+        text: Code
+        language: en
+    }
+)
+
+textMessage COLUMN_HEADING (
+    message {
+        text: <input type="checkbox" id="check_all_docs" aria-label="Select all documents">
+        language: ar
+    }
+)
+
+textMessage COLUMN_HEADING (
+    message {
+        text: <input type="checkbox" id="check_all_docs" aria-label="Select all documents">
+        language: en
+    }
+)
+
+textMessage COLUMN_HTML_EXPRESSION (
+    message {
+        text:
+            ```
+            <div class="vacancy-card">
+            
+                <div class="vacancy-card-header">
+                    <div>
+                        <h2 class="vacancy-title">%TITLE</h2>
+            
+                        <div class="vacancy-sub-info">
+                            <span>
+                                <i class="fa fa-calendar-o"></i>
+                                Posted: %POST_DATE
+                            </span>
+            
+                            <span>
+                                <i class="fa fa-user"></i>
+                                By: %NAME
+                            </span>
+                        </div>
+                    </div>
+            
+                    <span class="vacancy-status %STATUS_CLASS">
+                        %VACANCY_STATUS
+                    </span>
+                </div>
+            
+                <div class="vacancy-info-grid">
+            
+                    <div class="vacancy-info-box">
+                        <span class="info-label">Category</span>
+                        <span class="info-value">%CATEGORY_NAME</span>
+                    </div>
+            
+                    <div class="vacancy-info-box">
+                        <span class="info-label">Minimum Education Level</span>
+                        <span class="info-value">%MINIMUM_EDUCATION_LEVEL_ID</span>
+                    </div>
+            
+                    <div class="vacancy-info-box">
+                        <span class="info-label">Ministry Exclusive</span>
+                        <span class="info-value">%MINISTRY_EXCLUSIVE</span>
+                    </div>
+            
+                    <div class="vacancy-info-box">
+                        <span class="info-label">Created On</span>
+                        <span class="info-value">%CREATION_DATE</span>
+                    </div>
+            
+                    <div class="vacancy-info-box">
+                        <span class="info-label">Last Updated</span>
+                        <span class="info-value">%LAST_UPDATE_DATE</span>
+                    </div>
+            
+                    <div class="vacancy-info-box">
+                        <span class="info-label">Updated By</span>
+                        <span class="info-value">%LAST_UPDATED_BY</span>
+                    </div>
+            
+                </div>
+            
+                <div class="vacancy-section">
+                    <h3>
+                        <i class="fa fa-info-circle"></i>
+                        Job Summary
+                    </h3>
+            
+                    <div class="vacancy-html-content">
+                        %SUMMARY
+                    </div>
+                </div>
+            
+                <div class="vacancy-section">
+                    <h3>
+                        <i class="fa fa-tasks"></i>
+                        Responsibilities
+                    </h3>
+            
+                    <div class="vacancy-html-content">
+                        %RESPONSIBILITIES
+                    </div>
+                </div>
+            
+                <div class="vacancy-section">
+                    <h3>
+                        <i class="fa fa-check-square-o"></i>
+                        Required Qualifications
+                    </h3>
+            
+                    <div class="vacancy-html-content">
+                        %QUALIFICATIONS
+                    </div>
+                </div>
+            
+            </div>
+            ```
+        language: ar
+    }
+)
+
+textMessage COLUMN_HTML_EXPRESSION (
+    message {
+        text:
+            ```
+            <div class="vacancy-card">
+            
+                <div class="vacancy-card-header">
+                    <div>
+                        <h2 class="vacancy-title">%TITLE</h2>
+            
+                        <div class="vacancy-sub-info">
+                            <span>
+                                <i class="fa fa-calendar-o"></i>
+                                Posted: %POST_DATE
+                            </span>
+            
+                            <span>
+                                <i class="fa fa-user"></i>
+                                By: %NAME
+                            </span>
+                        </div>
+                    </div>
+            
+                    <span class="vacancy-status %STATUS_CLASS">
+                        %VACANCY_STATUS
+                    </span>
+                </div>
+            
+                <div class="vacancy-info-grid">
+            
+                    <div class="vacancy-info-box">
+                        <span class="info-label">Category</span>
+                        <span class="info-value">%CATEGORY_NAME</span>
+                    </div>
+            
+                    <div class="vacancy-info-box">
+                        <span class="info-label">Minimum Education Level</span>
+                        <span class="info-value">%MINIMUM_EDUCATION_LEVEL_ID</span>
+                    </div>
+            
+                    <div class="vacancy-info-box">
+                        <span class="info-label">Ministry Exclusive</span>
+                        <span class="info-value">%MINISTRY_EXCLUSIVE</span>
+                    </div>
+            
+                    <div class="vacancy-info-box">
+                        <span class="info-label">Created On</span>
+                        <span class="info-value">%CREATION_DATE</span>
+                    </div>
+            
+                    <div class="vacancy-info-box">
+                        <span class="info-label">Last Updated</span>
+                        <span class="info-value">%LAST_UPDATE_DATE</span>
+                    </div>
+            
+                    <div class="vacancy-info-box">
+                        <span class="info-label">Updated By</span>
+                        <span class="info-value">%LAST_UPDATED_BY</span>
+                    </div>
+            
+                </div>
+            
+                <div class="vacancy-section">
+                    <h3>
+                        <i class="fa fa-info-circle"></i>
+                        Job Summary
+                    </h3>
+            
+                    <div class="vacancy-html-content">
+                        %SUMMARY
+                    </div>
+                </div>
+            
+                <div class="vacancy-section">
+                    <h3>
+                        <i class="fa fa-tasks"></i>
+                        Responsibilities
+                    </h3>
+            
+                    <div class="vacancy-html-content">
+                        %RESPONSIBILITIES
+                    </div>
+                </div>
+            
+                <div class="vacancy-section">
+                    <h3>
+                        <i class="fa fa-check-square-o"></i>
+                        Required Qualifications
+                    </h3>
+            
+                    <div class="vacancy-html-content">
+                        %QUALIFICATIONS
+                    </div>
+                </div>
+            
+            </div>
+            ```
+        language: en
+    }
+)
+
+textMessage COMPANY (
+    message {
+        text: Company
+        language: ar
+    }
+)
+
+textMessage COMPANY (
+    message {
+        text: Company
+        language: en
+    }
+)
+
+textMessage COMPLETE_YOUR_PERSONAL_INFO (
+    message {
+        text: Complete Your Personal Info
+        language: ar
+    }
+)
+
+textMessage COMPLETE_YOUR_PERSONAL_INFO (
+    message {
+        text: Complete Your Personal Info
+        language: en
+    }
+)
+
+textMessage COMPLETE_YOUR_PERSONAL_INFO_FIRST (
+    message {
+        text: Complete Your Personal Info First
+        language: ar
+    }
+)
+
+textMessage COMPLETE_YOUR_PERSONAL_INFO_FIRST (
+    message {
+        text: Complete Your Personal Info First
+        language: en
+    }
+)
+
+textMessage CONFIRM_PASSWORD (
+    message {
+        text: Confirm Password
+        language: ar
+    }
+)
+
+textMessage CONFIRM_PASSWORD (
+    message {
+        text: Confirm Password
+        language: en
+    }
+)
+
+textMessage COUNTRY (
+    message {
+        text: "Country "
+        language: ar
+    }
+)
+
+textMessage COUNTRY (
+    message {
+        text: "Country "
+        language: en
+    }
+)
+
+textMessage COUNTRY_1 (
+    message {
+        text: Country
+        language: ar
+    }
+)
+
+textMessage COUNTRY_1 (
+    message {
+        text: Country
+        language: en
+    }
+)
+
+textMessage COUNTRY_ID (
+    message {
+        text: Country Id
+        language: ar
+    }
+)
+
+textMessage COUNTRY_ID (
+    message {
+        text: Country Id
+        language: en
+    }
+)
+
+textMessage COUNTRY_NAME (
+    message {
+        text: Country Name
+        language: ar
+    }
+)
+
+textMessage COUNTRY_NAME (
+    message {
+        text: Country Name
+        language: en
+    }
+)
+
+textMessage COUNTRY_PHONE_CODE (
+    message {
+        text: "Country Phone Code "
+        language: ar
+    }
+)
+
+textMessage COUNTRY_PHONE_CODE (
+    message {
+        text: "Country Phone Code "
+        language: en
+    }
+)
+
+textMessage COUNTRY_PHONE_CODE_1 (
+    message {
+        text: Country Phone Code
+        language: ar
+    }
+)
+
+textMessage COUNTRY_PHONE_CODE_1 (
+    message {
+        text: Country Phone Code
+        language: en
+    }
+)
+
+textMessage CREATE (
+    message {
+        text: Create
+        language: ar
+    }
+)
+
+textMessage CREATE (
+    message {
+        text: Create
+        language: en
+    }
+)
+
+textMessage CREATED_BY (
+    message {
+        text: Created By
+        language: ar
+    }
+)
+
+textMessage CREATED_BY (
+    message {
+        text: Created By
+        language: en
+    }
+)
+
+textMessage CREATE_NEW_ACCOUNT (
+    message {
+        text: Create new account?
+        language: ar
+    }
+)
+
+textMessage CREATE_NEW_ACCOUNT (
+    message {
+        text: Create new account?
+        language: en
+    }
+)
+
+textMessage DASHBOARD (
+    message {
+        text: Dashboard
+        language: ar
+    }
+)
+
+textMessage DASHBOARD (
+    message {
+        text: Dashboard
+        language: en
+    }
+)
+
+textMessage DATE_IS_REQUIRED (
+    message {
+        text: Date is required!
+        language: ar
+    }
+)
+
+textMessage DATE_IS_REQUIRED (
+    message {
+        text: Date is required!
+        language: en
+    }
+)
+
+textMessage DATE_OF_ACQUISITION (
+    message {
+        text: Date Of Acquisition
+        language: ar
+    }
+)
+
+textMessage DATE_OF_ACQUISITION (
+    message {
+        text: Date Of Acquisition
+        language: en
+    }
+)
+
+textMessage DATE_OF_BIRTH (
+    message {
+        text: Date Of Birth
+        language: ar
+    }
+)
+
+textMessage DATE_OF_BIRTH (
+    message {
+        text: Date Of Birth
+        language: en
+    }
+)
+
+textMessage DATE_TIME (
+    message {
+        text: Date Time
+        language: ar
+    }
+)
+
+textMessage DATE_TIME (
+    message {
+        text: Date Time
+        language: en
+    }
+)
+
+textMessage DELETE (
+    message {
+        text: Delete
+        language: ar
+    }
+)
+
+textMessage DELETE (
+    message {
+        text: Delete
+        language: en
+    }
+)
+
+textMessage DETAILS_CARD (
+    message {
+        text: Details Card
+        language: ar
+    }
+)
+
+textMessage DETAILS_CARD (
+    message {
+        text: Details Card
+        language: en
+    }
+)
+
+textMessage DOWNLOAD (
+    message {
+        text: Download
+        language: ar
+    }
+)
+
+textMessage DOWNLOAD (
+    message {
+        text: Download
+        language: en
+    }
+)
+
+textMessage DOWNLOAD_PAGE (
+    message {
+        text: download page
+        language: ar
+    }
+)
+
+textMessage DOWNLOAD_PAGE (
+    message {
+        text: download page
+        language: en
+    }
+)
+
+textMessage DOWNLOAD_RESUMES (
+    message {
+        text: Download Resumes
+        language: ar
+    }
+)
+
+textMessage DOWNLOAD_RESUMES (
+    message {
+        text: Download Resumes
+        language: en
+    }
+)
+
+textMessage EDIT (
+    message {
+        text: Edit
+        language: ar
+    }
+)
+
+textMessage EDIT (
+    message {
+        text: Edit
+        language: en
+    }
+)
+
+textMessage EDIT_ACCOUNT_DATA (
+    message {
+        text: Edit Account Data
+        language: ar
+    }
+)
+
+textMessage EDIT_ACCOUNT_DATA (
+    message {
+        text: Edit Account Data
+        language: en
+    }
+)
+
+textMessage EDIT_APPLICATIONS (
+    message {
+        text: Edit Applications
+        language: ar
+    }
+)
+
+textMessage EDIT_APPLICATIONS (
+    message {
+        text: Edit Applications
+        language: en
+    }
+)
+
+textMessage EDIT_EDUCATION (
+    message {
+        text: Edit Education
+        language: ar
+    }
+)
+
+textMessage EDIT_EDUCATION (
+    message {
+        text: Edit Education
+        language: en
+    }
+)
+
+textMessage EDIT_EXPERIENCE (
+    message {
+        text: Edit Experience
+        language: ar
+    }
+)
+
+textMessage EDIT_EXPERIENCE (
+    message {
+        text: Edit Experience
+        language: en
+    }
+)
+
+textMessage EDIT_LANGUGE (
+    message {
+        text: Edit Languge
+        language: ar
+    }
+)
+
+textMessage EDIT_LANGUGE (
+    message {
+        text: Edit Languge
+        language: en
+    }
+)
+
+textMessage EDIT_VACANCY (
+    message {
+        text: Edit Vacancy
+        language: ar
+    }
+)
+
+textMessage EDIT_VACANCY (
+    message {
+        text: Edit Vacancy
+        language: en
+    }
+)
+
+textMessage EDUCATION (
+    message {
+        text: Education
+        language: ar
+    }
+)
+
+textMessage EDUCATION (
+    message {
+        text: Education
+        language: en
+    }
+)
+
+textMessage EDUCATIONW (
+    message {
+        text: EducationW
+        language: ar
+    }
+)
+
+textMessage EDUCATIONW (
+    message {
+        text: EducationW
+        language: en
+    }
+)
+
+textMessage EDUCATION_DEGREE (
+    message {
+        text: Education Degree
+        language: ar
+    }
+)
+
+textMessage EDUCATION_DEGREE (
+    message {
+        text: Education Degree
+        language: en
+    }
+)
+
+textMessage EDUCATION_FIELD (
+    message {
+        text: Education Field
+        language: ar
+    }
+)
+
+textMessage EDUCATION_FIELD (
+    message {
+        text: Education Field
+        language: en
+    }
+)
+
+textMessage EDUCATION_GRADE (
+    message {
+        text: Education Grade
+        language: ar
+    }
+)
+
+textMessage EDUCATION_GRADE (
+    message {
+        text: Education Grade
+        language: en
+    }
+)
+
+textMessage EDUCATION_LEVEL (
+    message {
+        text: Education Level
+        language: ar
+    }
+)
+
+textMessage EDUCATION_LEVEL (
+    message {
+        text: Education Level
+        language: en
+    }
+)
+
+textMessage EMAIL (
+    message {
+        text: Email
+        language: ar
+    }
+)
+
+textMessage EMAIL (
+    message {
+        text: Email
+        language: en
+    }
+)
+
+textMessage ENTER_YOUR_EXPERIENCE_FIRST (
+    message {
+        text: Enter Your Experience First!
+        language: ar
+    }
+)
+
+textMessage ENTER_YOUR_EXPERIENCE_FIRST (
+    message {
+        text: Enter Your Experience First!
+        language: en
+    }
+)
+
+textMessage ERROR_MESSAGE (
+    message {
+        text: Insufficient privileges, user is not an Administrator
+        language: ar
+    }
+)
+
+textMessage ERROR_MESSAGE (
+    message {
+        text: Insufficient privileges, user is not an Administrator
+        language: en
+    }
+)
+
+textMessage EXCEL_APPLICATION_REPORT (
+    message {
+        text: Excel Application Report
+        language: ar
+    }
+)
+
+textMessage EXCEL_APPLICATION_REPORT (
+    message {
+        text: Excel Application Report
+        language: en
+    }
+)
+
+textMessage EXCEL_DOWNLOAD (
+    message {
+        text: Excel Download
+        language: ar
+    }
+)
+
+textMessage EXCEL_DOWNLOAD (
+    message {
+        text: Excel Download
+        language: en
+    }
+)
+
+textMessage EXPERIENCE (
+    message {
+        text: Experience
+        language: ar
+    }
+)
+
+textMessage EXPERIENCE (
+    message {
+        text: Experience
+        language: en
+    }
+)
+
+textMessage EXPERIENCEW (
+    message {
+        text: ExperienceW
+        language: ar
+    }
+)
+
+textMessage EXPERIENCEW (
+    message {
+        text: ExperienceW
+        language: en
+    }
+)
+
+textMessage EXPERIENCE_YEARS (
+    message {
+        text: Experience Years
+        language: ar
+    }
+)
+
+textMessage EXPERIENCE_YEARS (
+    message {
+        text: Experience Years
+        language: en
+    }
+)
+
+textMessage EXPORT (
+    message {
+        text: Export
+        language: ar
+    }
+)
+
+textMessage EXPORT (
+    message {
+        text: Export
+        language: en
+    }
+)
+
+textMessage FIELD_IS_REQUIRED (
+    message {
+        text: field is required!
+        language: ar
+    }
+)
+
+textMessage FIELD_IS_REQUIRED (
+    message {
+        text: field is required!
+        language: en
+    }
+)
+
+textMessage FIELD_NAME (
+    message {
+        text: Field Name
+        language: ar
+    }
+)
+
+textMessage FIELD_NAME (
+    message {
+        text: Field Name
+        language: en
+    }
+)
+
+textMessage FILE_NAME (
+    message {
+        text: File Name
+        language: ar
+    }
+)
+
+textMessage FILE_NAME (
+    message {
+        text: File Name
+        language: en
+    }
+)
+
+textMessage FILTER (
+    message {
+        text: Filter
+        language: ar
+    }
+)
+
+textMessage FILTER (
+    message {
+        text: Filter
+        language: en
+    }
+)
+
+textMessage FINISH (
+    message {
+        text: Finish
+        language: ar
+    }
+)
+
+textMessage FINISH (
+    message {
+        text: Finish
+        language: en
+    }
+)
+
+textMessage FIRST_NAME (
+    message {
+        text: First Name
+        language: ar
+    }
+)
+
+textMessage FIRST_NAME (
+    message {
+        text: First Name
+        language: en
+    }
+)
+
+textMessage FROMDATE (
+    message {
+        text: Fromdate
+        language: ar
+    }
+)
+
+textMessage FROMDATE (
+    message {
+        text: Fromdate
+        language: en
+    }
+)
+
+textMessage GENDER (
+    message {
+        text: Gender
+        language: ar
+    }
+)
+
+textMessage GENDER (
+    message {
+        text: Gender
+        language: en
+    }
+)
+
+textMessage GET_VACANCIES (
+    message {
+        text: Get Vacancies
+        language: ar
+    }
+)
+
+textMessage GET_VACANCIES (
+    message {
+        text: Get Vacancies
+        language: en
+    }
+)
+
+textMessage GLOBAL_PAGE (
+    message {
+        text: Global Page
+        language: ar
+    }
+)
+
+textMessage GLOBAL_PAGE (
+    message {
+        text: Global Page
+        language: en
+    }
+)
+
+textMessage GRADE_NAME (
+    message {
+        text: Grade Name
+        language: ar
+    }
+)
+
+textMessage GRADE_NAME (
+    message {
+        text: Grade Name
+        language: en
+    }
+)
+
+textMessage GRADUATION_CERTIFICATE (
+    message {
+        text: Graduation Certificate
+        language: ar
+    }
+)
+
+textMessage GRADUATION_CERTIFICATE (
+    message {
+        text: Graduation Certificate
+        language: en
+    }
+)
+
+textMessage GRADUATION_CERTIFICATE_FILE_NAME (
+    message {
+        text: Graduation Certificate File Name
+        language: ar
+    }
+)
+
+textMessage GRADUATION_CERTIFICATE_FILE_NAME (
+    message {
+        text: Graduation Certificate File Name
+        language: en
+    }
+)
+
+textMessage GRADUATION_YEAR (
+    message {
+        text: Graduation Year
+        language: ar
+    }
+)
+
+textMessage GRADUATION_YEAR (
+    message {
+        text: Graduation Year
+        language: en
+    }
+)
+
+textMessage HOME (
+    message {
+        text: Home
+        language: ar
+    }
+)
+
+textMessage HOME (
+    message {
+        text: Home
+        language: en
+    }
+)
+
+textMessage HOME_1 (
+    message {
+        text: HOME
+        language: ar
+    }
+)
+
+textMessage HOME_1 (
+    message {
+        text: HOME
+        language: en
+    }
+)
+
+textMessage HOME_TELEPHONE (
+    message {
+        text: Home Telephone
+        language: ar
+    }
+)
+
+textMessage HOME_TELEPHONE (
+    message {
+        text: Home Telephone
+        language: en
+    }
+)
+
+textMessage ID (
+    message {
+        text: Id
+        language: ar
+    }
+)
+
+textMessage ID (
+    message {
+        text: Id
+        language: en
+    }
+)
+
+textMessage ID_1 (
+    message {
+        text: ID
+        language: ar
+    }
+)
+
+textMessage ID_1 (
+    message {
+        text: ID
+        language: en
+    }
+)
+
+textMessage IMAGE (
+    message {
+        text: Image
+        language: ar
+    }
+)
+
+textMessage IMAGE (
+    message {
+        text: Image
+        language: en
+    }
+)
+
+textMessage IS_ARCHIVED (
+    message {
+        text: Is Archived
+        language: ar
+    }
+)
+
+textMessage IS_ARCHIVED (
+    message {
+        text: Is Archived
+        language: en
+    }
+)
+
+textMessage JOB_APPLICATION_ID (
+    message {
+        text: Job Application Id
+        language: ar
+    }
+)
+
+textMessage JOB_APPLICATION_ID (
+    message {
+        text: Job Application Id
+        language: en
+    }
+)
+
+textMessage JOB_CATEGORIES (
+    message {
+        text: Job categories
+        language: ar
+    }
+)
+
+textMessage JOB_CATEGORIES (
+    message {
+        text: Job categories
+        language: en
+    }
+)
+
+textMessage JOB_DETAILS (
+    message {
+        text: Job Details
+        language: ar
+    }
+)
+
+textMessage JOB_DETAILS (
+    message {
+        text: Job Details
+        language: en
+    }
+)
+
+textMessage JOB_ID (
+    message {
+        text: Job Id
+        language: ar
+    }
+)
+
+textMessage JOB_ID (
+    message {
+        text: Job Id
+        language: en
+    }
+)
+
+textMessage JOB_SUMMARY (
+    message {
+        text: job summary
+        language: ar
+    }
+)
+
+textMessage JOB_SUMMARY (
+    message {
+        text: job summary
+        language: en
+    }
+)
+
+textMessage JOB_SUMMARY_1 (
+    message {
+        text: Job Summary
+        language: ar
+    }
+)
+
+textMessage JOB_SUMMARY_1 (
+    message {
+        text: Job Summary
+        language: en
+    }
+)
+
+textMessage JOB_SUMMARY_DETAILS (
+    message {
+        text: Job Summary Details
+        language: ar
+    }
+)
+
+textMessage JOB_SUMMARY_DETAILS (
+    message {
+        text: Job Summary Details
+        language: en
+    }
+)
+
+textMessage JOB_TITLE (
+    message {
+        text: Job Title
+        language: ar
+    }
+)
+
+textMessage JOB_TITLE (
+    message {
+        text: Job Title
+        language: en
+    }
+)
+
+textMessage JOB_VACANCIES (
+    message {
+        text: Job Vacancies
+        language: ar
+    }
+)
+
+textMessage JOB_VACANCIES (
+    message {
+        text: Job Vacancies
+        language: en
+    }
+)
+
+textMessage JOIN_DATE (
+    message {
+        text: Join Date
+        language: ar
+    }
+)
+
+textMessage JOIN_DATE (
+    message {
+        text: Join Date
+        language: en
+    }
+)
+
+textMessage LANGUAGE (
+    message {
+        text: Language
+        language: ar
+    }
+)
+
+textMessage LANGUAGE (
+    message {
+        text: Language
+        language: en
+    }
+)
+
+textMessage LANGUAGE_ID (
+    message {
+        text: Language Id
+        language: ar
+    }
+)
+
+textMessage LANGUAGE_ID (
+    message {
+        text: Language Id
+        language: en
+    }
+)
+
+textMessage LANGUAGE_IS_REQUIRED (
+    message {
+        text: language is required!
+        language: ar
+    }
+)
+
+textMessage LANGUAGE_IS_REQUIRED (
+    message {
+        text: language is required!
+        language: en
+    }
+)
+
+textMessage LANGUAGE_LEVEL (
+    message {
+        text: Language Level
+        language: ar
+    }
+)
+
+textMessage LANGUAGE_LEVEL (
+    message {
+        text: Language Level
+        language: en
+    }
+)
+
+textMessage LANGUAGE_LEVEL_ID (
+    message {
+        text: Language Level Id
+        language: ar
+    }
+)
+
+textMessage LANGUAGE_LEVEL_ID (
+    message {
+        text: Language Level Id
+        language: en
+    }
+)
+
+textMessage LAST_NAME (
+    message {
+        text: Last Name
+        language: ar
+    }
+)
+
+textMessage LAST_NAME (
+    message {
+        text: Last Name
+        language: en
+    }
+)
+
+textMessage LAST_UPDATE_DATE (
+    message {
+        text: Last Update Date
+        language: ar
+    }
+)
+
+textMessage LAST_UPDATE_DATE (
+    message {
+        text: Last Update Date
+        language: en
+    }
+)
+
+textMessage LEVEL_NAME (
+    message {
+        text: Level Name
+        language: ar
+    }
+)
+
+textMessage LEVEL_NAME (
+    message {
+        text: Level Name
+        language: en
+    }
+)
+
+textMessage LOGIN (
+    message {
+        text: Login
+        language: ar
+    }
+)
+
+textMessage LOGIN (
+    message {
+        text: Login
+        language: en
+    }
+)
+
+textMessage LOGOUT (
+    message {
+        text: Logout
+        language: ar
+    }
+)
+
+textMessage LOGOUT (
+    message {
+        text: Logout
+        language: en
+    }
+)
+
+textMessage MARITAL_STATUS (
+    message {
+        text: Marital Status
+        language: ar
+    }
+)
+
+textMessage MARITAL_STATUS (
+    message {
+        text: Marital Status
+        language: en
+    }
+)
+
+textMessage MAX_ROW_COUNT_MESSAGE (
+    message {
+        text: The maximum row count for this report is %MAX_ROW_COUNT rows.  Please apply a filter to reduce the number of records in your query.
+        language: ar
+    }
+)
+
+textMessage MAX_ROW_COUNT_MESSAGE (
+    message {
+        text: The maximum row count for this report is %MAX_ROW_COUNT rows.  Please apply a filter to reduce the number of records in your query.
+        language: en
+    }
+)
+
+textMessage MILITARY_STATUS (
+    message {
+        text: Military Status
+        language: ar
+    }
+)
+
+textMessage MILITARY_STATUS (
+    message {
+        text: Military Status
+        language: en
+    }
+)
+
+textMessage MINIMUM_EDUCATION_LEVEL (
+    message {
+        text: Minimum Education Level
+        language: ar
+    }
+)
+
+textMessage MINIMUM_EDUCATION_LEVEL (
+    message {
+        text: Minimum Education Level
+        language: en
+    }
+)
+
+textMessage MOBILE_TELEPHONE (
+    message {
+        text: Mobile Telephone
+        language: ar
+    }
+)
+
+textMessage MOBILE_TELEPHONE (
+    message {
+        text: Mobile Telephone
+        language: en
+    }
+)
+
+textMessage MORE_DETAILS (
+    message {
+        text: More Details
+        language: ar
+    }
+)
+
+textMessage MORE_DETAILS (
+    message {
+        text: More Details
+        language: en
+    }
+)
+
+textMessage MOTHER_FULL_NAME (
+    message {
+        text: Mother Full Name
+        language: ar
+    }
+)
+
+textMessage MOTHER_FULL_NAME (
+    message {
+        text: Mother Full Name
+        language: en
+    }
+)
+
+textMessage NATIDTEST (
+    message {
+        text: natIDTEST
+        language: ar
+    }
+)
+
+textMessage NATIDTEST (
+    message {
+        text: natIDTEST
+        language: en
+    }
+)
+
+textMessage NATIONAL_ID (
+    message {
+        text: National Id
+        language: ar
+    }
+)
+
+textMessage NATIONAL_ID (
+    message {
+        text: National Id
+        language: en
+    }
+)
+
+textMessage NATIONAL_ID_1 (
+    message {
+        text: National ID
+        language: ar
+    }
+)
+
+textMessage NATIONAL_ID_1 (
+    message {
+        text: National ID
+        language: en
+    }
+)
+
+textMessage NATIONAL_ID_FILE_ID (
+    message {
+        text: National Id File Id
+        language: ar
+    }
+)
+
+textMessage NATIONAL_ID_FILE_ID (
+    message {
+        text: National Id File Id
+        language: en
+    }
+)
+
+textMessage NATIONAL_ID_IMAGE (
+    message {
+        text: National Id Image
+        language: ar
+    }
+)
+
+textMessage NATIONAL_ID_IMAGE (
+    message {
+        text: National Id Image
+        language: en
+    }
+)
+
+textMessage NAT_ID_FILE_NAME (
+    message {
+        text: Nat Id File Name
+        language: ar
+    }
+)
+
+textMessage NAT_ID_FILE_NAME (
+    message {
+        text: Nat Id File Name
+        language: en
+    }
+)
+
+textMessage NAVBAR (
+    message {
+        text: navbar
+        language: ar
+    }
+)
+
+textMessage NAVBAR (
+    message {
+        text: navbar
+        language: en
+    }
+)
+
+textMessage NAVBAR_1 (
+    message {
+        text: navBar
+        language: ar
+    }
+)
+
+textMessage NAVBAR_1 (
+    message {
+        text: navBar
+        language: en
+    }
+)
+
+textMessage NEW (
+    message {
+        text: New
+        language: ar
+    }
+)
+
+textMessage NEW (
+    message {
+        text: New
+        language: en
+    }
+)
+
+textMessage NEW_PASSWORD (
+    message {
+        text: New Password
+        language: ar
+    }
+)
+
+textMessage NEW_PASSWORD (
+    message {
+        text: New Password
+        language: en
+    }
+)
+
+textMessage NEW_VACANCY (
+    message {
+        text: New Vacancy
+        language: ar
+    }
+)
+
+textMessage NEW_VACANCY (
+    message {
+        text: New Vacancy
+        language: en
+    }
+)
+
+textMessage NEXT (
+    message {
+        text: Next
+        language: ar
+    }
+)
+
+textMessage NEXT (
+    message {
+        text: Next
+        language: en
+    }
+)
+
+textMessage NO_DATA_FOUND (
+    message {
+        text: No data found.
+        language: ar
+    }
+)
+
+textMessage NO_DATA_FOUND (
+    message {
+        text: No data found.
+        language: en
+    }
+)
+
+textMessage NO_DATA_FOUND_1 (
+    message {
+        text: no data found
+        language: ar
+    }
+)
+
+textMessage NO_DATA_FOUND_1 (
+    message {
+        text: no data found
+        language: en
+    }
+)
+
+textMessage OTHER_CERTIFICATES (
+    message {
+        text: Other Certificates
+        language: ar
+    }
+)
+
+textMessage OTHER_CERTIFICATES (
+    message {
+        text: Other Certificates
+        language: en
+    }
+)
+
+textMessage OTHER_DETAILS (
+    message {
+        text: Other Details
+        language: ar
+    }
+)
+
+textMessage OTHER_DETAILS (
+    message {
+        text: Other Details
+        language: en
+    }
+)
+
+textMessage OTHER_EDUCATION_FIELD (
+    message {
+        text: Other Education Field
+        language: ar
+    }
+)
+
+textMessage OTHER_EDUCATION_FIELD (
+    message {
+        text: Other Education Field
+        language: en
+    }
+)
+
+textMessage OTP (
+    message {
+        text: OTP
+        language: ar
+    }
+)
+
+textMessage OTP (
+    message {
+        text: OTP
+        language: en
+    }
+)
+
+textMessage OTP_1 (
+    message {
+        text: Otp
+        language: ar
+    }
+)
+
+textMessage OTP_1 (
+    message {
+        text: Otp
+        language: en
+    }
+)
+
+textMessage OTP_VALIDATION (
+    message {
+        text: OTP Validation
+        language: ar
+    }
+)
+
+textMessage OTP_VALIDATION (
+    message {
+        text: OTP Validation
+        language: en
+    }
+)
+
+textMessage PASSORT_NUMBER (
+    message {
+        text: Passort Number
+        language: ar
+    }
+)
+
+textMessage PASSORT_NUMBER (
+    message {
+        text: Passort Number
+        language: en
+    }
+)
+
+textMessage PASSPORT_NUMBER (
+    message {
+        text: Passport Number
+        language: ar
+    }
+)
+
+textMessage PASSPORT_NUMBER (
+    message {
+        text: Passport Number
+        language: en
+    }
+)
+
+textMessage PASSWORD (
+    message {
+        text: Password
+        language: ar
+    }
+)
+
+textMessage PASSWORD (
+    message {
+        text: Password
+        language: en
+    }
+)
+
+textMessage PERSONALEDUCATION (
+    message {
+        text: Personal_education
+        language: ar
+    }
+)
+
+textMessage PERSONALEDUCATION (
+    message {
+        text: Personal_education
+        language: en
+    }
+)
+
+textMessage PERSONALEPERIENCE (
+    message {
+        text: Personal_Eperience
+        language: ar
+    }
+)
+
+textMessage PERSONALEPERIENCE (
+    message {
+        text: Personal_Eperience
+        language: en
+    }
+)
+
+textMessage PERSONALINFO (
+    message {
+        text: Personal_info
+        language: ar
+    }
+)
+
+textMessage PERSONALINFO (
+    message {
+        text: Personal_info
+        language: en
+    }
+)
+
+textMessage PERSONALLANG (
+    message {
+        text: personal_Lang
+        language: ar
+    }
+)
+
+textMessage PERSONALLANG (
+    message {
+        text: personal_Lang
+        language: en
+    }
+)
+
+textMessage PERSONAL_INFO (
+    message {
+        text: Personal Info
+        language: ar
+    }
+)
+
+textMessage PERSONAL_INFO (
+    message {
+        text: Personal Info
+        language: en
+    }
+)
+
+textMessage PERSONAL_INFOW (
+    message {
+        text: Personal InfoW
+        language: ar
+    }
+)
+
+textMessage PERSONAL_INFOW (
+    message {
+        text: Personal InfoW
+        language: en
+    }
+)
+
+textMessage PERSONAL_INFO_DATA (
+    message {
+        text: Personal Info Data
+        language: ar
+    }
+)
+
+textMessage PERSONAL_INFO_DATA (
+    message {
+        text: Personal Info Data
+        language: en
+    }
+)
+
+textMessage PERSONAL_INFO_DATA_2 (
+    message {
+        text: Personal Info Data 2
+        language: ar
+    }
+)
+
+textMessage PERSONAL_INFO_DATA_2 (
+    message {
+        text: Personal Info Data 2
+        language: en
+    }
+)
+
+textMessage PERSONAL_INFO_EDIT (
+    message {
+        text: Personal Info Edit
+        language: ar
+    }
+)
+
+textMessage PERSONAL_INFO_EDIT (
+    message {
+        text: Personal Info Edit
+        language: en
+    }
+)
+
+textMessage PERSONAL_INFO_TEST (
+    message {
+        text: personal info test
+        language: ar
+    }
+)
+
+textMessage PERSONAL_INFO_TEST (
+    message {
+        text: personal info test
+        language: en
+    }
+)
+
+textMessage PERSONAL_INFO_W (
+    message {
+        text: Personal Info W
+        language: ar
+    }
+)
+
+textMessage PERSONAL_INFO_W (
+    message {
+        text: Personal Info W
+        language: en
+    }
+)
+
+textMessage PHONE_NUMBER_MUST_BE_NUMBERS_ONLY (
+    message {
+        text: phone number must be numbers only!
+        language: ar
+    }
+)
+
+textMessage PHONE_NUMBER_MUST_BE_NUMBERS_ONLY (
+    message {
+        text: phone number must be numbers only!
+        language: en
+    }
+)
+
+textMessage PI_ID (
+    message {
+        text: Pi Id
+        language: ar
+    }
+)
+
+textMessage PI_ID (
+    message {
+        text: Pi Id
+        language: en
+    }
+)
+
+textMessage PLEASE_MATCH_BOTH_PASSWORDS (
+    message {
+        text: please match both passwords
+        language: ar
+    }
+)
+
+textMessage PLEASE_MATCH_BOTH_PASSWORDS (
+    message {
+        text: please match both passwords
+        language: en
+    }
+)
+
+textMessage PLUG_SOURCE (
+    message {
+        text:
+            ```
+            <div class="custom-navbar">
+            
+                <div class="nav-left">
+                    <a href="f?p=%APP_ID:104:&SESSION." class="nav-link">
+                        <span class="fa fa-home"></span>
+                        Home
+                    </a>
+            
+                    <a href="f?p=%APP_ID:113:&SESSION." class="nav-link">
+                        <span class="fa fa-user"></span>
+                        Profile
+                    </a>
+            
+                    <a href="f?p=%APP_ID:119:&SESSION." class="nav-link">
+                        <span class="fa fa-id-card"></span>
+                        Personal Data
+                    </a>
+                </div>
+            
+                <div class="nav-right">
+            
+                    <span class="user-name">
+                        <span class="fa fa-user-circle" style="font-size:20px;"></span>
+                        %APP_USER
+                    </span>
+            
+                    <a href="javascript:apex.submit('LOGOUT');" class="logout-btn">
+                        <span class="fa fa-sign-out"></span>
+                        Logout
+                    </a>
+                </div>
+            
+            </div>
+            ```
+        language: ar
+    }
+)
+
+textMessage PLUG_SOURCE (
+    message {
+        text:
+            ```
+            <div class="custom-navbar">
+            
+                <div class="nav-left">
+                    <a href="f?p=%APP_ID:104:&SESSION." class="nav-link">
+                        <span class="fa fa-home"></span>
+                        Home
+                    </a>
+            
+                    <a href="f?p=%APP_ID:113:&SESSION." class="nav-link">
+                        <span class="fa fa-user"></span>
+                        Profile
+                    </a>
+            
+                    <a href="f?p=%APP_ID:119:&SESSION." class="nav-link">
+                        <span class="fa fa-id-card"></span>
+                        Personal Data
+                    </a>
+                </div>
+            
+                <div class="nav-right">
+            
+                    <span class="user-name">
+                        <span class="fa fa-user-circle" style="font-size:20px;"></span>
+                        %APP_USER
+                    </span>
+            
+                    <a href="javascript:apex.submit('LOGOUT');" class="logout-btn">
+                        <span class="fa fa-sign-out"></span>
+                        Logout
+                    </a>
+                </div>
+            
+            </div>
+            ```
+        language: en
+    }
+)
+
+textMessage PLUG_SOURCE_1 (
+    message {
+        text:
+            ```
+            <div class="custom-navbar">
+            
+                <div class="nav-left">
+                    <a href="f?p=%APP_ID:104:&SESSION." class="nav-link">
+                        <span class="fa fa-home"></span>
+                        Home
+                    </a>
+            
+                    <a href="f?p=%APP_ID:113:&SESSION." class="nav-link">
+                        <span class="fa fa-user"></span>
+                        Profile
+                    </a>
+            
+                    <a href="f?p=%APP_ID:119:&SESSION." class="nav-link">
+                        <span class="fa fa-id-card"></span>
+                        Personal Data
+                    </a>
+                </div>
+            
+                <div class="nav-right">
+                    <a href="javascript:apex.submit('LOGOUT');" class="logout-btn">
+                        <span class="fa fa-sign-out"></span>
+                        Logout
+                    </a>
+                </div>
+            
+            </div>
+            ```
+        language: ar
+    }
+)
+
+textMessage PLUG_SOURCE_1 (
+    message {
+        text:
+            ```
+            <div class="custom-navbar">
+            
+                <div class="nav-left">
+                    <a href="f?p=%APP_ID:104:&SESSION." class="nav-link">
+                        <span class="fa fa-home"></span>
+                        Home
+                    </a>
+            
+                    <a href="f?p=%APP_ID:113:&SESSION." class="nav-link">
+                        <span class="fa fa-user"></span>
+                        Profile
+                    </a>
+            
+                    <a href="f?p=%APP_ID:119:&SESSION." class="nav-link">
+                        <span class="fa fa-id-card"></span>
+                        Personal Data
+                    </a>
+                </div>
+            
+                <div class="nav-right">
+                    <a href="javascript:apex.submit('LOGOUT');" class="logout-btn">
+                        <span class="fa fa-sign-out"></span>
+                        Logout
+                    </a>
+                </div>
+            
+            </div>
+            ```
+        language: en
+    }
+)
+
+textMessage POSITION_NAME (
+    message {
+        text: Position Name
+        language: ar
+    }
+)
+
+textMessage POSITION_NAME (
+    message {
+        text: Position Name
+        language: en
+    }
+)
+
+textMessage POST_DATE (
+    message {
+        text: Post Date
+        language: ar
+    }
+)
+
+textMessage POST_DATE (
+    message {
+        text: Post Date
+        language: en
+    }
+)
+
+textMessage PREVIOUS (
+    message {
+        text: Previous
+        language: ar
+    }
+)
+
+textMessage PREVIOUS (
+    message {
+        text: Previous
+        language: en
+    }
+)
+
+textMessage PROFILE (
+    message {
+        text: Profile
+        language: ar
+    }
+)
+
+textMessage PROFILE (
+    message {
+        text: Profile
+        language: en
+    }
+)
+
+textMessage QUALIFICATIONS (
+    message {
+        text: Qualifications
+        language: ar
+    }
+)
+
+textMessage QUALIFICATIONS (
+    message {
+        text: Qualifications
+        language: en
+    }
+)
+
+textMessage QUALIFICATIONS_1 (
+    message {
+        text: QUALIFICATIONS
+        language: ar
+    }
+)
+
+textMessage QUALIFICATIONS_1 (
+    message {
+        text: QUALIFICATIONS
+        language: en
+    }
+)
+
+textMessage REGISTER (
+    message {
+        text: Register
+        language: ar
+    }
+)
+
+textMessage REGISTER (
+    message {
+        text: Register
+        language: en
+    }
+)
+
+textMessage REGISTRATION_PAGE (
+    message {
+        text: Registration page
+        language: ar
+    }
+)
+
+textMessage REGISTRATION_PAGE (
+    message {
+        text: Registration page
+        language: en
+    }
+)
+
+textMessage REMEMBER_USERNAME (
+    message {
+        text: Remember username
+        language: ar
+    }
+)
+
+textMessage REMEMBER_USERNAME (
+    message {
+        text: Remember username
+        language: en
+    }
+)
+
+textMessage RESET_ADMIN_PASSWORD (
+    message {
+        text: Reset Admin Password
+        language: ar
+    }
+)
+
+textMessage RESET_ADMIN_PASSWORD (
+    message {
+        text: Reset Admin Password
+        language: en
+    }
+)
+
+textMessage RESET_PASSWORD (
+    message {
+        text: Reset Password
+        language: ar
+    }
+)
+
+textMessage RESET_PASSWORD (
+    message {
+        text: Reset Password
+        language: en
+    }
+)
+
+textMessage RESET_PASSWORD_BTN (
+    message {
+        text: Reset Password Btn
+        language: ar
+    }
+)
+
+textMessage RESET_PASSWORD_BTN (
+    message {
+        text: Reset Password Btn
+        language: en
+    }
+)
+
+textMessage RESET_PASSWORD_FLG (
+    message {
+        text: Reset Password Flg
+        language: ar
+    }
+)
+
+textMessage RESET_PASSWORD_FLG (
+    message {
+        text: Reset Password Flg
+        language: en
+    }
+)
+
+textMessage RESPONSIBILITIES (
+    message {
+        text: Responsibilities
+        language: ar
+    }
+)
+
+textMessage RESPONSIBILITIES (
+    message {
+        text: Responsibilities
+        language: en
+    }
+)
+
+textMessage RESPONSIBILITIES_1 (
+    message {
+        text: RESPONSIBILITIES
+        language: ar
+    }
+)
+
+textMessage RESPONSIBILITIES_1 (
+    message {
+        text: RESPONSIBILITIES
+        language: en
+    }
+)
+
+textMessage RESUME (
+    message {
+        text: Resume
+        language: ar
+    }
+)
+
+textMessage RESUME (
+    message {
+        text: Resume
+        language: en
+    }
+)
+
+textMessage RESUME_DOWNLOAD (
+    message {
+        text: Resume Download
+        language: ar
+    }
+)
+
+textMessage RESUME_DOWNLOAD (
+    message {
+        text: Resume Download
+        language: en
+    }
+)
+
+textMessage RESUME_IS_REQUIRED (
+    message {
+        text: Resume is Required
+        language: ar
+    }
+)
+
+textMessage RESUME_IS_REQUIRED (
+    message {
+        text: Resume is Required
+        language: en
+    }
+)
+
+textMessage SALT (
+    message {
+        text: Salt
+        language: ar
+    }
+)
+
+textMessage SALT (
+    message {
+        text: Salt
+        language: en
+    }
+)
+
+textMessage SAVE (
+    message {
+        text: Save
+        language: ar
+    }
+)
+
+textMessage SAVE (
+    message {
+        text: Save
+        language: en
+    }
+)
+
+textMessage SECOND_NAME (
+    message {
+        text: Second Name
+        language: ar
+    }
+)
+
+textMessage SECOND_NAME (
+    message {
+        text: Second Name
+        language: en
+    }
+)
+
+textMessage SEQ_ID (
+    message {
+        text: Seq Id
+        language: ar
+    }
+)
+
+textMessage SEQ_ID (
+    message {
+        text: Seq Id
+        language: en
+    }
+)
+
+textMessage SHOW_APP (
+    message {
+        text: Show App
+        language: ar
+    }
+)
+
+textMessage SHOW_APP (
+    message {
+        text: Show App
+        language: en
+    }
+)
+
+textMessage SIGN_IN (
+    message {
+        text: Sign In
+        language: ar
+    }
+)
+
+textMessage SIGN_IN (
+    message {
+        text: Sign In
+        language: en
+    }
+)
+
+textMessage SIGN_OUT (
+    message {
+        text: Sign Out
+        language: ar
+    }
+)
+
+textMessage SIGN_OUT (
+    message {
+        text: Sign Out
+        language: en
+    }
+)
+
+textMessage SKIP_FOR_NOW (
+    message {
+        text: Skip For Now
+        language: ar
+    }
+)
+
+textMessage SKIP_FOR_NOW (
+    message {
+        text: Skip For Now
+        language: en
+    }
+)
+
+textMessage SUBMIT (
+    message {
+        text: Submit
+        language: ar
+    }
+)
+
+textMessage SUBMIT (
+    message {
+        text: Submit
+        language: en
+    }
+)
+
+textMessage SUMMARY (
+    message {
+        text: Summary
+        language: ar
+    }
+)
+
+textMessage SUMMARY (
+    message {
+        text: Summary
+        language: en
+    }
+)
+
+textMessage THE_EDUCATION_ADDED (
+    message {
+        text: The Education Added!
+        language: ar
+    }
+)
+
+textMessage THE_EDUCATION_ADDED (
+    message {
+        text: The Education Added!
+        language: en
+    }
+)
+
+textMessage THE_FIELD_IS_REQUIRED (
+    message {
+        text: the field is required!
+        language: ar
+    }
+)
+
+textMessage THE_FIELD_IS_REQUIRED (
+    message {
+        text: the field is required!
+        language: en
+    }
+)
+
+textMessage THE_PASSWORD_AND_CONFIRM_PASSWORD_MUST_BE_THE_SAME (
+    message {
+        text: the password and confirm password must be the same!
+        language: ar
+    }
+)
+
+textMessage THE_PASSWORD_AND_CONFIRM_PASSWORD_MUST_BE_THE_SAME (
+    message {
+        text: the password and confirm password must be the same!
+        language: en
+    }
+)
+
+textMessage THE_PASSWORD_UPDATED_SUCCESSFULLY (
+    message {
+        text: the password updated successfully!
+        language: ar
+    }
+)
+
+textMessage THE_PASSWORD_UPDATED_SUCCESSFULLY (
+    message {
+        text: the password updated successfully!
+        language: en
+    }
+)
+
+textMessage THIS_IS_INVALID_YEAR (
+    message {
+        text: this is invalid year!
+        language: ar
+    }
+)
+
+textMessage THIS_IS_INVALID_YEAR (
+    message {
+        text: this is invalid year!
+        language: en
+    }
+)
+
+textMessage TITLE (
+    message {
+        text: Title
+        language: ar
+    }
+)
+
+textMessage TITLE (
+    message {
+        text: Title
+        language: en
+    }
+)
+
+textMessage TITLE_CODE (
+    message {
+        text: Title Code
+        language: ar
+    }
+)
+
+textMessage TITLE_CODE (
+    message {
+        text: Title Code
+        language: en
+    }
+)
+
+textMessage TODATE (
+    message {
+        text: Todate
+        language: ar
+    }
+)
+
+textMessage TODATE (
+    message {
+        text: Todate
+        language: en
+    }
+)
+
+textMessage TOTAL_APPLICATIONS (
+    message {
+        text: Total Applications
+        language: ar
+    }
+)
+
+textMessage TOTAL_APPLICATIONS (
+    message {
+        text: Total Applications
+        language: en
+    }
+)
+
+textMessage UNIVERSITY (
+    message {
+        text: University
+        language: ar
+    }
+)
+
+textMessage UNIVERSITY (
+    message {
+        text: University
+        language: en
+    }
+)
+
+textMessage UPDATE (
+    message {
+        text: Update
+        language: ar
+    }
+)
+
+textMessage UPDATE (
+    message {
+        text: Update
+        language: en
+    }
+)
+
+textMessage USERNAME (
+    message {
+        text: Username
+        language: ar
+    }
+)
+
+textMessage USERNAME (
+    message {
+        text: Username
+        language: en
+    }
+)
+
+textMessage VACANCIES (
+    message {
+        text: Vacancies
+        language: ar
+    }
+)
+
+textMessage VACANCIES (
+    message {
+        text: Vacancies
+        language: en
+    }
+)
+
+textMessage VACANCY (
+    message {
+        text: "Vacancy "
+        language: ar
+    }
+)
+
+textMessage VACANCY (
+    message {
+        text: "Vacancy "
+        language: en
+    }
+)
+
+textMessage VACANCY_APPLICATIONS (
+    message {
+        text: Vacancy Applications
+        language: ar
+    }
+)
+
+textMessage VACANCY_APPLICATIONS (
+    message {
+        text: Vacancy Applications
+        language: en
+    }
+)
+
+textMessage VACANCY_DETAILS (
+    message {
+        text: Vacancy Details
+        language: ar
+    }
+)
+
+textMessage VACANCY_DETAILS (
+    message {
+        text: Vacancy Details
+        language: en
+    }
+)
+
+textMessage VACANCY_EDIT (
+    message {
+        text: Vacancy Edit
+        language: ar
+    }
+)
+
+textMessage VACANCY_EDIT (
+    message {
+        text: Vacancy Edit
+        language: en
+    }
+)
+
+textMessage VACANCY_ID (
+    message {
+        text: Vacancy Id
+        language: ar
+    }
+)
+
+textMessage VACANCY_ID (
+    message {
+        text: Vacancy Id
+        language: en
+    }
+)
+
+textMessage VACANCY_PER_CATEGORY_TEST (
+    message {
+        text: vacancy per category test
+        language: ar
+    }
+)
+
+textMessage VACANCY_PER_CATEGORY_TEST (
+    message {
+        text: vacancy per category test
+        language: en
+    }
+)
+
+textMessage VACANCY_TYPE (
+    message {
+        text: Vacancy Type
+        language: ar
+    }
+)
+
+textMessage VACANCY_TYPE (
+    message {
+        text: Vacancy Type
+        language: en
+    }
+)
+
+textMessage VACANY_ID (
+    message {
+        text: Vacany Id
+        language: ar
+    }
+)
+
+textMessage VACANY_ID (
+    message {
+        text: Vacany Id
+        language: en
+    }
+)
+
+textMessage VERFIY (
+    message {
+        text: Verfiy
+        language: ar
+    }
+)
+
+textMessage VERFIY (
+    message {
+        text: Verfiy
+        language: en
+    }
+)
+
+textMessage WELCOME_BACK (
+    message {
+        text: Welcome Back!
+        language: ar
+    }
+)
+
+textMessage WELCOME_BACK (
+    message {
+        text: Welcome Back!
+        language: en
+    }
+)
+
+textMessage YOUR_CERTIFICATES (
+    message {
+        text: Your Certificates
+        language: ar
+    }
+)
+
+textMessage YOUR_CERTIFICATES (
+    message {
+        text: Your Certificates
+        language: en
+    }
+)
+
+textMessage YOUR_EDUCATION_IS_REQUIRED (
+    message {
+        text: your education is required!
+        language: ar
+    }
+)
+
+textMessage YOUR_EDUCATION_IS_REQUIRED (
+    message {
+        text: your education is required!
+        language: en
+    }
+)
+
+textMessage YOU_ARE_NOT_AUTHORIZED (
+    message {
+        text: You Are not Authorized
+        language: ar
+    }
+)
+
+textMessage YOU_ARE_NOT_AUTHORIZED (
+    message {
+        text: You Are not Authorized
+        language: en
+    }
+)
+
+textMessage YOU_HAVE_NOT_ENTERED_ANY_DATA (
+    message {
+        text: you have not entered any data
+        language: ar
+    }
+)
+
+textMessage YOU_HAVE_NOT_ENTERED_ANY_DATA (
+    message {
+        text: you have not entered any data
+        language: en
+    }
+)
+
+textMessage YOU_MUST_ADD_EDUCATION_FIRST (
+    message {
+        text: You must add education first!
+        language: ar
+    }
+)
+
+textMessage YOU_MUST_ADD_EDUCATION_FIRST (
+    message {
+        text: You must add education first!
+        language: en
+    }
+)
+
+textMessage YOU_MUST_ADD_LANGUAGE_FIRST (
+    message {
+        text: You Must Add Language First!
+        language: ar
+    }
+)
+
+textMessage YOU_MUST_ADD_LANGUAGE_FIRST (
+    message {
+        text: You Must Add Language First!
+        language: en
+    }
+)
+
+textMessage ZIP_CONTAINER (
+    message {
+        text: Zip Container
+        language: ar
+    }
+)
+
+textMessage ZIP_CONTAINER (
+    message {
+        text: Zip Container
+        language: en
+    }
+)
+
+textMessage اسم_المتقدم_للوظيفة (
+    message {
+        text: اسم المتقدم للوظيفة
+        language: ar
+    }
+)
+
+textMessage اسم_المتقدم_للوظيفة (
+    message {
+        text: اسم المتقدم للوظيفة
+        language: en
+    }
+)
+
+textMessage التخصص (
+    message {
+        text: التخصص
+        language: ar
+    }
+)
+
+textMessage التخصص (
+    message {
+        text: التخصص
+        language: en
+    }
+)
+
+textMessage الجامعةالكلية (
+    message {
+        text: الجامعة/الكلية
+        language: ar
+    }
+)
+
+textMessage الجامعةالكلية (
+    message {
+        text: الجامعة/الكلية
+        language: en
+    }
+)
+
+textMessage الخبره_الوظيفية (
+    message {
+        text: الخبره الوظيفية
+        language: ar
+    }
+)
+
+textMessage الخبره_الوظيفية (
+    message {
+        text: الخبره الوظيفية
+        language: en
+    }
+)
+
+textMessage الرقم_القومى (
+    message {
+        text: الرقم القومى
+        language: ar
+    }
+)
+
+textMessage الرقم_القومى (
+    message {
+        text: الرقم القومى
+        language: en
+    }
+)
+
+textMessage المؤهل_الدراسى (
+    message {
+        text: المؤهل الدراسى
+        language: ar
+    }
+)
+
+textMessage المؤهل_الدراسى (
+    message {
+        text: المؤهل الدراسى
+        language: en
+    }
+)
+
+textMessage المدينة (
+    message {
+        text: المدينة
+        language: ar
+    }
+)
+
+textMessage المدينة (
+    message {
+        text: المدينة
+        language: en
+    }
+)
+
+textMessage بريد_إليكترونى (
+    message {
+        text: بريد إليكترونى
+        language: ar
+    }
+)
+
+textMessage بريد_إليكترونى (
+    message {
+        text: بريد إليكترونى
+        language: en
+    }
+)
+
+textMessage تاريخ_الميلاد (
+    message {
+        text: تاريخ الميلاد
+        language: ar
+    }
+)
+
+textMessage تاريخ_الميلاد (
+    message {
+        text: تاريخ الميلاد
+        language: en
+    }
+)
+
+textMessage دراسات_عليا (
+    message {
+        text: دراسات عليا
+        language: ar
+    }
+)
+
+textMessage دراسات_عليا (
+    message {
+        text: دراسات عليا
+        language: en
+    }
+)
+
+textMessage رقم_التسجيل (
+    message {
+        text: رقم التسجيل
+        language: ar
+    }
+)
+
+textMessage رقم_التسجيل (
+    message {
+        text: رقم التسجيل
+        language: en
+    }
+)
+
+textMessage رقم_التليفون_موبايل (
+    message {
+        text: رقم التليفون/ موبايل
+        language: ar
+    }
+)
+
+textMessage رقم_التليفون_موبايل (
+    message {
+        text: رقم التليفون/ موبايل
+        language: en
+    }
+)
+
+textMessage سنة_التخرج (
+    message {
+        text: سنة التخرج
+        language: ar
+    }
+)
+
+textMessage سنة_التخرج (
+    message {
+        text: سنة التخرج
+        language: en
+    }
+)
+
+textMessage سنة_الحصول_عليها (
+    message {
+        text: سنة الحصول عليها
+        language: ar
+    }
+)
+
+textMessage سنة_الحصول_عليها (
+    message {
+        text: سنة الحصول عليها
+        language: en
+    }
+)

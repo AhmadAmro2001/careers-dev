@@ -1,0 +1,437 @@
+page 108 (
+    name: Personal Info Data
+    alias: PERSONAL-INFO-DATA1
+    title: "&{PERSONAL_INFO_DATA}."
+    appearance {
+        pageTemplate: @/blank
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    security {
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region personal-info-data (
+        name: Personal Info Data
+        title: "&{COMPLETE_YOUR_PERSONAL_INFO}."
+        type: form
+        source {
+            location: localDatabase
+            tableName: PERSONAL_INFO
+        }
+        layout {
+            sequence: 10
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        edit {
+            enabled: true
+            allowedOperations: [
+                add
+                update
+                delete
+            ]
+        }
+    )
+
+    pageItem P108_ACCOUNT_ID (
+        type: hidden
+        layout {
+            sequence: 20
+            region: @personal-info-data
+            slot: regionBody
+        }
+        source {
+            formRegion: @personal-info-data
+            column: ACCOUNT_ID
+            dataType: number
+        }
+    )
+
+    pageItem P108_ID (
+        type: hidden
+        layout {
+            sequence: 10
+            region: @personal-info-data
+            slot: regionBody
+        }
+        source {
+            formRegion: @personal-info-data
+            column: ID
+            dataType: number
+            queryOnly: true
+            primaryKey: true
+        }
+        security {
+            sessionStateProtection: checksumRequiredSessionLevel
+        }
+    )
+
+    pageItem P108_MARITAL_STATUS (
+        type: selectList
+        label {
+            label: "&{MARITAL_STATUS}."
+            alignment: left
+        }
+        lov {
+            type: sqlQuery
+            sqlQuery: "select ms.name display, ms.id value from Marital_Status ms; "
+        }
+        layout {
+            sequence: 30
+            region: @personal-info-data
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @personal-info-data
+            column: MARITAL_STATUS
+            dataType: number
+        }
+    )
+
+    pageItem P108_MILITARY_STATUS (
+        type: selectList
+        label {
+            label: "&{MILITARY_STATUS}."
+            alignment: left
+        }
+        lov {
+            type: sqlQuery
+            sqlQuery: "select ms.name display, ms.id value from Military_Status ms; "
+        }
+        layout {
+            sequence: 40
+            region: @personal-info-data
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @personal-info-data
+            column: MILITARY_STATUS
+            dataType: number
+        }
+    )
+
+    pageItem P108_MOTHER_FULL_NAME (
+        type: textField
+        label {
+            label: "&{MOTHER_FULL_NAME}."
+            alignment: left
+        }
+        layout {
+            sequence: 50
+            region: @personal-info-data
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 60
+        }
+        validation {
+            maxLength: 300
+        }
+        source {
+            formRegion: @personal-info-data
+            column: MOTHER_FULL_NAME
+            dataType: varchar2
+        }
+    )
+
+    pageItem P108_NATIONAL_ID_IMAGE (
+        type: fileUpload
+        label {
+            label: "&{NATIONAL_ID_IMAGE}."
+            alignment: left
+        }
+        storage {
+            type: appTempFiles
+        }
+        layout {
+            sequence: 60
+            region: @personal-info-data
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 60
+        }
+        validation {
+            maxLength: 255
+        }
+        source {
+            formRegion: @personal-info-data
+            column: NATIONAL_ID_IMAGE
+            dataType: blob
+        }
+    )
+
+    pageItem P108_PASSORT_NUMBER (
+        type: hidden
+        layout {
+            sequence: 80
+            region: @personal-info-data
+            slot: regionBody
+        }
+        source {
+            formRegion: @personal-info-data
+            column: PASSORT_NUMBER
+            dataType: varchar2
+        }
+    )
+
+    button cancel (
+        buttonName: CANCEL
+        label: "&{CANCEL}."
+        layout {
+            sequence: 10
+            region: @personal-info-data
+            slot: close
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 1
+            }
+            warnOnUnsavedChanges: doNotCheck
+        }
+    )
+
+    button create (
+        buttonName: CREATE
+        label: "&{SAVE}."
+        layout {
+            sequence: 40
+            region: @personal-info-data
+            slot: create
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: insert
+        }
+        serverSideCondition {
+            type: itemIsNull
+            item: P108_ID
+        }
+    )
+
+    button delete (
+        buttonName: DELETE
+        label: "&{DELETE}."
+        layout {
+            sequence: 20
+            region: @personal-info-data
+            slot: delete
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            executeValidations: false
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: delete
+            requiresConfirmation: true
+        }
+        confirmation {
+            message: &APP_TEXT$DELETE_MSG!RAW.
+            style: danger
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P108_ID
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    button save (
+        buttonName: SAVE
+        label: "&{APPLY_CHANGES}."
+        layout {
+            sequence: 30
+            region: @personal-info-data
+            slot: change
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: update
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P108_ID
+        }
+    )
+
+    process create-personal-info (
+        name: Create_personal_info
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                DECLARE
+                    v_personal_id NUMBER;
+                Begin
+                    user_personal_info_pkg.Save_Personal_data(:P108_MARITAL_STATUS, :P108_MILITARY_STATUS, :P108_MOTHER_FULL_NAME,
+                    :P108_NATIONAL_ID_IMAGE, TO_NUMBER(:APP_USER_ACC_ID), v_personal_id );
+                
+                    :APP_USER_PERS_ID := v_personal_id;
+                
+                END;
+                ```
+        }
+        execution {
+            sequence: 20
+        }
+        advanced {
+            executionMappingIdentifier: 338535285474033904
+        }
+        serverSideCondition {
+            whenButtonPressed: @create
+        }
+    )
+
+    process get-user-data-if-exists (
+        name: get user data if exists
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                
+                select p.id,p.id,p.mother_full_name, mls.name, ms.name 
+                into 
+                :APP_USER_PERS_ID ,:P108_ID ,:P108_MOTHER_FULL_NAME, :P108_MILITARY_STATUS, :P108_MARITAL_STATUS 
+                from personal_info p 
+                join MILITARY_STATUS mls on p.MILITARY_STATUS = mls.id 
+                join MARITAL_STATUS ms on p.MARITAL_STATUS = ms.id
+                where p.account_id = :APP_USER_ACC_ID;
+                
+                
+                exception
+                    when no_data_found then
+                        :P108_MOTHER_FULL_NAME := null;
+                        :P108_MILITARY_STATUS  := null;
+                        :P108_MARITAL_STATUS   := null;
+                
+                end;
+                ```
+        }
+        execution {
+            sequence: 10
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 341788748173908902
+        }
+    )
+
+    process initialize-form-personal-info-data (
+        name: Initialize form Personal Info Data
+        type: formInitialization
+        formRegion: @personal-info-data
+        execution {
+            sequence: 20
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 338624448382426667
+        }
+    )
+
+    process process-form-personal-info-data (
+        name: Process form Personal Info Data
+        type: formAutoRowProcessing
+        formRegion: @personal-info-data
+        execution {
+            sequence: 10
+        }
+        advanced {
+            executionMappingIdentifier: 338624879432426668
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    process update-personal-info (
+        name: Update Personal info
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                Begin
+                    user_personal_info_pkg.Update_Personal_data(:P108_MARITAL_STATUS, :P108_MILITARY_STATUS, :P108_MOTHER_FULL_NAME, :P108_NATIONAL_ID_IMAGE, :P108_ID);
+                END;
+                ```
+        }
+        execution {
+            sequence: 30
+        }
+        advanced {
+            executionMappingIdentifier: 338537494813033926
+        }
+        serverSideCondition {
+            whenButtonPressed: @save
+        }
+    )
+
+    branch (
+        name: Go To Page Education
+        execution {
+            sequence: 1
+        }
+        behavior {
+            target: {
+                page: 109
+            }
+        }
+    )
+
+)

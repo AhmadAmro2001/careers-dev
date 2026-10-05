@@ -1,0 +1,821 @@
+page 104 (
+    name: HOME
+    alias: HOME1
+    title: "&{Vacancies}."
+    appearance {
+        pageTemplate: @/blank
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    css {
+        inline:
+            ```css
+            /* Tree Container */
+            #job_tree .a-TreeView {
+                padding: 12px;
+                background: #f5f7fb;
+                border-radius: 16px;
+            }
+            
+            /* Tree Nodes */
+            #job_tree .a-TreeView-node {
+                margin: 8px 0;
+            }
+            
+            /* Tree Content */
+            #job_tree .a-TreeView-content {
+                background: white;
+                border-radius: 14px;
+                padding: 12px 16px;
+                border: 1px solid lightblue;
+                transition: all 0.25s ease !important;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                font-size: 14px;
+                font-weight: 500;
+            }
+            
+            /* Hover */
+            #job_tree .a-TreeView-content:hover {
+                transform: translateX(6px);
+                background: lightblue;
+                border-color: #3b82f6;
+                box-shadow: 0 8px 20px rgba(59,130,246,0.15);
+            }
+            
+            #job_tree .a-TreeView-content:hover,
+            #job_tree .a-TreeView-content:focus-within,
+            #job_tree .a-TreeView-node.is-focused .a-TreeView-content {
+                transform: translateX(6px);
+                background: lightblue;
+                border-color: #3b82f6;
+                outline: none !important;
+                box-shadow: none !important;
+            }
+            /* Selected */
+            #job_tree .is-selected > .a-TreeView-content {
+                background: linear-gradient(135deg, #2563eb, #3b82f6) !important;
+                /* color: black; */
+                border-color: #2563eb;
+            }
+            
+            /* Labels */
+            #job_tree .a-TreeView-label {
+                font-family: 'Segoe UI', sans-serif;
+                font-size: 15px;
+            }
+            
+            /* Child Nodes */
+            #job_tree .a-TreeView-node--leaf .a-TreeView-content {
+                margin-left: 12px;
+            }
+            
+            /* Icons */
+            #job_tree .fa-folder {
+                color: #f59e0b;
+                margin-right: 8px;
+            }
+            
+            #job_tree .fa-briefcase {
+                color: #2563eb;
+                margin-right: 8px;
+            }
+            
+            /* Links */
+            #job_tree .a-TreeView-label a {
+                text-decoration: none;
+                color: inherit;
+            }
+            
+            #job_tree .is-selected > .a-TreeView-content {
+                background: white;
+                border: 2px solid lightblue;
+                border-left: 6px solid #3b82f6;
+                /* color: black; */
+                box-shadow: 0 4px 12px rgba(173,216,230,0.4);
+            }
+            
+            #job_tree .is-selected .a-TreeView-label {
+                color: black !important;
+            }
+            
+            /* Selected links */
+            #job_tree .is-selected .a-TreeView-label a {
+                color: black !important;
+            }
+            
+            
+            #job_tree .a-TreeView-row.is-selected,
+            #job_tree .a-TreeView-row.is-focused {
+                background: rgba(0, 0, 0, .05) !important;
+            }
+            
+            
+            
+            /* Selected row */
+            #job_tree .a-TreeView-row.is-selected .a-TreeView-content,
+            #job_tree .a-TreeView-node.is-selected .a-TreeView-content {
+                background: white !important;
+                border: 2px solid lightblue !important;
+                border-left: 6px solid #3b82f6 !important;
+                border-radius: 14px !important;
+                box-shadow: 0 4px 12px rgba(247, 246, 246, 0.4)rtant;
+            }
+            
+            /* Selected text */
+            #job_tree .a-TreeView-row.is-selected .a-TreeView-label,
+            #job_tree .a-TreeView-row.is-selected .a-TreeView-label a,
+            #job_tree .a-TreeView-node.is-selected .a-TreeView-label,
+            #job_tree .a-TreeView-node.is-selected .a-TreeView-label a {
+                color: black !important;
+            }
+            
+            /* Remove dark background */
+            #job_tree .a-TreeView-row.is-selected,
+            #job_tree .a-TreeView-row.is-focused,
+            #job_tree .a-TreeView-node.is-selected {
+                background: transparent !important;
+            }
+            
+            #job_tree .a-TreeView-row.is-focused,
+            #job_tree .a-TreeView-row:focus {
+                background: transparent !important;
+                box-shadow: none !important;
+                outline: none !important;
+            }
+            
+            #job_tree .a-TreeView-toggle {
+                color: #ffffff !important; /* light gray */
+            }
+            
+            /* on focus */
+            #job_tree .a-TreeView-node.is-focused .a-TreeView-toggle,
+            #job_tree .a-TreeView-node.is-selected .a-TreeView-toggle {
+                color: #6b7280 !important; /* slightly darker gray */
+            }
+            
+            
+            .profile-big-icon .fa {
+                font-size: 30px;
+            }
+            
+            
+            /* ========================================================== */
+            /* CUSTOM NAVBAR                                               */
+            /* ========================================================== */
+            
+            .custom-navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            
+                background: rgb(233, 233, 233);
+            
+                padding: 14px 24px;
+            
+                border-radius: 18px;
+            
+                box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            
+                margin-bottom: 20px;
+            }
+            
+            /* Left Links */
+            .nav-left {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            
+            /* Nav Links */
+            .nav-link {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            
+                text-decoration: none;
+            
+                color: #334155;
+            
+                padding: 10px 18px;
+            
+                border-radius: 12px;
+            
+                font-weight: 600;
+            
+                transition: all 0.3s ease;
+            }
+            
+            /* Hover */
+            .nav-link:hover {
+                background: rgb(232, 244, 255);
+                color: #0563bb;
+            }
+            
+            /* Logout Button */
+            .logout-btn {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            
+                background: #ef4444;
+            
+                color: white !important;
+            
+                text-decoration: none;
+            
+                padding: 10px 18px;
+            
+                border-radius: 12px;
+            
+                font-weight: 600;
+            
+                transition: all 0.3s ease;
+            }
+            
+            /* Logout Hover */
+            .logout-btn:hover {
+                background: #dc2626;
+                transform: translateY(-1px);
+            }
+            
+            /* Icons */
+            .custom-navbar .fa {
+                font-size: 14px;
+            }
+            
+            .nav-right {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .user-name {
+                color: #333;
+                font-weight: 600;
+            }
+            
+            /* Make navbar wrap on small screens */
+            .custom-navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap; /* مهم جداً */
+            }
+            
+            /* Mobile & small tablets */
+            @media (max-width: 768px) {
+                .custom-navbar {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 12px;
+                }
+            
+                .nav-left,
+                .nav-right {
+                    width: 100%;
+                    justify-content: flex-start;
+                    flex-wrap: wrap;
+                }
+            
+                .nav-link,
+                .logout-btn {
+                    width: 100%;
+                    justify-content: center;
+                }
+            
+                .user-name {
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+            
+            /* Very small screens (phones) */
+            @media (max-width: 480px) {
+                .nav-link,
+                .logout-btn {
+                    padding: 12px;
+                    font-size: 14px;
+                }
+            
+                .custom-navbar {
+                    padding: 12px;
+                }
+            }
+            /* 1. Ensure the individual row wrapper handles positioning correctly */
+            #job_tree .a-TreeView-row {
+                position: relative !important;
+            }
+            
+            /* 2. Anchor the toggle to the ROW container, NOT the entire branch structure */
+            #job_tree .a-TreeView-node {
+                position: relative !important;
+            }
+            
+            #job_tree .a-TreeView-toggle {
+                position: absolute !important;
+                /* top: 0 !important;
+                left: 0 !important; */
+                width: 100% !important;
+                /* Limit the height to the top row content block only, typically ~48px depending on padding */
+                height: 48px !important; 
+                margin: 0 !important;
+                padding: 0 !important;
+                z-index: 2 !important; 
+                opacity: 0 !important;
+                cursor: pointer !important;
+            }
+            
+            /* 3. Pass clicks through the card background */
+            #job_tree .a-TreeView-content {
+                position: relative;
+                z-index: 1; 
+                pointer-events: none; 
+            }
+            
+            /* 4. Keep links active and clickable above the transparent toggle layer */
+            #job_tree .a-TreeView-label a {
+                position: relative;
+                z-index: 3; 
+                pointer-events: auto !important;
+            }
+            
+            #job_tree .a-TreeView-row,
+            #job_tree .a-TreeView-row:hover,
+            #job_tree .a-TreeView-row.is-selected,
+            #job_tree .a-TreeView-row.is-focused,
+            #job_tree .a-TreeView-node.is-selected > .a-TreeView-row,
+            #job_tree .a-TreeView-node.is-focused > .a-TreeView-row {
+                background: transparent !important;
+                background-color: transparent !important;
+                box-shadow: none !important;
+                border: none !important;
+            }
+            
+            /* ========================================================== */
+            /* COHESIVE HOVER & FOCUS EFFECTS FOR THE APEX HTML TREE     */
+            /* ========================================================== */
+            
+            /* 1. Base State: Ensure smooth transitions on the content card */
+            #job_tree .a-TreeView-content {
+                transition: all 0.25s ease !important;
+            }
+            
+            /* 2. Hover & True Focus States: Drop transformations on mouseleave */
+            #job_tree .a-TreeView-node:hover > .a-TreeView-content,
+            #job_tree .a-TreeView-row.is-hover + .a-TreeView-toggle + .a-TreeView-content,
+            #job_tree .a-TreeView-content:hover {
+                transform: translateX(6px) !important;
+                background: lightblue !important;
+                border-color: #3b82f6 !important;
+                box-shadow: 0 8px 20px rgba(59, 130, 246, 0.15) !important;
+            }
+            
+            /* 3. Text color retention ONLY on active hover or focus states */
+            #job_tree .a-TreeView-node:hover .a-TreeView-label,
+            #job_tree .a-TreeView-node:hover .a-TreeView-label a,
+            #job_tree .a-TreeView-node.is-focused .a-TreeView-label,
+            #job_tree .a-TreeView-node.is-focused .a-TreeView-label a,
+            #job_tree .a-TreeView-content:hover .a-TreeView-label {
+                color: black !important;
+            }
+            
+            /* 4. Reset browser-level element focus outline sticky behavior */
+            #job_tree .a-TreeView-node:not(:hover):not(.is-selected) > .a-TreeView-content {
+                transform: none !important;
+                background: white !important;
+                border-color: lightblue !important;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+            }
+            
+            .guide-container {
+                width: 100%;
+                max-width: 1100px;
+                margin: 20px auto;
+                box-sizing: border-box;
+            }
+            ```
+    }
+    security {
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region guide-message (
+        name: guide message
+        type: staticContent
+        source {
+            htmlCode:
+                ```html
+                <div class="grid-box-bg-blue">
+                 
+                    <div class="">
+                        ⚠️
+                    </div> 
+                
+                    <div class="guide-content">
+                        <!-- <div class="guide-title">
+                            User Guide
+                        </div> -->
+                
+                        <p>
+                            You can apply for up to 2 vacancies only. You cannot apply for the same vacancy twice.        
+                        </p>
+                        
+                        
+                    </div>
+                
+                    
+                
+                    
+                </div>
+                
+                <div class="grid-box-bg-blue">
+                 
+                    <div class="">
+                        ⚠️
+                    </div> 
+                
+                    <div class="guide-content">
+                        <!-- <div class="guide-title">
+                            User Guide
+                        </div> -->
+                
+                        <p>
+                          To apply for another vacancy, please delete one of your existing applications first.        
+                        </p>
+                        
+                        
+                    </div>
+                
+                    
+                
+                    
+                </div>
+                ```
+        }
+        layout {
+            sequence: 70
+            slot: body
+            columnCssClasses: guide-container
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--noPadding
+                t-Region--removeHeader js-removeLandmark
+                t-Region--scrollBody
+                t-Form--stretchInputs
+                margin-left-lg
+                margin-right-lg
+            ]
+        }
+    )
+
+    region job-vacancy-category-tree (
+        name: job vacancy category tree
+        title: "&{JOB_VACANCIES}."
+        type: tree
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                -- SELECT 
+                --     'CAT_' || c.id        AS id,
+                --     NULL                  AS parent_id,
+                --     c.name                AS label,
+                --     NULL                  AS link
+                -- FROM career_category c
+                
+                -- UNION ALL
+                
+                -- SELECT 
+                --     'JOB_' || v.id        AS id,
+                --     'CAT_' || v.category_id AS parent_id,
+                --     v.title               AS label,
+                --     'f?p=&APP_ID.:13:&SESSION.::NO::P13_VACANY_ID:' || v.id AS link
+                -- FROM job_vacancy v
+                
+                -- SELECT 
+                --     'CAT_' || c.id AS id,
+                --     NULL AS parent_id,
+                
+                --     c.name || ' (' ||
+                --     (SELECT COUNT(*)
+                --      FROM job_vacancy v
+                --      WHERE v.category_id = c.id)
+                --     || ')' AS label,
+                
+                --     NULL AS link
+                
+                -- FROM career_category c
+                
+                -- UNION ALL
+                
+                -- SELECT 
+                --     'JOB_' || v.id AS id,
+                --     'CAT_' || v.category_id AS parent_id,
+                --     v.title AS label,
+                
+                --     'javascript:if(confirm(''Are you sure you want to open this vacancy?'')){window.location.href=''' ||
+                    
+                --     apex_page.get_url(
+                --         p_page => 112,
+                --         p_items => 'P112_VACANcY_ID',
+                --         p_values => v.id
+                --     )
+                    
+                --     || ''';}' AS link
+                
+                -- FROM job_vacancy v
+                
+                
+                SELECT 
+                    'CAT_' || c.id AS id,
+                    NULL AS parent_id,
+                
+                    c.name || ' (' || 
+                    (SELECT COUNT(*)
+                     FROM job_vacancy v
+                     WHERE v.category_id = c.id AND v.IS_ARCHIVED = 0)
+                    || ')' AS label,
+                
+                    '#' AS link
+                
+                FROM career_category c
+                
+                WHERE EXISTS (
+                    SELECT 1
+                    FROM job_vacancy v
+                    WHERE v.category_id = c.id
+                    AND v.IS_ARCHIVED = 0
+                )
+                  
+                  UNION ALL 
+                  
+                  
+                  SELECT 'JOB_' || v.id AS id,
+                   'CAT_' || v.category_id AS parent_id, 
+                   v.title AS label, 
+                   CASE -- Personal data not completed 
+                   WHEN Job_application_pkg.check_complete_personal_info( :APP_USER_ACC_ID) = 0
+                   THEN 'javascript:apex.message.confirm(
+                ''Please complete your personal data first. Go to Personal Data page?'',
+                function(okPressed){
+                    if(okPressed){
+                        window.location.href = ''' ||
+                        apex_page.get_url(p_page => 119) ||
+                        ''';
+                    }
+                });'
+                    -- Already applied 
+                    WHEN Job_application_pkg.check_application_vacancy( :APP_USER_PERS_ID, v.id ) > 0 
+                    THEN 'javascript:apex.message.alert(''You already applied to this vacancy.'');' 
+                    WHEN Job_application_pkg.check_application_vacancy_count_per_user( :APP_USER_PERS_ID) >= 2
+                    THEN
+                    'javascript:apex.message.confirm(
+                ''You already applied to 2 vacancies. Delete at least one application to apply to new job!'',
+                function(okPressed){
+                    if(okPressed){
+                        window.location.href = ''' ||
+                        apex_page.get_url(p_page => 132) ||
+                        ''';
+                    }
+                });' 
+                    -- Open vacancy 
+                    ELSE apex_page.get_url( p_page => 112, 
+                    p_items => 'P112_VACANCY_ID,P112_DETAILS_FLG', p_values =>  v.id || ',0')
+                    END AS link 
+                    FROM job_vacancy v 
+                    WHERE v.IS_ARCHIVED = 0;
+                ```
+        }
+        layout {
+            sequence: 80
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--noBorder
+                t-Region--scrollBody
+            ]
+        }
+        advanced {
+            htmlDomId: job_tree
+        }
+        settings {
+            nodeLabelColumn: LABEL
+            nodeIdColumn: ID
+            parentKeyColumn: PARENT_ID
+            linkColumn: LINK
+            defaultIconCssClass: icon-tree-folder
+            iconTypeCssClass: a-Icon
+        }
+    )
+
+    region navbar-2 (
+        name: navbar
+        title: "&{NAVBAR}."
+        type: appTemplateComponent/appliocantNavbar
+        layout {
+            sequence: 60
+            slot: body
+            column: 3
+            columnSpan: 8
+        }
+        componentAppearance {
+            display: regionOnly
+        }
+        settings {
+            personalCheck: &PERSONAL_CHECK.
+        }
+    )
+
+    pageItem P104_ACC_ID (
+        type: hidden
+        layout {
+            sequence: 20
+            slot: body
+        }
+    )
+
+    pageItem P104_ACC_ID_ITEM (
+        type: hidden
+        layout {
+            sequence: 30
+            slot: body
+        }
+        default {
+            type: static
+            staticValue: Account ID: &APP_USER_ACC_ID.
+        }
+    )
+
+    pageItem P104_PERS_ID (
+        type: hidden
+        layout {
+            sequence: 40
+            slot: body
+        }
+        default {
+            type: static
+            staticValue: Personal_ID: &APP_USER_PERS_ID.
+        }
+    )
+
+    pageItem P104_PERS_TEST (
+        type: hidden
+        layout {
+            sequence: 90
+            slot: body
+        }
+    )
+
+    pageItem P104_PERS_TEST_1 (
+        type: hidden
+        layout {
+            sequence: 100
+            slot: body
+        }
+    )
+
+    process logout (
+        name: logout
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                    APEX_UTIL.SET_SESSION_STATE('APP_USER_ACC_ID', NULL);
+                    APEX_UTIL.SET_SESSION_STATE('APP_USER_PERS_ID', NULL);
+                end;
+                ```
+        }
+        execution {
+            sequence: 10
+        }
+        advanced {
+            executionMappingIdentifier: 337357586168663829
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    process logout-process (
+        name: logout Process
+        type: invokeApi
+        invoke {
+            package: APEX_AUTHENTICATION
+            procedureOrFunction: LOGOUT
+        }
+        execution {
+            sequence: 20
+        }
+        advanced {
+            executionMappingIdentifier: 352595476927134908
+        }
+        serverSideCondition {
+            type: request=Value
+            value: LOGOUT
+        }
+
+        parameter p_app_id (
+            parameter {
+                dataType: number
+                hasDefault: true
+            }
+            value {
+                type: apiDefault
+            }
+            advanced {
+                displaySequence: 20
+            }
+        )
+
+        parameter p_session_id (
+            parameter {
+                dataType: number
+                hasDefault: true
+            }
+            value {
+                type: apiDefault
+            }
+            advanced {
+                displaySequence: 10
+            }
+        )
+
+    )
+
+    process set-personal-id (
+        name: set personal id
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                    APEX_UTIL.SET_SESSION_STATE('APP_USER_PERS_ID', NULL);
+                
+                    SELECT id
+                    INTO :P104_PERS_ID
+                    FROM personal_info
+                    WHERE account_id = :APP_USER_ACC_ID;
+                
+                    APEX_UTIL.SET_SESSION_STATE('APP_USER_PERS_ID', :P104_PERS_ID);
+                
+                EXCEPTION
+                    WHEN NO_DATA_FOUND THEN
+                        APEX_UTIL.SET_SESSION_STATE('APP_USER_PERS_ID', NULL);
+                END;
+                
+                ```
+        }
+        execution {
+            sequence: 10
+            point: afterHeader
+        }
+        advanced {
+            executionMappingIdentifier: 31284978515282605
+        }
+    )
+
+    branch (
+        name: logout
+        execution {
+            sequence: 10
+        }
+        behavior {
+            target: {
+                page: 9999
+            }
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    branch (
+        name: logout process
+        execution {
+            sequence: 20
+        }
+        behavior {
+            target: {
+                page: 9999
+            }
+        }
+        serverSideCondition {
+            type: request=Value
+            value: LOGOUT
+        }
+    )
+
+)

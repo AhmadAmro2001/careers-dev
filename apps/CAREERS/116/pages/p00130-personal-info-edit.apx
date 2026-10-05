@@ -1,0 +1,1607 @@
+page 130 (
+    name: Personal Info Edit
+    alias: PERSONAL-INFO-EDIT
+    title: "&{PERSONAL_INFO_EDIT}."
+    appearance {
+        pageMode: modalDialog
+        dialogTemplate: @/modal-dialog
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    css {
+        inline:
+            ```css
+            /* ========================================================== */
+            /* 1. STANDARD FORM FIELDS (TEXT, TEL, EMAIL, SELECT, ETC.)    */
+            /* ========================================================== */
+            
+            .t-Form-fieldContainer input[type="text"],
+            .t-Form-fieldContainer input[type="tel"],
+            .t-Form-fieldContainer input[type="email"],
+            .t-Form-fieldContainer input[type="date"],
+            .t-Form-fieldContainer textarea,
+            .t-Form-fieldContainer select.selectlist,
+            .apex-item-text,
+            .apex-item-textarea,
+            .apex-item-select {
+                background-color: rgb(232, 244, 255) !important; /* Light blue color */
+                border-radius: 10px !important; /* Consistent 10px roundness */
+                border: 1px solid #cbd5e1 !important;
+                transition: all 0.3s ease !important;
+            }
+            
+            
+            
+            /* Hover Effect for Standard Fields */
+            .t-Form-fieldContainer input[type="text"]:hover,
+            .t-Form-fieldContainer input[type="tel"]:hover,
+            .t-Form-fieldContainer input[type="email"]:hover,
+            .t-Form-fieldContainer input[type="date"]:hover,
+            .t-Form-fieldContainer textarea:hover,
+            .t-Form-fieldContainer select.selectlist:hover,
+            .apex-item-text:hover,
+            .apex-item-textarea:hover,
+            .apex-item-select:hover {
+                border-color: #0563bb !important;
+                background-color: #f8fafc !important; 
+            }
+            
+            /* Focus Effect */
+            .apex-item-text:focus,
+            .apex-item-textarea:focus,
+            .apex-item-select:focus {
+                border-color: #024486 !important;
+                box-shadow: 0 0 0 3px rgba(5, 99, 187, 0.15) !important;
+                outline: none !important;
+            }
+            
+            /* File Upload Button */
+            .apex-item-file {
+                border-radius: 10px !important;
+                transition: all 0.3s ease !important;
+            }
+            .apex-item-file:hover {
+                border-color: #0563bb !important;
+                background-color: #f8fafc !important;
+            }
+            
+            
+            /* ========================================================== */
+            /* 2. DATE PICKER UNIFICATION (INPUT + CALENDAR ICON)          */
+            /* ========================================================== */
+            
+            /* Lock input text container and icon button together tightly without affecting the label */
+            .apex-item-group--datepicker,
+            .apex-item-group.apex-item-group--file {
+                display: inline-flex !important;
+                width: 100% !important;
+                align-items: stretch !important;
+                gap: 0 !important;
+            }
+            
+            /* Left side of the date component (Text Field) */
+            .apex-item-group--datepicker input.apex-item-text,
+            input.apex-item-datepicker {
+                background-color: rgb(232, 244, 255) !important;
+                border-top-left-radius: 10px !important;
+                border-bottom-left-radius: 10px !important;
+                border-top-right-radius: 0px !important;
+                border-bottom-right-radius: 0px !important;
+                border-right: none !important; 
+            }
+            
+            /* Right side of the date component (Calendar Button) */
+            .apex-item-group--datepicker .a-Button--calendar,
+            .apex-item-group--datepicker .apex-item-datepicker-btn,
+            .a-Button--calendar {
+                border-top-left-radius: 0px !important;
+                border-bottom-left-radius: 0px !important;
+                border-top-right-radius: 10px !important; /* Perfectly matches the 10px layout roundness */
+                border-bottom-right-radius: 10px !important;
+                border: 1px solid #cbd5e1 !important;
+                border-left: 1px solid #cbd5e1 !important; 
+                background-color: #ffffff !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                box-shadow: none !important;
+            }
+            
+            /* Grouped Hover Actions for Date Picker */
+            .apex-item-group--datepicker:hover input,
+            .apex-item-group--datepicker:hover .a-Button--calendar {
+                border-color: #0563bb !important;
+            }
+            
+            .apex-item-group--datepicker:hover input {
+                background-color: #f8fafc !important;
+            }
+            
+            /* Grouped Focus Actions for Date Picker */
+            .apex-item-group--datepicker input:focus,
+            .apex-item-group--datepicker input:focus + button {
+                border-color: #024486 !important;
+            }
+            
+            .t-Form-fieldContainer input[type="date"],
+            .apex-item-text.apex-item-datepicker {
+                border-radius: 10px 0 0 10px !important;
+            }
+            
+            /* Calendar Button */
+            .a-Button.a-Button--calendar,
+            .ui-datepicker-trigger {
+                border-radius: 0 10px 10px 0 !important;
+            }
+            ```
+    }
+    security {
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region personal-info (
+        name: Personal Info
+        title: "&{PERSONAL_INFO}."
+        type: form
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select acc.ID,
+                       acc.FIRST_NAME,
+                       acc.LAST_NAME,
+                       acc.DATE_OF_BIRTH,
+                       acc.GENDER,
+                       acc.EMAIL,
+                       acc.HOME_TELEPHONE,
+                       acc.ADDRESS,
+                       acc.CITY_ID,
+                       acc.NATIONAL_ID,
+                       acc.SECOND_NAME,
+                       acc.PASSPORT_NUMBER,
+                       acc.COUNTRY_ID,
+                       acc.COUNTRY_PHONE_CODE_ID,
+                       acc.mobile_telephone,
+                       pi.MARITAL_STATUS,
+                       pi.military_status,
+                       pi.mother_full_name,
+                       pi.NATIONAL_ID_FILE_ID as national_id_image,
+                       pi.id as pers_id_1
+                  from ACCOUNT acc
+                  join personal_info pi on pi.account_id = acc.id
+                  JOIN CITIES c ON c.id = acc.city_id
+                ```
+        }
+        layout {
+            sequence: 10
+            slot: contentBody
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--noBorder
+                t-Region--scrollBody
+            ]
+        }
+        edit {
+            enabled: true
+            allowedOperations: [
+                add
+                update
+                delete
+            ]
+        }
+    )
+
+    region personal-info-data (
+        name: Personal Info Data
+        title: "&{COMPLETE_YOUR_PERSONAL_INFO}."
+        type: form
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery:
+                ```sql
+                select ID As Pers_id,
+                       ACCOUNT_ID,
+                       NATIONAL_ID_IMAGE,
+                       MOTHER_FULL_NAME,
+                       MARITAL_STATUS,
+                       MILITARY_STATUS,
+                       PASSORT_NUMBER,
+                       NAT_ID_FILE_NAME
+                  from PERSONAL_INFO
+                ```
+        }
+        layout {
+            sequence: 40
+            parentRegion: @personal-info-w
+            slot: subRegions
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--removeHeader js-removeLandmark
+                t-Region--noBorder
+                t-Region--scrollBody
+            ]
+        }
+        config {
+            buildOption: @commented-out
+        }
+        edit {
+            enabled: true
+            allowedOperations: [
+                add
+                update
+                delete
+            ]
+        }
+    )
+
+    region personal-info-w (
+        name: Personal Info W
+        title: "&{PERSONAL_INFO_W}."
+        type: list
+        source {
+            list: @personal-infow
+        }
+        layout {
+            sequence: 30
+            slot: contentBody
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--removeHeader js-removeLandmark
+                t-Region--noBorder
+                t-Region--scrollBody
+            ]
+        }
+        config {
+            buildOption: @commented-out
+        }
+        componentAppearance {
+            listTemplate: @/wizard-progress
+            templateOptions: [
+                #DEFAULT#
+                t-WizardSteps--displayLabels
+            ]
+        }
+    )
+
+    pageItem P130_ACCOUNT_ID (
+        type: hidden
+        layout {
+            sequence: 30
+            region: @personal-info-data
+            slot: regionBody
+        }
+        source {
+            formRegion: @personal-info-data
+            column: ACCOUNT_ID
+            dataType: number
+        }
+    )
+
+    pageItem P130_ADDRESS (
+        type: textField
+        label {
+            label: "&{ADDRESS}."
+            alignment: left
+        }
+        layout {
+            sequence: 210
+            region: @personal-info
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 60
+        }
+        validation {
+            valueRequired: true
+            maxLength: 500
+        }
+        source {
+            formRegion: @personal-info
+            column: ADDRESS
+            dataType: varchar2
+        }
+    )
+
+    pageItem P130_CITY_ID (
+        type: selectList
+        label {
+            label: "City "
+            alignment: left
+        }
+        lov {
+            type: sharedComponent
+            lov: @cities
+        }
+        layout {
+            sequence: 90
+            region: @personal-info
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        source {
+            formRegion: @personal-info
+            column: CITY_ID
+            dataType: number
+        }
+    )
+
+    pageItem P130_COUNTRY_ID (
+        type: selectList
+        label {
+            label: "&{COUNTRY_1}."
+            alignment: left
+        }
+        lov {
+            type: sharedComponent
+            lov: @country-name
+        }
+        layout {
+            sequence: 130
+            region: @personal-info
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @personal-info
+            column: COUNTRY_ID
+            dataType: number
+        }
+    )
+
+    pageItem P130_COUNTRY_PHONE_CODE_ID (
+        type: textField
+        label {
+            label: "&{COUNTRY_PHONE_CODE}."
+            alignment: left
+        }
+        layout {
+            sequence: 220
+            region: @personal-info
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+        validation {
+            valueRequired: true
+        }
+        advanced {
+            customAttributes: readonly
+        }
+        source {
+            formRegion: @personal-info
+            column: COUNTRY_PHONE_CODE_ID
+            dataType: number
+        }
+    )
+
+    pageItem P130_DATE_OF_BIRTH (
+        type: datePicker
+        label {
+            label: "&{DATE_OF_BIRTH}."
+            alignment: left
+        }
+        layout {
+            sequence: 70
+            region: @personal-info
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: [
+                #DEFAULT#
+                t-Form-fieldContainer--stretchInputs
+            ]
+            width: 32
+        }
+        validation {
+            valueRequired: true
+            maxLength: 255
+        }
+        source {
+            formRegion: @personal-info
+            column: DATE_OF_BIRTH
+            dataType: date
+        }
+    )
+
+    pageItem P130_EMAIL (
+        type: textField
+        label {
+            label: "&{EMAIL}."
+            alignment: left
+        }
+        layout {
+            sequence: 140
+            region: @personal-info
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            valueRequired: true
+            maxLength: 200
+        }
+        source {
+            formRegion: @personal-info
+            column: EMAIL
+            dataType: varchar2
+        }
+    )
+
+    pageItem P130_FIRST_NAME (
+        type: textField
+        label {
+            label: "&{FIRST_NAME}."
+            alignment: left
+        }
+        layout {
+            sequence: 40
+            region: @personal-info
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            valueRequired: true
+            maxLength: 200
+        }
+        source {
+            formRegion: @personal-info
+            column: FIRST_NAME
+            dataType: varchar2
+        }
+    )
+
+    pageItem P130_GENDER (
+        type: selectList
+        label {
+            label: "&{GENDER}."
+            alignment: left
+        }
+        lov {
+            type: staticValues
+            staticValues: STATIC:Male;Male,Female;Female
+        }
+        layout {
+            sequence: 80
+            region: @personal-info
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @personal-info
+            column: GENDER
+            dataType: varchar2
+        }
+    )
+
+    pageItem P130_HOME_TELEPHONE (
+        type: textField
+        label {
+            label: "&{HOME_TELEPHONE}."
+            alignment: left
+        }
+        layout {
+            sequence: 100
+            region: @personal-info
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            valueRequired: true
+            maxLength: 200
+        }
+        source {
+            formRegion: @personal-info
+            column: HOME_TELEPHONE
+            dataType: varchar2
+        }
+    )
+
+    pageItem P130_ID (
+        type: hidden
+        layout {
+            sequence: 10
+            region: @personal-info
+            slot: regionBody
+        }
+        source {
+            formRegion: @personal-info
+            column: ID
+            dataType: number
+            queryOnly: true
+            primaryKey: true
+        }
+        security {
+            sessionStateProtection: checksumRequiredSessionLevel
+        }
+    )
+
+    pageItem P130_LAST_NAME (
+        type: textField
+        label {
+            label: "&{LAST_NAME}."
+            alignment: left
+        }
+        layout {
+            sequence: 60
+            region: @personal-info
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            valueRequired: true
+            maxLength: 200
+        }
+        source {
+            formRegion: @personal-info
+            column: LAST_NAME
+            dataType: varchar2
+        }
+    )
+
+    pageItem P130_MARITAL_STATUS (
+        type: selectList
+        label {
+            label: "&{MARITAL_STATUS}."
+            alignment: left
+        }
+        lov {
+            type: sqlQuery
+            sqlQuery: "select mrs.name display, mrs.id value from Marital_Status mrs; "
+        }
+        layout {
+            sequence: 40
+            region: @personal-info-data
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @personal-info-data
+            column: MARITAL_STATUS
+            dataType: number
+        }
+    )
+
+    pageItem P130_MARITAL_STATUS_1 (
+        type: selectList
+        label {
+            label: "&{MARITAL_STATUS}."
+            alignment: left
+        }
+        lov {
+            type: sqlQuery
+            sqlQuery: "select INITCAP(mrs.name) display, mrs.id value from Marital_Status mrs; "
+        }
+        layout {
+            sequence: 180
+            region: @personal-info
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @personal-info
+            column: MARITAL_STATUS
+            dataType: number
+        }
+    )
+
+    pageItem P130_MILITARY_STATUS (
+        type: selectList
+        label {
+            label: "&{MILITARY_STATUS}."
+            alignment: left
+        }
+        lov {
+            type: sqlQuery
+            sqlQuery: "select ms.name display, ms.id value from Military_Status ms; "
+        }
+        layout {
+            sequence: 50
+            region: @personal-info-data
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @personal-info-data
+            column: MILITARY_STATUS
+            dataType: number
+        }
+    )
+
+    pageItem P130_MILITARY_STATUS_1 (
+        type: selectList
+        label {
+            label: "&{MILITARY_STATUS}."
+            alignment: left
+        }
+        lov {
+            type: sqlQuery
+            sqlQuery: "select ms.name display, ms.id value from Military_Status ms; "
+        }
+        layout {
+            sequence: 190
+            region: @personal-info
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @personal-info
+            column: MILITARY_STATUS
+            dataType: number
+        }
+    )
+
+    pageItem P130_MOBILE_TELEPHONE (
+        type: textField
+        label {
+            label: "&{MOBILE_TELEPHONE}."
+            alignment: left
+        }
+        layout {
+            sequence: 110
+            region: @personal-info
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+        validation {
+            maxLength: 200
+        }
+        source {
+            formRegion: @personal-info
+            column: MOBILE_TELEPHONE
+            dataType: varchar2
+        }
+    )
+
+    pageItem P130_MOTHER_FULL_NAME (
+        type: textField
+        label {
+            label: "&{MOTHER_FULL_NAME}."
+            alignment: left
+        }
+        layout {
+            sequence: 60
+            region: @personal-info-data
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 60
+        }
+        validation {
+            maxLength: 300
+        }
+        source {
+            formRegion: @personal-info-data
+            column: MOTHER_FULL_NAME
+            dataType: varchar2
+        }
+    )
+
+    pageItem P130_MOTHER_FULL_NAME_1 (
+        type: textField
+        label {
+            label: "&{MOTHER_FULL_NAME}."
+            alignment: left
+        }
+        layout {
+            sequence: 200
+            region: @personal-info
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+        validation {
+            valueRequired: true
+        }
+        source {
+            formRegion: @personal-info
+            column: MOTHER_FULL_NAME
+            dataType: varchar2
+        }
+    )
+
+    pageItem P130_NATIONAL_ID (
+        type: textField
+        label {
+            label: "&{NATIONAL_ID}."
+            alignment: left
+        }
+        layout {
+            sequence: 150
+            region: @personal-info
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+            column: 5
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 14
+        }
+        source {
+            formRegion: @personal-info
+            column: NATIONAL_ID
+            dataType: varchar2
+        }
+    )
+
+    pageItem P130_NATIONAL_ID_IMAGE (
+        type: fileUpload
+        label {
+            label: "&{NATIONAL_ID_1}."
+            alignment: left
+        }
+        storage {
+            type: appTempFiles
+        }
+        layout {
+            sequence: 10
+            region: @personal-info-data
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+        source {
+            formRegion: @personal-info-data
+            column: NATIONAL_ID_IMAGE
+            dataType: blob
+        }
+    )
+
+    pageItem P130_NATIONAL_ID_IMAGE_1 (
+        type: fileUpload
+        label {
+            label: "&{NATIONAL_ID_IMAGE}."
+            alignment: left
+        }
+        storage {
+            type: appTempFiles
+        }
+        layout {
+            sequence: 170
+            region: @personal-info
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 30
+        }
+        source {
+            formRegion: @personal-info
+            column: NATIONAL_ID_IMAGE
+            dataType: number
+        }
+    )
+
+    pageItem P130_PASSORT_NUMBER (
+        type: hidden
+        layout {
+            sequence: 80
+            region: @personal-info-data
+            slot: regionBody
+        }
+        source {
+            formRegion: @personal-info-data
+            column: PASSORT_NUMBER
+            dataType: varchar2
+        }
+    )
+
+    pageItem P130_PASSPORT_NUMBER (
+        type: textField
+        label {
+            label: "&{PASSPORT_NUMBER}."
+            alignment: left
+        }
+        layout {
+            sequence: 160
+            region: @personal-info
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+            column: 5
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 200
+        }
+        source {
+            formRegion: @personal-info
+            column: PASSPORT_NUMBER
+            dataType: varchar2
+        }
+    )
+
+    pageItem P130_PERS_ID (
+        type: hidden
+        layout {
+            sequence: 20
+            region: @personal-info-data
+            slot: regionBody
+        }
+        source {
+            formRegion: @personal-info-data
+            column: PERS_ID
+            dataType: number
+        }
+    )
+
+    pageItem P130_PERS_ID_1 (
+        type: hidden
+        layout {
+            sequence: 230
+            region: @personal-info
+            slot: regionBody
+        }
+        source {
+            formRegion: @personal-info
+            column: PERS_ID_1
+            dataType: number
+        }
+    )
+
+    pageItem P130_PROFILE_EDIT (
+        type: hidden
+        layout {
+            sequence: 40
+            slot: contentBody
+        }
+    )
+
+    pageItem P130_SECOND_NAME (
+        type: textField
+        label {
+            label: "&{SECOND_NAME}."
+            alignment: left
+        }
+        layout {
+            sequence: 50
+            region: @personal-info
+            slot: regionBody
+            alignment: left
+            startNewRow: false
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            valueRequired: true
+            maxLength: 200
+        }
+        source {
+            formRegion: @personal-info
+            column: SECOND_NAME
+            dataType: varchar2
+        }
+    )
+
+    button cancel (
+        buttonName: CANCEL
+        label: "&{CANCEL}."
+        layout {
+            sequence: 20
+            region: @personal-info
+            slot: close
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 1
+            }
+            warnOnUnsavedChanges: doNotCheck
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    button next (
+        buttonName: NEXT
+        label: "&{NEXT}."
+        layout {
+            sequence: 10
+            region: @personal-info-w
+            slot: next
+        }
+        appearance {
+            buttonTemplate: @/text-with-icon
+            hot: true
+            templateOptions: t-Button--iconRight
+            icon: fa-chevron-right
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    button next-pers (
+        buttonName: NEXT_pers
+        label: "&{SAVE}."
+        layout {
+            sequence: 30
+            region: @personal-info
+            slot: create
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+            icon: fa-chevron-right
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+        }
+        serverSideCondition {
+            type: itemIsNull
+            item: P130_PERS_ID_1
+        }
+    )
+
+    button save-pers (
+        buttonName: Save_pers
+        label: "&{UPDATE}."
+        layout {
+            sequence: 10
+            region: @personal-info
+            slot: create
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+            icon: fa-chevron-right
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P130_PERS_ID_1
+        }
+    )
+
+    button skip-for-now (
+        buttonName: Skip_For_Now
+        label: "&{SKIP_FOR_NOW}."
+        layout {
+            sequence: 10
+            region: @personal-info
+            slot: edit
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: [
+                #DEFAULT#
+                t-Button--warning
+            ]
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 104
+                action: clearRegions
+            }
+            warnOnUnsavedChanges: doNotCheck
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    button updateprofileedit (
+        buttonName: UpdateProfileEdit
+        label: "&{UPDATE}."
+        layout {
+            sequence: 20
+            region: @personal-info
+            slot: create
+        }
+        appearance {
+            buttonTemplate: @/text-with-icon
+            hot: true
+            templateOptions: [
+                #DEFAULT#
+                t-Button--iconRight
+            ]
+            icon: fa-chevron-right
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P130_PROFILE_EDIT
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    dynamicAction pass-natid (
+        name: pass_natId
+        execution {
+            sequence: 20
+        }
+        when {
+            selectionType: items
+            items: P130_COUNTRY_ID
+        }
+        clientSideCondition {
+            type: jsExpression
+            javaScriptExpression: $v('P130_COUNTRY_ID').trim() === '' || $v('P130_COUNTRY_ID').trim() === '63';
+        }
+
+        action native-hide (
+            action: hide
+            affectedElements {
+                selectionType: items
+                items: P130_NATIONAL_ID
+            }
+            execution {
+                sequence: 10
+                fireWhenEventResultIs: false
+            }
+        )
+
+        action native-show (
+            action: show
+            affectedElements {
+                selectionType: items
+                items: P130_NATIONAL_ID
+            }
+            execution {
+                sequence: 10
+            }
+        )
+
+    )
+
+    dynamicAction passport-or-natid (
+        name: passport_or_natID
+        execution {
+            sequence: 10
+        }
+        when {
+            selectionType: items
+            items: P130_COUNTRY_ID
+        }
+        clientSideCondition {
+            type: jsExpression
+            javaScriptExpression: $v('P130_COUNTRY_ID').trim() !== '' && $v('P130_COUNTRY_ID').trim() !== '63'
+        }
+
+        action native-hide (
+            action: hide
+            affectedElements {
+                selectionType: items
+                items: P130_PASSPORT_NUMBER
+            }
+            execution {
+                sequence: 10
+                fireWhenEventResultIs: false
+            }
+        )
+
+        action native-show (
+            action: show
+            affectedElements {
+                selectionType: items
+                items: P130_PASSPORT_NUMBER
+            }
+            execution {
+                sequence: 10
+            }
+        )
+
+    )
+
+    dynamicAction select-country-phone-code (
+        name: select country phone code
+        execution {
+            sequence: 30
+        }
+        when {
+            selectionType: items
+            items: P130_COUNTRY_ID
+        }
+
+        action native-refresh (
+            action: refresh
+            affectedElements {
+                selectionType: items
+                items: P130_COUNTRY_PHONE_CODE_ID
+            }
+            execution {
+                sequence: 20
+                fireOnInit: false
+            }
+        )
+
+        action native-set-value (
+            action: setValue
+            settings {
+                type: sqlQuery
+                sqlQuery: select country.phone_code from country country where id = :P130_COUNTRY_ID;
+                itemsToSubmit: P130_COUNTRY_ID
+            }
+            affectedElements {
+                selectionType: items
+                items: P130_COUNTRY_PHONE_CODE_ID
+            }
+            execution {
+                sequence: 10
+            }
+        )
+
+    )
+
+    validation number-validation (
+        name: number_validation
+        execution {
+            sequence: 10
+        }
+        validation {
+            type: itemIsNumeric
+            item: P130_HOME_TELEPHONE
+        }
+        error {
+            errorMessage: "&{PHONE_NUMBER_MUST_BE_NUMBERS_ONLY}."
+            associatedItem: @P130_HOME_TELEPHONE
+        }
+    )
+
+    process create-personal-info (
+        name: Create_personal_info
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                -- DECLARE
+                --     v_personal_id NUMBER;
+                -- Begin
+                --     user_personal_info_pkg.Save_Personal_data(:P130_MARITAL_STATUS_1, :P130_MILITARY_STATUS_1, :P130_MOTHER_FULL_NAME_1,
+                --     :P130_NATIONAL_ID_IMAGE_1, TO_NUMBER(:APP_USER_ACC_ID), v_personal_id );
+                
+                --     :APP_USER_PERS_ID := v_personal_id;
+                
+                -- END;
+                
+                
+                DECLARE
+                    v_personal_id NUMBER;
+                Begin
+                    user_personal_info_pkg.Save_Personal_data(:P130_MARITAL_STATUS_1, :P130_MILITARY_STATUS_1, :P130_MOTHER_FULL_NAME_1,
+                    :P130_NATIONAL_ID_IMAGE_1, TO_NUMBER(:APP_USER_ACC_ID), v_personal_id );
+                
+                    :APP_USER_PERS_ID := v_personal_id;
+                
+                END;
+                ```
+        }
+        execution {
+            sequence: 40
+        }
+        advanced {
+            executionMappingIdentifier: 17917734765055616
+        }
+        serverSideCondition {
+            whenButtonPressed: @next-pers
+        }
+    )
+
+    process get-user-data-if-exist (
+        name: get user data if exist
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                -- BEGIN
+                --     IF :APP_USER_ACC_ID IS NULL THEN
+                --         RAISE_APPLICATION_ERROR(-20001, 'User session expired. Please login again.');
+                --     END IF;
+                --     SELECT ID,
+                --            first_name,
+                --            second_name,
+                --            last_name,
+                --            date_of_birth,
+                --            gender,
+                --            email,
+                --            home_telephone,
+                --            address,
+                --            city,
+                --            national_id,
+                --            passport_number,
+                --            country_id,
+                --            country_phone_code_id
+                --     INTO   :P130_ID,
+                --            :P130_FIRST_NAME,
+                --            :P130_SECOND_NAME,
+                --            :P130_LAST_NAME,
+                --            :P130_DATE_OF_BIRTH,
+                --            :P130_GENDER,
+                --            :P130_EMAIL,
+                --            :P130_HOME_TELEPHONE,
+                --            :P130_ADDRESS,
+                --            :P130_CITY,
+                --            :P130_NATIONAL_ID,
+                --            :P130_PASSPORT_NUMBER,
+                --            :P130_COUNTRY_ID,
+                --            :P130_COUNTRY_PHONE_CODE_ID
+                --     FROM account
+                --     WHERE id = :APP_USER_ACC_ID;
+                -- END;
+                
+                
+                BEGIN
+                    IF :APP_USER_ACC_ID IS NULL THEN
+                        RAISE_APPLICATION_ERROR(-20001, 'User session expired. Please login again.');
+                    END IF;
+                    SELECT ID,
+                           first_name,
+                           second_name,
+                           last_name,
+                           date_of_birth,
+                           gender,
+                           email,
+                           home_telephone,
+                           address,
+                           city_id,
+                           national_id,
+                           passport_number,
+                           country_id,
+                           country_phone_code_id,
+                           mobile_telephone
+                     INTO   :P130_ID,
+                           :P130_FIRST_NAME,
+                           :P130_SECOND_NAME,
+                           :P130_LAST_NAME,
+                           :P130_DATE_OF_BIRTH,
+                           :P130_GENDER,
+                           :P130_EMAIL,
+                           :P130_HOME_TELEPHONE,
+                           :P130_ADDRESS,
+                           :P130_CITY_ID,
+                           :P130_NATIONAL_ID,
+                           :P130_PASSPORT_NUMBER,
+                           :P130_COUNTRY_ID,
+                           :P130_COUNTRY_PHONE_CODE_ID,
+                           :P130_MOBILE_TELEPHONE
+                    FROM account
+                    WHERE id = :APP_USER_ACC_ID;
+                END;
+                ```
+        }
+        execution {
+            sequence: 20
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 17916950346055615
+        }
+    )
+
+    process get-user-pers-data-if-exists (
+        name: get user pers data if exists
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                
+                select p.id,p.id,p.mother_full_name, p.MILITARY_STATUS, p.MARITAL_STATUS 
+                into 
+                :APP_USER_PERS_ID ,:P130_Pers_id_1 ,:P130_MOTHER_FULL_NAME_1, :P130_MILITARY_STATUS_1, :P130_MARITAL_STATUS_1 
+                from personal_info p 
+                join MILITARY_STATUS mls on p.MILITARY_STATUS = mls.id 
+                join MARITAL_STATUS ms on p.MARITAL_STATUS = ms.id
+                where p.account_id = :APP_USER_ACC_ID;
+                
+                
+                exception
+                    when no_data_found then
+                        :P130_MOTHER_FULL_NAME_1 := null;
+                        :P130_MILITARY_STATUS_1  := null;
+                        :P130_MARITAL_STATUS_1   := null;
+                        :P130_PERS_ID_1 := null;
+                
+                end;
+                ```
+        }
+        execution {
+            sequence: 30
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 17917357191055616
+        }
+    )
+
+    process update-account (
+        name: Update account
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                Begin
+                
+                
+                    user_personal_info_pkg.Complete_account_data(:P130_FIRST_NAME, :P130_SECOND_NAME, :P130_LAST_NAME,
+                    :P130_DATE_OF_BIRTH, :P130_GENDER, :P130_EMAIL, :P130_HOME_TELEPHONE, :P130_ADDRESS, :P130_CITY_ID,
+                    :P130_NATIONAL_ID, :P130_PASSPORT_NUMBER, :P130_COUNTRY_ID, :P130_COUNTRY_PHONE_CODE_ID, :P130_MOBILE_TELEPHONE ,:APP_USER_ACC_ID);
+                
+                
+                end;
+                ```
+        }
+        execution {
+            sequence: 10
+        }
+        advanced {
+            executionMappingIdentifier: 17916508043055615
+        }
+    )
+
+    process update-personal-info (
+        name: Update Personal info
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                -- Begin
+                
+                -- -- BEGIN
+                -- --     raise_application_error(
+                -- --         -20001,
+                -- --         'Marital=' || :P130_MARITAL_STATUS ||
+                -- --         ' | Military=' || :P130_MILITARY_STATUS
+                -- --     );
+                -- -- END;
+                --     user_personal_info_pkg.Update_Personal_data(:P130_MARITAL_STATUS_1, :P130_MILITARY_STATUS_1, :P130_MOTHER_FULL_NAME_1, :P130_NATIONAL_ID_IMAGE_1, :P130_PERS_ID_1);
+                -- END;
+                
+                Begin
+                
+                -- BEGIN
+                --     raise_application_error(
+                --         -20001,
+                --         'Marital=' || :P119_MARITAL_STATUS ||
+                --         ' | Military=' || :P119_MILITARY_STATUS
+                --     );
+                -- END;
+                    user_personal_info_pkg.Update_Personal_data(:P130_MARITAL_STATUS_1, :P130_MILITARY_STATUS_1, :P130_MOTHER_FULL_NAME_1, :P130_NATIONAL_ID_IMAGE_1, :P130_PERS_ID_1);
+                END;
+                ```
+        }
+        execution {
+            sequence: 50
+        }
+        advanced {
+            executionMappingIdentifier: 17918174425055616
+        }
+        serverSideCondition {
+            whenButtonPressed: @save-pers
+        }
+    )
+
+    branch (
+        name: Go To Profile
+        execution {
+            sequence: 30
+        }
+        behavior {
+            target: {
+                page: 113
+            }
+        }
+        serverSideCondition {
+            whenButtonPressed: @save-pers
+            type: itemIsNotNull
+            item: P130_PROFILE_EDIT
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    branch (
+        name: Go To Page 121
+        execution {
+            sequence: 20
+        }
+        behavior {
+            target: {
+                page: 121
+            }
+        }
+        serverSideCondition {
+            whenButtonPressed: @next
+        }
+    )
+
+    branch (
+        name: Go To P info data
+        execution {
+            sequence: 11
+        }
+        behavior {
+            target: {
+                page: 108
+            }
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    branch (
+        name: Go To Profile
+        execution {
+            sequence: 40
+        }
+        behavior {
+            target: {
+                page: 113
+            }
+        }
+        serverSideCondition {
+            whenButtonPressed: @save-pers
+        }
+    )
+
+    branch (
+        name: Go To Page 121
+        execution {
+            sequence: 60
+        }
+        behavior {
+            target: {
+                page: 121
+            }
+        }
+        serverSideCondition {
+            whenButtonPressed: @next-pers
+        }
+    )
+
+)

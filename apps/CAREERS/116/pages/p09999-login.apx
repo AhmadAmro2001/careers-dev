@@ -1,0 +1,1125 @@
+page 9999 (
+    name: Login Page
+    alias: LOGIN
+    title: "&{CAREERS_LOG_IN}."
+    appearance {
+        pageTemplate: @/login
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        warnOnUnsavedChanges: false
+    }
+    javaScript {
+        fileUrls: https://www.google.com/recaptcha/api.js
+    }
+    css {
+        fileUrls: #APP_FILES#careers#MIN#.css
+        inline:
+            ```css
+            .no-border-item input {
+                border: none !important;
+                background: transparent !important;
+                box-shadow: none !important;
+                outline: none !important;
+                pointer-events: none;
+                font-size: 18px;
+                font-weight: bold;
+                color: #2c3e50;
+            }
+            
+            
+            
+            body {
+                background-image: url("#APP_FILES#CareerBackGround4.jpg");
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+            }
+            
+            
+            /* Secondary Action (Back) */
+            #Login {
+                /* background: transparent !important; */
+                background: rgba(9, 8, 66, 1) !important;
+                color: rgba(255, 255, 255, 0.7) !important;
+                border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            }
+            
+            #Login:hover {
+                color: #000000ff !important;
+                border-color: #ffffff !important;
+                background: rgba(9, 8, 66, 0.36) !important;
+            }
+            
+            
+            #caution .t-Region-body {
+                padding-top: 0 !important;
+            }
+            
+            #caution .t-Region-content {
+                padding-top: 0 !important;
+            
+            
+            }
+            
+            #eprom-warning .t-Region-body {
+                padding-top: 0 !important;
+            }
+            
+            #eprom-warning .t-Region-content {
+                padding-top: 0 !important;
+            }
+            ```
+    }
+    security {
+        authentication: public
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region careers (
+        name: careers
+        title: EPROM Careers
+        type: staticContent
+        layout {
+            sequence: 30
+            slot: contentBody
+            startNewRow: false
+        }
+        appearance {
+            template: @/login
+            templateOptions: [
+                #DEFAULT#
+                t-Login-region--headerHidden js-removeLandmark
+                margin-left-none
+            ]
+        }
+    )
+
+    region caution (
+        name: caution
+        type: staticContent
+        source {
+            htmlCode:
+                ```html
+                <div class="eprom-warning" style = "padding-top: 0px;">
+                
+                    <h3>   ⚠️ Caution </h3>
+                
+                    <p>
+                        ⚠️ In our commitment to protecting citizens and maintaining our credibility,
+                        EPROM strongly warns and fully disclaims any responsibility against fake entities,
+                        individuals, online pages or phone numbers spreading misleading information falsely
+                        claiming to act as intermediaries offering job opportunities in the name of EPROM.
+                    </p>
+                
+                    <p><strong>The company affirms the following:</strong></p>
+                
+                    <ul>
+                        <li>✅ There are no authorized intermediaries for offering job opportunities, whether inside or outside the country.</li>
+                        <li>✅ All services and job opportunities are announced exclusively through the company’s official channels.</li>
+                        <li>✅ All services are provided completely free of charge, with no fees or commissions whatsoever.</li>
+                    </ul>
+                
+                    <p>
+                        🚫 We urge everyone not to share any personal information with unknown parties
+                        impersonating the company.
+                    </p>
+                
+                    <p>
+                        <strong>For your safety… Always verify through the EPROM official channels.</strong>
+                    </p>
+                
+                </div>
+                ```
+        }
+        layout {
+            sequence: 20
+            slot: contentBody
+        }
+        appearance {
+            template: @/login
+            templateOptions: [
+                #DEFAULT#
+                t-Login-region--headerHidden js-removeLandmark
+                js-headingLevel-6
+                t-Form--leftLabels
+                margin-right-sm
+            ]
+        }
+    )
+
+    region guide-message (
+        name: guide message
+        type: staticContent
+        source {
+            htmlCode:
+                ```html
+                <div class="guide-box">
+                    <!-- " -->
+                    <div class="guide-icon">
+                        <span class="fa fa-info-circle"></span>
+                    </div>
+                
+                    <div class="guide-content">
+                        <!-- <div class="guide-title">
+                            User Guide
+                        </div> -->
+                
+                        <p>
+                            Please Enter the Registered Email & Password  (Capital letters & Special Characters counts!).
+                        </p>
+                    </div>
+                </div>
+                ```
+        }
+        layout {
+            sequence: 10
+            parentRegion: @careers
+            slot: regionBody
+        }
+        appearance {
+            template: @/content-block
+            templateOptions: [
+                #DEFAULT#
+                t-ContentBlock--h1
+                t-Region--removeHeader js-removeLandmark
+            ]
+        }
+    )
+
+    region recaptcha (
+        name: RECAPTCHA
+        type: staticContent
+        source {
+            htmlCode: <div class="g-recaptcha" data-sitekey="&RECAPTCHAV2_SITE_KEY."></div>
+        }
+        layout {
+            sequence: 80
+            parentRegion: @careers
+            slot: regionBody
+        }
+        appearance {
+            template: @/blank-with-attributes
+            templateOptions: [
+                #DEFAULT#
+                t-Form--stretchInputs
+                t-Form--labelsAbove
+                margin-top-md
+                margin-bottom-lg
+            ]
+        }
+    )
+
+    pageItem P9999_CREATE_ACC (
+        type: textField
+        label {
+            label: "&{CREATE_NEW_ACCOUNT}."
+            alignment: left
+        }
+        layout {
+            sequence: 60
+            region: @careers
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-above
+            templateOptions: #DEFAULT#
+            cssClasses: no-border-item
+            width: 30
+        }
+        advanced {
+            customAttributes: readonly
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    pageItem P9999_IS_ADMIN (
+        type: hidden
+        layout {
+            sequence: 60
+            slot: contentBody
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    pageItem P9999_PASSWORD (
+        type: password
+        label {
+            label: "&{PASSWORD}."
+            alignment: left
+        }
+        layout {
+            sequence: 30
+            region: @careers
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/hidden
+            templateOptions: #DEFAULT#
+            icon: fa-key
+            width: 40
+            valuePlaceholder: "&{PASSWORD}."
+        }
+        validation {
+            maxLength: 100
+        }
+        advanced {
+            customAttributes: autocomplete="current-password"
+        }
+        sessionState {
+            storage: request
+        }
+    )
+
+    pageItem P9999_PERS_ID (
+        type: hidden
+        layout {
+            sequence: 50
+            slot: contentBody
+        }
+    )
+
+    pageItem P9999_PERS_ID_CHECK (
+        type: hidden
+        layout {
+            sequence: 40
+            slot: contentBody
+        }
+    )
+
+    pageItem P9999_RECAPTCHA_RESPONSE (
+        type: hidden
+        settings {
+            valueProtected: false
+        }
+        layout {
+            sequence: 10
+            region: @recaptcha
+            slot: regionBody
+        }
+    )
+
+    pageItem P9999_REMEMBER (
+        type: checkbox
+        label {
+            label: Remember Email
+            alignment: left
+        }
+        layout {
+            sequence: 50
+            region: @careers
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/hidden
+            templateOptions: #DEFAULT#
+        }
+        serverSideCondition {
+            type: expression
+            plsqlExpression: apex_authentication.persistent_cookies_enabled
+        }
+    )
+
+    pageItem P9999_RES (
+        type: hidden
+        settings {
+            valueProtected: false
+        }
+        layout {
+            sequence: 20
+            region: @recaptcha
+            slot: regionBody
+        }
+    )
+
+    pageItem P9999_USERNAME (
+        type: textField
+        label {
+            label: "&{EMAIL}."
+            alignment: left
+        }
+        settings {
+            submitWhenEnterPressed: true
+        }
+        layout {
+            sequence: 20
+            region: @careers
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/hidden
+            templateOptions: #DEFAULT#
+            icon: fa-user
+            width: 40
+            valuePlaceholder: "&{Email}."
+        }
+        validation {
+            maxLength: 100
+        }
+        advanced {
+            customAttributes: autocomplete="username"
+        }
+        sessionState {
+            storage: request
+        }
+    )
+
+    pageItem P9999_USER_TYPE (
+        type: hidden
+        layout {
+            sequence: 70
+            region: @careers
+            slot: regionBody
+        }
+    )
+
+    button create-acc (
+        buttonName: Create_acc
+        label: Create New Account ?
+        layout {
+            sequence: 10
+            region: @careers
+            slot: edit
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: [
+                #DEFAULT#
+                t-Button--large
+                t-Button--success
+                t-Button--link
+                t-Button--gapLeft
+                t-Button--gapRight
+            ]
+            cssClasses: readonly
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 100
+            }
+        }
+    )
+
+    button forget-password_1 (
+        buttonName: Forget_Password
+        label: Forget Password ?
+        layout {
+            sequence: 20
+            region: @careers
+            slot: edit
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: [
+                #DEFAULT#
+                t-Button--large
+                t-Button--danger
+                t-Button--link
+            ]
+            cssClasses: readonly
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 2
+                items: {
+                    P2_REGION_CHECK: 0
+                }
+                clearCache: 2
+                action: clearRegions
+            }
+        }
+    )
+
+    button login (
+        buttonName: LOGIN
+        label: "&{SIGN_IN}."
+        layout {
+            sequence: 40
+            region: @careers
+            slot: next
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: [
+                #DEFAULT#
+                t-Button--stretch
+            ]
+        }
+        behavior {
+            action: triggerAction
+        }
+        advanced {
+            htmlDomId: Login
+        }
+
+        triggerAction native-javascript-code (
+            action: executeJsCode
+            settings {
+                jsCode:
+                    ```javascript-browser
+                    var response = grecaptcha.getResponse();
+                    apex.item("P9999_RECAPTCHA_RESPONSE").setValue(response);
+                    // This removes it from POST completely.
+                    $('textarea[name="g-recaptcha-response"]').removeAttr('name');
+                    ```
+            }
+            execution {
+                sequence: 10
+            }
+        )
+
+        triggerAction native-submit-page (
+            action: submitPage
+            settings {
+                requestButtonName: CHECK_MAIL_PASS
+            }
+            execution {
+                sequence: 20
+            }
+        )
+
+    )
+
+    button problem-btn (
+        buttonName: Problem_btn
+        label: Have Any Problem ?
+        layout {
+            sequence: 20
+            region: @careers
+            slot: create
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: [
+                #DEFAULT#
+                t-Button--large
+                t-Button--danger
+                t-Button--link
+                t-Button--stretch
+            ]
+            cssClasses: readonly
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 133
+                items: {
+                    P133_REGION_CHECK: 1
+                }
+                clearCache: 133
+                action: clearRegions
+            }
+        }
+    )
+
+    button register (
+        buttonName: Register
+        label: "&{REGISTER}."
+        layout {
+            sequence: 40
+            region: @careers
+            slot: edit
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: [
+                #DEFAULT#
+                t-Button--large
+                t-Button--link
+            ]
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 100
+            }
+            warnOnUnsavedChanges: doNotCheck
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    validation validate-recaptcha (
+        name: validate recaptcha
+        execution {
+            sequence: 10
+        }
+        validation {
+            type: functionBodyReturningBoolean
+            plsqlFunctionBody:
+                ```plsql
+                DECLARE
+                    l_response   CLOB;
+                    l_result     VARCHAR2(32767);
+                BEGIN
+                    apex_web_service.g_request_headers(1).name  := 'Content-Type';
+                    apex_web_service.g_request_headers(1).value := 'application/x-www-form-urlencoded';
+                
+                    l_response := apex_web_service.make_rest_request(
+                        p_url         => 'https://www.google.com/recaptcha/api/siteverify',
+                        p_http_method => 'POST',
+                        p_body        => 'secret='|| :RECAPTCHAV2_SECRETE_KEY
+                                      || '&response=' || :P9999_RECAPTCHA_RESPONSE
+                    );
+                
+                    -- Check success
+                 IF INSTR(l_response, '"success": true') = 0 THEN
+                        return false;
+                    END IF;
+                
+                
+                :P9999_RES := l_response;
+                return true;
+                END;
+                ```
+        }
+        error {
+            errorMessage: reCAPTCHA validation failed.
+        }
+        serverSideCondition {
+            type: request=Value
+            value: CHECK_MAIL_PASS
+        }
+    )
+
+    process clear-page-s-cache (
+        name: Clear Page(s) Cache
+        type: clearSessionState
+        execution {
+            sequence: 90
+        }
+        advanced {
+            executionMappingIdentifier: 332081465326699696
+        }
+    )
+
+    process get-username-cookie (
+        name: Get Username Cookie
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                :P9999_USERNAME := apex_authentication.get_login_username_cookie;
+                :P9999_REMEMBER := case when :P9999_USERNAME is not null then 'Y' end;
+                ```
+        }
+        execution {
+            sequence: 10
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 332081069096699696
+        }
+    )
+
+    process login (
+        name: Login
+        type: invokeApi
+        invoke {
+            package: APEX_AUTHENTICATION
+            procedureOrFunction: LOGIN
+        }
+        execution {
+            sequence: 30
+        }
+        error {
+            errorMessage: Invalid Credentials
+        }
+        advanced {
+            executionMappingIdentifier: 332077680882699692
+        }
+
+        parameter p_password (
+            value {
+                type: item
+                item: P9999_PASSWORD
+            }
+            advanced {
+                displaySequence: 2
+            }
+        )
+
+        parameter p_set_persistent_auth (
+            parameter {
+                dataType: boolean
+                hasDefault: true
+            }
+            value {
+                type: apiDefault
+            }
+            advanced {
+                displaySequence: 3
+            }
+        )
+
+        parameter p_username (
+            value {
+                type: item
+                item: P9999_USERNAME
+            }
+            advanced {
+                displaySequence: 1
+            }
+        )
+
+    )
+
+    process logout-process (
+        name: logout Process
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                    APEX_UTIL.SET_SESSION_STATE('APP_USER_ACC_ID', NULL);
+                    APEX_UTIL.SET_SESSION_STATE('APP_USER_PERS_ID', NULL);
+                    -- apex_authentication.logout;
+                end;
+                ```
+        }
+        execution {
+            sequence: 100
+        }
+        advanced {
+            executionMappingIdentifier: 22277691394125367
+        }
+        serverSideCondition {
+            type: request=Value
+            value: LOGOUT
+        }
+    )
+
+    process new (
+        name: Redirect
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                DECLARE
+                    l_user account%rowtype;
+                    cred_result boolean;
+                    invalid_cred exception;
+                    l_reset number;
+                BEGIN
+                
+                    
+                
+                    select count(*)
+                    into l_reset
+                    from admin 
+                    where upper(email) = upper(:P9999_USERNAME);
+                
+                    cred_result := USER_ACCOUNT_PACKAGE.authenticate(
+                        :P9999_USERNAME,
+                        :P9999_PASSWORD
+                        );
+                
+                
+                    if cred_result = true and l_reset > 0 then 
+                
+                
+                    IF :G_USER_ROLE = 1 THEN
+                            apex_util.redirect_url(
+                                apex_page.get_url(
+                                    p_page   => 102,
+                                    p_items  => 'P102_EMAIL',
+                                    p_values => :P9999_USERNAME
+                                )
+                            );
+                        END IF;  
+                
+                
+                
+                    elsif   l_reset = 0 then
+                
+                        SELECT *
+                        INTO l_user
+                        FROM account
+                        WHERE upper(email) = upper(:P9999_USERNAME);  
+                
+                        IF :G_USER_ROLE = 0 and cred_result = true and (l_user.RESET_PASSWORD_FLG = 1  ) THEN
+                
+                                apex_util.redirect_url(
+                                apex_page.get_url(
+                                    p_page   => 102,
+                                    p_items  => 'P102_PERS_ID_CHECK,P102_EMAIL' ,
+                                    p_values => :P9999_PERS_ID_CHECK || ',' || :P9999_USERNAME 
+                
+                                )
+                            );
+                
+                            -- end if;
+                         elsif :G_USER_ROLE = 0 and  (l_user.RESET_PASSWORD_FLG = 0  ) then
+                            apex_util.redirect_url(
+                            apex_page.get_url(
+                                p_page   => 106,
+                                p_items  => 'P106_ACC_ID' ,
+                                p_values => l_user.id
+                
+                                )
+                            );
+                            
+                        -- ELSE
+                        --     apex_util.redirect_url('f?p=&APP_ID.:9999:&SESSION.'); -- fallback page
+                        END IF;
+                        
+                   
+                        
+                
+                    else 
+                        
+                
+                            raise invalid_cred;
+                   
+                    end if;
+                    
+                
+                EXCEPTION
+                    WHEN invalid_cred THEN
+                        RAISE_APPLICATION_ERROR(-20022,'Invalid Cred.');
+                
+                    
+                END;
+                
+                
+                
+                ```
+        }
+        execution {
+            sequence: 70
+        }
+        advanced {
+            executionMappingIdentifier: 17176128863907636
+        }
+    )
+
+    process personal-check (
+        name: Personal_check
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                    :P9999_PERS_ID_Check := user_account_package.Personal_exist_check(:APP_USER_ACC_ID);
+                    if :P9999_PERS_ID_CHECK != 0 and :APP_USER_PERS_ID is not null then
+                        :PERSONAL_CHECK := JOB_APPLICATION_PKG.check_complete_personal_info(:APP_USER_PERS_ID);
+                    end if ;
+                end;
+                ```
+        }
+        execution {
+            sequence: 50
+        }
+        advanced {
+            executionMappingIdentifier: 21362260292211166
+        }
+    )
+
+    process reset-password (
+        name: Reset Password
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                DECLARE
+                    reset_flag varchar2(50);
+                    v_acc_id number;
+                
+                BEGIN
+                
+                    reset_flag := PKG_ADMIN.reset_pass_check(:P9999_USERNAME);
+                
+                    if reset_flag = 'RESET_ADMIN' then
+                        APEX_UTIL.REDIRECT_URL(
+                                APEX_PAGE.GET_URL(
+                                    p_page   => 201,
+                                    p_items  => 'P201_USERNAME',
+                                    p_values => :P9999_USERNAME
+                                )
+                            );
+                        apex_application.stop_apex_engine;
+                    elsif reset_flag = 'RESET_USER' then
+                        select id into v_acc_id from account where lower(email) = lower(:P9999_USERNAME);
+                         APEX_UTIL.REDIRECT_URL(
+                            APEX_PAGE.GET_URL(
+                                p_page => 106,
+                                p_items  => 'P106_ACC_ID',
+                                p_values => v_acc_id
+                            )
+                        );
+                        apex_application.stop_apex_engine;
+                    else 
+                        NULL;
+                    end if;
+                END;
+                ```
+        }
+        execution {
+            sequence: 20
+            point: afterSubmit
+        }
+        advanced {
+            executionMappingIdentifier: 16988071802402318
+        }
+        serverSideCondition {
+            whenButtonPressed: @login
+        }
+    )
+
+    process set-ids (
+        name: Set ids
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                declare
+                
+                v_admin_id varchar2(100);
+                v_acc_id number;
+                
+                
+                begin
+                --  :G_USER_ROLE := null;
+                -- raise_application_error(-20111,:APP_USER_ACC_ID);
+                    APEX_UTIL.SET_SESSION_STATE('APP_USER_ACC_ID', NULL);
+                    APEX_UTIL.SET_SESSION_STATE('APP_USER_PERS_ID', NULL);
+                
+                    -- :P103_ACC_ID := user_account_package.login(:P103_MOBILE_TELEPHONE, :P103_PASSWORD);
+                    if :G_USER_ROLE = 1 then
+                        select id into v_admin_id from admin where upper(email) = upper(:P9999_USERNAME);
+                        APEX_UTIL.SET_SESSION_STATE('G_USER_ROLE', 1);
+                        -- :P9999_IS_ADMIN := 1;
+                    else
+                        APEX_UTIL.SET_SESSION_STATE('G_USER_ROLE', 0);
+                        select id into v_acc_id from account where upper(email) = upper(:P9999_USERNAME);
+                    end if;
+                
+                    APEX_UTIL.SET_SESSION_STATE('APP_USER_ACC_ID', v_acc_id);
+                
+                     BEGIN
+                        SELECT id
+                        INTO :P9999_PERS_ID
+                        FROM personal_info
+                        WHERE account_id = :APP_USER_ACC_ID;
+                
+                        APEX_UTIL.SET_SESSION_STATE('APP_USER_PERS_ID', :P9999_PERS_ID);
+                
+                    EXCEPTION
+                        WHEN NO_DATA_FOUND THEN
+                            APEX_UTIL.SET_SESSION_STATE('APP_USER_PERS_ID', NULL);
+                    END;
+                END;
+                
+                ```
+        }
+        execution {
+            sequence: 40
+        }
+        error {
+            errorMessage: Invalid Credentials
+        }
+        advanced {
+            executionMappingIdentifier: 17174137093907616
+        }
+    )
+
+    process set-username-cookie (
+        name: Set Username Cookie
+        type: invokeApi
+        invoke {
+            package: APEX_AUTHENTICATION
+            procedureOrFunction: SEND_LOGIN_USERNAME_COOKIE
+        }
+        execution {
+            sequence: 10
+        }
+        advanced {
+            executionMappingIdentifier: 332079524804699695
+        }
+
+        parameter p_consent (
+            parameter {
+                dataType: boolean
+            }
+            value {
+                type: item
+                item: P9999_REMEMBER
+            }
+            advanced {
+                displaySequence: 2
+            }
+        )
+
+        parameter p_username (
+            value {
+                type: expression
+                plsqlExpression: lower( :P9999_USERNAME )
+            }
+            advanced {
+                displaySequence: 1
+            }
+        )
+
+    )
+
+    process verfication (
+        name: Verfication
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                DECLARE
+                    l_code VARCHAR2(6);
+                    l_reset number;
+                    l_test number;
+                    cred_result boolean;
+                    invalid_cred exception;
+                
+                BEGIN
+                
+                    cred_result := USER_ACCOUNT_PACKAGE.authenticate(
+                        :P9999_USERNAME,
+                        :P9999_PASSWORD
+                        );
+                
+                    select count(*)
+                    into l_test
+                    from admin 
+                    where upper(email) = upper(:P9999_USERNAME);
+                
+                
+                
+                -- and (l_reset = 1)
+                if cred_result = true and l_test = 0  then
+                
+                    select RESET_PASSWORD_FLG
+                    into l_reset
+                    from account 
+                    where upper(email) = upper(:P9999_USERNAME);
+                    if l_reset = 1 then
+                    -- generate 6-digit OTP
+                        l_code := LPAD(TRUNC(DBMS_RANDOM.VALUE(0, 999999)), 6, '0');
+                
+                
+                        IF :P9999_USERNAME IS NULL THEN
+                            raise_application_error(-20002, 'Email is required');
+                        END IF;
+                
+                
+                    -- store code
+                        INSERT INTO user_verification (email, code, expires_at)
+                        VALUES (
+                            :P9999_USERNAME,
+                            l_code,
+                            SYSTIMESTAMP + INTERVAL '10' MINUTE
+                        );
+                
+                    -- send email
+                        APEX_MAIL.SEND(
+                            p_to   => :P9999_USERNAME,
+                            p_from => 'apex@eprom.com.eg',
+                            p_subj => 'Login Verification Code',
+                            p_body => 'Your verification code is: ' || l_code ||
+                                      CHR(10) || 'It expires in 10 minutes.'
+                        );
+                
+                        APEX_MAIL.PUSH_QUEUE;
+                    end if;
+                    -- and (l_reset = 1 )
+                elsif cred_result = true and l_test = 1  then
+                     l_code := LPAD(TRUNC(DBMS_RANDOM.VALUE(0, 999999)), 6, '0');
+                
+                
+                        IF :P9999_USERNAME IS NULL THEN
+                            raise_application_error(-20002, 'Email is required');
+                        END IF;
+                
+                
+                    -- store code
+                        INSERT INTO user_verification (email, code, expires_at)
+                        VALUES (
+                            :P9999_USERNAME,
+                            l_code,
+                            SYSTIMESTAMP + INTERVAL '10' MINUTE
+                        );
+                
+                    -- send email
+                        APEX_MAIL.SEND(
+                            p_to   => :P9999_USERNAME,
+                            p_from => 'apex@eprom.com.eg',
+                            p_subj => 'Login Verification Code',
+                            p_body => 'Your verification code is: ' || l_code ||
+                                      CHR(10) || 'It expires in 10 minutes.'
+                        );
+                
+                        APEX_MAIL.PUSH_QUEUE;
+                -- else  
+                --     raise invalid_cred;
+                end if;
+                -- EXCEPTION
+                --     WHEN invalid_cred THEN
+                --         RAISE_APPLICATION_ERROR(-20024,'Invalid Cred.');
+                END;
+                ```
+        }
+        execution {
+            sequence: 60
+        }
+        advanced {
+            executionMappingIdentifier: 44876179820641619
+        }
+    )
+
+    branch (
+        name: logout process
+        execution {
+            sequence: 30
+        }
+        behavior {
+            target: {
+                page: 9999
+            }
+        }
+        serverSideCondition {
+            type: request=Value
+            value: LOGOUT
+        }
+    )
+
+    branch (
+        name: otp
+        execution {
+            sequence: 40
+        }
+        behavior {
+            target: {
+                page: 2
+                items: {
+                    P2_EMAIL: &P9999_USERNAME.
+                }
+            }
+        }
+        serverSideCondition {
+            whenButtonPressed: @forget-password_1
+        }
+    )
+
+)

@@ -1,0 +1,520 @@
+page 103 (
+    name: Login
+    alias: LOGIN1
+    title: "&{LOGIN}."
+    appearance {
+        pageTemplate: @/login
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    css {
+        inline:
+            ```css
+            .no-border-item input {
+                border: none !important;
+                background: transparent !important;
+                box-shadow: none !important;
+                outline: none !important;
+                pointer-events: none;
+                font-size: 18px;
+                font-weight: bold;
+                color: #2c3e50;
+            }
+            ```
+    }
+    security {
+        authentication: public
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region login (
+        name: Login
+        title: "&{WELCOME_BACK}."
+        type: form
+        source {
+            location: localDatabase
+            tableName: ACCOUNT
+        }
+        layout {
+            sequence: 10
+            slot: contentBody
+            column: 5
+            columnSpan: 4
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        edit {
+            enabled: true
+            allowedOperations: [
+                add
+                update
+                delete
+            ]
+        }
+    )
+
+    pageItem P103_ACC_ID (
+        type: hidden
+        layout {
+            sequence: 60
+            region: @login
+            slot: regionBody
+        }
+    )
+
+    pageItem P103_CREATE_ACC (
+        type: textField
+        label {
+            label: "&{CREATE_NEW_ACCOUNT}."
+            alignment: left
+        }
+        layout {
+            sequence: 100
+            region: @login
+            slot: regionBody
+            alignment: left
+            column: 1
+            columnSpan: 3
+        }
+        appearance {
+            template: @/optional-above
+            templateOptions: #DEFAULT#
+            cssClasses: no-border-item
+            width: 30
+        }
+        advanced {
+            customAttributes: readonly
+        }
+    )
+
+    pageItem P103_EMAIL (
+        type: textField
+        label {
+            label: "&{EMAIL}."
+            alignment: left
+        }
+        layout {
+            sequence: 20
+            region: @login
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            width: 32
+        }
+        validation {
+            maxLength: 200
+        }
+        source {
+            formRegion: @login
+            column: EMAIL
+            dataType: varchar2
+        }
+    )
+
+    pageItem P103_ID (
+        type: hidden
+        layout {
+            sequence: 10
+            region: @login
+            slot: regionBody
+        }
+        source {
+            formRegion: @login
+            column: ID
+            dataType: number
+            queryOnly: true
+            primaryKey: true
+        }
+        security {
+            sessionStateProtection: checksumRequiredSessionLevel
+        }
+    )
+
+    pageItem P103_PASSWORD (
+        type: password
+        label {
+            label: "&{PASSWORD}."
+            alignment: left
+        }
+        layout {
+            sequence: 40
+            region: @login
+            slot: regionBody
+            alignment: left
+        }
+        appearance {
+            template: @/required-floating
+            templateOptions: #DEFAULT#
+            width: 60
+        }
+        validation {
+            valueRequired: true
+            maxLength: 4000
+        }
+        source {
+            formRegion: @login
+            column: PASSWORD
+            dataType: varchar2
+        }
+    )
+
+    pageItem P103_PERS_ID (
+        type: hidden
+        layout {
+            sequence: 80
+            region: @login
+            slot: regionBody
+        }
+    )
+
+    pageItem P103_PERS_ID_CHECK (
+        type: hidden
+        layout {
+            sequence: 90
+            region: @login
+            slot: regionBody
+        }
+    )
+
+    pageItem P103_RESET_FLAG (
+        type: hidden
+        layout {
+            sequence: 70
+            region: @login
+            slot: regionBody
+        }
+    )
+
+    button cancel (
+        buttonName: CANCEL
+        label: "&{CANCEL}."
+        layout {
+            sequence: 10
+            region: @login
+            slot: close
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 1
+            }
+            warnOnUnsavedChanges: doNotCheck
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    button create (
+        buttonName: CREATE
+        label: "&{LOGIN}."
+        layout {
+            sequence: 50
+            region: @login
+            slot: regionBody
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: [
+                #DEFAULT#
+                t-Button--primary
+                t-Button--stretch
+            ]
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+        }
+        serverSideCondition {
+            type: itemIsNull
+            item: P103_ID
+        }
+    )
+
+    button delete (
+        buttonName: DELETE
+        label: "&{DELETE}."
+        layout {
+            sequence: 20
+            region: @login
+            slot: delete
+        }
+        appearance {
+            buttonTemplate: @/text
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            executeValidations: false
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: delete
+            requiresConfirmation: true
+        }
+        confirmation {
+            message: &APP_TEXT$DELETE_MSG!RAW.
+            style: danger
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P103_ID
+        }
+    )
+
+    button register (
+        buttonName: Register
+        label: "&{REGISTER}."
+        layout {
+            sequence: 110
+            region: @login
+            slot: regionBody
+            startNewRow: false
+            column: 4
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: [
+                #DEFAULT#
+                t-Button--large
+                t-Button--link
+            ]
+        }
+        behavior {
+            action: redirectThisApp
+            target: {
+                page: 100
+            }
+            warnOnUnsavedChanges: doNotCheck
+        }
+    )
+
+    button save (
+        buttonName: SAVE
+        label: "&{APPLY_CHANGES}."
+        layout {
+            sequence: 30
+            region: @login
+            slot: change
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            warnOnUnsavedChanges: doNotCheck
+            databaseAction: update
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P103_ID
+        }
+    )
+
+    process initialize-form-login (
+        name: Initialize form Login
+        type: formInitialization
+        formRegion: @login
+        execution {
+            sequence: 10
+            point: beforeHeader
+        }
+        advanced {
+            executionMappingIdentifier: 336029149211817890
+        }
+    )
+
+    process login (
+        name: Login
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                    APEX_UTIL.SET_SESSION_STATE('APP_USER_ACC_ID', NULL);
+                    APEX_UTIL.SET_SESSION_STATE('APP_USER_PERS_ID', NULL);
+                
+                    :P103_ACC_ID := user_account_package.login(:P103_EMAIL, :P103_PASSWORD);
+                    APEX_UTIL.SET_SESSION_STATE('APP_USER_ACC_ID', :P103_ACC_ID);
+                
+                     BEGIN
+                        SELECT id
+                        INTO :P103_PERS_ID
+                        FROM personal_info
+                        WHERE account_id = :P103_ACC_ID;
+                
+                        APEX_UTIL.SET_SESSION_STATE('APP_USER_PERS_ID', :P103_PERS_ID);
+                
+                    EXCEPTION
+                        WHEN NO_DATA_FOUND THEN
+                            APEX_UTIL.SET_SESSION_STATE('APP_USER_PERS_ID', NULL);
+                    END;
+                END;
+                
+                
+                ```
+        }
+        execution {
+            sequence: 30
+        }
+        advanced {
+            executionMappingIdentifier: 315099914269516327
+        }
+        serverSideCondition {
+            whenButtonPressed: @create
+            type: itemIsNull
+            item: P103_RESET_FLAG
+        }
+    )
+
+    process personal-check (
+        name: Personal_check
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                    :P103_PERS_ID_Check := user_account_package.Personal_exist_check(:APP_USER_ACC_ID);
+                end;
+                ```
+        }
+        execution {
+            sequence: 30
+        }
+        advanced {
+            executionMappingIdentifier: 352595605089134910
+        }
+    )
+
+    process process-form-login (
+        name: Process form Login
+        type: formAutoRowProcessing
+        formRegion: @login
+        execution {
+            sequence: 10
+        }
+        advanced {
+            executionMappingIdentifier: 336029585893817890
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    process reset-check (
+        name: Reset_Check
+        type: executeCode
+        source {
+            plsqlCode:
+                ```plsql
+                begin
+                    :P103_RESET_FLAG := user_account_package.Email_Check_To_Reset(:P103_EMAIL);
+                end;
+                ```
+        }
+        execution {
+            sequence: 20
+            point: afterSubmit
+        }
+        advanced {
+            executionMappingIdentifier: 315100510783516333
+        }
+    )
+
+    branch (
+        name: login redirect
+        execution {
+            sequence: 10
+            point: processing
+        }
+        behavior {
+            target: {
+                page: 104
+                items: {
+                    P104_ACC_ID: &P103_ACC_ID.
+                }
+                action: clearRegions
+            }
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P103_ACC_ID
+        }
+        config {
+            buildOption: @commented-out
+        }
+    )
+
+    branch (
+        name: reset_redirect
+        execution {
+            sequence: 10
+        }
+        behavior {
+            target: {
+                page: 106
+                items: {
+                    P106_ACC_ID: &P103_RESET_FLAG.
+                }
+            }
+        }
+        serverSideCondition {
+            type: itemIsNotNull
+            item: P103_RESET_FLAG
+        }
+    )
+
+    branch (
+        name: Go To Page 1
+        execution {
+            sequence: 30
+        }
+        behavior {
+            target: {
+                page: 104
+                items: {
+                    P104_ACC_ID: &P103_ACC_ID.
+                    P104_PERS_ID: &P103_PERS_ID.
+                }
+            }
+        }
+        serverSideCondition {
+            type: itemIsNull
+            item: P103_RESET_FLAG
+        }
+    )
+
+    branch (
+        name: Go To PersW
+        execution {
+            sequence: 20
+        }
+        behavior {
+            target: {
+                page: 119
+                items: {
+                    P104_ACC_ID: &P103_ACC_ID.
+                }
+            }
+        }
+        serverSideCondition {
+            type: itemIsZero
+            item: P103_PERS_ID_CHECK
+        }
+    )
+
+)
