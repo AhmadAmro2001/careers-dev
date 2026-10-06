@@ -298,7 +298,8 @@ page 102 (
                         update user_verification set is_used = 1 where id = v_id;
                         IF :G_USER_ROLE  = 1 THEN
                        
-                        
+                            APEX_UTIL.SET_SESSION_STATE('G_UI_LANGUAGE', 'en', p_commit => FALSE);
+                            APEX_UTIL.SET_SESSION_LANG('en');
                             apex_util.redirect_url('f?p=&APP_ID.:202:&SESSION.');
                         
                         ELSIF :G_USER_ROLE = 0 THEN

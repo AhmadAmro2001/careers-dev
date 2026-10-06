@@ -13,6 +13,9 @@ appItem G_LOGIN_TYPE (
 appItem G_USER_ROLE (
 )
 
+appItem G_UI_LANGUAGE (
+)
+
 appItem G_VERIFICATION_EMAIL (
 )
 

@@ -56,3 +56,32 @@ appProcess personal-check-flag (
         sequence: 1
     }
 )
+
+appProcess apply-session-language (
+    name: APPLY_SESSION_LANGUAGE
+    type: executeCode
+    source {
+        plsqlCode:
+            ```plsql
+            DECLARE
+                l_language VARCHAR2(2);
+            BEGIN
+                IF TO_NUMBER(:APP_PAGE_ID) BETWEEN 201 AND 214 THEN
+                    l_language := 'en';
+                ELSE
+                    l_language := LOWER(NVL(:G_UI_LANGUAGE, 'en'));
+
+                    IF l_language NOT IN ('en', 'ar') THEN
+                        l_language := 'en';
+                    END IF;
+                END IF;
+
+                APEX_UTIL.SET_SESSION_LANG(l_language);
+            END;
+            ```
+    }
+    execution {
+        sequence: 10
+        point: beforeHeader
+    }
+)

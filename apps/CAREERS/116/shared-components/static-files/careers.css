@@ -351,20 +351,20 @@
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
-    min-width: 4.5rem;
-    min-height: 2.25rem;
+    min-width: 4.25rem;
+    min-height: 2.125rem;
     margin: 0 !important;
-    padding: 0.45rem 0.8rem;
+    padding: 0.4rem 0.7rem;
     border: 1px solid #1f7a1f !important;
     border-radius: 0 !important;
     background: rgba(255, 255, 255, 0.98) !important;
     color: #1c6f1c !important;
-    font-size: 0.875rem;
+    font-size: 0.85rem;
     font-weight: 700;
     line-height: 1;
     text-decoration: none;
     box-shadow: none;
-    transition: background-color 160ms ease, color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+    transition: background-color 180ms ease, color 180ms ease, box-shadow 180ms ease, transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .t-Login-links:has(.language-switch),
@@ -391,6 +391,12 @@
     background: #155f15 !important;
     color: #fff !important;
     box-shadow: 0 3px 10px rgba(31, 122, 31, 0.2);
+    transform: translateY(-1px) scale(1.03);
+}
+
+.language-switch:active {
+    transform: scale(0.94);
+    box-shadow: inset 0 2px 4px rgba(9, 8, 66, 0.2);
 }
 
 .language-switch:focus-visible {
@@ -404,6 +410,41 @@ html[lang|="ar"] .language-switch--arabic {
     background: #1f7a1f !important;
     color: #fff !important;
     box-shadow: 0 2px 8px rgba(9, 8, 66, 0.16);
+    animation: language-switch-selected 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes language-switch-selected {
+    0% {
+        transform: scale(0.9);
+        box-shadow: 0 0 0 rgba(9, 8, 66, 0);
+    }
+
+    65% {
+        transform: scale(1.06);
+        box-shadow: 0 4px 12px rgba(31, 122, 31, 0.28);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 2px 8px rgba(9, 8, 66, 0.16);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .language-switch {
+        transition: none;
+    }
+
+    .language-switch:hover,
+    .language-switch:focus-visible,
+    .language-switch:active {
+        transform: none;
+    }
+
+    html:not([lang|="ar"]) .language-switch--english,
+    html[lang|="ar"] .language-switch--arabic {
+        animation: none;
+    }
 }
 
 html[lang|="ar"] {

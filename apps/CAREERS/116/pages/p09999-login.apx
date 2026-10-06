@@ -844,6 +844,8 @@ page 9999 (
                     reset_flag := PKG_ADMIN.reset_pass_check(:P9999_USERNAME);
                 
                     if reset_flag = 'RESET_ADMIN' then
+                        APEX_UTIL.SET_SESSION_STATE('G_UI_LANGUAGE', 'en', p_commit => FALSE);
+                        APEX_UTIL.SET_SESSION_LANG('en');
                         APEX_UTIL.REDIRECT_URL(
                                 APEX_PAGE.GET_URL(
                                     p_page   => 201,
@@ -1131,7 +1133,7 @@ page 9999 (
     )
     button switch-to-arabic (
         buttonName: SWITCH_TO_ARABIC
-        label: AR
+        label: العربيه
         layout {
             sequence: 22
             region: @careers
@@ -1157,7 +1159,7 @@ page 9999 (
     )
     button switch-to-english (
         buttonName: SWITCH_TO_ENGLISH
-        label: EN
+        label: English
         layout {
             sequence: 21
             region: @careers
@@ -1192,6 +1194,11 @@ page 9999 (
             plsqlCode:
                 ```plsql
                 IF LOWER(:P9999_LANGUAGE) IN ('en', 'ar') THEN
+                    APEX_UTIL.SET_SESSION_STATE(
+                        p_name   => 'G_UI_LANGUAGE',
+                        p_value  => LOWER(:P9999_LANGUAGE),
+                        p_commit => FALSE
+                    );
                     APEX_UTIL.SET_SESSION_LANG(LOWER(:P9999_LANGUAGE));
                     APEX_UTIL.REDIRECT_URL(
                         APEX_PAGE.GET_URL(

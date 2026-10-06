@@ -27,6 +27,18 @@ application review, vacancy management, and reports.
   offers a session-only language switch. It applies the requested value with
   `APEX_UTIL.SET_SESSION_LANG` and redirects to page 9999 with its cache
   cleared, so APEX renders the next request using the new session language.
+- The selected language is also kept in the session-only application item
+  `G_UI_LANGUAGE`. Application process `APPLY_SESSION_LANGUAGE` runs before
+  each page header, forces English on admin pages 201–214, and applies the
+  saved `en` or `ar` preference on other pages. Default invalid or missing
+  preferences to English; add new admin page IDs to the process range when
+  the administration area grows.
+- A successful admin OTP on page 102 sets `G_UI_LANGUAGE` and the APEX session
+  language to English before redirecting to page 202. The admin password-reset
+  redirect from page 9999 does the same before page 201. The earlier redirect
+  boundary matters: changing the session language in the admin page's
+  `beforeHeader` process alone takes effect on the next request, so the first
+  admin response can otherwise retain Arabic until refreshed.
 - UI translations live in `shared-components/messages.apx`. Verified
   message-aware APEX fields use `&{KEY}.`; the custom applicant navbar
   template uses `&APP_TEXT$KEY!HTML.` so its labels resolve through APEX
@@ -60,5 +72,5 @@ application review, vacancy management, and reports.
 
 ## Last Updated
 
-2026-10-05 — created from the exported app structure, dependency scan,
-owner-confirmed authorization intent, and language-switch/navbar fixes.
+2026-10-06 — updated with the session language behavior for admin and
+applicant pages.
