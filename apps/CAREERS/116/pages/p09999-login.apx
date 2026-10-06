@@ -1131,12 +1131,12 @@ page 9999 (
     )
     button switch-to-arabic (
         buttonName: SWITCH_TO_ARABIC
-        label: العربية
+        label: AR
         layout {
-            sequence: 21
+            sequence: 22
             region: @careers
             slot: create
-            startNewRow: true
+            startNewRow: false
         }
         appearance {
             buttonTemplate: @/text
@@ -1157,12 +1157,12 @@ page 9999 (
     )
     button switch-to-english (
         buttonName: SWITCH_TO_ENGLISH
-        label: English
+        label: EN
         layout {
-            sequence: 22
+            sequence: 21
             region: @careers
             slot: create
-            startNewRow: false
+            startNewRow: true
         }
         appearance {
             buttonTemplate: @/text
