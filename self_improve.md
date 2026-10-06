@@ -45,6 +45,20 @@ database investigation exposes a recurring risk:
 
 Add lessons below only when the evidence supports them.
 
+### Re-render APEX after changing its session language
+
+- Trigger: changing the current language in a page's `Before Header` process.
+- Evidence: on app 116, the language switch set
+  `APEX_UTIL.SET_SESSION_LANG` in `Before Header`, yet the page immediately
+  rendered in the previously active language because that request had already
+  derived its language from session state.
+- Preferred behavior: after setting a valid session language, redirect to the
+  same page with its page cache cleared so APEX starts a fresh request using
+  the new session language.
+- Verification: switch in both directions and confirm the resulting document
+  language, text messages, and RTL direction match the selected language;
+  confirm the cleared language-selection item does not cause a redirect loop.
+
 ### Lesson Template
 
 ```text

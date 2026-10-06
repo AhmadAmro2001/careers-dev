@@ -24,10 +24,13 @@ application review, vacancy management, and reports.
 - The application uses APEX `textMessages` for translated text and the
   Universal Theme.
 - The bilingual interface is English and Modern Standard Arabic. Page 9999
-  offers the language switch; its request sets `APEX_UTIL.SET_SESSION_LANG`
-  for the current APEX session only.
-- UI translations live in `shared-components/messages.apx` and use `&{KEY}.`
-  in verified message-aware APEX fields. Static server-side feedback uses
+  offers a session-only language switch. It applies the requested value with
+  `APEX_UTIL.SET_SESSION_LANG` and redirects to page 9999 with its cache
+  cleared, so APEX renders the next request using the new session language.
+- UI translations live in `shared-components/messages.apx`. Verified
+  message-aware APEX fields use `&{KEY}.`; the custom applicant navbar
+  template uses `&APP_TEXT$KEY!HTML.` so its labels resolve through APEX
+  template substitutions. Static server-side feedback uses
   `APEX_LANG.GET_MESSAGE` where needed.
 - Business tables and stored data are unchanged. Vacancy and lookup values
   remain as stored; only application interface text is translated.
@@ -57,5 +60,5 @@ application review, vacancy management, and reports.
 
 ## Last Updated
 
-2026-10-05 — created from the exported app structure, dependency scan, and
-owner-confirmed authorization intent.
+2026-10-05 — created from the exported app structure, dependency scan,
+owner-confirmed authorization intent, and language-switch/navbar fixes.

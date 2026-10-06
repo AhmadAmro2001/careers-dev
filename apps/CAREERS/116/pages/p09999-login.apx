@@ -1133,13 +1133,14 @@ page 9999 (
         buttonName: SWITCH_TO_ARABIC
         label: العربية
         layout {
-            sequence: 5
+            sequence: 21
             region: @careers
-            slot: edit
+            slot: create
+            startNewRow: true
         }
         appearance {
             buttonTemplate: @/text
-            cssClasses: language-switch
+            cssClasses: language-switch language-switch--arabic
             templateOptions: #DEFAULT#
         }
         behavior {
@@ -1153,22 +1154,19 @@ page 9999 (
             }
             warnOnUnsavedChanges: doNotCheck
         }
-        serverSideCondition {
-            type: expression
-            plsqlExpression: NVL(APEX_UTIL.GET_SESSION_LANG(), 'en') NOT LIKE 'ar%'
-        }
     )
     button switch-to-english (
         buttonName: SWITCH_TO_ENGLISH
         label: English
         layout {
-            sequence: 6
+            sequence: 22
             region: @careers
-            slot: edit
+            slot: create
+            startNewRow: false
         }
         appearance {
             buttonTemplate: @/text
-            cssClasses: language-switch
+            cssClasses: language-switch language-switch--english
             templateOptions: #DEFAULT#
         }
         behavior {
@@ -1182,10 +1180,6 @@ page 9999 (
             }
             warnOnUnsavedChanges: doNotCheck
         }
-        serverSideCondition {
-            type: expression
-            plsqlExpression: NVL(APEX_UTIL.GET_SESSION_LANG(), 'en') LIKE 'ar%'
-        }
     )
     process apply-login-language (
         name: Apply login language
@@ -1197,8 +1191,15 @@ page 9999 (
         source {
             plsqlCode:
                 ```plsql
-                IF :P9999_LANGUAGE IN ('en', 'ar') THEN
+                IF LOWER(:P9999_LANGUAGE) IN ('en', 'ar') THEN
                     APEX_UTIL.SET_SESSION_LANG(LOWER(:P9999_LANGUAGE));
+                    APEX_UTIL.REDIRECT_URL(
+                        APEX_PAGE.GET_URL(
+                            p_page        => 9999,
+                            p_clear_cache => '9999'
+                        )
+                    );
+                    APEX_APPLICATION.STOP_APEX_ENGINE;
                 END IF;
                 ```
         }

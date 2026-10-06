@@ -4271,7 +4271,7 @@ textMessage EPROM_CAREERS (
 
 textMessage EPROM_CAREERS (
     message {
-        text: "بوابة التوظيف في إبروم"
+        text: "بوابة التوظيف في إيبروم"
         language: ar
     }
 )
@@ -4299,7 +4299,7 @@ textMessage FRAUD_ALERT_INTRO (
 
 textMessage FRAUD_ALERT_INTRO (
     message {
-        text: "في إطار التزامنا بحماية المواطنين والحفاظ على مصداقيتنا، تحذر إبروم بشدة وتخلي مسؤوليتها تمامًا عن أي جهات أو أفراد أو صفحات إلكترونية أو أرقام هاتفية زائفة تنشر معلومات مضللة وتدّعي كذبًا أنها وسطاء لتوفير فرص عمل باسم إبروم."
+        text: "في إطار التزامنا بحماية المواطنين والحفاظ على مصداقيتنا، تحذر إيبروم بشدة وتخلي مسؤوليتها تمامًا عن أي جهات أو أفراد أو صفحات إلكترونية أو أرقام هاتفية زائفة تنشر معلومات مضللة وتدّعي كذبًا أنها وسطاء لتوفير فرص عمل باسم إيبروم."
         language: ar
     }
 )
@@ -4383,7 +4383,7 @@ textMessage FRAUD_ALERT_VERIFY_CHANNELS (
 
 textMessage FRAUD_ALERT_VERIFY_CHANNELS (
     message {
-        text: "حرصًا على سلامتكم، تحققوا دائمًا عبر القنوات الرسمية لشركة إبروم."
+        text: "حرصًا على سلامتكم، تحققوا دائمًا عبر القنوات الرسمية لشركة إيبروم."
         language: ar
     }
 )
@@ -4945,7 +4945,7 @@ textMessage RECRUITMENT_PROCESS (
 
 textMessage RECRUITMENT_PROCESS (
     message {
-        text: "عملية التوظيف في إبروم"
+        text: "عملية التوظيف في إيبروم"
         language: ar
     }
 )
@@ -4973,7 +4973,7 @@ textMessage STAGE_1_APPLY_INTRO (
 
 textMessage STAGE_1_APPLY_INTRO (
     message {
-        text: "قدّم طلبًا إلى الوظيفة التي تناسب اهتماماتك عبر بوابة التوظيف في إبروم ضمن قسم"
+        text: "قدّم طلبًا إلى الوظيفة التي تناسب اهتماماتك عبر بوابة التوظيف في إيبروم ضمن قسم"
         language: ar
     }
 )
@@ -5047,7 +5047,7 @@ textMessage STAGE_3_FORMAT (
 
 textMessage STAGE_3_FORMAT (
     message {
-        text: "قد تشمل المقابلات مقابلة هاتفية مع مسؤول توظيف في إبروم و/أو مدير مباشر، تليها مقابلة شخصية حضورية أو في موقع العمل."
+        text: "قد تشمل المقابلات مقابلة هاتفية مع مسؤول توظيف في إيبروم و/أو مدير مباشر، تليها مقابلة شخصية حضورية أو في موقع العمل."
         language: ar
     }
 )
@@ -5061,7 +5061,7 @@ textMessage STAGE_3_PURPOSE (
 
 textMessage STAGE_3_PURPOSE (
     message {
-        text: "تهدف المقابلة أساسًا إلى تقييم المهارات الفنية للمرشح وخبرته العملية ومدى توافقه مع احتياجات إبروم وقيمها."
+        text: "تهدف المقابلة أساسًا إلى تقييم المهارات الفنية للمرشح وخبرته العملية ومدى توافقه مع احتياجات إيبروم وقيمها."
         language: ar
     }
 )
@@ -5103,7 +5103,7 @@ textMessage STAGE_4_OFFER (
 
 textMessage STAGE_4_OFFER (
     message {
-        text: "تقدم إبروم عرض عمل للمرشح المختار بناءً على نتائج التوظيف والمقابلات."
+        text: "تقدم إيبروم عرض عمل للمرشح المختار بناءً على نتائج التوظيف والمقابلات."
         language: ar
     }
 )
@@ -5131,7 +5131,7 @@ textMessage STAGE_4_JOINING (
 
 textMessage STAGE_4_JOINING (
     message {
-        text: "بعد استيفاء جميع المتطلبات بنجاح، يستكمل المرشح إجراءات التعيين وينضم إلى فريق إبروم."
+        text: "بعد استيفاء جميع المتطلبات بنجاح، يستكمل المرشح إجراءات التعيين وينضم إلى فريق إيبروم."
         language: ar
     }
 )
@@ -5145,7 +5145,7 @@ textMessage RECRUITMENT_OVERVIEW (
 
 textMessage RECRUITMENT_OVERVIEW (
     message {
-        text: "عملية التوظيف في إبروم"
+        text: "عملية التوظيف في إيبروم"
         language: ar
     }
 )
